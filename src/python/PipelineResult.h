@@ -13,6 +13,7 @@ namespace Kirana {
 
 struct MLResult {
     int         productId;
+    QString     sku;
     DemandLabel demandLabel;
     StockStatus stockStatus;
     double      confidence;      // 0–100

@@ -213,7 +213,7 @@ def test_migrations_already_up_to_date(temp_db):
 
 def test_db_connection_failure():
     """Tests that initializing a DBManager with an invalid path raises DatabaseError."""
-    # An invalid Windows path containing invalid characters like * or ?
-    invalid_path = "C:\\invalid_?_path\\inventory.db"
+    # A path that is guaranteed to fail on both Unix and Windows
+    invalid_path = "/nonexistent_directory_xyz/inventory.db"
     with pytest.raises(DatabaseError):
         DBManager(invalid_path)

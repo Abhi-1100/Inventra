@@ -17,6 +17,19 @@ def load_csv(file_path: str) -> pd.DataFrame:
     # Standardize column headers (strip, lowercase, replace spaces with underscores)
     df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
     
+    # Map custom database columns from the dataset to standard names
+    custom_mapping = {
+        'product_id': 'sku',
+        'product_name': 'name',
+        'closing_stock': 'current_stock',
+        'unit_price_inr': 'unit_cost',
+        'weekly_sales': 'sales_volume',
+        'week_start_date': 'date'
+    }
+    for src, dst in custom_mapping.items():
+        if src in df.columns and dst not in df.columns:
+            df[dst] = df[src]
+    
     # Fill missing values and enforce correct types
     df['current_stock'] = pd.to_numeric(df.get('current_stock', 0), errors='coerce').fillna(0).astype(int)
     df['unit_cost'] = pd.to_numeric(df.get('unit_cost', 0.0), errors='coerce').fillna(0.0)

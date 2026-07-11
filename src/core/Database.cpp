@@ -610,4 +610,16 @@ bool Database::setSetting(const QString& key, const QString& value) {
     return true;
 }
 
+QString Database::getLatestPipelineResults() const {
+    auto db = QSqlDatabase::database(m_connectionName);
+    QSqlQuery q(db);
+    q.prepare(QStringLiteral(
+        "SELECT results_json FROM pipeline_results WHERE success=1 ORDER BY run_at DESC LIMIT 1;"));
+    if (q.exec() && q.next()) {
+        return q.value(0).toString();
+    }
+    return QString();
+}
+
 } // namespace Kirana
+

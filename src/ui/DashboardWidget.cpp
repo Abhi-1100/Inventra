@@ -281,7 +281,7 @@ void DashboardWidget::onFilterChipClicked() {
         btn->update();
     }
 
-    auto* proxy = qobject_cast<ProductFilterProxyModel*>(m_proxyModel);
+    auto* proxy = static_cast<ProductFilterProxyModel*>(m_proxyModel);
     if (proxy) {
         proxy->filterState = val;
         proxy->invalidate();

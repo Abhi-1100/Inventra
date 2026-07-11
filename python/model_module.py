@@ -21,8 +21,17 @@ def run_pipeline(df: pd.DataFrame) -> dict:
     products_list = []
     for sku, sku_df in df.groupby("sku"):
         last_row = sku_df.iloc[-1]
+        
+        raw_id = last_row.get("product_id", 0)
+        try:
+            product_id = int(raw_id)
+        except ValueError:
+            import re
+            num_part = re.sub(r"\D", "", str(raw_id))
+            product_id = int(num_part) if num_part else 0
+            
         products_list.append({
-            "id": int(last_row.get("product_id", 0)),
+            "id": product_id,
             "sku": sku,
             "name": str(last_row.get("name", sku)),
             "category": str(last_row.get("category", "")),

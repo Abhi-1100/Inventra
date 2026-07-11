@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "training_timestamp": "2026-07-11T15:22:07.433030",
+    "training_timestamp": "2026-07-11T15:57:05.962437",
     "feature_list": [
         "sales_volume",
         "lag_1",
@@ -25,5 +25,5 @@
         "average_usage",
         "demand_trend"
     ],
-    "data_hash": "c96ab2a09bf172be6a6a301b4a56202cc4d2b0e35a75c85a0bb6791b2e0abc68"
+    "data_hash": "676e059d046875377b3d1f325deba7924abf78fe2b10abcd85b9bd8d48e7b768"
 }

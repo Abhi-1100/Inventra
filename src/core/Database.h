@@ -69,6 +69,8 @@ public:
     // ── Settings ──────────────────────────────
     QString getSetting(const QString& key, const QString& defaultVal = {}) const;
     bool    setSetting(const QString& key, const QString& value);
+    QString getLatestPipelineResults() const;
+
 
 private:
     bool runMigrations();

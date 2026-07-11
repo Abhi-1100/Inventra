@@ -108,7 +108,8 @@ class PredictionService:
                         "trend": r.trend,
                         "eoq": r.eoq,
                         "priority": r.priority,
-                        "explanations": r.explanations
+                        "explanations": r.explanations,
+                        "forecast_points": r.forecast_points
                     })
                 
                 results_json = json.dumps(serializable_results)
@@ -145,8 +146,17 @@ class PredictionService:
             for sku, group in grouped:
                 # Grab details from the last row
                 last_row = group.iloc[-1]
+                
+                raw_id = last_row.get("product_id", 0)
+                try:
+                    product_id = int(raw_id)
+                except ValueError:
+                    import re
+                    num_part = re.sub(r"\D", "", str(raw_id))
+                    product_id = int(num_part) if num_part else 0
+                    
                 products_list.append({
-                    "id": int(last_row.get("product_id", 0)),
+                    "id": product_id,
                     "sku": sku,
                     "name": str(last_row.get("name", sku)),
                     "category": str(last_row.get("category", "")),

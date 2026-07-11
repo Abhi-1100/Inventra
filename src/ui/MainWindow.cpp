@@ -225,9 +225,10 @@ void MainWindow::onPipelineProgress(int /*pct*/, const QString& /*stage*/) {}
 
 void MainWindow::onPipelineFinished(const PipelineRunResult& result) {
     if (result.success && !result.results.isEmpty()) {
-        // Phase 2: applyPipelineResults
+        m_controller->applyPipelineRun(result);
+    } else {
+        m_controller->loadDummyData();
     }
-    m_controller->loadDummyData();
     m_statusBar->setPipelineState(false, m_controller->lastRunTime());
 }
 

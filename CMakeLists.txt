@@ -122,7 +122,7 @@ if(INVENTRA_ENABLE_PYTHON)
     target_include_directories(Inventra PRIVATE
         ${Python3_INCLUDE_DIRS}
     )
-    target_compile_definitions(Inventra PRIVATE INVENTRA_PYTHON_ENABLED)
+    target_compile_definitions(Inventra PRIVATE INVENTRA_PYTHON_ENABLED KIRANA_PYTHON_ENABLED)
 endif()
 
 # ─────────────────────────────────────────────
@@ -132,7 +132,10 @@ add_custom_command(TARGET Inventra POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/python"
         "$<TARGET_FILE_DIR:Inventra>/python"
-    COMMENT "Copying Python ML modules to output directory..."
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/backend"
+        "$<TARGET_FILE_DIR:Inventra>/backend"
+    COMMENT "Copying Python ML modules and backend to output directory..."
 )
 
 # ─────────────────────────────────────────────
@@ -167,4 +170,7 @@ install(TARGETS Inventra
 )
 install(DIRECTORY python/
     DESTINATION bin/python
+)
+install(DIRECTORY backend/
+    DESTINATION bin/backend
 )

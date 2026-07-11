@@ -4,6 +4,9 @@
 #include <QtMath>
 #include <algorithm>
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 namespace Kirana {
 
@@ -94,42 +97,112 @@ bool AppController::loadFromDatabase() {
         // Seed database with dummy seed data
         QVector<Product> dummyList = buildDummyProducts(m_settings);
         for (const auto& p : dummyList) {
-            m_db->saveProduct(p);
+            int newId = m_db->saveProduct(p);
+            if (newId > 0) {
+                // Seed 30 days of sales history daily entries
+                QDate today = QDate::currentDate();
+                for (int d = 30; d >= 1; --d) {
+                    DailyEntry entry;
+                    entry.productId = newId;
+                    entry.entryDate = today.addDays(-d);
+                    entry.unitsSold = p.historicalSales[30 - d];
+                    entry.unitsWasted = QRandomGenerator::global()->bounded(2);
+                    m_db->saveDailyEntry(entry);
+                }
+            }
         }
         dbProds = m_db->getProducts();
     }
 
-    // Populate ML simulation values on top of DB loaded structures
-    for (int i = 0; i < dbProds.size(); ++i) {
-        Product& p = dbProds[i];
-        bool foundSeed = false;
-        for (const auto& s : kSeedData) {
-            if (p.sku == QString::fromLatin1(s.sku)) {
-                p.demandLabel = s.demand;
-                p.stockStatus = s.status;
-                p.priority = s.priority;
-                p.confidence = s.confidence;
-                p.forecastNext7 = s.forecast7;
-                p.forecastTrend = s.trend;
-                p.eoqQty = s.eoq;
-                foundSeed = true;
-                break;
-            }
-        }
-        if (!foundSeed) {
-            // Default generated ML/forecasting values
-            p.demandLabel = DemandLabel::Medium;
-            p.stockStatus = StockStatus::NoAction;
-            p.priority = Priority::Safe;
-            p.confidence = 85.0;
-            p.forecastNext7 = p.currentStock * 0.5;
-            p.forecastTrend = 0.5;
-            p.eoqQty = 50;
-        }
+    // Try loading actual ML pipeline results from Database
+    QString jsonStr = m_db->getLatestPipelineResults();
+    bool loadedMLResults = false;
+    if (!jsonStr.isEmpty()) {
+        QJsonParseError err;
+        QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8(), &err);
+        if (err.error == QJsonParseError::NoError && doc.isArray()) {
+            QJsonArray arr = doc.array();
+            for (const QJsonValue& val : arr) {
+                QJsonObject obj = val.toObject();
+                QString sku = obj.value(QStringLiteral("sku")).toString();
+                for (auto& p : dbProds) {
+                    if (p.sku == sku) {
+                        QString dl = obj.value(QStringLiteral("demand_label")).toString();
+                        if (dl == QStringLiteral("High")) p.demandLabel = DemandLabel::High;
+                        else if (dl == QStringLiteral("Medium")) p.demandLabel = DemandLabel::Medium;
+                        else if (dl == QStringLiteral("Low")) p.demandLabel = DemandLabel::Low;
 
-        const double dailyBase = p.forecastNext7 / 7.0;
-        p.forecast = makeForecast(dailyBase, p.forecastTrend / 7.0, m_settings.forecastHorizonDays);
-        p.historicalSales = makeHistory(dailyBase, 30);
+                        QString ss = obj.value(QStringLiteral("stock_status")).toString();
+                        if (ss == QStringLiteral("Reorder")) p.stockStatus = StockStatus::Reorder;
+                        else if (ss == QStringLiteral("Overstock")) p.stockStatus = StockStatus::Overstock;
+                        else p.stockStatus = StockStatus::NoAction;
+
+                        QString pr = obj.value(QStringLiteral("priority")).toString();
+                        if (pr == QStringLiteral("Critical")) p.priority = Priority::Critical;
+                        else if (pr == QStringLiteral("ReorderSoon")) p.priority = Priority::ReorderSoon;
+                        else p.priority = Priority::Safe;
+
+                        p.confidence = obj.value(QStringLiteral("confidence")).toDouble();
+                        p.forecastNext7 = obj.value(QStringLiteral("forecast_7d")).toDouble();
+                        p.forecastTrend = obj.value(QStringLiteral("trend")).toDouble();
+                        p.eoqQty = obj.value(QStringLiteral("eoq")).toInt();
+
+                        p.forecast.clear();
+                        QJsonArray pts = obj.value(QStringLiteral("forecast_points")).toArray();
+                        for (const QJsonValue& ptVal : pts) {
+                            QJsonObject ptObj = ptVal.toObject();
+                            ForecastPoint fp;
+                            fp.date = QDate::fromString(ptObj.value(QStringLiteral("ds")).toString(), QStringLiteral("yyyy-MM-dd"));
+                            fp.value = ptObj.value(QStringLiteral("yhat")).toDouble();
+                            fp.lower = ptObj.value(QStringLiteral("yhat_lower")).toDouble();
+                            fp.upper = ptObj.value(QStringLiteral("yhat_upper")).toDouble();
+                            p.forecast.append(fp);
+                        }
+
+                        const double dailyBase = p.forecastNext7 / 7.0;
+                        p.historicalSales = makeHistory(dailyBase, 30);
+                        break;
+                    }
+                }
+            }
+            m_pipelineLive = true;
+            loadedMLResults = true;
+        }
+    }
+
+    if (!loadedMLResults) {
+        // Populate ML simulation values on top of DB loaded structures
+        for (int i = 0; i < dbProds.size(); ++i) {
+            Product& p = dbProds[i];
+            bool foundSeed = false;
+            for (const auto& s : kSeedData) {
+                if (p.sku == QString::fromLatin1(s.sku)) {
+                    p.demandLabel = s.demand;
+                    p.stockStatus = s.status;
+                    p.priority = s.priority;
+                    p.confidence = s.confidence;
+                    p.forecastNext7 = s.forecast7;
+                    p.forecastTrend = s.trend;
+                    p.eoqQty = s.eoq;
+                    foundSeed = true;
+                    break;
+                }
+            }
+            if (!foundSeed) {
+                // Default generated ML/forecasting values
+                p.demandLabel = DemandLabel::Medium;
+                p.stockStatus = StockStatus::NoAction;
+                p.priority = Priority::Safe;
+                p.confidence = 85.0;
+                p.forecastNext7 = p.currentStock * 0.5;
+                p.forecastTrend = 0.5;
+                p.eoqQty = 50;
+            }
+
+            const double dailyBase = p.forecastNext7 / 7.0;
+            p.forecast = makeForecast(dailyBase, p.forecastTrend / 7.0, m_settings.forecastHorizonDays);
+            p.historicalSales = makeHistory(dailyBase, 30);
+        }
     }
 
     m_products = dbProds;
@@ -149,6 +222,29 @@ void AppController::applyPipelineResults(QVector<Product> updated) {
 
     emit productsChanged(m_products);
     emit pipelineStateChanged(m_pipelineLive, m_lastRunTime);
+}
+
+void AppController::applyPipelineRun(const PipelineRunResult& result) {
+    QVector<Product> updatedList = m_products;
+    for (const auto& r : result.results) {
+        for (auto& p : updatedList) {
+            if ((r.productId > 0 && p.id == r.productId) || (p.sku == r.sku)) {
+                p.demandLabel   = r.demandLabel;
+                p.stockStatus   = r.stockStatus;
+                p.confidence    = r.confidence;
+                p.priority      = r.priority;
+                p.forecastNext7 = r.forecastNext7;
+                p.forecastTrend = r.forecastTrend;
+                p.forecast      = r.forecast;
+                p.eoqQty        = r.eoqQty;
+
+                const double dailyBase = p.forecastNext7 / 7.0;
+                p.historicalSales = makeHistory(dailyBase, 30);
+                break;
+            }
+        }
+    }
+    applyPipelineResults(std::move(updatedList));
 }
 
 void AppController::updateSettings(const AppSettings& s) {
