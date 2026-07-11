@@ -1,0 +1,70 @@
+#pragma once
+
+#include <QObject>
+#include <QDateTime>
+#include "core/ProductData.h"
+
+namespace Kirana {
+
+// ─────────────────────────────────────────────
+// EOQ / Settings (shared mutable config)
+// ─────────────────────────────────────────────
+
+struct AppSettings {
+    double orderingCost     = 20.0;    // ₹/order
+    double holdingCostRate  = 0.25;    // fraction of unit cost/year
+    int    leadTimeDays     = 7;
+    double reorderThreshHigh   = 0.80; // confidence threshold → Critical
+    double reorderThreshMedium = 0.60;
+    int    forecastHorizonDays = 7;
+    QString dbPath;                    // SQLite path (empty = in-memory)
+};
+
+// ─────────────────────────────────────────────
+// AppController
+// Central state manager for the application.
+// Owns the product list. Provides dummy data in
+// Phase 1; real ML results in Phase 2 via signal.
+// ─────────────────────────────────────────────
+
+class AppController : public QObject {
+    Q_OBJECT
+
+public:
+    explicit AppController(QObject* parent = nullptr);
+
+    // ── Accessors ──────────────────────────
+    const QVector<Product>& products() const { return m_products; }
+    AppSettings&        settings()     { return m_settings; }
+    const AppSettings&  settings() const { return m_settings; }
+
+    QDateTime lastRunTime() const { return m_lastRunTime; }
+    bool      pipelineLive() const { return m_pipelineLive; }
+
+    // ── Aggregate stats (computed on demand) ──
+    int criticalCount()  const;
+    int overstockCount() const;
+    double stockoutRiskPct() const;
+
+    // ── Actions ──────────────────────────
+    void loadDummyData();
+    void applyPipelineResults(QVector<Product> updated);
+    void updateSettings(const AppSettings& s);
+
+signals:
+    void productsChanged(const QVector<Product>& products);
+    void pipelineStateChanged(bool live, QDateTime lastRun);
+    void settingsChanged(const AppSettings& s);
+
+private:
+    static QVector<Product> buildDummyProducts(const AppSettings& cfg);
+    static QVector<ForecastPoint> makeForecast(double base, double trend, int days);
+    static QVector<double> makeHistory(double base, int days);
+
+    QVector<Product> m_products;
+    AppSettings      m_settings;
+    QDateTime        m_lastRunTime;
+    bool             m_pipelineLive = false;
+};
+
+} // namespace Kirana

@@ -1,0 +1,7 @@
+D:/confres/build/CMakeFiles/KiranaTerminal.dir
+D:/confres/build/CMakeFiles/edit_cache.dir
+D:/confres/build/CMakeFiles/rebuild_cache.dir
+D:/confres/build/CMakeFiles/list_install_components.dir
+D:/confres/build/CMakeFiles/install.dir
+D:/confres/build/CMakeFiles/install/local.dir
+D:/confres/build/CMakeFiles/KiranaTerminal_autogen.dir

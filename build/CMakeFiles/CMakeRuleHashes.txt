@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+68aa63264391209d8d8dac52ea2fde59 CMakeFiles/KiranaTerminal_autogen
+b3afa10b3e7e0508326d4a2482964a04 KiranaTerminal_autogen/3YJK5W5UP7/qrc_kirana.cpp

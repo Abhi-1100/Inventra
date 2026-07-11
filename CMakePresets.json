@@ -1,0 +1,65 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "20"
+      }
+    },
+    {
+      "name": "windows-msvc-release",
+      "displayName": "Windows MSVC x64 — Release",
+      "inherits": "base",
+      "architecture": { "value": "x64", "strategy": "external" },
+      "binaryDir": "${sourceDir}/build/release",
+      "toolchainFile": "",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.8.3/msvc2022_64",
+        "KIRANA_ENABLE_PYTHON": "OFF"
+      },
+      "environment": {
+        "VCPKG_ROOT": ""
+      }
+    },
+    {
+      "name": "windows-msvc-debug",
+      "displayName": "Windows MSVC x64 — Debug",
+      "inherits": "base",
+      "architecture": { "value": "x64", "strategy": "external" },
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.8.3/msvc2022_64",
+        "KIRANA_ENABLE_PYTHON": "OFF"
+      }
+    },
+    {
+      "name": "windows-msvc-python",
+      "displayName": "Windows MSVC x64 — Release + Python Pipeline",
+      "inherits": "windows-msvc-release",
+      "binaryDir": "${sourceDir}/build/release-py",
+      "cacheVariables": {
+        "KIRANA_ENABLE_PYTHON": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "displayName": "Build Release",
+      "configurePreset": "windows-msvc-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "debug",
+      "displayName": "Build Debug",
+      "configurePreset": "windows-msvc-debug",
+      "configuration": "Debug"
+    }
+  ]
+}
