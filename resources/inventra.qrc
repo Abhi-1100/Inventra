@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>styles/terminal.qss</file>
+        <file>icons/inventra_logo.svg</file>
+        <file>icons/dashboard.svg</file>
+        <file>icons/daily_entry.svg</file>
+        <file>icons/stock.svg</file>
+        <file>icons/products.svg</file>
+        <file>icons/analytics.svg</file>
+        <file>icons/import.svg</file>
+        <file>icons/settings.svg</file>
+    </qresource>
+</RCC>

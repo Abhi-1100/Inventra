@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(KiranaTerminal VERSION 1.0.0 LANGUAGES CXX)
+project(Inventra VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -13,7 +13,7 @@ set(CMAKE_AUTOUIC OFF)  # Not using .ui files
 # ─────────────────────────────────────────────
 # Options
 # ─────────────────────────────────────────────
-option(KIRANA_ENABLE_PYTHON
+option(INVENTRA_ENABLE_PYTHON
     "Enable embedded Python ML pipeline via pybind11 (Phase 2)"
     OFF)
 
@@ -26,7 +26,7 @@ qt_standard_project_setup()
 # ─────────────────────────────────────────────
 # Python + pybind11  (Phase 2 — optional)
 # ─────────────────────────────────────────────
-if(KIRANA_ENABLE_PYTHON)
+if(INVENTRA_ENABLE_PYTHON)
     find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter Development)
 
     include(FetchContent)
@@ -45,16 +45,21 @@ endif()
 # ─────────────────────────────────────────────
 # Source files
 # ─────────────────────────────────────────────
-set(KIRANA_SOURCES
+set(INVENTRA_SOURCES
     src/main.cpp
     src/core/ProductModel.cpp
     src/core/AppController.cpp
     src/core/PipelineWorker.cpp
+    src/core/Database.cpp
+    src/core/AuthController.cpp
     src/python/PythonBridge.cpp
     src/ui/MainWindow.cpp
     src/ui/Sidebar.cpp
     src/ui/StatusBar.cpp
+    src/ui/AuthWidget.cpp
     src/ui/DashboardWidget.cpp
+    src/ui/DailyEntryWidget.cpp
+    src/ui/StockWidget.cpp
     src/ui/ProductDetailPanel.cpp
     src/ui/AnalyticsWidget.cpp
     src/ui/ImportWidget.cpp
@@ -63,17 +68,23 @@ set(KIRANA_SOURCES
     src/widgets/BadgeDelegate.cpp
 )
 
-set(KIRANA_HEADERS
+set(INVENTRA_HEADERS
     src/core/ProductData.h
     src/core/ProductModel.h
     src/core/AppController.h
     src/core/PipelineWorker.h
+    src/core/Database.h
+    src/core/AuthData.h
+    src/core/AuthController.h
     src/python/PythonBridge.h
     src/python/PipelineResult.h
     src/ui/MainWindow.h
     src/ui/Sidebar.h
     src/ui/StatusBar.h
+    src/ui/AuthWidget.h
     src/ui/DashboardWidget.h
+    src/ui/DailyEntryWidget.h
+    src/ui/StockWidget.h
     src/ui/ProductDetailPanel.h
     src/ui/AnalyticsWidget.h
     src/ui/ImportWidget.h
@@ -85,17 +96,17 @@ set(KIRANA_HEADERS
 # ─────────────────────────────────────────────
 # Executable
 # ─────────────────────────────────────────────
-qt_add_executable(KiranaTerminal WIN32
-    ${KIRANA_SOURCES}
-    ${KIRANA_HEADERS}
-    resources/kirana.qrc
+qt_add_executable(Inventra WIN32
+    ${INVENTRA_SOURCES}
+    ${INVENTRA_HEADERS}
+    resources/inventra.qrc
 )
 
-target_include_directories(KiranaTerminal PRIVATE
+target_include_directories(Inventra PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(KiranaTerminal PRIVATE
+target_link_libraries(Inventra PRIVATE
     Qt6::Core
     Qt6::Widgets
     Qt6::Sql
@@ -103,24 +114,24 @@ target_link_libraries(KiranaTerminal PRIVATE
 )
 
 # Phase 2: link Python
-if(KIRANA_ENABLE_PYTHON)
-    target_link_libraries(KiranaTerminal PRIVATE
+if(INVENTRA_ENABLE_PYTHON)
+    target_link_libraries(Inventra PRIVATE
         pybind11::embed
         Python3::Python
     )
-    target_include_directories(KiranaTerminal PRIVATE
+    target_include_directories(Inventra PRIVATE
         ${Python3_INCLUDE_DIRS}
     )
-    target_compile_definitions(KiranaTerminal PRIVATE KIRANA_PYTHON_ENABLED)
+    target_compile_definitions(Inventra PRIVATE INVENTRA_PYTHON_ENABLED)
 endif()
 
 # ─────────────────────────────────────────────
 # Post-build: copy Python scripts to output dir
 # ─────────────────────────────────────────────
-add_custom_command(TARGET KiranaTerminal POST_BUILD
+add_custom_command(TARGET Inventra POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/python"
-        "$<TARGET_FILE_DIR:KiranaTerminal>/python"
+        "$<TARGET_FILE_DIR:Inventra>/python"
     COMMENT "Copying Python ML modules to output directory..."
 )
 
@@ -128,7 +139,6 @@ add_custom_command(TARGET KiranaTerminal POST_BUILD
 # Windows: run windeployqt automatically
 # ─────────────────────────────────────────────
 if(WIN32)
-    # Attempt to find windeployqt next to qmake
     get_target_property(_qmake_exec Qt6::qmake IMPORTED_LOCATION)
     get_filename_component(_qt_bin_dir "${_qmake_exec}" DIRECTORY)
 
@@ -137,11 +147,11 @@ if(WIN32)
     )
 
     if(WINDEPLOYQT_EXECUTABLE)
-        add_custom_command(TARGET KiranaTerminal POST_BUILD
+        add_custom_command(TARGET Inventra POST_BUILD
             COMMAND "${WINDEPLOYQT_EXECUTABLE}"
                 --no-translations
                 --no-system-d3d-compiler
-                "$<TARGET_FILE:KiranaTerminal>"
+                "$<TARGET_FILE:Inventra>"
             COMMENT "Running windeployqt..."
         )
     else()
@@ -152,7 +162,7 @@ endif()
 # ─────────────────────────────────────────────
 # Install (optional)
 # ─────────────────────────────────────────────
-install(TARGETS KiranaTerminal
+install(TARGETS Inventra
     RUNTIME DESTINATION bin
 )
 install(DIRECTORY python/

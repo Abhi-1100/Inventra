@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+  <!-- Rounded square background -->
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#1f6feb" opacity="0.15"/>
+  <!-- Cube top face -->
+  <polygon points="12,4 20,8 12,12 4,8" fill="#1f6feb" opacity="0.9"/>
+  <!-- Cube left face -->
+  <polygon points="4,8 12,12 12,20 4,16" fill="#1f6feb" opacity="0.55"/>
+  <!-- Cube right face -->
+  <polygon points="12,12 20,8 20,16 12,20" fill="#1f6feb" opacity="0.75"/>
+</svg>

@@ -113,24 +113,64 @@ inline QString toString(Priority p) noexcept {
 
 namespace Palette {
     // Surfaces
-    static constexpr const char* BgPrimary   = "#0d1117";
+    static constexpr const char* BgPrimary   = "#0b0f14";
     static constexpr const char* BgSurface   = "#161b22";
     static constexpr const char* BgOverlay   = "#21262d";
     static constexpr const char* Border      = "#30363d";
     // Text
     static constexpr const char* TextPrimary   = "#e6edf3";
     static constexpr const char* TextSecondary = "#8b949e";
-    static constexpr const char* TextMuted     = "#484f58";
-    // Status
+    static constexpr const char* TextMuted     = "#6e7681";
+    // Status (badge-only: 20% opacity fill + solid text)
     static constexpr const char* Critical = "#f85149";
     static constexpr const char* Warning  = "#d29922";
     static constexpr const char* Success  = "#3fb950";
-    static constexpr const char* Info     = "#58a6ff";
-    static constexpr const char* Accent   = "#58a6ff";
+    // Accent — blue #1f6feb, used only for brand/active state/primary buttons
+    static constexpr const char* Accent   = "#1f6feb";
+    static constexpr const char* Info     = "#1f6feb";
 } // namespace Palette
+
+// ─────────────────────────────────────────────
+// Daily sales / waste entry record
+// ─────────────────────────────────────────────
+
+struct DailyEntry {
+    int     id           = 0;
+    int     productId    = 0;
+    int     unitsSold    = 0;
+    int     unitsWasted  = 0;
+    int     enteredBy    = 0;
+    QDate   entryDate;
+    QString productName;
+    QString productSku;
+    QDateTime createdAt;
+};
+
+// ─────────────────────────────────────────────
+// Stock movement ledger record (IN or OUT)
+// ─────────────────────────────────────────────
+
+struct StockMovement {
+    int     id           = 0;
+    int     productId    = 0;
+    int     quantity     = 0;
+    int     enteredBy    = 0;
+    QString movementType; // "IN" or "OUT"
+    QString supplierName;
+    double  costPerUnit  = 0.0;
+    QString reason;
+    QDate   movementDate;
+    QString productName;
+    QString staffName;
+    QDateTime createdAt;
+};
 
 } // namespace Kirana
 
 // Qt metatype registration (needed for queued signals across threads)
 Q_DECLARE_METATYPE(Kirana::Product)
 Q_DECLARE_METATYPE(QVector<Kirana::Product>)
+Q_DECLARE_METATYPE(Kirana::DailyEntry)
+Q_DECLARE_METATYPE(QVector<Kirana::DailyEntry>)
+Q_DECLARE_METATYPE(Kirana::StockMovement)
+Q_DECLARE_METATYPE(QVector<Kirana::StockMovement>)
