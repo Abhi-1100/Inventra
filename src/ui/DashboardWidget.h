@@ -6,6 +6,9 @@
 
 class QTableView;
 class QSortFilterProxyModel;
+class QPushButton;
+class QListWidget;
+class QHBoxLayout;
 
 namespace Kirana {
 
@@ -17,15 +20,10 @@ class ProductDetailPanel;
 // ─────────────────────────────────────────────
 // DashboardWidget
 //
-// Shows 4 metric cards at the top:
-//   - Total SKUs
-//   - Critical Reorders
-//   - Overstock Items
-//   - Stockout Risk %
-//
-// Below that, a dense QTableView of all products.
-// Supports column sorting, row double-click.
-// Double-click slides in the ProductDetailPanel.
+// Shows 4 metric cards at the top.
+// Below cards, a horizontal split:
+//   - Left: Dense table of products + filter chip bar
+//   - Right: Recent stock movement activity feed
 // ─────────────────────────────────────────────
 
 class DashboardWidget : public QWidget {
@@ -36,6 +34,7 @@ public:
     ~DashboardWidget() override = default;
 
     void updateMetrics();
+    void updateActivityFeed();
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -43,10 +42,12 @@ protected:
 private slots:
     void onRowDoubleClicked(const QModelIndex& index);
     void onProductsChanged();
+    void onFilterChipClicked();
 
 private:
     void buildLayout();
     void configureTable();
+    void setupFilterChips(QHBoxLayout* rowLayout);
 
     AppController*        m_controller = nullptr;
     ProductModel*         m_model      = nullptr;
@@ -58,7 +59,13 @@ private:
     MetricCard* m_cardOverstock  = nullptr;
     MetricCard* m_cardStockout   = nullptr;
 
+    // Filters
+    QVector<QPushButton*> m_filterChips;
+
     QTableView* m_tableView = nullptr;
+
+    // Activity Feed
+    QListWidget* m_activityList = nullptr;
 
     // Details panel
     ProductDetailPanel* m_detailPanel = nullptr;

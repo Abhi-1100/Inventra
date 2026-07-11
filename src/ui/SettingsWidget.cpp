@@ -1,5 +1,7 @@
 #include "ui/SettingsWidget.h"
 #include "core/AppController.h"
+#include "core/AuthController.h"
+#include "core/Database.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -8,16 +10,26 @@
 #include <QPushButton>
 #include <QDoubleSpinBox>
 #include <QSpinBox>
+#include <QLineEdit>
+#include <QListWidget>
 #include <QFrame>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QInputDialog>
+#include <QTabWidget>
 
 namespace Kirana {
 
-SettingsWidget::SettingsWidget(AppController* controller, QWidget* parent)
+SettingsWidget::SettingsWidget(AppController* controller, AuthController* auth, QWidget* parent)
     : QWidget(parent)
     , m_controller(controller)
+    , m_auth(auth)
 {
     buildLayout();
     updateFormFromSettings();
+    refreshStaffList();
+
+    connect(m_auth, &AuthController::staffChanged, this, &SettingsWidget::refreshStaffList);
 }
 
 void SettingsWidget::buildLayout() {
@@ -26,139 +38,187 @@ void SettingsWidget::buildLayout() {
     mainLayout->setSpacing(20);
 
     // Title
-    auto* titleLabel = new QLabel("GLOBAL PIPELINE SETTINGS", this);
-    titleLabel->setStyleSheet("font-family: 'Segoe UI', sans-serif; font-size: 16px; font-weight: bold; color: #e6edf3; letter-spacing: 0.5px;");
+    auto* titleLabel = new QLabel(QStringLiteral("SETTINGS & UTILITIES"), this);
+    titleLabel->setStyleSheet(QStringLiteral("font-family: 'Segoe UI', sans-serif; font-size: 16px; font-weight: bold; color: #e6edf3; letter-spacing: 0.5px;"));
     mainLayout->addWidget(titleLabel);
 
-    // Default Banner
-    m_defaultBanner = new QLabel("⚠️ APPLICATION IS CURRENTLY RUNNING WITH DEFAULT CONFIGURATION PARAMETERS", this);
-    m_defaultBanner->setStyleSheet("font-size: 10px; font-weight: bold; color: #d29922; background-color: rgba(210,153,34,0.12); padding: 8px; border-radius: 4px; border: 1px solid rgba(210,153,34,0.30);");
-    mainLayout->addWidget(m_defaultBanner);
+    // ── Tab Control for Settings Categories ──
+    auto* tabWidget = new QTabWidget(this);
+    tabWidget->setDocumentMode(true);
 
-    // ── Grid Container ───────────────────────────
-    auto* formFrame = new QFrame(this);
-    formFrame->setObjectName("FormFrame");
-    formFrame->setStyleSheet(
-        "QFrame#FormFrame {"
-        "  background: #161b22;"
-        "  border: 1px solid #30363d;"
-        "  border-radius: 6px;"
-        "  padding: 20px;"
-        "}"
-        "QLabel { color: #8b949e; font-size: 11px; }"
-        "QDoubleSpinBox, QSpinBox {"
-        "  background-color: #0d1117;"
-        "  border: 1px solid #30363d;"
-        "  border-radius: 4px;"
-        "  padding: 6px;"
-        "  color: #e6edf3;"
-        "  font-family: 'Consolas', monospace;"
-        "}"
-    );
+    auto makeFieldLabel = [](const QString& text) -> QLabel* {
+        auto* l = new QLabel(text);
+        l->setStyleSheet(QStringLiteral("color: #8b949e; font-size: 11px; font-weight: 500; background: transparent;"));
+        return l;
+    };
+
+    // ── TAB 1: Pipeline Parameters ──
+    auto* pipelineTab = new QWidget(tabWidget);
+    auto* pLayout = new QVBoxLayout(pipelineTab);
+    pLayout->setContentsMargins(12, 12, 12, 12);
+    pLayout->setSpacing(16);
+
+    m_defaultBanner = new QLabel(QStringLiteral("⚠️ APPLICATION IS CURRENTLY RUNNING WITH DEFAULT CONFIGURATION PARAMETERS"), pipelineTab);
+    m_defaultBanner->setStyleSheet(QStringLiteral("font-size: 10px; font-weight: bold; color: #d29922; background-color: rgba(210,153,34,0.12); padding: 8px; border-radius: 4px; border: 1px solid rgba(210,153,34,0.30);"));
+    pLayout->addWidget(m_defaultBanner);
+
+    auto* formFrame = new QFrame(pipelineTab);
+    formFrame->setObjectName(QStringLiteral("FormFrame"));
     auto* grid = new QGridLayout(formFrame);
     grid->setSpacing(16);
 
-    // Cost Assumptions
-    auto* eoqHeader = new QLabel("ECONOMIC ORDER QUANTITY (EOQ) VARIABLES", formFrame);
-    eoqHeader->setStyleSheet("font-weight: bold; color: #58a6ff; font-size: 11px;");
+    auto* eoqHeader = new QLabel(QStringLiteral("ECONOMIC ORDER QUANTITY (EOQ) VARIABLES"), formFrame);
+    eoqHeader->setStyleSheet(QStringLiteral("font-weight: bold; color: #1f6feb; font-size: 11px;"));
     grid->addWidget(eoqHeader, 0, 0, 1, 2);
 
-    grid->addWidget(new QLabel("Ordering Cost per Shipment (K):", formFrame), 1, 0);
+    grid->addWidget(makeFieldLabel(QStringLiteral("Ordering Cost per Shipment (K):")), 1, 0);
     m_orderingCostSpin = new QDoubleSpinBox(formFrame);
-    m_orderingCostSpin->setPrefix("₹ ");
+    m_orderingCostSpin->setPrefix(QStringLiteral("₹ "));
     m_orderingCostSpin->setRange(1.0, 10000.0);
     grid->addWidget(m_orderingCostSpin, 1, 1);
 
-    grid->addWidget(new QLabel("Annual Holding Cost Rate (h %):", formFrame), 2, 0);
+    grid->addWidget(makeFieldLabel(QStringLiteral("Annual Holding Cost Rate (h %):")), 2, 0);
     m_holdingCostSpin = new QDoubleSpinBox(formFrame);
-    m_holdingCostSpin->setSuffix(" %");
+    m_holdingCostSpin->setSuffix(QStringLiteral(" %"));
     m_holdingCostSpin->setRange(1.0, 100.0);
     m_holdingCostSpin->setDecimals(1);
     grid->addWidget(m_holdingCostSpin, 2, 1);
 
-    grid->addWidget(new QLabel("Supplier Shipment Lead Time:", formFrame), 3, 0);
+    grid->addWidget(makeFieldLabel(QStringLiteral("Supplier Shipment Lead Time:")), 3, 0);
     m_leadTimeSpin = new QSpinBox(formFrame);
-    m_leadTimeSpin->setSuffix(" days");
+    m_leadTimeSpin->setSuffix(QStringLiteral(" days"));
     m_leadTimeSpin->setRange(1, 90);
     grid->addWidget(m_leadTimeSpin, 3, 1);
 
-    // Separator line
     auto* line = new QFrame(formFrame);
     line->setFrameShape(QFrame::HLine);
-    line->setStyleSheet("background-color: #30363d; max-height: 1px; border: none;");
+    line->setStyleSheet(QStringLiteral("background-color: #30363d; max-height: 1px; border: none;"));
     grid->addWidget(line, 4, 0, 1, 2);
 
-    // ML Thresholds
-    auto* mlHeader = new QLabel("CLASSIFICATION DECISION THRESHOLDS", formFrame);
-    mlHeader->setStyleSheet("font-weight: bold; color: #58a6ff; font-size: 11px;");
+    auto* mlHeader = new QLabel(QStringLiteral("CLASSIFICATION DECISION THRESHOLDS"), formFrame);
+    mlHeader->setStyleSheet(QStringLiteral("font-weight: bold; color: #1f6feb; font-size: 11px;"));
     grid->addWidget(mlHeader, 5, 0, 1, 2);
 
-    grid->addWidget(new QLabel("Critical / Reorder Confidence Threshold:", formFrame), 6, 0);
+    grid->addWidget(makeFieldLabel(QStringLiteral("Critical / Reorder Confidence Threshold:")), 6, 0);
     m_threshHighSpin = new QDoubleSpinBox(formFrame);
-    m_threshHighSpin->setSuffix(" %");
+    m_threshHighSpin->setSuffix(QStringLiteral(" %"));
     m_threshHighSpin->setRange(10.0, 100.0);
     m_threshHighSpin->setDecimals(1);
     grid->addWidget(m_threshHighSpin, 6, 1);
 
-    grid->addWidget(new QLabel("Medium / Warning Confidence Threshold:", formFrame), 7, 0);
+    grid->addWidget(makeFieldLabel(QStringLiteral("Medium / Warning Confidence Threshold:")), 7, 0);
     m_threshMediumSpin = new QDoubleSpinBox(formFrame);
-    m_threshMediumSpin->setSuffix(" %");
+    m_threshMediumSpin->setSuffix(QStringLiteral(" %"));
     m_threshMediumSpin->setRange(10.0, 100.0);
     m_threshMediumSpin->setDecimals(1);
     grid->addWidget(m_threshMediumSpin, 7, 1);
 
-    mainLayout->addWidget(formFrame);
+    pLayout->addWidget(formFrame);
 
-    // ── Bottom Action Buttons ──────────────────
     auto* actionLayout = new QHBoxLayout();
     actionLayout->setSpacing(12);
 
-    m_resetBtn = new QPushButton("Restore Defaults", this);
-    m_resetBtn->setStyleSheet(
-        "QPushButton {"
-        "  background: transparent;"
-        "  border: 1px solid #30363d;"
-        "  color: #c9d1d9;"
-        "  padding: 8px 16px;"
-        "  border-radius: 4px;"
-        "}"
-        "QPushButton:hover { background: #21262d; }"
-    );
+    m_resetBtn = new QPushButton(QStringLiteral("Restore Defaults"), pipelineTab);
     connect(m_resetBtn, &QPushButton::clicked, this, &SettingsWidget::onResetClicked);
 
-    m_saveBtn = new QPushButton("Apply & Save Config", this);
-    m_saveBtn->setStyleSheet(
-        "QPushButton {"
-        "  background: #21262d;"
-        "  border: 1px solid #30363d;"
-        "  color: #58a6ff;"
-        "  padding: 8px 16px;"
-        "  border-radius: 4px;"
-        "  font-weight: bold;"
-        "}"
-        "QPushButton:hover { background: #30363d; }"
-    );
+    m_saveBtn = new QPushButton(QStringLiteral("Apply & Save Config"), pipelineTab);
+    m_saveBtn->setObjectName(QStringLiteral("PrimaryBtn"));
     connect(m_saveBtn, &QPushButton::clicked, this, &SettingsWidget::onSaveClicked);
 
-    m_runBtn = new QPushButton("▶ Re-run Pipeline", this);
-    m_runBtn->setStyleSheet(
-        "QPushButton {"
-        "  background: rgba(88,166,255,0.15);"
-        "  border: 1px solid rgba(88,166,255,0.40);"
-        "  color: #58a6ff;"
-        "  padding: 8px 16px;"
-        "  border-radius: 4px;"
-        "}"
-        "QPushButton:hover { background: rgba(88,166,255,0.25); }"
-    );
+    m_runBtn = new QPushButton(QStringLiteral("▶ Re-run Pipeline"), pipelineTab);
     connect(m_runBtn, &QPushButton::clicked, this, &SettingsWidget::onRunNowClicked);
 
     actionLayout->addWidget(m_resetBtn);
     actionLayout->addStretch();
     actionLayout->addWidget(m_runBtn);
     actionLayout->addWidget(m_saveBtn);
+    pLayout->addLayout(actionLayout);
 
-    mainLayout->addLayout(actionLayout);
+    tabWidget->addTab(pipelineTab, QStringLiteral("Global Pipeline"));
+
+    // ── TAB 2: Shop Profile ──
+    auto* shopTab = new QWidget(tabWidget);
+    auto* sLayout = new QVBoxLayout(shopTab);
+    sLayout->setContentsMargins(12, 12, 12, 12);
+    sLayout->setSpacing(16);
+
+    auto* shopFrame = new QFrame(shopTab);
+    shopFrame->setObjectName(QStringLiteral("FormFrame"));
+    auto* sGrid = new QGridLayout(shopFrame);
+    sGrid->setSpacing(16);
+
+    sGrid->addWidget(makeFieldLabel(QStringLiteral("Shop Name:")), 0, 0);
+    m_shopNameEdit = new QLineEdit(shopFrame);
+    m_shopNameEdit->setText(m_auth->shopProfile().name);
+    sGrid->addWidget(m_shopNameEdit, 0, 1);
+
+    sGrid->addWidget(makeFieldLabel(QStringLiteral("Owner Name:")), 1, 0);
+    m_ownerNameEdit = new QLineEdit(shopFrame);
+    m_ownerNameEdit->setText(m_auth->shopProfile().ownerName);
+    sGrid->addWidget(m_ownerNameEdit, 1, 1);
+
+    sGrid->addWidget(makeFieldLabel(QStringLiteral("Contact Phone:")), 2, 0);
+    m_phoneEdit = new QLineEdit(shopFrame);
+    m_phoneEdit->setText(m_auth->shopProfile().phone);
+    sGrid->addWidget(m_phoneEdit, 2, 1);
+
+    sGrid->addWidget(makeFieldLabel(QStringLiteral("Shop Logo:")), 3, 0);
+    auto* logoUploadRow = new QHBoxLayout();
+    auto* logoBtn = new QPushButton(QStringLiteral("Browse Logo"), shopFrame);
+    connect(logoBtn, &QPushButton::clicked, this, &SettingsWidget::onSelectLogoClicked);
+    m_logoPathLabel = new QLabel(m_auth->shopProfile().logoPath.isEmpty() ? QStringLiteral("No logo set") : QFileInfo(m_auth->shopProfile().logoPath).fileName(), shopFrame);
+    m_logoPathLabel->setStyleSheet(QStringLiteral("color: #8b949e;"));
+    m_logoPath = m_auth->shopProfile().logoPath;
+    logoUploadRow->addWidget(logoBtn);
+    logoUploadRow->addWidget(m_logoPathLabel);
+    logoUploadRow->addStretch();
+    sGrid->addLayout(logoUploadRow, 3, 1);
+
+    sLayout->addWidget(shopFrame);
+
+    auto* shopActionLayout = new QHBoxLayout();
+    auto* saveShopBtn = new QPushButton(QStringLiteral("Save Shop Profile"), shopTab);
+    saveShopBtn->setObjectName(QStringLiteral("PrimaryBtn"));
+    connect(saveShopBtn, &QPushButton::clicked, this, &SettingsWidget::onSaveShopClicked);
+    shopActionLayout->addStretch();
+    shopActionLayout->addWidget(saveShopBtn);
+    sLayout->addLayout(shopActionLayout);
+
+    tabWidget->addTab(shopTab, QStringLiteral("Shop Profile"));
+
+    // ── TAB 3: Staff Management ──
+    auto* staffTab = new QWidget(tabWidget);
+    auto* stLayout = new QHBoxLayout(staffTab);
+    stLayout->setContentsMargins(12, 12, 12, 12);
+    stLayout->setSpacing(16);
+
+    m_staffListWidget = new QListWidget(staffTab);
+    stLayout->addWidget(m_staffListWidget, 2);
+
+    auto* stActions = new QVBoxLayout();
+    stActions->setSpacing(12);
+
+    m_addStaffBtn = new QPushButton(QStringLiteral("Add Staff User"), staffTab);
+    m_addStaffBtn->setObjectName(QStringLiteral("PrimaryBtn"));
+    connect(m_addStaffBtn, &QPushButton::clicked, this, &SettingsWidget::onAddStaffClicked);
+    stActions->addWidget(m_addStaffBtn);
+
+    m_deleteStaffBtn = new QPushButton(QStringLiteral("Remove Staff User"), staffTab);
+    m_deleteStaffBtn->setObjectName(QStringLiteral("DangerBtn"));
+    m_deleteStaffBtn->setEnabled(false);
+    connect(m_deleteStaffBtn, &QPushButton::clicked, this, &SettingsWidget::onDeleteStaffClicked);
+    stActions->addWidget(m_deleteStaffBtn);
+
+    stActions->addStretch();
+    stLayout->addLayout(stActions, 1);
+
+    connect(m_staffListWidget, &QListWidget::currentRowChanged, this, [this](int row) {
+        m_deleteStaffBtn->setEnabled(row >= 0);
+    });
+
+    tabWidget->addTab(staffTab, QStringLiteral("Staff Pins & Roles"));
+
+    mainLayout->addWidget(tabWidget);
 }
 
 void SettingsWidget::updateFormFromSettings() {
@@ -169,7 +229,6 @@ void SettingsWidget::updateFormFromSettings() {
     m_threshHighSpin->setValue(s.reorderThreshHigh * 100.0);
     m_threshMediumSpin->setValue(s.reorderThreshMedium * 100.0);
 
-    // Hide banner if custom cost assumptions are saved
     bool usingDefaults = (s.orderingCost == 20.0 && s.holdingCostRate == 0.25);
     m_defaultBanner->setVisible(usingDefaults);
 }
@@ -187,13 +246,93 @@ void SettingsWidget::onSaveClicked() {
 }
 
 void SettingsWidget::onResetClicked() {
-    AppSettings s; // Defaults
+    AppSettings s;
     emit settingsChanged(s);
     updateFormFromSettings();
 }
 
 void SettingsWidget::onRunNowClicked() {
     emit reRunRequested();
+}
+
+void SettingsWidget::onSelectLogoClicked() {
+    QString path = QFileDialog::getOpenFileName(this, QStringLiteral("Select Shop Logo"), {}, QStringLiteral("Images (*.png *.jpg *.jpeg *.svg)"));
+    if (!path.isEmpty()) {
+        m_logoPath = path;
+        m_logoPathLabel->setText(QFileInfo(path).fileName());
+    }
+}
+
+void SettingsWidget::onSaveShopClicked() {
+    ShopProfile shop = m_auth->shopProfile();
+    shop.name = m_shopNameEdit->text().trimmed();
+    shop.ownerName = m_ownerNameEdit->text().trimmed();
+    shop.phone = m_phoneEdit->text().trimmed();
+    shop.logoPath = m_logoPath;
+
+    if (m_auth->updateShopProfile(shop)) {
+        QMessageBox::information(this, QStringLiteral("Shop Profile"), QStringLiteral("Profile updated successfully."));
+    } else {
+        QMessageBox::critical(this, QStringLiteral("Error"), QStringLiteral("Could not update shop profile."));
+    }
+}
+
+void SettingsWidget::refreshStaffList() {
+    m_staffListWidget->clear();
+    QVector<StaffUser> list = m_auth->getStaff();
+
+    for (const auto& u : list) {
+        QString itemText = QStringLiteral("%1 (%2)")
+            .arg(u.name)
+            .arg(u.role);
+        auto* item = new QListWidgetItem(itemText, m_staffListWidget);
+        item->setData(Qt::UserRole, u.id);
+        item->setData(Qt::UserRole + 1, u.role); // Store role to avoid deleting owner
+    }
+    m_deleteStaffBtn->setEnabled(false);
+}
+
+void SettingsWidget::onAddStaffClicked() {
+    bool ok;
+    QString name = QInputDialog::getText(this, QStringLiteral("Add Staff"), QStringLiteral("Staff Member Name:"), QLineEdit::Normal, {}, &ok);
+    if (!ok || name.trimmed().isEmpty()) return;
+
+    QString pin = QInputDialog::getText(this, QStringLiteral("Set Staff PIN"), QStringLiteral("4-Digit PIN:"), QLineEdit::Password, {}, &ok);
+    if (!ok || pin.length() != 4 || !pin.toInt()) {
+        QMessageBox::warning(this, QStringLiteral("Invalid PIN"), QStringLiteral("PIN must be exactly 4 digits."));
+        return;
+    }
+
+    if (m_auth->addStaff(name.trimmed(), pin)) {
+        refreshStaffList();
+    } else {
+        QMessageBox::critical(this, QStringLiteral("Error"), QStringLiteral("Could not add staff user."));
+    }
+}
+
+void SettingsWidget::onDeleteStaffClicked() {
+    auto* item = m_staffListWidget->currentItem();
+    if (!item) return;
+
+    int userId = item->data(Qt::UserRole).toInt();
+    QString role = item->data(Qt::UserRole + 1).toString();
+
+    if (role == QLatin1String("Owner")) {
+        QMessageBox::warning(this, QStringLiteral("Action Denied"), QStringLiteral("The primary owner user cannot be removed."));
+        return;
+    }
+
+    auto reply = QMessageBox::question(this, QStringLiteral("Remove User"),
+        QStringLiteral("Are you sure you want to remove this staff user?"),
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (reply == QMessageBox::Yes) {
+        if (m_auth->removeStaff(userId)) {
+            refreshStaffList();
+        } else {
+            QMessageBox::critical(this, QStringLiteral("Error"), QStringLiteral("Could not remove staff user."));
+        }
+    }
 }
 
 } // namespace Kirana

@@ -1,7 +1,9 @@
 #include "core/AppController.h"
+#include "core/Database.h"
 #include <QRandomGenerator>
 #include <QtMath>
 #include <algorithm>
+#include <QDebug>
 
 namespace Kirana {
 
@@ -60,14 +62,12 @@ static const RawSeed kSeedData[] = {
 // Constructor
 // ─────────────────────────────────────────────
 
-AppController::AppController(QObject* parent)
+AppController::AppController(Database* db, QObject* parent)
     : QObject(parent)
+    , m_db(db)
 {
-    // Register meta-types for cross-thread signal/slot use
     qRegisterMetaType<Kirana::Product>();
     qRegisterMetaType<QVector<Kirana::Product>>();
-
-    loadDummyData();
 }
 
 // ─────────────────────────────────────────────
@@ -81,6 +81,61 @@ void AppController::loadDummyData() {
 
     emit productsChanged(m_products);
     emit pipelineStateChanged(m_pipelineLive, m_lastRunTime);
+}
+
+// ─────────────────────────────────────────────
+// loadFromDatabase
+// ─────────────────────────────────────────────
+
+bool AppController::loadFromDatabase() {
+    if (!m_db) return false;
+    QVector<Product> dbProds = m_db->getProducts();
+    if (dbProds.isEmpty()) {
+        // Seed database with dummy seed data
+        QVector<Product> dummyList = buildDummyProducts(m_settings);
+        for (const auto& p : dummyList) {
+            m_db->saveProduct(p);
+        }
+        dbProds = m_db->getProducts();
+    }
+
+    // Populate ML simulation values on top of DB loaded structures
+    for (int i = 0; i < dbProds.size(); ++i) {
+        Product& p = dbProds[i];
+        bool foundSeed = false;
+        for (const auto& s : kSeedData) {
+            if (p.sku == QString::fromLatin1(s.sku)) {
+                p.demandLabel = s.demand;
+                p.stockStatus = s.status;
+                p.priority = s.priority;
+                p.confidence = s.confidence;
+                p.forecastNext7 = s.forecast7;
+                p.forecastTrend = s.trend;
+                p.eoqQty = s.eoq;
+                foundSeed = true;
+                break;
+            }
+        }
+        if (!foundSeed) {
+            // Default generated ML/forecasting values
+            p.demandLabel = DemandLabel::Medium;
+            p.stockStatus = StockStatus::NoAction;
+            p.priority = Priority::Safe;
+            p.confidence = 85.0;
+            p.forecastNext7 = p.currentStock * 0.5;
+            p.forecastTrend = 0.5;
+            p.eoqQty = 50;
+        }
+
+        const double dailyBase = p.forecastNext7 / 7.0;
+        p.forecast = makeForecast(dailyBase, p.forecastTrend / 7.0, m_settings.forecastHorizonDays);
+        p.historicalSales = makeHistory(dailyBase, 30);
+    }
+
+    m_products = dbProds;
+    m_lastRunTime  = QDateTime::currentDateTime();
+    emit productsChanged(m_products);
+    return true;
 }
 
 // ─────────────────────────────────────────────
@@ -156,7 +211,6 @@ QVector<double> AppController::makeHistory(double base, int days) {
     auto* rng = QRandomGenerator::global();
     for (int d = 0; d < days; ++d) {
         const double noise = (rng->bounded(200) / 100.0 - 1.0) * base * 0.25;
-        // sine-wave seasonality (weekly) + noise
         const double wave  = base * 0.12 * qSin(2.0 * M_PI * d / 7.0);
         hist.append(qMax(0.0, base + wave + noise));
     }

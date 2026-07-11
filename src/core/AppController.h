@@ -6,8 +6,10 @@
 
 namespace Kirana {
 
+class Database;
+
 // ─────────────────────────────────────────────
-// EOQ / Settings (shared mutable config)
+// AppSettings (shared mutable config)
 // ─────────────────────────────────────────────
 
 struct AppSettings {
@@ -17,26 +19,26 @@ struct AppSettings {
     double reorderThreshHigh   = 0.80; // confidence threshold → Critical
     double reorderThreshMedium = 0.60;
     int    forecastHorizonDays = 7;
-    QString dbPath;                    // SQLite path (empty = in-memory)
+    QString dbPath;                    // SQLite path
 };
 
 // ─────────────────────────────────────────────
 // AppController
 // Central state manager for the application.
-// Owns the product list. Provides dummy data in
-// Phase 1; real ML results in Phase 2 via signal.
+// Connects UI to Database and manages products list.
 // ─────────────────────────────────────────────
 
 class AppController : public QObject {
     Q_OBJECT
 
 public:
-    explicit AppController(QObject* parent = nullptr);
+    explicit AppController(Database* db, QObject* parent = nullptr);
 
     // ── Accessors ──────────────────────────
     const QVector<Product>& products() const { return m_products; }
     AppSettings&        settings()     { return m_settings; }
     const AppSettings&  settings() const { return m_settings; }
+    Database*           database()     { return m_db; }
 
     QDateTime lastRunTime() const { return m_lastRunTime; }
     bool      pipelineLive() const { return m_pipelineLive; }
@@ -48,6 +50,7 @@ public:
 
     // ── Actions ──────────────────────────
     void loadDummyData();
+    bool loadFromDatabase();
     void applyPipelineResults(QVector<Product> updated);
     void updateSettings(const AppSettings& s);
 
@@ -61,6 +64,7 @@ private:
     static QVector<ForecastPoint> makeForecast(double base, double trend, int days);
     static QVector<double> makeHistory(double base, int days);
 
+    Database*        m_db = nullptr;
     QVector<Product> m_products;
     AppSettings      m_settings;
     QDateTime        m_lastRunTime;

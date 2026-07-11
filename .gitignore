@@ -1,0 +1,25 @@
+# Build directories
+build/
+CMakeSettings.json
+CMakeUserPresets.json
+
+# MSVC / VS files
+.vs/
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.suo
+*.db
+*.db-wal
+*.db-journal
+*.pdb
+
+# Qt files
+*.qmlc
+*.jsc
+CMakeLists.txt.user
+
+# OS files
+.DS_Store
+Thumbs.db

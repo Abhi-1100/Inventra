@@ -3,40 +3,54 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include "ui/Sidebar.h"
+#include "core/AuthData.h"
 
 namespace Kirana {
 
 class AppController;
+class AuthController;
+class Database;
 class StatusBar;
+class AuthWidget;
 class DashboardWidget;
+class DailyEntryWidget;
+class StockWidget;
 class AnalyticsWidget;
 class ImportWidget;
 class SettingsWidget;
 class PipelineWorker;
 struct PipelineRunResult;
 
-
 // ─────────────────────────────────────────────
 // MainWindow — application shell
 //
+// Auth flow:  AuthWidget (full screen) → MainWindow body
+//
 // Layout:
-//   ┌── Sidebar(56px) ─┬── body ────────────┐
-//   │                  │  StatusBar (30px)   │
-//   │    Icon nav      │  QStackedWidget     │
-//   │                  │    0: Dashboard     │
-//   │                  │    1: Products      │
-//   │                  │    2: Analytics     │
-//   │                  │    3: Import        │
-//   │                  │    4: Settings      │
-//   └──────────────────┴─────────────────────┘
+//   ┌── Sidebar(160px) ─┬── body ─────────────┐
+//   │  Inventra logo    │  StatusBar (30px)    │
+//   │  Nav items        │  QStackedWidget      │
+//   │  (role-gated)     │    0: Dashboard      │
+//   │                   │    1: Daily Entry    │
+//   │                   │    2: Stock In/Out   │
+//   │                   │    3: Products       │
+//   │                   │    4: Analytics      │
+//   │                   │    5: Import         │
+//   │                   │    6: Settings       │
+//   └───────────────────┴──────────────────────┘
 // ─────────────────────────────────────────────
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(AppController* controller, QWidget* parent = nullptr);
+    explicit MainWindow(AppController* controller,
+                        AuthController* auth,
+                        QWidget* parent = nullptr);
     ~MainWindow() override;
+
+    // Called after the auth flow completes
+    void showAppShell();
 
 protected:
     void closeEvent(QCloseEvent* event) override;
@@ -44,6 +58,8 @@ protected:
 
 private slots:
     void onPageSelected(Sidebar::Page page);
+    void onLoginSucceeded(const Kirana::StaffUser& user);
+    void onLoggedOut();
     void onRunNowClicked();
     void onPipelineStarted();
     void onPipelineProgress(int pct, const QString& stage);
@@ -51,24 +67,35 @@ private slots:
     void onPipelineError(const QString& msg);
 
 private:
-    void buildLayout();
+    void buildAuthLayer();
+    void buildAppShell();
     void connectSignals();
     void showPage(int index);
 
-    // Controller (not owned)
-    AppController* m_controller = nullptr;
+    // Controllers (not owned)
+    AppController*  m_controller    = nullptr;
+    AuthController* m_auth          = nullptr;
 
-    // Shell widgets
-    Sidebar*        m_sidebar    = nullptr;
-    StatusBar*      m_statusBar  = nullptr;
-    QStackedWidget* m_stack      = nullptr;
+    // Top-level stack: 0=auth, 1=app shell
+    QStackedWidget* m_rootStack     = nullptr;
 
-    // Pages
-    DashboardWidget* m_dashboardPage  = nullptr;
-    DashboardWidget* m_productsPage   = nullptr;  // reuses DashboardWidget
-    AnalyticsWidget* m_analyticsPage  = nullptr;
-    ImportWidget*    m_importPage     = nullptr;
-    SettingsWidget*  m_settingsPage   = nullptr;
+    // Auth
+    AuthWidget*     m_authWidget    = nullptr;
+
+    // App shell widgets
+    QWidget*        m_appShell      = nullptr;
+    Sidebar*        m_sidebar       = nullptr;
+    StatusBar*      m_statusBar     = nullptr;
+    QStackedWidget* m_stack         = nullptr;
+
+    // Pages (indices match Sidebar::Page enum)
+    DashboardWidget*  m_dashboardPage   = nullptr;
+    DailyEntryWidget* m_dailyEntryPage  = nullptr;
+    StockWidget*      m_stockPage       = nullptr;
+    DashboardWidget*  m_productsPage    = nullptr;
+    AnalyticsWidget*  m_analyticsPage   = nullptr;
+    ImportWidget*     m_importPage      = nullptr;
+    SettingsWidget*   m_settingsPage    = nullptr;
 
     // Background pipeline worker
     PipelineWorker* m_worker = nullptr;
