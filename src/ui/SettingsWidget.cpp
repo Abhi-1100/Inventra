@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QTabWidget>
+#include <QComboBox>
 
 namespace Kirana {
 
@@ -218,6 +219,46 @@ void SettingsWidget::buildLayout() {
 
     tabWidget->addTab(staffTab, QStringLiteral("Staff Pins & Roles"));
 
+    // ── TAB 4: Session & Security ──
+    auto* sessionTab = new QWidget(tabWidget);
+    auto* sessLayout = new QVBoxLayout(sessionTab);
+    sessLayout->setContentsMargins(12, 12, 12, 12);
+    sessLayout->setSpacing(16);
+
+    auto* secFormFrame = new QFrame(sessionTab);
+    secFormFrame->setObjectName(QStringLiteral("FormFrame"));
+    auto* secGrid = new QGridLayout(secFormFrame);
+    secGrid->setSpacing(16);
+
+    secGrid->addWidget(makeFieldLabel(QStringLiteral("Auto-lock Timeout:")), 0, 0);
+    m_sessionTimeoutCombo = new QComboBox(secFormFrame);
+    m_sessionTimeoutCombo->addItem(QStringLiteral("1 minute"), 1);
+    m_sessionTimeoutCombo->addItem(QStringLiteral("5 minutes"), 5);
+    m_sessionTimeoutCombo->addItem(QStringLiteral("15 minutes"), 15);
+    m_sessionTimeoutCombo->addItem(QStringLiteral("30 minutes"), 30);
+    m_sessionTimeoutCombo->addItem(QStringLiteral("Never"), 0);
+    secGrid->addWidget(m_sessionTimeoutCombo, 0, 1);
+
+    sessLayout->addWidget(secFormFrame);
+
+    m_sessionTimeLabel = new QLabel(QStringLiteral("Session Active: 00:00:00"), sessionTab);
+    m_sessionTimeLabel->setStyleSheet(QStringLiteral("font-size: 14px; font-weight: bold; color: #1f6feb;"));
+    sessLayout->addWidget(m_sessionTimeLabel);
+
+    m_logoutBtn = new QPushButton(QStringLiteral("Logout"), sessionTab);
+    m_logoutBtn->setObjectName(QStringLiteral("DangerBtn"));
+    m_logoutBtn->setFixedWidth(200);
+    connect(m_logoutBtn, &QPushButton::clicked, this, &SettingsWidget::onLogoutClicked);
+    sessLayout->addWidget(m_logoutBtn);
+
+    sessLayout->addStretch();
+    tabWidget->addTab(sessionTab, QStringLiteral("Session & Security"));
+
+    m_sessionTimer = new QTimer(this);
+    connect(m_sessionTimer, &QTimer::timeout, this, &SettingsWidget::updateSessionTime);
+    m_sessionTimer->start(1000);
+    updateSessionTime();
+
     mainLayout->addWidget(tabWidget);
 }
 
@@ -228,6 +269,10 @@ void SettingsWidget::updateFormFromSettings() {
     m_leadTimeSpin->setValue(s.leadTimeDays);
     m_threshHighSpin->setValue(s.reorderThreshHigh * 100.0);
     m_threshMediumSpin->setValue(s.reorderThreshMedium * 100.0);
+
+    int timeout = s.sessionTimeoutMinutes;
+    int idx = m_sessionTimeoutCombo->findData(timeout);
+    if (idx >= 0) m_sessionTimeoutCombo->setCurrentIndex(idx);
 
     bool usingDefaults = (s.orderingCost == 20.0 && s.holdingCostRate == 0.25);
     m_defaultBanner->setVisible(usingDefaults);
@@ -240,6 +285,7 @@ void SettingsWidget::onSaveClicked() {
     s.leadTimeDays = m_leadTimeSpin->value();
     s.reorderThreshHigh = m_threshHighSpin->value() / 100.0;
     s.reorderThreshMedium = m_threshMediumSpin->value() / 100.0;
+    s.sessionTimeoutMinutes = m_sessionTimeoutCombo->currentData().toInt();
 
     emit settingsChanged(s);
     updateFormFromSettings();
@@ -332,6 +378,32 @@ void SettingsWidget::onDeleteStaffClicked() {
         } else {
             QMessageBox::critical(this, QStringLiteral("Error"), QStringLiteral("Could not remove staff user."));
         }
+    }
+}
+
+void SettingsWidget::updateSessionTime() {
+    if (m_auth->isLoggedIn() && m_auth->loginTime().isValid()) {
+        qint64 secs = m_auth->loginTime().secsTo(QDateTime::currentDateTime());
+        if (secs < 0) secs = 0;
+        qint64 h = secs / 3600;
+        qint64 m = (secs % 3600) / 60;
+        qint64 s = secs % 60;
+        m_sessionTimeLabel->setText(QStringLiteral("Session Active: %1:%2:%3")
+            .arg(h, 2, 10, QLatin1Char('0'))
+            .arg(m, 2, 10, QLatin1Char('0'))
+            .arg(s, 2, 10, QLatin1Char('0')));
+    } else {
+        m_sessionTimeLabel->setText(QStringLiteral("Not logged in"));
+    }
+}
+
+void SettingsWidget::onLogoutClicked() {
+    auto reply = QMessageBox::question(this, QStringLiteral("Logout"),
+        QStringLiteral("Are you sure you want to log out?"),
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (reply == QMessageBox::Yes) {
+        m_auth->logout();
     }
 }
 

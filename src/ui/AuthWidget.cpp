@@ -337,10 +337,14 @@ void AuthWidget::buildLoginPage() {
 void AuthWidget::setMode(Mode m) {
     m_mode = m;
     if (m == Mode::Registration) {
-        m_stack->setCurrentIndex(0);
+        m_stack->setCurrentWidget(m_regPage);
     } else {
-        updateShopGreeting();
-        m_stack->setCurrentIndex(1);
+        m_stack->setCurrentWidget(m_loginPage);
+        if (m == Mode::Unlock) {
+            m_shopGreeting->setText(QStringLiteral("Session Locked"));
+        } else {
+            updateShopGreeting();
+        }
     }
 }
 
@@ -373,8 +377,12 @@ void AuthWidget::onPinBackspace() {
 }
 
 void AuthWidget::submitPin() {
-    m_auth->authenticate(m_pinBuffer);
-    // Result comes via loginSucceeded / loginFailed signals
+    if (m_mode == Mode::Unlock) {
+        m_auth->unlockSession(m_pinBuffer);
+    } else {
+        m_auth->authenticate(m_pinBuffer);
+    }
+    // Result comes via loginSucceeded / loginFailed / sessionUnlocked signals
     resetPin();
 }
 

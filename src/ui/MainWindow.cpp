@@ -19,6 +19,8 @@
 #include <QResizeEvent>
 #include <QMessageBox>
 #include <QStatusBar>
+#include <QApplication>
+#include <QTimer>
 
 namespace Kirana {
 
@@ -44,6 +46,11 @@ MainWindow::MainWindow(AppController* controller,
 
     // Connect auth signals before showing anything
     connectSignals();
+
+    m_idleTimer = new QTimer(this);
+    m_idleTimer->setSingleShot(true);
+    connect(m_idleTimer, &QTimer::timeout, this, &MainWindow::onIdleTimeout);
+    qApp->installEventFilter(this);
 
     // Determine initial state
     if (m_auth->isRegistered()) {
@@ -143,7 +150,10 @@ void MainWindow::buildAppShell() {
             });
 
     connect(m_settingsPage, &SettingsWidget::settingsChanged,
-            m_controller, &AppController::updateSettings);
+            [this](const AppSettings& s) {
+                m_controller->updateSettings(s);
+                resetIdleTimer();
+            });
     connect(m_settingsPage, &SettingsWidget::reRunRequested,
             this, &MainWindow::onRunNowClicked);
 
@@ -171,6 +181,10 @@ void MainWindow::connectSignals() {
             m_authWidget, &AuthWidget::onLoginFailed);
     connect(m_auth, &AuthController::loggedOut,
             this, &MainWindow::onLoggedOut);
+    connect(m_auth, &AuthController::sessionLocked,
+            this, &MainWindow::onSessionLocked);
+    connect(m_auth, &AuthController::sessionUnlocked,
+            this, &MainWindow::onSessionUnlocked);
 }
 
 // ─────────────────────────────────────────────
@@ -193,9 +207,11 @@ void MainWindow::onLoginSucceeded(const StaffUser& user) {
     m_sidebar->setRole(user.role);
     m_rootStack->setCurrentIndex(1);
     showPage(static_cast<int>(Sidebar::Page::Dashboard));
+    resetIdleTimer();
 }
 
 void MainWindow::onLoggedOut() {
+    m_idleTimer->stop();
     m_rootStack->setCurrentIndex(0);
     m_authWidget->setMode(AuthWidget::Mode::Login);
 }
@@ -253,6 +269,47 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
     QMainWindow::resizeEvent(event);
     if (m_dashboardPage) m_dashboardPage->updateGeometry();
     if (m_productsPage)  m_productsPage->updateGeometry();
+}
+
+void MainWindow::onSessionLocked() {
+    m_idleTimer->stop();
+    m_authWidget->setMode(AuthWidget::Mode::Unlock);
+    m_rootStack->setCurrentIndex(0);
+}
+
+void MainWindow::onSessionUnlocked() {
+    resetIdleTimer();
+    m_rootStack->setCurrentIndex(1);
+}
+
+void MainWindow::onIdleTimeout() {
+    m_auth->lockSession();
+}
+
+void MainWindow::resetIdleTimer() {
+    if (!m_auth->isLoggedIn()) {
+        m_idleTimer->stop();
+        return;
+    }
+    int mins = m_controller->settings().sessionTimeoutMinutes;
+    if (mins <= 0) {
+        m_idleTimer->stop();
+    } else {
+        m_idleTimer->start(mins * 60 * 1000);
+    }
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
+    if (event->type() == QEvent::MouseMove || 
+        event->type() == QEvent::MouseButtonPress ||
+        event->type() == QEvent::KeyPress ||
+        event->type() == QEvent::Wheel) 
+    {
+        if (m_auth->isLoggedIn() && m_rootStack->currentIndex() == 1) {
+            resetIdleTimer();
+        }
+    }
+    return QMainWindow::eventFilter(obj, event);
 }
 
 } // namespace Kirana

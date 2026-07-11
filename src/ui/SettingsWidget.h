@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "core/AppController.h"
 #include "core/AuthData.h"
+#include <QTimer>
 
 class QDoubleSpinBox;
 class QSpinBox;
@@ -10,6 +11,7 @@ class QPushButton;
 class QLabel;
 class QLineEdit;
 class QListWidget;
+class QComboBox;
 
 namespace Kirana {
 
@@ -51,6 +53,10 @@ private slots:
     void onSaveShopClicked();
     void onSelectLogoClicked();
 
+    // Session slots
+    void updateSessionTime();
+    void onLogoutClicked();
+
 private:
     void buildLayout();
 
@@ -81,6 +87,12 @@ private:
     QListWidget* m_staffListWidget = nullptr;
     QPushButton* m_addStaffBtn     = nullptr;
     QPushButton* m_deleteStaffBtn  = nullptr;
+
+    // Session & Security fields
+    QComboBox* m_sessionTimeoutCombo = nullptr;
+    QLabel* m_sessionTimeLabel = nullptr;
+    QPushButton* m_logoutBtn = nullptr;
+    QTimer* m_sessionTimer = nullptr;
 };
 
 } // namespace Kirana

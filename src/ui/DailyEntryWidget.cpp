@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QComboBox>
+#include <QCompleter>
 #include <QSpinBox>
 #include <QListWidget>
 #include <QListWidgetItem>

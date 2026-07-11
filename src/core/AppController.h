@@ -19,6 +19,7 @@ struct AppSettings {
     double reorderThreshHigh   = 0.80; // confidence threshold → Critical
     double reorderThreshMedium = 0.60;
     int    forecastHorizonDays = 7;
+    int    sessionTimeoutMinutes = 5; // 0 means Never
     QString dbPath;                    // SQLite path
 };
 

@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QTimer>
+#include <QEvent>
 #include "ui/Sidebar.h"
 #include "core/AuthData.h"
 
@@ -55,6 +57,7 @@ public:
 protected:
     void closeEvent(QCloseEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private slots:
     void onPageSelected(Sidebar::Page page);
@@ -65,12 +68,16 @@ private slots:
     void onPipelineProgress(int pct, const QString& stage);
     void onPipelineFinished(const PipelineRunResult& result);
     void onPipelineError(const QString& msg);
+    void onSessionLocked();
+    void onSessionUnlocked();
+    void onIdleTimeout();
 
 private:
     void buildAuthLayer();
     void buildAppShell();
     void connectSignals();
     void showPage(int index);
+    void resetIdleTimer();
 
     // Controllers (not owned)
     AppController*  m_controller    = nullptr;
@@ -87,6 +94,9 @@ private:
     Sidebar*        m_sidebar       = nullptr;
     StatusBar*      m_statusBar     = nullptr;
     QStackedWidget* m_stack         = nullptr;
+
+    // Idle timer
+    QTimer*         m_idleTimer     = nullptr;
 
     // Pages (indices match Sidebar::Page enum)
     DashboardWidget*  m_dashboardPage   = nullptr;
