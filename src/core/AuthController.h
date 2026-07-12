@@ -4,6 +4,7 @@
 #include <QString>
 #include "core/AuthData.h"
 #include "core/Database.h"
+#include <QDateTime>
 
 namespace Kirana {
 
@@ -26,6 +27,7 @@ public:
 
     const StaffUser& currentUser() const { return m_currentUser; }
     const ShopProfile& shopProfile() const { return m_shop; }
+    QDateTime loginTime() const { return m_loginTime; }
 
     // ── Registration ──────────────────────────
     // Returns true on success; emits registrationSucceeded
@@ -35,6 +37,8 @@ public:
     // Returns true on success; emits loginSucceeded / loginFailed
     bool authenticate(const QString& pin);
     void logout();
+    void lockSession();
+    bool unlockSession(const QString& pin);
 
     // ── Staff management (Owner only) ─────────
     QVector<StaffUser> getStaff() const;
@@ -54,6 +58,8 @@ signals:
     void loginSucceeded(const Kirana::StaffUser& user);
     void loginFailed();
     void loggedOut();
+    void sessionLocked();
+    void sessionUnlocked();
     void staffChanged();
     void shopProfileChanged(const Kirana::ShopProfile& shop);
 
@@ -61,6 +67,7 @@ private:
     Database*   m_db;
     StaffUser   m_currentUser;
     ShopProfile m_shop;
+    QDateTime   m_loginTime;
 };
 
 } // namespace Kirana

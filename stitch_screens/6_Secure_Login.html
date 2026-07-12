@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventra - PIN Lock Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#afc6ff",
+                        "on-tertiary": "#2a313a",
+                        "on-primary": "#002d6d",
+                        "on-surface": "#e0e2ea",
+                        "tertiary-container": "#6e7580",
+                        "surface-container-low": "#181c21",
+                        "on-secondary": "#002f67",
+                        "surface-container": "#1c2025",
+                        "outline": "#8c90a0",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "primary": "#afc6ff",
+                        "background": "#101419",
+                        "secondary-container": "#0050a7",
+                        "on-surface-variant": "#c2c6d6",
+                        "surface-dim": "#101419",
+                        "on-secondary-container": "#abc6ff",
+                        "surface-variant": "#31353b",
+                        "secondary-fixed": "#d7e2ff",
+                        "primary-fixed": "#d9e2ff",
+                        "on-primary-fixed": "#001944",
+                        "surface-bright": "#36393f",
+                        "tertiary": "#c0c7d3",
+                        "tertiary-fixed": "#dce3ef",
+                        "on-secondary-fixed": "#001a40",
+                        "on-primary-fixed-variant": "#004299",
+                        "surface-container-high": "#262a30",
+                        "on-tertiary-container": "#fdfcff",
+                        "on-error": "#690005",
+                        "surface": "#101419",
+                        "inverse-on-surface": "#2d3136",
+                        "surface-container-lowest": "#0a0e13",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#151c25",
+                        "surface-container-highest": "#31353b",
+                        "outline-variant": "#424754",
+                        "primary-container": "#1f6feb",
+                        "surface-tint": "#afc6ff",
+                        "secondary": "#acc7ff",
+                        "on-secondary-fixed-variant": "#004491",
+                        "on-tertiary-fixed-variant": "#404751",
+                        "error-container": "#93000a",
+                        "on-background": "#e0e2ea",
+                        "on-primary-container": "#fffcff",
+                        "inverse-primary": "#0059c8",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e0e2ea",
+                        "tertiary-fixed-dim": "#c0c7d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "cell-padding-v": "12px",
+                        "sidebar-width": "260px",
+                        "cell-padding-h": "16px",
+                        "container-margin": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-md": ["JetBrains Mono"],
+                        "data-sm": ["JetBrains Mono"],
+                        "data-lg": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "data-lg": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .radial-glow {
+            background: radial-gradient(circle at center, rgba(31, 111, 235, 0.15) 0%, rgba(16, 20, 25, 0) 70%);
+        }
+        
+        .pin-dot {
+            transition: all 0.2s ease-in-out;
+        }
+        .pin-dot.filled {
+            background-color: #afc6ff; /* primary */
+            box-shadow: 0 0 8px rgba(175, 198, 255, 0.5);
+        }
+        
+        .keypad-btn {
+            transition: all 0.1s ease-out;
+        }
+        .keypad-btn:active {
+            transform: scale(0.95);
+            background-color: rgba(49, 53, 59, 0.8); /* surface-variant slightly darker */
+            border-top-color: #afc6ff; /* primary inner glow simulation */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen flex flex-col items-center justify-center overflow-hidden antialiased radial-glow">
+<!-- Header Section -->
+<div class="flex flex-col items-center mb-12">
+<h1 class="font-headline-lg text-headline-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+            Inventra
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Downtown Grocery HQ
+        </p>
+</div>
+<!-- PIN Progress -->
+<div class="flex items-center space-x-6 mb-12">
+<div class="w-4 h-4 rounded-full border border-outline-variant bg-surface-container-high pin-dot filled"></div>
+<div class="w-4 h-4 rounded-full border border-outline-variant bg-surface-container-high pin-dot filled"></div>
+<div class="w-4 h-4 rounded-full border border-outline-variant bg-surface-container-high pin-dot"></div>
+<div class="w-4 h-4 rounded-full border border-outline-variant bg-surface-container-high pin-dot"></div>
+</div>
+<!-- Keypad -->
+<div class="grid grid-cols-3 gap-6 mb-12 max-w-[280px]">
+<!-- Row 1 -->
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">1</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">2</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">3</button>
+<!-- Row 2 -->
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">4</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">5</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">6</button>
+<!-- Row 3 -->
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">7</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">8</button>
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">9</button>
+<!-- Row 4 -->
+<div class="w-20 h-20"></div> <!-- Empty space -->
+<button class="keypad-btn w-20 h-20 rounded-full bg-surface-container-high border-[0.5px] border-outline-variant flex items-center justify-center font-data-lg text-data-lg text-on-surface hover:bg-surface-variant focus:outline-none">0</button>
+<button class="keypad-btn w-20 h-20 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary focus:outline-none transition-colors">
+<span class="material-symbols-outlined" style="font-size: 28px;">backspace</span>
+</button>
+</div>
+<!-- Footer Action -->
+<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed transition-colors border-b border-transparent hover:border-primary-fixed" href="#">
+        Register your shop
+    </a>
+<script>
+        // Simple visual feedback logic for keypad (non-functional for real auth)
+        document.querySelectorAll('button:not(:last-child)').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dots = document.querySelectorAll('.pin-dot:not(.filled)');
+                if(dots.length > 0) {
+                    dots[0].classList.add('filled');
+                }
+            });
+        });
+
+        document.querySelector('button:last-child').addEventListener('click', () => {
+             const dots = document.querySelectorAll('.pin-dot.filled');
+             if(dots.length > 0) {
+                 dots[dots.length - 1].classList.remove('filled');
+             }
+        });
+    </script>
+</body></html>

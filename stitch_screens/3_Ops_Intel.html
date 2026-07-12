@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventra - Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#afc6ff",
+                      "on-tertiary": "#2a313a",
+                      "on-primary": "#002d6d",
+                      "on-surface": "#e0e2ea",
+                      "tertiary-container": "#6e7580",
+                      "surface-container-low": "#181c21",
+                      "on-secondary": "#002f67",
+                      "surface-container": "#1c2025",
+                      "outline": "#8c90a0",
+                      "secondary-fixed-dim": "#acc7ff",
+                      "primary": "#afc6ff",
+                      "background": "#101419",
+                      "secondary-container": "#0050a7",
+                      "on-surface-variant": "#c2c6d6",
+                      "surface-dim": "#101419",
+                      "on-secondary-container": "#abc6ff",
+                      "surface-variant": "#31353b",
+                      "secondary-fixed": "#d7e2ff",
+                      "primary-fixed": "#d9e2ff",
+                      "on-primary-fixed": "#001944",
+                      "surface-bright": "#36393f",
+                      "tertiary": "#c0c7d3",
+                      "tertiary-fixed": "#dce3ef",
+                      "on-secondary-fixed": "#001a40",
+                      "on-primary-fixed-variant": "#004299",
+                      "surface-container-high": "#262a30",
+                      "on-tertiary-container": "#fdfcff",
+                      "on-error": "#690005",
+                      "surface": "#101419",
+                      "inverse-on-surface": "#2d3136",
+                      "surface-container-lowest": "#0a0e13",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#151c25",
+                      "surface-container-highest": "#31353b",
+                      "outline-variant": "#424754",
+                      "primary-container": "#1f6feb",
+                      "surface-tint": "#afc6ff",
+                      "secondary": "#acc7ff",
+                      "on-secondary-fixed-variant": "#004491",
+                      "on-tertiary-fixed-variant": "#404751",
+                      "error-container": "#93000a",
+                      "on-background": "#e0e2ea",
+                      "on-primary-container": "#fffcff",
+                      "inverse-primary": "#0059c8",
+                      "on-error-container": "#ffdad6",
+                      "inverse-surface": "#e0e2ea",
+                      "tertiary-fixed-dim": "#c0c7d3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "cell-padding-v": "12px",
+                      "sidebar-width": "260px",
+                      "cell-padding-h": "16px",
+                      "container-margin": "24px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-md": [
+                              "JetBrains Mono"
+                      ],
+                      "data-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "data-lg": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { background-color: #0b0f14; color: #e0e2ea; }
+        .glass-card { background: linear-gradient(180deg, #161b22 0%, #12161c 100%); border: 0.5px solid #232a33; border-radius: 0.5rem; }
+        .glow-active { border-left: 4px solid #afc6ff; background-color: rgba(175, 198, 255, 0.1); }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden min-h-screen flex bg-background">
+<!-- SideNavBar -->
+<aside class="hidden md:flex w-[260px] h-screen fixed left-0 top-0 border-r-[0.5px] border-outline-variant bg-surface-container-low dark:bg-surface-container-low flex-col h-full py-4 z-50">
+<div class="px-6 mb-8 mt-2">
+<h1 class="font-headline-md text-headline-md font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Inventra</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Inventory Management</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">edit_calendar</span>
+                Daily Entry
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">swap_horiz</span>
+                Stock In/Out
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+                Products
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm border-l-4 border-primary bg-primary/10 text-primary font-bold active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">file_upload</span>
+                Import
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200 mt-8" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[260px] min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky border-b-[0.5px] border-outline-variant bg-surface dark:bg-surface flex justify-between items-center px-6 py-3 z-40">
+<div class="flex items-center gap-4 w-1/3">
+<!-- Search on Left -->
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-[#0b0f14] border border-[#232a33] text-on-surface rounded-md pl-10 pr-4 py-1.5 font-body-md text-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-end gap-6 w-2/3">
+<span class="font-data-sm text-data-sm text-on-surface-variant">Last sync: 2 mins ago</span>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-container-margin w-full max-w-[1600px] mx-auto overflow-y-auto">
+<div class="mb-6 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Operational Analytics</h2>
+<p class="font-body-md text-on-surface-variant mt-1">Real-time performance metrics and forecasting.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-md font-label-sm text-label-sm border border-[#232a33] text-on-surface-variant hover:bg-surface-variant/30 transition-colors">Export Report</button>
+<button class="px-4 py-2 rounded-md font-label-sm text-label-sm bg-primary-container text-on-primary-container hover:bg-primary-container/90 transition-colors border-t border-primary-fixed/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">Generate Forecast</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter auto-rows-[minmax(180px,auto)]">
+<!-- Top: Most Demanded Products (Bar Chart Placeholder) -->
+<div class="col-span-12 glass-card p-5 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Most Demanded Products</h3>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-data-lg text-data-lg text-on-surface">Volume: Top 10</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+</div>
+<!-- Chart Area -->
+<div class="flex-1 w-full bg-surface-container-lowest/50 rounded border border-outline-variant/30 relative overflow-hidden flex items-end px-4 gap-2 pt-8">
+<!-- CSS Bar Chart Simulation -->
+<div class="w-full flex justify-between items-end h-full opacity-80 gap-1 pb-2">
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 90%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 75%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 82%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 60%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 55%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 40%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 45%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 30%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 25%;"></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t" style="height: 15%;"></div>
+</div>
+</div>
+</div>
+<!-- Middle Left: Stock Status Distribution (Donut Chart) -->
+<div class="col-span-12 lg:col-span-4 glass-card p-5 flex flex-col min-h-[300px]">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Stock Distribution</h3>
+<span class="material-symbols-outlined text-primary">pie_chart</span>
+</div>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- CSS Donut Chart Simulation -->
+<div class="w-40 h-40 rounded-full border-[16px] border-surface-container-lowest relative flex items-center justify-center shadow-inner" style="background: conic-gradient(from 0deg, #afc6ff 0% 60%, #1f6feb 60% 85%, #6e7580 85% 100%); border-color: #161b22;">
+<div class="w-24 h-24 bg-[#161b22] rounded-full absolute flex flex-col items-center justify-center">
+<span class="font-data-lg text-data-lg text-on-surface">94%</span>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Optimal</span>
+</div>
+</div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary"></div><span class="font-body-md text-on-surface">In Stock</span></div>
+<span class="font-data-md text-on-surface">60%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary-container"></div><span class="font-body-md text-on-surface">Low Stock</span></div>
+<span class="font-data-md text-on-surface">25%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-tertiary-container"></div><span class="font-body-md text-on-surface">Out of Stock</span></div>
+<span class="font-data-md text-on-surface">15%</span>
+</div>
+</div>
+</div>
+<!-- Middle Right: Waste/Expiry Trend -->
+<div class="col-span-12 lg:col-span-8 glass-card p-5 flex flex-col min-h-[300px]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Waste &amp; Expiry Trend</h3>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-data-lg text-data-lg text-on-surface">2.4%</span>
+<span class="font-data-sm text-data-sm text-error">-0.5% (MoM)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-error">trending_down</span>
+</div>
+<div class="flex-1 w-full bg-surface-container-lowest/50 rounded border border-outline-variant/30 relative overflow-hidden p-4">
+<!-- SVG Line Chart Placeholder -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<path class="opacity-80" d="M0,35 Q10,30 20,25 T40,28 T60,15 T80,20 T100,10" fill="none" stroke="#93000a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path class="opacity-20" d="M0,35 Q10,30 20,25 T40,28 T60,15 T80,20 T100,10 L100,40 L0,40 Z" fill="url(#gradError)"></path>
+<defs>
+<lineargradient id="gradError" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#93000a"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Bottom: Forecast Accuracy -->
+<div class="col-span-12 glass-card p-5 flex flex-col min-h-[250px]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Forecast Accuracy</h3>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-data-lg text-data-lg text-on-surface">92.8%</span>
+<span class="font-data-sm text-data-sm text-primary">+1.2% (QoQ)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">multiline_chart</span>
+</div>
+<div class="flex-1 w-full bg-surface-container-lowest/50 rounded border border-outline-variant/30 relative overflow-hidden p-4">
+<!-- SVG Line Chart Placeholder -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,20 Q10,15 20,18 T40,10 T60,12 T80,5 T100,8" fill="none" stroke="#afc6ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path class="opacity-10" d="M0,20 Q10,15 20,18 T40,10 T60,12 T80,5 T100,8 L100,40 L0,40 Z" fill="url(#gradPrimary)"></path>
+<defs>
+<lineargradient id="gradPrimary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#afc6ff"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
