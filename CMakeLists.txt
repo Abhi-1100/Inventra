@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(Inventra VERSION 1.0.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -18,10 +18,17 @@ option(INVENTRA_ENABLE_PYTHON
     OFF)
 
 # ─────────────────────────────────────────────
-# Qt6
+# Qt (Qt6 with fallback to Qt5)
 # ─────────────────────────────────────────────
-find_package(Qt6 6.4 REQUIRED COMPONENTS Core Widgets Sql Charts)
-qt_standard_project_setup()
+find_package(Qt6 6.4 COMPONENTS Core Widgets Sql Charts)
+if(Qt6_FOUND)
+    qt_standard_project_setup()
+    set(QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::Sql Qt6::Charts)
+else()
+    message(STATUS "Qt6 not found. Falling back to Qt5...")
+    find_package(Qt5 REQUIRED COMPONENTS Core Widgets Sql Charts)
+    set(QT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Sql Qt5::Charts)
+endif()
 
 # ─────────────────────────────────────────────
 # Python + pybind11  (Phase 2 — optional)
@@ -96,21 +103,26 @@ set(INVENTRA_HEADERS
 # ─────────────────────────────────────────────
 # Executable
 # ─────────────────────────────────────────────
-qt_add_executable(Inventra WIN32
-    ${INVENTRA_SOURCES}
-    ${INVENTRA_HEADERS}
-    resources/inventra.qrc
-)
+if(Qt6_FOUND)
+    qt_add_executable(Inventra WIN32
+        ${INVENTRA_SOURCES}
+        ${INVENTRA_HEADERS}
+        resources/inventra.qrc
+    )
+else()
+    add_executable(Inventra WIN32
+        ${INVENTRA_SOURCES}
+        ${INVENTRA_HEADERS}
+        resources/inventra.qrc
+    )
+endif()
 
 target_include_directories(Inventra PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 target_link_libraries(Inventra PRIVATE
-    Qt6::Core
-    Qt6::Widgets
-    Qt6::Sql
-    Qt6::Charts
+    ${QT_LIBRARIES}
 )
 
 # Phase 2: link Python
@@ -142,12 +154,20 @@ add_custom_command(TARGET Inventra POST_BUILD
 # Windows: run windeployqt automatically
 # ─────────────────────────────────────────────
 if(WIN32)
-    get_target_property(_qmake_exec Qt6::qmake IMPORTED_LOCATION)
-    get_filename_component(_qt_bin_dir "${_qmake_exec}" DIRECTORY)
+    if(TARGET Qt6::qmake)
+        get_target_property(_qmake_exec Qt6::qmake IMPORTED_LOCATION)
+    elseif(TARGET Qt5::qmake)
+        get_target_property(_qmake_exec Qt5::qmake IMPORTED_LOCATION)
+    else()
+        set(_qmake_exec "")
+    endif()
 
-    find_program(WINDEPLOYQT_EXECUTABLE windeployqt
-        HINTS "${_qt_bin_dir}"
-    )
+    if(_qmake_exec)
+        get_filename_component(_qt_bin_dir "${_qmake_exec}" DIRECTORY)
+        find_program(WINDEPLOYQT_EXECUTABLE windeployqt
+            HINTS "${_qt_bin_dir}"
+        )
+    endif()
 
     if(WINDEPLOYQT_EXECUTABLE)
         add_custom_command(TARGET Inventra POST_BUILD

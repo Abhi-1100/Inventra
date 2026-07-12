@@ -15,6 +15,10 @@
 #include <QPieSeries>
 #include <QPieSlice>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+QT_CHARTS_USE_NAMESPACE
+#endif
+
 namespace Kirana {
 
 AnalyticsWidget::AnalyticsWidget(AppController* controller, QWidget* parent)

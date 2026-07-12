@@ -93,25 +93,10 @@ void AppController::loadDummyData() {
 bool AppController::loadFromDatabase() {
     if (!m_db) return false;
     QVector<Product> dbProds = m_db->getProducts();
+
     if (dbProds.isEmpty()) {
-        // Seed database with dummy seed data
-        QVector<Product> dummyList = buildDummyProducts(m_settings);
-        for (const auto& p : dummyList) {
-            int newId = m_db->saveProduct(p);
-            if (newId > 0) {
-                // Seed 30 days of sales history daily entries
-                QDate today = QDate::currentDate();
-                for (int d = 30; d >= 1; --d) {
-                    DailyEntry entry;
-                    entry.productId = newId;
-                    entry.entryDate = today.addDays(-d);
-                    entry.unitsSold = p.historicalSales[30 - d];
-                    entry.unitsWasted = QRandomGenerator::global()->bounded(2);
-                    m_db->saveDailyEntry(entry);
-                }
-            }
-        }
-        dbProds = m_db->getProducts();
+        // No longer seeding dummy data automatically.
+        // We will prompt the user to upload a CSV instead.
     }
 
     // Try loading actual ML pipeline results from Database

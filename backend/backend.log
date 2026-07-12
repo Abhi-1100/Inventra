@@ -2002,3 +2002,259 @@ backend.utils.validators.DuplicateProductError: Row 1: Product name 'Real Produc
 2026-07-11 15:57:05,952 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 98.32%
 2026-07-11 15:57:05,962 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
 2026-07-11 15:57:14,292 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-11 16:03:58,356 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,365 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,406 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,414 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,430 - inventory_backend.db_manager - INFO - Added product SKU=TEST-01 with ID=1
+2026-07-11 16:03:58,447 - inventory_backend.db_manager - ERROR - Transaction failed and was rolled back: FOREIGN KEY constraint failed
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 80, in transaction
+    yield cursor
+  File "C:\Inventra\backend\tests\test_database.py", line 55, in test_transaction_rollback
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        INSERT INTO stock_movements (product_id, movement_type, quantity, supplier_name, cost_per_unit, reason, movement_date, entered_by, created_at)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (999, 'IN', 5, 'Supplier', 5.0, 'Reason', '2026-07-11', NULL, datetime('now'));
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-07-11 16:03:58,451 - inventory_backend.db_manager - ERROR - Database connection error: Database transaction failure: FOREIGN KEY constraint failed
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 80, in transaction
+    yield cursor
+  File "C:\Inventra\backend\tests\test_database.py", line 55, in test_transaction_rollback
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        INSERT INTO stock_movements (product_id, movement_type, quantity, supplier_name, cost_per_unit, reason, movement_date, entered_by, created_at)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (999, 'IN', 5, 'Supplier', 5.0, 'Reason', '2026-07-11', NULL, datetime('now'));
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 54, in connection
+    yield conn
+  File "C:\Inventra\backend\database\db_manager.py", line 88, in transaction
+    raise DatabaseError(f"Database transaction failure: {e}") from e
+backend.utils.validators.DatabaseError: Database transaction failure: FOREIGN KEY constraint failed
+2026-07-11 16:03:58,483 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,491 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,507 - inventory_backend.db_manager - INFO - Added product SKU=SKU-1 with ID=1
+2026-07-11 16:03:58,535 - inventory_backend.db_manager - INFO - Updated product ID=1, status=True
+2026-07-11 16:03:58,567 - inventory_backend.db_manager - INFO - Deleted product ID=1, status=True
+2026-07-11 16:03:58,609 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,619 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,633 - inventory_backend.db_manager - INFO - Added product SKU=P1 with ID=1
+2026-07-11 16:03:58,648 - inventory_backend.db_manager - INFO - Added daily entry ID=1 for product ID=1
+2026-07-11 16:03:58,677 - inventory_backend.db_manager - INFO - Updated daily entry ID=1, status=True
+2026-07-11 16:03:58,696 - inventory_backend.db_manager - INFO - Deleted daily entry ID=1, status=True
+2026-07-11 16:03:58,726 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,733 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,747 - inventory_backend.db_manager - INFO - Added product SKU=P1 with ID=1
+2026-07-11 16:03:58,760 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (OUT), delta=-5 for product ID=1
+2026-07-11 16:03:58,826 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,832 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,918 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,926 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,942 - inventory_backend.db_manager - ERROR - Database connection error: no such table: nonexistent_table
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 54, in connection
+    yield conn
+  File "C:\Inventra\backend\tests\test_database.py", line 204, in test_db_execute_error
+    cursor.execute("SELECT * FROM nonexistent_table;")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: nonexistent_table
+2026-07-11 16:03:58,968 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:03:58,977 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:03:58,997 - inventory_backend.db_manager - ERROR - Database connection error: unable to open database file
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 45, in connection
+    conn = sqlite3.connect(self.db_path)
+sqlite3.OperationalError: unable to open database file
+2026-07-11 16:03:58,999 - inventory_backend.db_manager - CRITICAL - Database initialization failed: Database error: unable to open database file
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 45, in connection
+    conn = sqlite3.connect(self.db_path)
+sqlite3.OperationalError: unable to open database file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 31, in _initialize_db
+    with self.connection() as conn:
+         ~~~~~~~~~~~~~~~^^
+  File "C:\Users\parmar jaimin\anaconda3\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Inventra\backend\database\db_manager.py", line 66, in connection
+    raise DatabaseError(f"Database error: {e}") from e
+backend.utils.validators.DatabaseError: Database error: unable to open database file
+2026-07-11 16:04:00,665 - inventory_backend.forecasting - INFO - Moving Average fallback completed successfully
+2026-07-11 16:04:00,679 - inventory_backend.forecasting - INFO - Linear Regression fallback completed successfully
+2026-07-11 16:04:02,502 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-11 16:04:02,536 - inventory_backend.evaluation - INFO - Forecast evaluation: MAPE=0.0500, RMSE=0.8165, R2=0.9600
+2026-07-11 16:04:02,551 - inventory_backend.evaluation - INFO - Classification evaluation: Accuracy=0.6667, F1=0.5556
+2026-07-11 16:04:02,585 - inventory_backend.model_manager - INFO - Retraining required: No existing models found.
+2026-07-11 16:04:02,597 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to C:\Users\parmar jaimin\AppData\Local\Temp\pytest-of-parmar jaimin\pytest-13\test_model_manager0\models
+2026-07-11 16:04:02,624 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-11 16:04:02,625 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-11 16:04:02,629 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-11 16:04:02,629 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=hash1, new=hash2).
+2026-07-11 16:04:02,635 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-11 16:04:02,640 - inventory_backend.prediction_engine - WARNING - Sales history or product list is empty. Returning empty predictions.
+2026-07-11 16:04:02,642 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-07-11 16:04:02,646 - inventory_backend.prediction_engine - INFO - Product SKU=COLD is in Cold Start (history=2 points, span=7 days).
+2026-07-11 16:04:02,648 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-07-11 16:04:02,665 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:02,670 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:02,696 - inventory_backend.db_manager - INFO - Added product SKU=SKU-T1 with ID=1
+2026-07-11 16:04:02,712 - inventory_backend.inventory_service - WARNING - Failed to add product: SKU 'SKU-T1' already exists.
+2026-07-11 16:04:02,722 - inventory_backend.inventory_service - WARNING - Failed to add product: Name 'Bread' already exists.
+2026-07-11 16:04:02,735 - inventory_backend.db_manager - INFO - Updated product ID=1, status=True
+2026-07-11 16:04:02,771 - inventory_backend.inventory_service - INFO - Logically deactivated product SKU=SKU-T1
+2026-07-11 16:04:02,806 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:02,811 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:02,835 - inventory_backend.db_manager - INFO - Added product SKU=MILK-01 with ID=1
+2026-07-11 16:04:02,853 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (IN), delta=15 for product ID=1
+2026-07-11 16:04:02,874 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=MILK-01: Sales=17, PrevStock=10, Deliveries=15, NewStock=8
+2026-07-11 16:04:02,908 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:02,913 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:02,935 - inventory_backend.db_manager - INFO - Added product SKU=A-1 with ID=1
+2026-07-11 16:04:02,954 - inventory_backend.db_manager - INFO - Added product SKU=B-2 with ID=2
+2026-07-11 16:04:02,971 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A-1: Sales=10, PrevStock=20, Deliveries=0, NewStock=10
+2026-07-11 16:04:02,986 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=B-2: Sales=3, PrevStock=5, Deliveries=0, NewStock=2
+2026-07-11 16:04:03,035 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (IN), delta=10 for product ID=1
+2026-07-11 16:04:03,077 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:03,081 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:03,096 - inventory_backend.prediction_service - WARNING - No active products to run predictions for.
+2026-07-11 16:04:03,109 - inventory_backend.db_manager - INFO - Added product SKU=A with ID=1
+2026-07-11 16:04:03,128 - inventory_backend.prediction_service - WARNING - No sales history records in daily_entries. Pipeline cannot run.
+2026-07-11 16:04:03,135 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=5, PrevStock=20, Deliveries=0, NewStock=15
+2026-07-11 16:04:03,149 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-07-11 16:04:03,163 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-07-11 16:04:03,178 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-07-11 16:04:03,192 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-07-11 16:04:03,214 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-07-11 16:04:03,397 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-11 16:04:03,397 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=hash1, new=4c33ba0780ee190b57a5821cd9e278810bd386b266b42cb1580528b8377bb218).
+2026-07-11 16:04:03,645 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-11 16:04:03,715 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to C:\Inventra\backend\saved_models
+2026-07-11 16:04:03,725 - inventory_backend.forecasting - INFO - Linear Regression fallback completed successfully
+2026-07-11 16:04:03,751 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-07-11 16:04:03,769 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-07-11 16:04:03,773 - inventory_backend.prediction_engine - INFO - Product SKU=A is in Cold Start (history=2 points, span=1 days).
+2026-07-11 16:04:03,774 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-07-11 16:04:03,798 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:03,802 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:03,836 - inventory_backend.inventory_service - INFO - Bulk CSV import complete: 2 inserted, 0 updated.
+2026-07-11 16:04:03,848 - inventory_backend.inventory_service - INFO - Bulk CSV import complete: 0 inserted, 2 updated.
+2026-07-11 16:04:03,880 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-11 16:04:03,885 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-11 16:04:03,899 - inventory_backend.inventory_service - WARNING - Attempted deactivation of non-existent product ID=999
+2026-07-11 16:04:03,924 - inventory_backend.db_manager - INFO - Added product SKU=SKU-REAL with ID=1
+2026-07-11 16:04:03,943 - inventory_backend.db_manager - ERROR - Transaction failed and was rolled back: Row 1: Product name 'Real Product' already exists in database with a different SKU.
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 80, in transaction
+    yield cursor
+  File "C:\Inventra\backend\services\inventory_service.py", line 189, in bulk_csv_import
+    raise DuplicateProductError(f"Row {idx+1}: Product name '{name}' already exists in database with a different SKU.")
+backend.utils.validators.DuplicateProductError: Row 1: Product name 'Real Product' already exists in database with a different SKU.
+2026-07-12 21:30:37,891 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-12 21:30:37,893 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-12 21:30:37,894 - inventory_backend.db_manager - ERROR - Database connection error: no such table: products
+Traceback (most recent call last):
+  File "C:\Inventra\backend\database\db_manager.py", line 54, in connection
+    yield conn
+  File "C:\Inventra\backend\database\db_manager.py", line 204, in list_products
+    cursor.execute(query)
+    ~~~~~~~~~~~~~~^^^^^^^
+sqlite3.OperationalError: no such table: products
+2026-07-12 21:32:48,193 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-12 21:32:48,196 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-12 21:32:48,206 - inventory_backend.db_manager - INFO - Added product SKU=TST-001 with ID=1
+2026-07-12 21:32:51,848 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 2 products...
+2026-07-12 21:32:52,051 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-12 21:32:52,052 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=4c33ba0780ee190b57a5821cd9e278810bd386b266b42cb1580528b8377bb218, new=cf7f82187049b200854e4f130a1c8e32225f61f161973a118035cceaad81f756).
+2026-07-12 21:32:52,203 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-12 21:32:52,244 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to C:\Inventra\backend\saved_models
+2026-07-12 21:32:53,240 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 2 predictions.
+2026-07-12 21:32:53,249 - inventory_backend.prediction_service - WARNING - No sales history records in daily_entries. Pipeline cannot run.
+2026-07-12 21:33:16,700 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-12 21:33:16,704 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-12 21:33:16,711 - inventory_backend.db_manager - INFO - Added product SKU=TST-001 with ID=1
+2026-07-12 21:33:16,721 - inventory_backend.db_manager - INFO - Added daily entry ID=1 for product ID=1
+2026-07-12 21:33:16,727 - inventory_backend.db_manager - INFO - Added daily entry ID=2 for product ID=1
+2026-07-12 21:33:16,735 - inventory_backend.db_manager - INFO - Added daily entry ID=3 for product ID=1
+2026-07-12 21:33:16,741 - inventory_backend.db_manager - INFO - Added daily entry ID=4 for product ID=1
+2026-07-12 21:33:16,747 - inventory_backend.db_manager - INFO - Added daily entry ID=5 for product ID=1
+2026-07-12 21:33:16,755 - inventory_backend.db_manager - INFO - Added daily entry ID=6 for product ID=1
+2026-07-12 21:33:16,761 - inventory_backend.db_manager - INFO - Added daily entry ID=7 for product ID=1
+2026-07-12 21:33:16,769 - inventory_backend.db_manager - INFO - Added daily entry ID=8 for product ID=1
+2026-07-12 21:33:16,776 - inventory_backend.db_manager - INFO - Added daily entry ID=9 for product ID=1
+2026-07-12 21:33:16,784 - inventory_backend.db_manager - INFO - Added daily entry ID=10 for product ID=1
+2026-07-12 21:33:16,791 - inventory_backend.db_manager - INFO - Added daily entry ID=11 for product ID=1
+2026-07-12 21:33:16,796 - inventory_backend.db_manager - INFO - Added daily entry ID=12 for product ID=1
+2026-07-12 21:33:16,803 - inventory_backend.db_manager - INFO - Added daily entry ID=13 for product ID=1
+2026-07-12 21:33:16,809 - inventory_backend.db_manager - INFO - Added daily entry ID=14 for product ID=1
+2026-07-12 21:33:16,815 - inventory_backend.db_manager - INFO - Added daily entry ID=15 for product ID=1
+2026-07-12 21:33:16,823 - inventory_backend.db_manager - INFO - Added daily entry ID=16 for product ID=1
+2026-07-12 21:33:16,830 - inventory_backend.db_manager - INFO - Added daily entry ID=17 for product ID=1
+2026-07-12 21:33:16,836 - inventory_backend.db_manager - INFO - Added daily entry ID=18 for product ID=1
+2026-07-12 21:33:16,842 - inventory_backend.db_manager - INFO - Added daily entry ID=19 for product ID=1
+2026-07-12 21:33:16,849 - inventory_backend.db_manager - INFO - Added daily entry ID=20 for product ID=1
+2026-07-12 21:33:16,855 - inventory_backend.db_manager - INFO - Added daily entry ID=21 for product ID=1
+2026-07-12 21:33:16,862 - inventory_backend.db_manager - INFO - Added daily entry ID=22 for product ID=1
+2026-07-12 21:33:16,869 - inventory_backend.db_manager - INFO - Added daily entry ID=23 for product ID=1
+2026-07-12 21:33:16,877 - inventory_backend.db_manager - INFO - Added daily entry ID=24 for product ID=1
+2026-07-12 21:33:16,884 - inventory_backend.db_manager - INFO - Added daily entry ID=25 for product ID=1
+2026-07-12 21:33:16,891 - inventory_backend.db_manager - INFO - Added daily entry ID=26 for product ID=1
+2026-07-12 21:33:16,899 - inventory_backend.db_manager - INFO - Added daily entry ID=27 for product ID=1
+2026-07-12 21:33:16,905 - inventory_backend.db_manager - INFO - Added daily entry ID=28 for product ID=1
+2026-07-12 21:33:16,913 - inventory_backend.db_manager - INFO - Added daily entry ID=29 for product ID=1
+2026-07-12 21:33:16,920 - inventory_backend.db_manager - INFO - Added daily entry ID=30 for product ID=1
+2026-07-12 21:33:16,927 - inventory_backend.db_manager - INFO - Added daily entry ID=31 for product ID=1
+2026-07-12 21:33:16,935 - inventory_backend.db_manager - INFO - Added daily entry ID=32 for product ID=1
+2026-07-12 21:33:16,942 - inventory_backend.db_manager - INFO - Added daily entry ID=33 for product ID=1
+2026-07-12 21:33:16,950 - inventory_backend.db_manager - INFO - Added daily entry ID=34 for product ID=1
+2026-07-12 21:33:16,957 - inventory_backend.db_manager - INFO - Added daily entry ID=35 for product ID=1
+2026-07-12 21:33:18,120 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 2 products...
+2026-07-12 21:33:18,229 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-12 21:33:18,229 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-12 21:33:18,247 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-12 21:33:18,949 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 2 predictions.
+2026-07-12 21:33:18,957 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-07-12 21:33:19,030 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-12 21:33:19,030 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=cf7f82187049b200854e4f130a1c8e32225f61f161973a118035cceaad81f756, new=0b8740746b0c7d83fc81dcbf7b18163f539ca4a95514c8af960421c3fe760589).
+2026-07-12 21:33:19,167 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-12 21:33:19,204 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to C:\Inventra\backend\saved_models
+2026-07-12 21:33:19,521 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-07-12 23:04:38,856 - inventory_backend.import_service - INFO - Starting CSV import from C:\Inventra\sample_inventory.csv
+2026-07-12 23:04:38,940 - inventory_backend.db_manager - INFO - Added product SKU=SKU-101 with ID=1
+2026-07-12 23:04:38,962 - inventory_backend.db_manager - INFO - Added daily entry ID=1 for product ID=1
+2026-07-12 23:04:38,982 - inventory_backend.db_manager - INFO - Added daily entry ID=2 for product ID=1
+2026-07-12 23:04:39,012 - inventory_backend.db_manager - INFO - Added product SKU=SKU-102 with ID=2
+2026-07-12 23:04:39,085 - inventory_backend.db_manager - INFO - Added daily entry ID=3 for product ID=2
+2026-07-12 23:04:39,187 - inventory_backend.db_manager - INFO - Added daily entry ID=4 for product ID=2
+2026-07-12 23:04:39,277 - inventory_backend.db_manager - INFO - Added product SKU=SKU-103 with ID=3
+2026-07-12 23:04:39,297 - inventory_backend.db_manager - INFO - Added daily entry ID=5 for product ID=3
+2026-07-12 23:04:39,316 - inventory_backend.db_manager - INFO - Added daily entry ID=6 for product ID=3
+2026-07-12 23:04:39,340 - inventory_backend.db_manager - INFO - Added product SKU=SKU-104 with ID=4
+2026-07-12 23:04:39,362 - inventory_backend.db_manager - INFO - Added daily entry ID=7 for product ID=4
+2026-07-12 23:04:39,382 - inventory_backend.db_manager - INFO - Added daily entry ID=8 for product ID=4
+2026-07-12 23:04:39,405 - inventory_backend.db_manager - INFO - Added product SKU=SKU-105 with ID=5
+2026-07-12 23:04:39,429 - inventory_backend.db_manager - INFO - Added daily entry ID=9 for product ID=5
+2026-07-12 23:04:39,449 - inventory_backend.db_manager - INFO - Added daily entry ID=10 for product ID=5
+2026-07-12 23:04:39,450 - inventory_backend.import_service - INFO - CSV Import complete. Added 5 products and 10 daily entries.
+2026-07-12 23:04:52,753 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 5 products...
+2026-07-12 23:04:52,759 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-101 is in Cold Start (history=2 points, span=7 days).
+2026-07-12 23:04:52,761 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-102 is in Cold Start (history=2 points, span=7 days).
+2026-07-12 23:04:52,762 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-103 is in Cold Start (history=2 points, span=7 days).
+2026-07-12 23:04:52,763 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-104 is in Cold Start (history=2 points, span=7 days).
+2026-07-12 23:04:52,764 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-105 is in Cold Start (history=2 points, span=7 days).
+2026-07-12 23:04:52,768 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 5 predictions.
