@@ -60,6 +60,8 @@ private slots:
     void onPinBackspace();
     void onRegisterClicked();
     void onForgotPin();
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     void buildRegistrationPage();

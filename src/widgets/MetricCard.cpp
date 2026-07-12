@@ -21,8 +21,8 @@ MetricCard::MetricCard(const QString& title,
     // Surface styling — matches .card QSS rule + 1px left accent painted manually
     setStyleSheet(
         "QFrame#MetricCard {"
-        "  background: #161b22;"
-        "  border: 1px solid #30363d;"
+        "  background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #161b22, stop:1 #12161c);"
+        "  border: 1px solid #232a33;"
         "  border-radius: 8px;"
         "}"
     );
@@ -51,12 +51,10 @@ void MetricCard::buildLayout() {
     // Title
     m_titleLabel = new QLabel(this);
     m_titleLabel->setStyleSheet(
-        "font-family: 'Segoe UI', 'Inter', sans-serif;"
-        "font-size: 10px;"
+        "font-family: 'Hanken Grotesk', 'Segoe UI', 'Inter', sans-serif;"
+        "font-size: 13px;"
         "font-weight: 600;"
-        "letter-spacing: 1px;"
-        "color: #8b949e;"
-        "text-transform: uppercase;"
+        "color: #8c90a0;"
         "background: transparent;"
     );
     m_titleLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -64,10 +62,10 @@ void MetricCard::buildLayout() {
     // Value (large monospace number)
     m_valueLabel = new QLabel(this);
     m_valueLabel->setStyleSheet(
-        "font-family: 'Consolas', 'JetBrains Mono', 'Courier New', monospace;"
-        "font-size: 30px;"
+        "font-family: 'JetBrains Mono', 'Consolas', monospace;"
+        "font-size: 32px;"
         "font-weight: 700;"
-        "color: #e6edf3;"
+        "color: #e0e2ea;"
         "background: transparent;"
     );
     m_valueLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -75,9 +73,9 @@ void MetricCard::buildLayout() {
     // Subtitle / delta
     m_subtitleLabel = new QLabel(this);
     m_subtitleLabel->setStyleSheet(
-        "font-family: 'Segoe UI', 'Inter', sans-serif;"
-        "font-size: 11px;"
-        "color: #8b949e;"
+        "font-family: 'Hanken Grotesk', 'Segoe UI', 'Inter', sans-serif;"
+        "font-size: 13px;"
+        "color: #8c90a0;"
         "background: transparent;"
     );
     m_subtitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
@@ -98,8 +96,8 @@ void MetricCard::setValue(const QString& text) {
     m_valueLabel->setText(text);
     // Colour the value to match the accent
     m_valueLabel->setStyleSheet(
-        QString("font-family: 'Consolas','JetBrains Mono','Courier New',monospace;"
-                "font-size: 30px; font-weight: 700;"
+        QString("font-family: 'JetBrains Mono', 'Consolas', monospace;"
+                "font-size: 32px; font-weight: 700;"
                 "color: %1; background: transparent;")
         .arg(m_accentColor.name())
     );

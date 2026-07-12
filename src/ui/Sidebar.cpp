@@ -25,7 +25,7 @@ SidebarButton::SidebarButton(const QString& iconPath,
     , m_iconPath(iconPath)
     , m_label(label)
 {
-    setFixedSize(160, 44);
+    setFixedSize(260, 44);
     setToolTip(tooltip);
     setCursor(Qt::PointingHandCursor);
     setAttribute(Qt::WA_Hover);
@@ -43,18 +43,18 @@ void SidebarButton::paintEvent(QPaintEvent*) {
     // Hover / active background
     if (m_active) {
         QColor bg(Palette::Accent);
-        bg.setAlpha(22);
+        bg.setAlpha(26); // 10% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
         p.drawRoundedRect(r.adjusted(8, 3, -8, -3), 6, 6);
 
         // Left accent bar
         p.setBrush(QColor(Palette::Accent));
-        p.drawRect(0, r.height() / 2 - 10, 3, 20);
+        p.drawRect(0, r.height() / 2 - 12, 4, 24);
 
     } else if (m_hovered) {
-        QColor bg(Palette::BgOverlay);
-        bg.setAlpha(120);
+        QColor bg(Palette::Accent);
+        bg.setAlpha(13); // 5% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
         p.drawRoundedRect(r.adjusted(8, 3, -8, -3), 6, 6);
@@ -95,8 +95,8 @@ void SidebarButton::paintEvent(QPaintEvent*) {
 
     p.setPen(textColor);
     QFont f = p.font();
-    f.setFamily(QStringLiteral("Segoe UI"));
-    f.setPixelSize(12);
+    f.setFamily(QStringLiteral("Hanken Grotesk"));
+    f.setPixelSize(13);
     f.setWeight(m_active ? QFont::Medium : QFont::Normal);
     p.setFont(f);
     p.drawText(QRect(textX, 0, r.width() - textX - 8, r.height()),
@@ -123,10 +123,10 @@ void SidebarButton::leaveEvent(QEvent* ev) {
 Sidebar::Sidebar(QWidget* parent)
     : QWidget(parent)
 {
-    setFixedWidth(160);
+    setFixedWidth(260);
     setObjectName(QStringLiteral("Sidebar"));
     setStyleSheet(QStringLiteral(
-        "QWidget#Sidebar { background:#0b0f14; border-right:1px solid #21262d; }"));
+        "QWidget#Sidebar { background:qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #161b22, stop:1 #12161c); border-right:1px solid #232a33; }"));
 
     buildLayout();
 }

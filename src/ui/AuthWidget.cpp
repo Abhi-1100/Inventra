@@ -17,6 +17,7 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QGraphicsOpacityEffect>
+#include <QKeyEvent>
 
 namespace Kirana {
 
@@ -59,6 +60,7 @@ AuthWidget::AuthWidget(AuthController* auth, QWidget* parent)
     , m_auth(auth)
 {
     setObjectName(QStringLiteral("AuthPage"));
+    setFocusPolicy(Qt::StrongFocus);
 
     m_stack = new QStackedWidget(this);
     auto* root = new QVBoxLayout(this);
@@ -389,6 +391,25 @@ void AuthWidget::submitPin() {
 void AuthWidget::resetPin() {
     m_pinBuffer.clear();
     m_pinDots->reset();
+}
+
+void AuthWidget::keyPressEvent(QKeyEvent* event) {
+    if (m_mode == Mode::Registration) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9) {
+        onPinDigitPressed(event->key() - Qt::Key_0);
+    } else if (event->key() == Qt::Key_Backspace) {
+        onPinBackspace();
+    } else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+        if (m_pinBuffer.length() == 4) {
+            submitPin();
+        }
+    } else {
+        QWidget::keyPressEvent(event);
+    }
 }
 
 // ─────────────────────────────────────────────

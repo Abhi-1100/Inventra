@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventra - Stock In/Out</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#afc6ff",
+                        "on-tertiary": "#2a313a",
+                        "on-primary": "#002d6d",
+                        "on-surface": "#e0e2ea",
+                        "tertiary-container": "#6e7580",
+                        "surface-container-low": "#181c21",
+                        "on-secondary": "#002f67",
+                        "surface-container": "#1c2025",
+                        "outline": "#8c90a0",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "primary": "#afc6ff",
+                        "background": "#101419",
+                        "secondary-container": "#0050a7",
+                        "on-surface-variant": "#c2c6d6",
+                        "surface-dim": "#101419",
+                        "on-secondary-container": "#abc6ff",
+                        "surface-variant": "#31353b",
+                        "secondary-fixed": "#d7e2ff",
+                        "primary-fixed": "#d9e2ff",
+                        "on-primary-fixed": "#001944",
+                        "surface-bright": "#36393f",
+                        "tertiary": "#c0c7d3",
+                        "tertiary-fixed": "#dce3ef",
+                        "on-secondary-fixed": "#001a40",
+                        "on-primary-fixed-variant": "#004299",
+                        "surface-container-high": "#262a30",
+                        "on-tertiary-container": "#fdfcff",
+                        "on-error": "#690005",
+                        "surface": "#101419",
+                        "inverse-on-surface": "#2d3136",
+                        "surface-container-lowest": "#0a0e13",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#151c25",
+                        "surface-container-highest": "#31353b",
+                        "outline-variant": "#424754",
+                        "primary-container": "#1f6feb",
+                        "surface-tint": "#afc6ff",
+                        "secondary": "#acc7ff",
+                        "on-secondary-fixed-variant": "#004491",
+                        "on-tertiary-fixed-variant": "#404751",
+                        "error-container": "#93000a",
+                        "on-background": "#e0e2ea",
+                        "on-primary-container": "#fffcff",
+                        "inverse-primary": "#0059c8",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e0e2ea",
+                        "tertiary-fixed-dim": "#c0c7d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "cell-padding-v": "12px",
+                        "sidebar-width": "260px",
+                        "cell-padding-h": "16px",
+                        "container-margin": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-md": ["JetBrains Mono"],
+                        "data-sm": ["JetBrains Mono"],
+                        "data-lg": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "data-lg": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0b0f14; color: #e0e2ea; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Custom Scrollbar for dense data tables */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #101419; }
+        ::-webkit-scrollbar-thumb { background: #31353b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #424754; }
+
+        /* Input styling overrides */
+        input[type="text"], input[type="number"], input[type="date"], select {
+            background-color: #0b0f14;
+            border: 0.5px solid #232a33;
+            color: #e0e2ea;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus {
+            border-color: #afc6ff;
+            box-shadow: 0 0 0 2px rgba(175, 198, 255, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md text-body-md">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface-container-low dark:bg-surface-container-low w-[260px] h-screen fixed left-0 top-0 border-r-[0.5px] border-outline-variant flex flex-col h-full py-4 z-20">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Inventra</h1>
+<p class="font-data-sm text-data-sm text-on-surface-variant mt-1">Inventory Management</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="edit_calendar">edit_calendar</span>
+<span>Daily Entry</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT border-l-4 border-primary bg-primary/10 text-primary font-bold scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+<span>Stock In/Out</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="file_upload">file_upload</span>
+<span>Import</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant/50 hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] flex-1 flex flex-col h-screen overflow-hidden bg-background relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface docked full-width top-0 sticky border-b-[0.5px] border-outline-variant flex justify-between items-center px-6 py-3 w-full z-10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-transparent border-none text-on-surface placeholder-on-surface-variant focus:ring-0 w-64 font-data-md text-data-md" placeholder="Search products, suppliers, SKU..." style="border: none; box-shadow: none;" type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-data-sm text-data-sm text-on-surface-variant">Last sync: 2 mins ago</span>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto p-container-margin space-y-gutter">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Stock Movements</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Record incoming deliveries and outgoing shipments or adjustments.</p>
+</div>
+</div>
+<!-- Bento Layout for Action Area -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Entry Form Card (Left, wider) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container rounded-lg border-[0.5px] border-outline-variant p-6 relative overflow-hidden">
+<!-- Decorative subtle gradient -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+<!-- Tabs -->
+<div class="flex space-x-1 border-b-[0.5px] border-outline-variant mb-6 pb-2 relative">
+<button class="px-4 py-2 font-label-sm text-label-sm text-primary border-b-2 border-primary transition-colors focus:outline-none" id="tab-btn-in" onclick="switchTab('stock-in')">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="login">login</span>
+                                Stock In
+                            </span>
+</button>
+<button class="px-4 py-2 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors focus:outline-none" id="tab-btn-out" onclick="switchTab('stock-out')">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+                                Stock Out
+                            </span>
+</button>
+</div>
+<!-- Tab Content: Stock In -->
+<div class="tab-content active space-y-5 relative z-10" id="stock-in">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Product / SKU</label>
+<select class="w-full rounded-DEFAULT p-2 font-data-md text-data-md">
+<option>Select Product...</option>
+<option>SKU-10042 (Organic Gala Apples)</option>
+<option>SKU-99210 (Whole Milk 1L)</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Supplier</label>
+<select class="w-full rounded-DEFAULT p-2 font-data-md text-data-md">
+<option>Select Supplier...</option>
+<option>Fresh Farms Co.</option>
+<option>Dairy Distrib LLC</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Quantity Added</label>
+<input class="w-full rounded-DEFAULT p-2 font-data-md text-data-md text-right" placeholder="0" type="number"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Cost / Unit ($)</label>
+<input class="w-full rounded-DEFAULT p-2 font-data-md text-data-md text-right" placeholder="0.00" step="0.01" type="number"/>
+</div>
+<div class="space-y-1 md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Date Received</label>
+<input class="w-full rounded-DEFAULT p-2 font-data-md text-data-md" type="date" value="2023-10-27"/>
+</div>
+</div>
+<div class="flex justify-end pt-4">
+<button class="bg-gradient-to-r from-primary-container to-primary text-on-primary-container px-6 py-2 rounded-DEFAULT font-label-sm text-label-sm hover:opacity-90 transition-opacity border-t border-[#d9e2ff]/30 shadow-[0_0_12px_rgba(31,111,235,0.2)]">
+                                Record Stock In
+                            </button>
+</div>
+</div>
+<!-- Tab Content: Stock Out -->
+<div class="tab-content space-y-5 relative z-10" id="stock-out">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="space-y-1 md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Product / SKU</label>
+<select class="w-full rounded-DEFAULT p-2 font-data-md text-data-md">
+<option>Select Product...</option>
+<option>SKU-10042 (Organic Gala Apples)</option>
+<option>SKU-99210 (Whole Milk 1L)</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Quantity Removed</label>
+<input class="w-full rounded-DEFAULT p-2 font-data-md text-data-md text-right" placeholder="0" type="number"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Reason Code</label>
+<select class="w-full rounded-DEFAULT p-2 font-data-md text-data-md">
+<option>Sale / Fulfillment</option>
+<option>Spoilage / Damage</option>
+<option>Internal Transfer</option>
+<option>Inventory Correction</option>
+</select>
+</div>
+</div>
+<div class="flex justify-end pt-4">
+<button class="bg-transparent border border-error text-error px-6 py-2 rounded-DEFAULT font-label-sm text-label-sm hover:bg-error hover:text-on-error transition-colors">
+                                Record Stock Out
+                            </button>
+</div>
+</div>
+</div>
+<!-- Quick Stats / Image Panel (Right, narrower) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-lg border-[0.5px] border-outline-variant overflow-hidden flex flex-col">
+<div class="p-6 border-b-[0.5px] border-outline-variant flex-1">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-4">Today's Activity</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Total Items In</span>
+<span class="font-data-lg text-data-lg text-primary">+1,240</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Total Items Out</span>
+<span class="font-data-lg text-data-lg text-error">-432</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Pending Deliveries</span>
+<span class="font-data-lg text-data-lg text-secondary">3</span>
+</div>
+</div>
+</div>
+<div class="h-32 w-full relative">
+<!-- Using pattern instead of image as requested to avoid bloat, but setting up structure -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#424754 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-data-sm text-data-sm text-outline-variant">Visual Data Placeholder</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Ledger Table Section -->
+<div class="bg-surface-container rounded-lg border-[0.5px] border-outline-variant mt-6 flex flex-col">
+<!-- Table Toolbar -->
+<div class="p-4 border-b-[0.5px] border-outline-variant flex flex-wrap justify-between items-center gap-4 bg-surface-container-high/50">
+<div class="flex items-center gap-3">
+<h3 class="font-label-sm text-label-sm text-on-surface">Recent Movements Ledger</h3>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-[#0b0f14] border-[0.5px] border-outline-variant rounded-DEFAULT px-3 py-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+<span class="font-data-sm text-data-sm text-on-surface">Oct 20 - Oct 27</span>
+</div>
+<button class="flex items-center gap-2 border-[0.5px] border-outline-variant text-on-surface px-3 py-1.5 rounded-DEFAULT font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-2 border-[0.5px] border-outline-variant text-on-surface px-3 py-1.5 rounded-DEFAULT font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#0b0f14] border-b-[1px] border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+<th class="py-cell-padding-v px-cell-padding-h font-medium whitespace-nowrap">Date / Time</th>
+<th class="py-cell-padding-v px-cell-padding-h font-medium">Type</th>
+<th class="py-cell-padding-v px-cell-padding-h font-medium">Product / SKU</th>
+<th class="py-cell-padding-v px-cell-padding-h font-medium text-right">Qty</th>
+<th class="py-cell-padding-v px-cell-padding-h font-medium">Reference / Note</th>
+<th class="py-cell-padding-v px-cell-padding-h font-medium text-right">User</th>
+</tr>
+</thead>
+<tbody class="font-data-md text-data-md text-on-surface divide-y-[0.5px] divide-outline-variant/30">
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant">2023-10-27 14:32</td>
+<td class="py-cell-padding-v px-cell-padding-h">
+<span class="inline-flex items-center gap-1 text-primary bg-primary/10 px-2 py-0.5 rounded-full font-data-sm text-data-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_downward">arrow_downward</span> In
+                                    </span>
+</td>
+<td class="py-cell-padding-v px-cell-padding-h">SKU-10042 (Org Gala Apples)</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-primary">+500</td>
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant truncate max-w-[200px]">PO-8821 Fresh Farms Co.</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-on-surface-variant">J. Doe</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant">2023-10-27 11:15</td>
+<td class="py-cell-padding-v px-cell-padding-h">
+<span class="inline-flex items-center gap-1 text-error bg-error/10 px-2 py-0.5 rounded-full font-data-sm text-data-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span> Out
+                                    </span>
+</td>
+<td class="py-cell-padding-v px-cell-padding-h">SKU-99210 (Whole Milk 1L)</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-error">-12</td>
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant truncate max-w-[200px]">Spoilage / Expired</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-on-surface-variant">M. Smith</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant">2023-10-26 09:00</td>
+<td class="py-cell-padding-v px-cell-padding-h">
+<span class="inline-flex items-center gap-1 text-primary bg-primary/10 px-2 py-0.5 rounded-full font-data-sm text-data-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_downward">arrow_downward</span> In
+                                    </span>
+</td>
+<td class="py-cell-padding-v px-cell-padding-h">SKU-44122 (Baguette)</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-primary">+120</td>
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant truncate max-w-[200px]">PO-8820 Local Bakery</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-on-surface-variant">J. Doe</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant">2023-10-26 16:45</td>
+<td class="py-cell-padding-v px-cell-padding-h">
+<span class="inline-flex items-center gap-1 text-error bg-error/10 px-2 py-0.5 rounded-full font-data-sm text-data-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span> Out
+                                    </span>
+</td>
+<td class="py-cell-padding-v px-cell-padding-h">SKU-10042 (Org Gala Apples)</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-error">-40</td>
+<td class="py-cell-padding-v px-cell-padding-h text-on-surface-variant truncate max-w-[200px]">Sale / Fulfillment batch 9A</td>
+<td class="py-cell-padding-v px-cell-padding-h text-right text-on-surface-variant">System</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Reset tab buttons
+            const btnIn = document.getElementById('tab-btn-in');
+            const btnOut = document.getElementById('tab-btn-out');
+            
+            btnIn.className = "px-4 py-2 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors focus:outline-none";
+            btnOut.className = "px-4 py-2 font-label-sm text-label-sm text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors focus:outline-none";
+            
+            // Show selected tab and style active button
+            document.getElementById(tabId).classList.add('active');
+            
+            if(tabId === 'stock-in') {
+                btnIn.className = "px-4 py-2 font-label-sm text-label-sm text-primary border-b-2 border-primary transition-colors focus:outline-none";
+            } else {
+                btnOut.className = "px-4 py-2 font-label-sm text-label-sm text-primary border-b-2 border-primary transition-colors focus:outline-none";
+            }
+        }
+    </script>
+</body></html>
