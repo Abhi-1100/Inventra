@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/AuthWidget.h"
 #include "core/AuthController.h"
 #include "core/ProductData.h"
@@ -42,8 +43,8 @@ void PinDotIndicator::paintEvent(QPaintEvent*) {
     const int y = height() / 2 - dotR;
 
     for (int i = 0; i < 4; ++i) {
-        QColor fill  = (i < m_filled) ? QColor(Palette::Accent) : QColor(Palette::BgOverlay);
-        QColor border= (i < m_filled) ? QColor(Palette::Accent) : QColor(Palette::Border);
+        QColor fill  = (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().BgOverlay;
+        QColor border= (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().Border;
 
         p.setPen(QPen(border, 1.5));
         p.setBrush(fill);

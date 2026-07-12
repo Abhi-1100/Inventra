@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/StockWidget.h"
 #include "core/AppController.h"
 #include "core/AuthController.h"
@@ -319,9 +320,9 @@ void StockWidget::loadLedger() {
 
         // Styling
         if (mv.movementType == QLatin1String("IN")) {
-            row[2]->setForeground(QColor(Palette::Success));
+            row[2]->setForeground(ThemeManager::instance().tokens().Success);
         } else {
-            row[2]->setForeground(QColor(Palette::Critical));
+            row[2]->setForeground(ThemeManager::instance().tokens().Critical);
         }
 
         m_ledgerModel->appendRow(row);

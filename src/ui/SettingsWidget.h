@@ -56,6 +56,7 @@ private slots:
     // Session slots
     void updateSessionTime();
     void onLogoutClicked();
+    void onThemeChanged(int index);
 
 private:
     void buildLayout();
@@ -92,7 +93,9 @@ private:
     QComboBox* m_sessionTimeoutCombo = nullptr;
     QLabel* m_sessionTimeLabel = nullptr;
     QPushButton* m_logoutBtn = nullptr;
-    QTimer* m_sessionTimer = nullptr;
+    QTimer*      m_sessionTimer = nullptr;
+
+    QComboBox*   m_themeCombo = nullptr;
 };
 
 } // namespace Kirana

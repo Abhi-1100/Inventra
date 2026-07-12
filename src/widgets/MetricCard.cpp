@@ -19,13 +19,7 @@ MetricCard::MetricCard(const QString& title,
     setMinimumWidth(180);
 
     // Surface styling — matches .card QSS rule + 1px left accent painted manually
-    setStyleSheet(
-        "QFrame#MetricCard {"
-        "  background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #161b22, stop:1 #12161c);"
-        "  border: 1px solid #232a33;"
-        "  border-radius: 8px;"
-        "}"
-    );
+    
 
     buildLayout();
     setValue("—");

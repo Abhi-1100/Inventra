@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>styles/terminal.qss</file>
+        <file>styles/terminal_light.qss</file>
         <file>icons/inventra_logo.svg</file>
         <file>icons/dashboard.svg</file>
         <file>icons/daily_entry.svg</file>

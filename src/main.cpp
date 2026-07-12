@@ -6,6 +6,7 @@
 #include "core/AppController.h"
 #include "core/AuthController.h"
 #include "ui/MainWindow.h"
+#include "core/ThemeManager.h"
 #include "python/PythonBridge.h"
 
 int main(int argc, char *argv[]) {
@@ -14,12 +15,8 @@ int main(int argc, char *argv[]) {
     // Set styling hints
     app.setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 
-    // Load global QSS Dark Theme
-    QFile styleFile(QStringLiteral(":/styles/terminal.qss"));
-    if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
-        QString styleSheet = QLatin1String(styleFile.readAll());
-        app.setStyleSheet(styleSheet);
-    }
+    // Initialize ThemeManager to apply the default theme
+    Kirana::ThemeManager::instance();
 
     // Initialize Database
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("inventra.db"));
