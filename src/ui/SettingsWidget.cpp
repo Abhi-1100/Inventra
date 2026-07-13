@@ -40,8 +40,11 @@ void SettingsWidget::buildLayout() {
     mainLayout->setSpacing(20);
 
     // Title
-    auto* titleLabel = new QLabel(QStringLiteral("SETTINGS & UTILITIES"), this);
-    titleLabel->setStyleSheet(QStringLiteral("font-family: 'Segoe UI', sans-serif; font-size: 16px; font-weight: bold; color: #e6edf3; letter-spacing: 0.5px;"));
+    auto* titleLabel = new QLabel(QStringLiteral("Settings"), this);
+    titleLabel->setStyleSheet(QStringLiteral(
+        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
+        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "background:transparent;border:none;"));
     mainLayout->addWidget(titleLabel);
 
     // ── Tab Control for Settings Categories ──
@@ -50,7 +53,9 @@ void SettingsWidget::buildLayout() {
 
     auto makeFieldLabel = [](const QString& text) -> QLabel* {
         auto* l = new QLabel(text);
-        l->setStyleSheet(QStringLiteral("color: #8b949e; font-size: 11px; font-weight: 500; background: transparent;"));
+        l->setStyleSheet(QStringLiteral(
+            "color:#8c90a0;font-size:11px;font-weight:600;"
+            "letter-spacing:0.05em;background:transparent;border:none;"));
         return l;
     };
 
@@ -60,8 +65,13 @@ void SettingsWidget::buildLayout() {
     pLayout->setContentsMargins(12, 12, 12, 12);
     pLayout->setSpacing(16);
 
-    m_defaultBanner = new QLabel(QStringLiteral("⚠️ APPLICATION IS CURRENTLY RUNNING WITH DEFAULT CONFIGURATION PARAMETERS"), pipelineTab);
-    m_defaultBanner->setStyleSheet(QStringLiteral("font-size: 10px; font-weight: bold; color: #d29922; background-color: rgba(210,153,34,0.12); padding: 8px; border-radius: 4px; border: 1px solid rgba(210,153,34,0.30);"));
+    m_defaultBanner = new QLabel(QStringLiteral("⚠  APPLICATION IS CURRENTLY RUNNING WITH DEFAULT CONFIGURATION PARAMETERS"), pipelineTab);
+    m_defaultBanner->setStyleSheet(QStringLiteral(
+        "font-size:12px;font-weight:600;color:#c0c7d3;"
+        "background-color:rgba(192,199,211,0.08);"
+        "padding:10px 14px;border-radius:6px;"
+        "border:1px solid rgba(192,199,211,0.25);"
+        "border-left:3px solid #c0c7d3;"));
     pLayout->addWidget(m_defaultBanner);
 
     auto* formFrame = new QFrame(pipelineTab);
@@ -70,7 +80,10 @@ void SettingsWidget::buildLayout() {
     grid->setSpacing(16);
 
     auto* eoqHeader = new QLabel(QStringLiteral("ECONOMIC ORDER QUANTITY (EOQ) VARIABLES"), formFrame);
-    eoqHeader->setStyleSheet(QStringLiteral("font-weight: bold; color: #1f6feb; font-size: 11px;"));
+    eoqHeader->setStyleSheet(QStringLiteral(
+        "font-family:'Hanken Grotesk',sans-serif;"
+        "font-weight:700;color:#afc6ff;font-size:11px;"
+        "letter-spacing:0.06em;background:transparent;border:none;"));
     grid->addWidget(eoqHeader, 0, 0, 1, 2);
 
     grid->addWidget(makeFieldLabel(QStringLiteral("Ordering Cost per Shipment (K):")), 1, 0);
@@ -98,7 +111,10 @@ void SettingsWidget::buildLayout() {
     grid->addWidget(line, 4, 0, 1, 2);
 
     auto* mlHeader = new QLabel(QStringLiteral("CLASSIFICATION DECISION THRESHOLDS"), formFrame);
-    mlHeader->setStyleSheet(QStringLiteral("font-weight: bold; color: #1f6feb; font-size: 11px;"));
+    mlHeader->setStyleSheet(QStringLiteral(
+        "font-family:'Hanken Grotesk',sans-serif;"
+        "font-weight:700;color:#afc6ff;font-size:11px;"
+        "letter-spacing:0.06em;background:transparent;border:none;"));
     grid->addWidget(mlHeader, 5, 0, 1, 2);
 
     grid->addWidget(makeFieldLabel(QStringLiteral("Critical / Reorder Confidence Threshold:")), 6, 0);

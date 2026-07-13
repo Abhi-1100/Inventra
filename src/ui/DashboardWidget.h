@@ -9,6 +9,7 @@ class QSortFilterProxyModel;
 class QPushButton;
 class QListWidget;
 class QHBoxLayout;
+class QLabel;
 
 namespace Kirana {
 
@@ -16,14 +17,16 @@ class AppController;
 class ProductModel;
 class MetricCard;
 class ProductDetailPanel;
+class StockDonutWidget;
 
 // ─────────────────────────────────────────────
 // DashboardWidget
 //
-// Shows 4 metric cards at the top.
-// Below cards, a horizontal split:
-//   - Left: Dense table of products + filter chip bar
-//   - Right: Recent stock movement activity feed
+// Layout matching 7_Dashboard.html reference:
+//   Top: 4 metric cards in a row
+//   Bottom (2/3 + 1/3 split):
+//     Left:  Priority Queue table with filter chips
+//     Right: Stock Distribution donut + legend
 // ─────────────────────────────────────────────
 
 class DashboardWidget : public QWidget {
@@ -49,25 +52,29 @@ private:
     void configureTable();
     void setupFilterChips(QHBoxLayout* rowLayout);
 
-    AppController*        m_controller = nullptr;
-    ProductModel*         m_model      = nullptr;
+    AppController*         m_controller = nullptr;
+    ProductModel*          m_model      = nullptr;
     QSortFilterProxyModel* m_proxyModel = nullptr;
 
-    // Metrics
+    // Metric cards
     MetricCard* m_cardSKUs       = nullptr;
     MetricCard* m_cardCritical   = nullptr;
     MetricCard* m_cardOverstock  = nullptr;
     MetricCard* m_cardStockout   = nullptr;
 
-    // Filters
+    // Filter chips
     QVector<QPushButton*> m_filterChips;
 
+    // Priority Queue table
     QTableView* m_tableView = nullptr;
 
-    // Activity Feed
-    QListWidget* m_activityList = nullptr;
+    // Stock Distribution donut
+    StockDonutWidget* m_donutWidget      = nullptr;
+    QLabel*           m_legendSafe       = nullptr;
+    QLabel*           m_legendOverstock  = nullptr;
+    QLabel*           m_legendReorder    = nullptr;
 
-    // Details panel
+    // Product detail side panel
     ProductDetailPanel* m_detailPanel = nullptr;
 };
 

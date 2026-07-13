@@ -3,20 +3,19 @@
 #include <QFrame>
 #include <QString>
 #include <QColor>
-
-class QLabel;
+#include <QLabel>  // needed for inline setIconText
 
 namespace Kirana {
 
 // ─────────────────────────────────────────────
 // MetricCard
 //
-// A dark-surface KPI card used in the Dashboard.
-// Shows a title, a large primary value, and an
-// optional delta/subtitle.
-//
-// Left edge has a 3-px accent bar in a status
-// colour (passed as accentColor).
+// KPI card matching stitch_screens reference design:
+// - Gradient dark background (#161b22 → #12161c)
+// - Label (top-left, muted) + icon chip (top-right)
+// - Large JetBrains Mono value with optional delta badge
+// - Optional subtitle line
+// - Top-border accent glow on hover
 // ─────────────────────────────────────────────
 
 class MetricCard : public QFrame {
@@ -29,16 +28,27 @@ public:
 
     void setValue   (const QString& text);
     void setSubtitle(const QString& text);
+    void setDelta   (const QString& delta, bool positive = true);
     void setAccent  (const QColor& color);
 
+    // Set icon text shown in the chip (e.g. emoji, symbol letter)
+    void setIconText(const QString& text);
+
 protected:
-    void paintEvent(QPaintEvent* event) override;
+    void paintEvent (QPaintEvent* event) override;
+    void enterEvent (QEnterEvent* event) override;
+    void leaveEvent (QEvent* event) override;
 
 private:
     QLabel* m_titleLabel    = nullptr;
     QLabel* m_valueLabel    = nullptr;
     QLabel* m_subtitleLabel = nullptr;
+    QLabel* m_deltaLabel    = nullptr;
+    QLabel* m_iconLabel     = nullptr;
+
     QColor  m_accentColor;
+    QString m_title;
+    bool    m_hovered = false;
 
     void buildLayout();
 };

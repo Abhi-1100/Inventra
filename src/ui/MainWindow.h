@@ -20,6 +20,7 @@ class StockWidget;
 class AnalyticsWidget;
 class ImportWidget;
 class SettingsWidget;
+class ProductCatalogWidget;
 class PipelineWorker;
 struct PipelineRunResult;
 
@@ -99,13 +100,13 @@ private:
     QTimer*         m_idleTimer     = nullptr;
 
     // Pages (indices match Sidebar::Page enum)
-    DashboardWidget*  m_dashboardPage   = nullptr;
-    DailyEntryWidget* m_dailyEntryPage  = nullptr;
-    StockWidget*      m_stockPage       = nullptr;
-    DashboardWidget*  m_productsPage    = nullptr;
-    AnalyticsWidget*  m_analyticsPage   = nullptr;
-    ImportWidget*     m_importPage      = nullptr;
-    SettingsWidget*   m_settingsPage    = nullptr;
+    DashboardWidget*       m_dashboardPage   = nullptr;
+    DailyEntryWidget*      m_dailyEntryPage  = nullptr;
+    StockWidget*           m_stockPage       = nullptr;
+    ProductCatalogWidget*  m_productsPage    = nullptr;
+    AnalyticsWidget*       m_analyticsPage   = nullptr;
+    ImportWidget*          m_importPage      = nullptr;
+    SettingsWidget*        m_settingsPage    = nullptr;
 
     // Background pipeline worker
     PipelineWorker* m_worker = nullptr;

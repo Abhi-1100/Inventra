@@ -35,9 +35,19 @@ void AnalyticsWidget::buildLayout() {
     mainLayout->setSpacing(20);
 
     // Title Section
-    auto* titleLabel = new QLabel("ANALYTICS ENGINE", this);
-    titleLabel->setStyleSheet("font-family: 'Segoe UI', sans-serif; font-size: 16px; font-weight: bold; color: #e6edf3; letter-spacing: 0.5px;");
+    auto* titleLabel = new QLabel(QStringLiteral("Analytics"), this);
+    titleLabel->setStyleSheet(QStringLiteral(
+        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
+        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "background:transparent;border:none;"));
     mainLayout->addWidget(titleLabel);
+
+    // Subtitle
+    auto* subtitleLabel = new QLabel(QStringLiteral("Operational Intelligence"), this);
+    subtitleLabel->setStyleSheet(QStringLiteral(
+        "font-size:14px;color:#8c90a0;font-family:'Hanken Grotesk',sans-serif;"
+        "background:transparent;border:none;margin-top:-8px;"));
+    mainLayout->addWidget(subtitleLabel);
 
     // Charts side-by-side or stacked
     auto* chartsLayout = new QHBoxLayout();
@@ -45,11 +55,15 @@ void AnalyticsWidget::buildLayout() {
 
     m_barChartView = new QChartView(this);
     m_barChartView->setRenderHint(QPainter::Antialiasing);
-    m_barChartView->setStyleSheet("background: #161b22; border: 1px solid #30363d; border-radius: 6px;");
+    m_barChartView->setStyleSheet(
+        "background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #161b22,stop:1 #12161c);"
+        "border:1px solid #232a33;border-radius:8px;");
 
     m_pieChartView = new QChartView(this);
     m_pieChartView->setRenderHint(QPainter::Antialiasing);
-    m_pieChartView->setStyleSheet("background: #161b22; border: 1px solid #30363d; border-radius: 6px;");
+    m_pieChartView->setStyleSheet(
+        "background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #161b22,stop:1 #12161c);"
+        "border:1px solid #232a33;border-radius:8px;");
 
     chartsLayout->addWidget(m_barChartView, 1);
     chartsLayout->addWidget(m_pieChartView, 1);
@@ -64,12 +78,12 @@ void AnalyticsWidget::refreshCharts() {
 
 void AnalyticsWidget::renderDemandBarChart() {
     auto* chart = new QChart();
-    chart->setTitle("TOP 10 DEMANDED PRODUCTS (7-DAY FORECAST)");
-    chart->setTitleBrush(QBrush(QColor("#e6edf3")));
+    chart->setTitle(QStringLiteral("Most Demanded Products — 7-Day Forecast"));
+    chart->setTitleBrush(QBrush(QColor("#e0e2ea")));
     chart->setBackgroundVisible(false);
 
-    QColor textCol("#8b949e");
-    QColor gridCol("#21262d");
+    QColor textCol("#8c90a0");
+    QColor gridCol("#232a33");
 
     // Fetch and sort top products
     QVector<Product> sortedList = m_controller->products();

@@ -5,14 +5,15 @@
 
 class QLabel;
 class QPushButton;
+class QLineEdit;
 
 namespace Kirana {
 
 // ─────────────────────────────────────────────
-// StatusBar — top 28px status strip
+// StatusBar — Top App Bar (56px)
 //
 // Layout (left → right):
-//   [APP TITLE + STORE]   [● PIPELINE: LIVE|IDLE]   [LAST RUN: HH:mm:ss] [RUN NOW]
+//   [Search Input]  stretch  [Last sync]  [● LIVE|IDLE]  [Run Pipeline]  |  [🔔]  [👤]
 // ─────────────────────────────────────────────
 
 class StatusBar : public QWidget {
@@ -30,9 +31,10 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    QLabel*      m_pipelineLabel = nullptr;
-    QLabel*      m_lastRunLabel  = nullptr;
-    QPushButton* m_runBtn        = nullptr;
+    QLineEdit*   m_searchEdit     = nullptr;
+    QLabel*      m_pipelineLabel  = nullptr;
+    QLabel*      m_lastRunLabel   = nullptr;
+    QPushButton* m_runBtn         = nullptr;
 
     void buildLayout();
 };

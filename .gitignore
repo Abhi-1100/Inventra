@@ -23,3 +23,7 @@ CMakeLists.txt.user
 # OS files
 .DS_Store
 Thumbs.db
+
+# Stitch MCP Screens
+stitch_screens/
+download_screens.ps1

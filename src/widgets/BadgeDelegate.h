@@ -8,14 +8,16 @@ namespace Kirana {
 // ─────────────────────────────────────────────
 // BadgeDelegate
 //
-// Renders badge-type cells (Demand / Status /
-// Priority columns) as pill badges:
-//   – background: statusColor @ 22% opacity
-//   – text:       statusColor @ 100% opacity
-//   – shape:      rounded rect, 3px radius
+// Renders badge-type cells matching stitch_screens design:
 //
-// Also renders the Forecast column with a trend
-// arrow glyph (▲ / → / ▼) before the number.
+// Badge mode:
+//   - High demand: primary/20 bg + primary border + primary text
+//   - Med demand:  tertiary/12 bg + outline border + on-surface text
+//   - Low demand:  transparent + outline border + outline text
+//   - Status dot+label: colored 8px dot + text
+//
+// Forecast mode:
+//   - trend arrow (▲/→/▼) + EOQ quantity
 // ─────────────────────────────────────────────
 
 class BadgeDelegate : public QStyledItemDelegate {
@@ -23,7 +25,7 @@ class BadgeDelegate : public QStyledItemDelegate {
 
 public:
     enum class Mode {
-        Badge,     // pill badge (Demand/Status/Priority columns)
+        Badge,     // pill badge / status dot (Demand/Status/Priority columns)
         Forecast   // trend arrow + number (Forecast column)
     };
 
@@ -39,8 +41,12 @@ public:
 private:
     Mode m_mode;
 
-    void paintBadge   (QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const;
-    void paintForecast(QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const;
+    void paintBadge     (QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const;
+    void paintForecast  (QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const;
+    void paintStatusDot (QPainter*, const QStyleOptionViewItem&,
+                         const QColor& dotColor, const QString& label, bool pulsing) const;
+    void painter_helper (QPainter*, const QStyleOptionViewItem&,
+                         const QColor& dotColor, const QString& label) const;
 
     void fillBackground(QPainter*, const QStyleOptionViewItem&) const;
 };

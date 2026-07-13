@@ -65,6 +65,7 @@ set(INVENTRA_SOURCES
     src/ui/AnalyticsWidget.cpp
     src/ui/ImportWidget.cpp
     src/ui/SettingsWidget.cpp
+    src/ui/ProductCatalogWidget.cpp
     src/widgets/MetricCard.cpp
     src/widgets/BadgeDelegate.cpp
 )
@@ -91,6 +92,7 @@ set(INVENTRA_HEADERS
     src/ui/AnalyticsWidget.h
     src/ui/ImportWidget.h
     src/ui/SettingsWidget.h
+    src/ui/ProductCatalogWidget.h
     src/widgets/MetricCard.h
     src/widgets/BadgeDelegate.h
 )
