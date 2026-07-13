@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/AuthWidget.h"
 #include "core/AuthController.h"
 #include "core/ProductData.h"
@@ -17,6 +18,7 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QGraphicsOpacityEffect>
+#include <QKeyEvent>
 
 namespace Kirana {
 
@@ -41,8 +43,8 @@ void PinDotIndicator::paintEvent(QPaintEvent*) {
     const int y = height() / 2 - dotR;
 
     for (int i = 0; i < 4; ++i) {
-        QColor fill  = (i < m_filled) ? QColor(Palette::Accent) : QColor(Palette::BgOverlay);
-        QColor border= (i < m_filled) ? QColor(Palette::Accent) : QColor(Palette::Border);
+        QColor fill  = (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().BgOverlay;
+        QColor border= (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().Border;
 
         p.setPen(QPen(border, 1.5));
         p.setBrush(fill);
@@ -59,6 +61,7 @@ AuthWidget::AuthWidget(AuthController* auth, QWidget* parent)
     , m_auth(auth)
 {
     setObjectName(QStringLiteral("AuthPage"));
+    setFocusPolicy(Qt::StrongFocus);
 
     m_stack = new QStackedWidget(this);
     auto* root = new QVBoxLayout(this);
@@ -337,10 +340,14 @@ void AuthWidget::buildLoginPage() {
 void AuthWidget::setMode(Mode m) {
     m_mode = m;
     if (m == Mode::Registration) {
-        m_stack->setCurrentIndex(0);
+        m_stack->setCurrentWidget(m_regPage);
     } else {
-        updateShopGreeting();
-        m_stack->setCurrentIndex(1);
+        m_stack->setCurrentWidget(m_loginPage);
+        if (m == Mode::Unlock) {
+            m_shopGreeting->setText(QStringLiteral("Session Locked"));
+        } else {
+            updateShopGreeting();
+        }
     }
 }
 
@@ -373,14 +380,37 @@ void AuthWidget::onPinBackspace() {
 }
 
 void AuthWidget::submitPin() {
-    m_auth->authenticate(m_pinBuffer);
-    // Result comes via loginSucceeded / loginFailed signals
+    if (m_mode == Mode::Unlock) {
+        m_auth->unlockSession(m_pinBuffer);
+    } else {
+        m_auth->authenticate(m_pinBuffer);
+    }
+    // Result comes via loginSucceeded / loginFailed / sessionUnlocked signals
     resetPin();
 }
 
 void AuthWidget::resetPin() {
     m_pinBuffer.clear();
     m_pinDots->reset();
+}
+
+void AuthWidget::keyPressEvent(QKeyEvent* event) {
+    if (m_mode == Mode::Registration) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9) {
+        onPinDigitPressed(event->key() - Qt::Key_0);
+    } else if (event->key() == Qt::Key_Backspace) {
+        onPinBackspace();
+    } else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+        if (m_pinBuffer.length() == 4) {
+            submitPin();
+        }
+    } else {
+        QWidget::keyPressEvent(event);
+    }
 }
 
 // ─────────────────────────────────────────────

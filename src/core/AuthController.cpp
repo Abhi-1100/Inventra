@@ -67,6 +67,7 @@ bool AuthController::registerShop(const ShopProfile& shop,
 
     // Auto-login the newly registered owner
     m_currentUser = m_db->getUserById(userId);
+    m_loginTime = QDateTime::currentDateTime();
     emit registrationSucceeded(m_currentUser);
     emit loginSucceeded(m_currentUser);
     emit shopProfileChanged(m_shop);
@@ -88,6 +89,7 @@ bool AuthController::authenticate(const QString& pin) {
     }
 
     m_currentUser = user;
+    m_loginTime = QDateTime::currentDateTime();
     emit loginSucceeded(m_currentUser);
     return true;
 }
@@ -98,7 +100,25 @@ bool AuthController::authenticate(const QString& pin) {
 
 void AuthController::logout() {
     m_currentUser = {};
+    m_loginTime = QDateTime();
     emit loggedOut();
+}
+
+void AuthController::lockSession() {
+    if (isLoggedIn()) {
+        emit sessionLocked();
+    }
+}
+
+bool AuthController::unlockSession(const QString& pin) {
+    if (!isLoggedIn()) return false;
+    const QString hash = hashPin(pin);
+    if (m_currentUser.pinHash == hash) {
+        emit sessionUnlocked();
+        return true;
+    }
+    emit loginFailed();
+    return false;
 }
 
 // ─────────────────────────────────────────────

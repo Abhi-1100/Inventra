@@ -111,24 +111,7 @@ inline QString toString(Priority p) noexcept {
 // Terminal status palette (shared constants)
 // ─────────────────────────────────────────────
 
-namespace Palette {
-    // Surfaces
-    static constexpr const char* BgPrimary   = "#0b0f14";
-    static constexpr const char* BgSurface   = "#161b22";
-    static constexpr const char* BgOverlay   = "#21262d";
-    static constexpr const char* Border      = "#30363d";
-    // Text
-    static constexpr const char* TextPrimary   = "#e6edf3";
-    static constexpr const char* TextSecondary = "#8b949e";
-    static constexpr const char* TextMuted     = "#6e7681";
-    // Status (badge-only: 20% opacity fill + solid text)
-    static constexpr const char* Critical = "#f85149";
-    static constexpr const char* Warning  = "#d29922";
-    static constexpr const char* Success  = "#3fb950";
-    // Accent — blue #1f6feb, used only for brand/active state/primary buttons
-    static constexpr const char* Accent   = "#1f6feb";
-    static constexpr const char* Info     = "#1f6feb";
-} // namespace Palette
+// Palette namespace removed in favor of ThemeManager
 
 // ─────────────────────────────────────────────
 // Daily sales / waste entry record

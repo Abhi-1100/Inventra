@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/AnalyticsWidget.h"
 #include "core/AppController.h"
 
@@ -79,7 +80,7 @@ void AnalyticsWidget::renderDemandBarChart() {
     int limit = qMin(10, static_cast<int>(sortedList.size()));
     
     auto* barSet = new QBarSet("Forecast Demand (Units)");
-    barSet->setColor(QColor(Palette::Accent));
+    barSet->setColor(ThemeManager::instance().tokens().Accent);
     
     QStringList categories;
     for (int i = 0; i < limit; ++i) {
@@ -143,15 +144,15 @@ void AnalyticsWidget::renderStatusPieChart() {
     auto* series = new QPieSeries();
     
     auto* sReorder = series->append("Reorder", reorderCount);
-    sReorder->setColor(QColor(Palette::Critical));
+    sReorder->setColor(ThemeManager::instance().tokens().Critical);
     sReorder->setLabelColor(textCol);
 
     auto* sSafe = series->append("No Action", safeCount);
-    sSafe->setColor(QColor(Palette::Success));
+    sSafe->setColor(ThemeManager::instance().tokens().Success);
     sSafe->setLabelColor(textCol);
 
     auto* sOverstock = series->append("Overstock", overstockCount);
-    sOverstock->setColor(QColor(Palette::Warning));
+    sOverstock->setColor(ThemeManager::instance().tokens().Warning);
     sOverstock->setLabelColor(textCol);
 
     chart->addSeries(series);

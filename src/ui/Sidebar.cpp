@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/Sidebar.h"
 #include "core/ProductData.h"
 
@@ -25,7 +26,7 @@ SidebarButton::SidebarButton(const QString& iconPath,
     , m_iconPath(iconPath)
     , m_label(label)
 {
-    setFixedSize(160, 44);
+    setFixedSize(260, 44);
     setToolTip(tooltip);
     setCursor(Qt::PointingHandCursor);
     setAttribute(Qt::WA_Hover);
@@ -42,19 +43,19 @@ void SidebarButton::paintEvent(QPaintEvent*) {
 
     // Hover / active background
     if (m_active) {
-        QColor bg(Palette::Accent);
-        bg.setAlpha(22);
+        QColor bg(ThemeManager::instance().tokens().Accent);
+        bg.setAlpha(26); // 10% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
         p.drawRoundedRect(r.adjusted(8, 3, -8, -3), 6, 6);
 
         // Left accent bar
-        p.setBrush(QColor(Palette::Accent));
-        p.drawRect(0, r.height() / 2 - 10, 3, 20);
+        p.setBrush(ThemeManager::instance().tokens().Accent);
+        p.drawRect(0, r.height() / 2 - 12, 4, 24);
 
     } else if (m_hovered) {
-        QColor bg(Palette::BgOverlay);
-        bg.setAlpha(120);
+        QColor bg(ThemeManager::instance().tokens().Accent);
+        bg.setAlpha(13); // 5% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
         p.drawRoundedRect(r.adjusted(8, 3, -8, -3), 6, 6);
@@ -72,8 +73,8 @@ void SidebarButton::paintEvent(QPaintEvent*) {
 
         // Paint icon with colour-overlay using painter compositing
         QColor tintColor = m_active
-            ? QColor(Palette::Accent)
-            : (m_hovered ? QColor(Palette::TextPrimary) : QColor(Palette::TextSecondary));
+            ? ThemeManager::instance().tokens().Accent
+            : (m_hovered ? ThemeManager::instance().tokens().TextPrimary : ThemeManager::instance().tokens().TextSecondary);
 
         p.setOpacity(1.0);
         // Draw icon (SVG already contains stroke="currentColor";
@@ -90,13 +91,13 @@ void SidebarButton::paintEvent(QPaintEvent*) {
     // Label text
     const int textX = iconX + iconSz + 12;
     QColor textColor = m_active
-        ? QColor(Palette::Accent)
-        : (m_hovered ? QColor(Palette::TextPrimary) : QColor(Palette::TextSecondary));
+        ? ThemeManager::instance().tokens().Accent
+        : (m_hovered ? ThemeManager::instance().tokens().TextPrimary : ThemeManager::instance().tokens().TextSecondary);
 
     p.setPen(textColor);
     QFont f = p.font();
-    f.setFamily(QStringLiteral("Segoe UI"));
-    f.setPixelSize(12);
+    f.setFamily(QStringLiteral("Hanken Grotesk"));
+    f.setPixelSize(13);
     f.setWeight(m_active ? QFont::Medium : QFont::Normal);
     p.setFont(f);
     p.drawText(QRect(textX, 0, r.width() - textX - 8, r.height()),
@@ -123,11 +124,9 @@ void SidebarButton::leaveEvent(QEvent* ev) {
 Sidebar::Sidebar(QWidget* parent)
     : QWidget(parent)
 {
-    setFixedWidth(160);
+    setFixedWidth(260);
     setObjectName(QStringLiteral("Sidebar"));
-    setStyleSheet(QStringLiteral(
-        "QWidget#Sidebar { background:#0b0f14; border-right:1px solid #21262d; }"));
-
+    // Styles moved to QSS
     buildLayout();
 }
 

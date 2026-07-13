@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/ProductDetailPanel.h"
 #include <QPainter>
 #include <QPaintEvent>
@@ -190,7 +191,7 @@ void ProductDetailPanel::updateCharts() {
     auto* forecastSeries = new QLineSeries();
     forecastSeries->setName("Prophet Forecast");
     QPen forecastPen;
-    forecastPen.setColor(QColor(Palette::Accent));
+    forecastPen.setColor(ThemeManager::instance().tokens().Accent);
     forecastPen.setWidth(2);
     forecastSeries->setPen(forecastPen);
 
@@ -216,7 +217,7 @@ void ProductDetailPanel::updateCharts() {
     // Area series for confidence band
     auto* areaSeries = new QAreaSeries(upperSeries, lowerSeries);
     areaSeries->setName("Confidence Band (80%)");
-    QColor bandColor(Palette::Accent);
+    QColor bandColor(ThemeManager::instance().tokens().Accent);
     bandColor.setAlpha(35);
     areaSeries->setBrush(QBrush(bandColor));
     areaSeries->setPen(Qt::NoPen);

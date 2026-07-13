@@ -42,7 +42,7 @@ class AuthWidget : public QWidget {
     Q_OBJECT
 
 public:
-    enum class Mode { Registration, Login };
+    enum class Mode { Registration, Login, Unlock };
 
     explicit AuthWidget(AuthController* auth, QWidget* parent = nullptr);
 
@@ -60,6 +60,8 @@ private slots:
     void onPinBackspace();
     void onRegisterClicked();
     void onForgotPin();
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     void buildRegistrationPage();
