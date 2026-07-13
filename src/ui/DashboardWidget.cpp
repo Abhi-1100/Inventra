@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/DashboardWidget.h"
 #include "core/AppController.h"
 #include "core/Database.h"
@@ -78,10 +79,10 @@ void DashboardWidget::buildLayout() {
     auto* cardsLayout = new QHBoxLayout();
     cardsLayout->setSpacing(16);
 
-    m_cardSKUs = new MetricCard(QStringLiteral("Total SKUs"), QColor(Palette::Info), this);
-    m_cardCritical = new MetricCard(QStringLiteral("Critical Reorder"), QColor(Palette::Critical), this);
-    m_cardOverstock = new MetricCard(QStringLiteral("Overstock"), QColor(Palette::Warning), this);
-    m_cardStockout = new MetricCard(QStringLiteral("Stockout Risk %"), QColor(Palette::Success), this);
+    m_cardSKUs = new MetricCard(QStringLiteral("Total SKUs"), ThemeManager::instance().tokens().Info, this);
+    m_cardCritical = new MetricCard(QStringLiteral("Critical Reorder"), ThemeManager::instance().tokens().Critical, this);
+    m_cardOverstock = new MetricCard(QStringLiteral("Overstock"), ThemeManager::instance().tokens().Warning, this);
+    m_cardStockout = new MetricCard(QStringLiteral("Stockout Risk %"), ThemeManager::instance().tokens().Success, this);
 
     cardsLayout->addWidget(m_cardSKUs);
     cardsLayout->addWidget(m_cardCritical);
@@ -233,7 +234,7 @@ void DashboardWidget::updateActivityFeed() {
     if (movements.isEmpty()) {
         auto* item = new QListWidgetItem(QStringLiteral("No recent activity recorded."), m_activityList);
         item->setFlags(Qt::NoItemFlags);
-        item->setForeground(QColor(Palette::TextSecondary));
+        item->setForeground(ThemeManager::instance().tokens().TextSecondary);
         return;
     }
 
@@ -250,9 +251,9 @@ void DashboardWidget::updateActivityFeed() {
         
         // Coloring of text item or icon block
         if (mv.movementType == QLatin1String("IN")) {
-            item->setForeground(QColor(Palette::Success));
+            item->setForeground(ThemeManager::instance().tokens().Success);
         } else {
-            item->setForeground(QColor(Palette::Critical));
+            item->setForeground(ThemeManager::instance().tokens().Critical);
         }
     }
 }

@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from typing import List, Dict, Any, Tuple
+from sklearn.cluster import KMeans
 
 from backend.config import settings
 from backend.models.entities import MLResult
@@ -62,6 +63,38 @@ def run_ml_pipeline(
         
     logger.info(f"Starting ML pipeline for {len(products_list)} products...")
     
+    # ── K-Means Clustering for Demand Labels ──
+    avg_sales_by_sku = sales_history_df.groupby("sku")["sales_volume"].mean().to_dict()
+    skus_for_clustering = list(avg_sales_by_sku.keys())
+    
+    if len(skus_for_clustering) > 0:
+        X_kmeans = np.array([avg_sales_by_sku[sku] for sku in skus_for_clustering]).reshape(-1, 1)
+        n_clusters = min(3, len(X_kmeans))
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+        cluster_labels = kmeans.fit_predict(X_kmeans)
+        
+        # Sort clusters by average sales volume (lowest to highest)
+        cluster_centers = kmeans.cluster_centers_.flatten()
+        sorted_cluster_indices = np.argsort(cluster_centers)
+        
+        cluster_demand_map = {}
+        if n_clusters == 3:
+            cluster_demand_map[sorted_cluster_indices[0]] = "Low Demand"
+            cluster_demand_map[sorted_cluster_indices[1]] = "Medium Demand"
+            cluster_demand_map[sorted_cluster_indices[2]] = "High Demand"
+        elif n_clusters == 2:
+            cluster_demand_map[sorted_cluster_indices[0]] = "Low Demand"
+            cluster_demand_map[sorted_cluster_indices[1]] = "High Demand"
+        else:
+            cluster_demand_map[sorted_cluster_indices[0]] = "Medium Demand"
+            
+        demand_labels_by_sku = {
+            skus_for_clustering[i]: cluster_demand_map[cluster_labels[i]]
+            for i in range(len(skus_for_clustering))
+        }
+    else:
+        demand_labels_by_sku = {}
+        
     # Map products by SKU for easy lookup
     products_map = {p["sku"]: p for p in products_list}
     
@@ -160,13 +193,17 @@ def run_ml_pipeline(
                 priority = "Critical"
             elif current_stock <= reorder_point:
                 status = "Low"
-                priority = "ReorderSoon"
+                priority = "Reorder Soon"
             elif current_stock > overstock_thresh:
                 status = "Overstock"
                 priority = "Safe"
             else:
                 status = "Healthy"
                 priority = "Safe"
+                
+            # Force Critical priority if stock is very low
+            if current_stock <= safety_stock or current_stock <= (reorder_point * 0.2):
+                priority = "Critical"
                 
             confidence = 50.0  # Default confidence for cold-start heuristics
             eoq = calculate_eoq(avg_usage, ordering_cost, holding_cost_rate, unit_cost)
@@ -190,7 +227,7 @@ def run_ml_pipeline(
             res = MLResult(
                 product_id=product_id,
                 sku=sku,
-                demand_label="Medium",
+                demand_label=demand_labels_by_sku.get(sku, "Medium Demand"),
                 stock_status=status,
                 confidence=confidence,
                 forecast_7d=forecast_7d,
@@ -242,17 +279,16 @@ def run_ml_pipeline(
                 )
                 
                 priority_label = "Safe"
-                if priority_score >= 75.0:
+                # Force Critical priority if stock is very low (<= 20% of reorder point)
+                if status == "Critical" or current_stock <= (reorder_point * 0.2):
+                    priority_label = "Critical"
+                elif priority_score >= 75.0:
                     priority_label = "Critical"
                 elif priority_score >= 50.0:
-                    priority_label = "ReorderSoon"
+                    priority_label = "Reorder Soon"
                     
-                # 5. Determine demand label based on avg daily sales relative to other items
-                demand_label = "Medium"
-                if avg_usage > 15.0:
-                    demand_label = "High"
-                elif avg_usage < 2.0:
-                    demand_label = "Low"
+                # 5. Determine demand label using K-Means clustering
+                demand_label = demand_labels_by_sku.get(sku, "Medium Demand")
                     
                 # 6. Generate Explanation
                 explanation = generate_explanation(

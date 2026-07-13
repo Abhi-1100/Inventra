@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/ImportWidget.h"
 #include "core/AppController.h"
 
@@ -95,7 +96,7 @@ void ImportWidget::buildLayout() {
         m_mappingTable->setItem(i, 1, matchItem);
 
         auto* statusItem = new QTableWidgetItem("✓ Found");
-        statusItem->setForeground(QBrush(QColor(Palette::Success)));
+        statusItem->setForeground(QBrush(ThemeManager::instance().tokens().Success));
         statusItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
         m_mappingTable->setItem(i, 2, statusItem);
     }

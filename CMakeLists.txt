@@ -59,6 +59,7 @@ set(INVENTRA_SOURCES
     src/core/PipelineWorker.cpp
     src/core/Database.cpp
     src/core/AuthController.cpp
+    src/core/ThemeManager.cpp
     src/python/PythonBridge.cpp
     src/ui/MainWindow.cpp
     src/ui/Sidebar.cpp
@@ -83,6 +84,7 @@ set(INVENTRA_HEADERS
     src/core/Database.h
     src/core/AuthData.h
     src/core/AuthController.h
+    src/core/ThemeManager.h
     src/python/PythonBridge.h
     src/python/PipelineResult.h
     src/ui/MainWindow.h

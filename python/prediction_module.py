@@ -72,10 +72,12 @@ def forecast_all(
         )
         
         priority_label = "Safe"
-        if priority_score >= 75.0:
+        if ml_data.get("stock_status") == "Critical" or current_stock <= (reorder_point * 0.2):
+            priority_label = "Critical"
+        elif priority_score >= 75.0:
             priority_label = "Critical"
         elif priority_score >= 50.0:
-            priority_label = "ReorderSoon"
+            priority_label = "Reorder Soon"
             
         # Get product_id if exists
         product_id = 0

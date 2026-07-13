@@ -11,7 +11,7 @@ Retrieves confidence thresholds directly via predict_proba.
 import numpy as np
 import pandas as pd
 from typing import List, Dict, Any, Tuple
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 
 from backend.config import settings
@@ -50,26 +50,27 @@ def determine_heuristic_target(row: Dict[str, Any]) -> str:
 def train_classifier(
     features_df: pd.DataFrame,
     feature_cols: List[str]
-) -> Tuple[RandomForestClassifier, StandardScaler, float]:
+) -> Tuple[SVC, StandardScaler, float]:
     """
-    Trains a RandomForestClassifier on inventory features.
+    Trains a Linear Support Vector Machine (LSVM) on inventory features.
     Bootstraps targets using heuristic rules if target is not already present.
     
     Returns:
         Tuple containing:
-            - RandomForestClassifier: The fitted model.
+            - SVC: The fitted model.
             - StandardScaler: The fitted scaler.
             - accuracy (float): Training accuracy score.
     """
     df = features_df.copy()
     
-    # 1. Bootstrap Target Column if missing
-    if "target" not in df.columns:
-        # Generate target per row
-        df["target"] = df.apply(determine_heuristic_target, axis=1)
+    # Ensure target represents stock_status (Critical, Low, Healthy, Overstock)
+    if "stock_status" in df.columns:
+        y = df["stock_status"]
+    else:
+        df["stock_status"] = df.apply(determine_heuristic_target, axis=1)
+        y = df["stock_status"]
         
     X = df[feature_cols].fillna(0.0)
-    y = df["target"]
     
     # Check if we have enough samples
     if len(df) == 0:
@@ -79,19 +80,19 @@ def train_classifier(
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    # Train Random Forest
-    clf = RandomForestClassifier(**settings.RF_PARAMS)
+    # Train Linear Support Vector Machine (LSVM) with probability estimates
+    clf = SVC(kernel='linear', probability=True, random_state=42)
     clf.fit(X_scaled, y)
     
     # Compute simple training accuracy
     predictions = clf.predict(X_scaled)
     acc = float(np.mean(predictions == y))
     
-    logger.info(f"Classifier trained successfully. Train Accuracy: {acc * 100.0:.2f}%")
+    logger.info(f"LSVM Classifier trained successfully. Train Accuracy: {acc * 100.0:.2f}%")
     return clf, scaler, acc
 
 def predict_health(
-    clf: RandomForestClassifier,
+    clf: SVC,
     scaler: StandardScaler,
     feature_row: Dict[str, Any],
     feature_cols: List[str]

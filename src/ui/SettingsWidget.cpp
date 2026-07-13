@@ -18,6 +18,7 @@
 #include <QInputDialog>
 #include <QTabWidget>
 #include <QComboBox>
+#include "core/ThemeManager.h"
 
 namespace Kirana {
 
@@ -259,6 +260,33 @@ void SettingsWidget::buildLayout() {
     m_sessionTimer->start(1000);
     updateSessionTime();
 
+    // ── TAB 5: Appearance ──
+    auto* appTab = new QWidget(tabWidget);
+    auto* appLayout = new QVBoxLayout(appTab);
+    appLayout->setContentsMargins(12, 12, 12, 12);
+    appLayout->setSpacing(16);
+
+    auto* appFormFrame = new QFrame(appTab);
+    appFormFrame->setObjectName(QStringLiteral("FormFrame"));
+    auto* appGrid = new QGridLayout(appFormFrame);
+    appGrid->setSpacing(16);
+
+    appGrid->addWidget(makeFieldLabel(QStringLiteral("Application Theme:")), 0, 0);
+    m_themeCombo = new QComboBox(appFormFrame);
+    m_themeCombo->addItem(QStringLiteral("Dark (Pro-Inventory)"), Kirana::ThemeManager::Dark);
+    m_themeCombo->addItem(QStringLiteral("Light (Nexus Core)"), Kirana::ThemeManager::Light);
+    
+    // Set current theme
+    int currentThemeIdx = m_themeCombo->findData(Kirana::ThemeManager::instance().theme());
+    if (currentThemeIdx >= 0) m_themeCombo->setCurrentIndex(currentThemeIdx);
+    
+    connect(m_themeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SettingsWidget::onThemeChanged);
+    
+    appGrid->addWidget(m_themeCombo, 0, 1);
+    appLayout->addWidget(appFormFrame);
+    appLayout->addStretch();
+    tabWidget->addTab(appTab, QStringLiteral("Appearance"));
+
     mainLayout->addWidget(tabWidget);
 }
 
@@ -405,6 +433,11 @@ void SettingsWidget::onLogoutClicked() {
     if (reply == QMessageBox::Yes) {
         m_auth->logout();
     }
+}
+
+void SettingsWidget::onThemeChanged(int index) {
+    ThemeManager::Theme t = static_cast<ThemeManager::Theme>(m_themeCombo->itemData(index).toInt());
+    ThemeManager::instance().setTheme(t);
 }
 
 } // namespace Kirana

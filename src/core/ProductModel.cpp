@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "core/ProductModel.h"
 #include <algorithm>
 
@@ -144,28 +145,28 @@ QVariant ProductModel::badgeColorData(const Product& p, ProductColumn col) const
 
 QColor ProductModel::badgeColor(DemandLabel d) {
     switch (d) {
-    case DemandLabel::High:   return QColor(Palette::Info);     // blue
-    case DemandLabel::Medium: return QColor(Palette::Warning);  // amber
-    case DemandLabel::Low:    return QColor(Palette::TextSecondary); // muted grey
-    default:                  return QColor(Palette::TextMuted);
+    case DemandLabel::High:   return ThemeManager::instance().tokens().Info;     // blue
+    case DemandLabel::Medium: return ThemeManager::instance().tokens().Warning;  // amber
+    case DemandLabel::Low:    return ThemeManager::instance().tokens().TextSecondary; // muted grey
+    default:                  return ThemeManager::instance().tokens().TextMuted;
     }
 }
 
 QColor ProductModel::badgeColor(StockStatus s) {
     switch (s) {
-    case StockStatus::Reorder:   return QColor(Palette::Critical);  // red
-    case StockStatus::NoAction:  return QColor(Palette::Success);   // green
-    case StockStatus::Overstock: return QColor(Palette::Warning);   // amber
-    default:                     return QColor(Palette::TextMuted);
+    case StockStatus::Reorder:   return ThemeManager::instance().tokens().Critical;  // red
+    case StockStatus::NoAction:  return ThemeManager::instance().tokens().Success;   // green
+    case StockStatus::Overstock: return ThemeManager::instance().tokens().Warning;   // amber
+    default:                     return ThemeManager::instance().tokens().TextMuted;
     }
 }
 
 QColor ProductModel::badgeColor(Priority p) {
     switch (p) {
-    case Priority::Critical:    return QColor(Palette::Critical);   // red
-    case Priority::ReorderSoon: return QColor(Palette::Warning);    // amber
-    case Priority::Safe:        return QColor(Palette::Success);    // green
-    default:                    return QColor(Palette::TextMuted);
+    case Priority::Critical:    return ThemeManager::instance().tokens().Critical;   // red
+    case Priority::ReorderSoon: return ThemeManager::instance().tokens().Warning;    // amber
+    case Priority::Safe:        return ThemeManager::instance().tokens().Success;    // green
+    default:                    return ThemeManager::instance().tokens().TextMuted;
     }
 }
 

@@ -113,9 +113,9 @@ bool AppController::loadFromDatabase() {
                 for (auto& p : dbProds) {
                     if (p.sku == sku) {
                         QString dl = obj.value(QStringLiteral("demand_label")).toString();
-                        if (dl == QStringLiteral("High")) p.demandLabel = DemandLabel::High;
-                        else if (dl == QStringLiteral("Medium")) p.demandLabel = DemandLabel::Medium;
-                        else if (dl == QStringLiteral("Low")) p.demandLabel = DemandLabel::Low;
+                        if (dl == QStringLiteral("High") || dl == QStringLiteral("High Demand")) p.demandLabel = DemandLabel::High;
+                        else if (dl == QStringLiteral("Medium") || dl == QStringLiteral("Medium Demand")) p.demandLabel = DemandLabel::Medium;
+                        else p.demandLabel = DemandLabel::Low;
 
                         QString ss = obj.value(QStringLiteral("stock_status")).toString();
                         if (ss == QStringLiteral("Reorder")) p.stockStatus = StockStatus::Reorder;
@@ -124,7 +124,7 @@ bool AppController::loadFromDatabase() {
 
                         QString pr = obj.value(QStringLiteral("priority")).toString();
                         if (pr == QStringLiteral("Critical")) p.priority = Priority::Critical;
-                        else if (pr == QStringLiteral("ReorderSoon")) p.priority = Priority::ReorderSoon;
+                        else if (pr == QStringLiteral("ReorderSoon") || pr == QStringLiteral("Reorder Soon")) p.priority = Priority::ReorderSoon;
                         else p.priority = Priority::Safe;
 
                         p.confidence = obj.value(QStringLiteral("confidence")).toDouble();

@@ -47,7 +47,8 @@ def main():
     print("Top 5 product predictions:")
     for r in results[:5]:
         print(f"Product SKU: {r.sku}")
-        print(f"  Demand Status Prediction: {r.stock_status} (Confidence: {r.confidence:.1f}%)")
+        print(f"  Demand Cluster (K-Means): {r.demand_label}")
+        print(f"  Stock Status (LSVM): {r.stock_status} (Confidence: {r.confidence:.1f}%)")
         print(f"  Priority Level: {r.priority}")
         print(f"  EOQ: {r.eoq} units")
         print(f"  7-Day Demand Forecast: {r.forecast_7d:.2f} units")

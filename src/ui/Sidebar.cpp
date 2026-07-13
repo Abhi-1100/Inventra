@@ -1,3 +1,4 @@
+#include "core/ThemeManager.h"
 #include "ui/Sidebar.h"
 #include "core/ProductData.h"
 
@@ -42,18 +43,18 @@ void SidebarButton::paintEvent(QPaintEvent*) {
 
     // Hover / active background
     if (m_active) {
-        QColor bg(Palette::Accent);
+        QColor bg(ThemeManager::instance().tokens().Accent);
         bg.setAlpha(26); // 10% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
         p.drawRoundedRect(r.adjusted(8, 3, -8, -3), 6, 6);
 
         // Left accent bar
-        p.setBrush(QColor(Palette::Accent));
+        p.setBrush(ThemeManager::instance().tokens().Accent);
         p.drawRect(0, r.height() / 2 - 12, 4, 24);
 
     } else if (m_hovered) {
-        QColor bg(Palette::Accent);
+        QColor bg(ThemeManager::instance().tokens().Accent);
         bg.setAlpha(13); // 5% opacity
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
@@ -72,8 +73,8 @@ void SidebarButton::paintEvent(QPaintEvent*) {
 
         // Paint icon with colour-overlay using painter compositing
         QColor tintColor = m_active
-            ? QColor(Palette::Accent)
-            : (m_hovered ? QColor(Palette::TextPrimary) : QColor(Palette::TextSecondary));
+            ? ThemeManager::instance().tokens().Accent
+            : (m_hovered ? ThemeManager::instance().tokens().TextPrimary : ThemeManager::instance().tokens().TextSecondary);
 
         p.setOpacity(1.0);
         // Draw icon (SVG already contains stroke="currentColor";
@@ -90,8 +91,8 @@ void SidebarButton::paintEvent(QPaintEvent*) {
     // Label text
     const int textX = iconX + iconSz + 12;
     QColor textColor = m_active
-        ? QColor(Palette::Accent)
-        : (m_hovered ? QColor(Palette::TextPrimary) : QColor(Palette::TextSecondary));
+        ? ThemeManager::instance().tokens().Accent
+        : (m_hovered ? ThemeManager::instance().tokens().TextPrimary : ThemeManager::instance().tokens().TextSecondary);
 
     p.setPen(textColor);
     QFont f = p.font();
@@ -129,9 +130,7 @@ Sidebar::Sidebar(QWidget* parent)
 {
     setFixedWidth(260);
     setObjectName(QStringLiteral("Sidebar"));
-    setStyleSheet(QStringLiteral(
-        "QWidget#Sidebar { background:qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #161b22, stop:1 #12161c); border-right:1px solid #232a33; }"));
-
+    // Styles moved to QSS
     buildLayout();
 }
 
