@@ -6,5 +6,5 @@ CXX_DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CHARTS_LIB -DQT_CORE_LIB -DQT_GUI_LI
 
 CXX_INCLUDES = @CMakeFiles/Inventra.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -std=c++20
+CXX_FLAGS = -g -std=c++17
 

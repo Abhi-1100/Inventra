@@ -1,0 +1,30 @@
+{
+    "version": "1.0.0",
+    "training_timestamp": "2026-07-13T20:14:48.088992",
+    "feature_list": [
+        "sales_volume",
+        "lag_1",
+        "lag_2",
+        "lag_3",
+        "lag_7",
+        "rolling_mean_7",
+        "rolling_std_7",
+        "rolling_sum_7",
+        "rolling_mean_30",
+        "rolling_std_30",
+        "rolling_sum_30",
+        "ema_7",
+        "ema_30",
+        "growth_rate",
+        "current_stock",
+        "unit_cost",
+        "reorder_point",
+        "lead_time",
+        "order_cost",
+        "holding_cost",
+        "average_usage",
+        "demand_trend"
+    ],
+    "data_hash": "676e059d046875377b3d1f325deba7924abf78fe2b10abcd85b9bd8d48e7b768",
+    "model_type": "SVC"
+}

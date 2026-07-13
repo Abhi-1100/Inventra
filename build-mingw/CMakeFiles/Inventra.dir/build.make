@@ -513,8 +513,9 @@ Inventra.exe: CMakeFiles/Inventra.dir/objects1.rsp
 Inventra.exe: CMakeFiles/Inventra.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\confres\build-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Linking CXX executable Inventra.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Inventra.dir\link.txt --verbose=$(VERBOSE)
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying Python ML modules to output directory..."
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying Python ML modules and backend to output directory..."
 	"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/confres/python D:/confres/build-mingw/python
+	"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/confres/backend D:/confres/build-mingw/backend
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Running windeployqt..."
 	C:\Qt\6.11.1\mingw_64\bin\windeployqt.exe --no-translations --no-system-d3d-compiler D:/confres/build-mingw/Inventra.exe
 
