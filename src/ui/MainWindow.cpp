@@ -8,6 +8,7 @@
 #include "ui/AnalyticsWidget.h"
 #include "ui/ImportWidget.h"
 #include "ui/SettingsWidget.h"
+#include "ui/ProductCatalogWidget.h"
 #include "core/AppController.h"
 #include "core/AuthController.h"
 #include "core/PipelineWorker.h"
@@ -115,7 +116,7 @@ void MainWindow::buildAppShell() {
     m_dashboardPage  = new DashboardWidget(m_controller, body);
     m_dailyEntryPage = new DailyEntryWidget(m_controller, m_auth, body);
     m_stockPage      = new StockWidget(m_controller, m_auth, body);
-    m_productsPage   = new DashboardWidget(m_controller, body);
+    m_productsPage   = new ProductCatalogWidget(m_controller, body);
     m_analyticsPage  = new AnalyticsWidget(m_controller, body);
     m_importPage     = new ImportWidget(m_controller, body);
     m_settingsPage   = new SettingsWidget(m_controller, m_auth, body);

@@ -52,6 +52,7 @@ set(INVENTRA_SOURCES
     src/core/PipelineWorker.cpp
     src/core/Database.cpp
     src/core/AuthController.cpp
+    src/core/ThemeManager.cpp
     src/python/PythonBridge.cpp
     src/ui/MainWindow.cpp
     src/ui/Sidebar.cpp
@@ -64,6 +65,7 @@ set(INVENTRA_SOURCES
     src/ui/AnalyticsWidget.cpp
     src/ui/ImportWidget.cpp
     src/ui/SettingsWidget.cpp
+    src/ui/ProductCatalogWidget.cpp
     src/widgets/MetricCard.cpp
     src/widgets/BadgeDelegate.cpp
 )
@@ -76,6 +78,7 @@ set(INVENTRA_HEADERS
     src/core/Database.h
     src/core/AuthData.h
     src/core/AuthController.h
+    src/core/ThemeManager.h
     src/python/PythonBridge.h
     src/python/PipelineResult.h
     src/ui/MainWindow.h
@@ -89,6 +92,7 @@ set(INVENTRA_HEADERS
     src/ui/AnalyticsWidget.h
     src/ui/ImportWidget.h
     src/ui/SettingsWidget.h
+    src/ui/ProductCatalogWidget.h
     src/widgets/MetricCard.h
     src/widgets/BadgeDelegate.h
 )

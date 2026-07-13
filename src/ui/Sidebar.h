@@ -71,6 +71,9 @@ public:
 signals:
     void pageSelected(Kirana::Sidebar::Page page);
 
+protected:
+    void paintEvent(QPaintEvent* event) override;
+
 private:
     QVector<SidebarButton*> m_buttons;
     Page m_activePage = Page::Dashboard;

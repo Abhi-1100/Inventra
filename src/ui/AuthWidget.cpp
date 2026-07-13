@@ -36,15 +36,24 @@ void PinDotIndicator::paintEvent(QPaintEvent*) {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
 
-    const int dotR   = 8;
-    const int spacing = 24;
+    const int dotR    = 8;
+    const int spacing = 28;
     const int totalW  = 4 * spacing;
     int startX = (width() - totalW) / 2 + spacing / 2 - dotR;
     const int y = height() / 2 - dotR;
 
     for (int i = 0; i < 4; ++i) {
-        QColor fill  = (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().BgOverlay;
-        QColor border= (i < m_filled) ? ThemeManager::instance().tokens().Accent : ThemeManager::instance().tokens().Border;
+        bool filled = (i < m_filled);
+        QColor fill   = filled ? QColor("#afc6ff") : QColor("#262a30");
+        QColor border = filled ? QColor("#afc6ff") : QColor("#424754");
+
+        // Glow effect for filled dots
+        if (filled) {
+            QColor glow(0xaf, 0xc6, 0xff, 60);
+            p.setPen(Qt::NoPen);
+            p.setBrush(glow);
+            p.drawEllipse(startX + i * spacing - 3, y - 3, (dotR + 3) * 2, (dotR + 3) * 2);
+        }
 
         p.setPen(QPen(border, 1.5));
         p.setBrush(fill);
@@ -107,9 +116,9 @@ void AuthWidget::buildRegistrationPage() {
 
     auto* wordmark = new QLabel(QStringLiteral("Inventra"));
     wordmark->setStyleSheet(
-        QStringLiteral("font-family: 'Segoe UI', 'Inter', sans-serif;"
-                       "font-size: 24px; font-weight: 600;"
-                       "color: #e6edf3; background: transparent;"));
+        QStringLiteral("font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;"
+                       "font-size: 24px; font-weight: 700;"
+                       "color: #afc6ff; background: transparent; border: none;"));
 
     logoRow->addWidget(logoIcon);
     logoRow->addSpacing(8);
@@ -119,20 +128,21 @@ void AuthWidget::buildRegistrationPage() {
     auto* subtitle = new QLabel(QStringLiteral("Set up your shop to get started"));
     subtitle->setAlignment(Qt::AlignCenter);
     subtitle->setStyleSheet(QStringLiteral(
-        "color: #8b949e; font-size: 13px; background: transparent;"));
+        "color: #8c90a0; font-size: 13px; font-family:'Hanken Grotesk',sans-serif;"
+        "background: transparent; border: none;"));
     cardLayout->addWidget(subtitle);
 
     // Separator
     auto* sep = new QFrame; sep->setFrameShape(QFrame::HLine);
-    sep->setStyleSheet(QStringLiteral("background:#30363d; max-height:1px; border:none;"));
+    sep->setStyleSheet(QStringLiteral("background:#232a33; max-height:1px; border:none;"));
     cardLayout->addWidget(sep);
 
     // ── Form fields ──
     auto makeLabel = [&](const QString& text) -> QLabel* {
         auto* l = new QLabel(text);
         l->setStyleSheet(QStringLiteral(
-            "color:#8b949e; font-size:11px; font-weight:500;"
-            "background:transparent;"));
+            "color:#8c90a0; font-size:11px; font-weight:600;"
+            "letter-spacing:0.05em;background:transparent;border:none;"));
         return l;
     };
 
@@ -239,96 +249,146 @@ void AuthWidget::buildLoginPage() {
     m_loginPage = new QWidget;
     m_loginPage->setObjectName(QStringLiteral("AuthPage"));
 
+    // Full-screen centered layout — no card border, matches 6_Secure_Login.html
     auto* outer = new QVBoxLayout(m_loginPage);
     outer->setAlignment(Qt::AlignCenter);
-    outer->setContentsMargins(40, 40, 40, 40);
+    outer->setContentsMargins(0, 0, 0, 0);
+    outer->setSpacing(0);
 
-    // Card
+    // Use a transparent frame (no card bg — the page itself is the bg)
     m_pinCard = new QFrame;
-    m_pinCard->setObjectName(QStringLiteral("AuthCard"));
-    m_pinCard->setFixedWidth(380);
+    m_pinCard->setObjectName(QStringLiteral("LoginFrame"));
+    m_pinCard->setStyleSheet("QFrame#LoginFrame { background:transparent; border:none; }");
 
     auto* cardLayout = new QVBoxLayout(m_pinCard);
-    cardLayout->setContentsMargins(36, 36, 36, 36);
-    cardLayout->setSpacing(16);
+    cardLayout->setContentsMargins(40, 0, 40, 0);
+    cardLayout->setSpacing(0);
+    cardLayout->setAlignment(Qt::AlignCenter);
 
-    // Logo + wordmark
-    auto* logoRow = new QHBoxLayout;
-    logoRow->setAlignment(Qt::AlignCenter);
-    auto* logoIcon = new QLabel;
-    logoIcon->setPixmap(
-        QPixmap(QStringLiteral(":/icons/inventra_logo.svg")).scaled(28, 28,
-            Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    // ── Brand header ─────────────────────────
+    auto* brandWidget = new QWidget;
+    brandWidget->setStyleSheet("background:transparent;");
+    auto* brandLayout = new QVBoxLayout(brandWidget);
+    brandLayout->setAlignment(Qt::AlignCenter);
+    brandLayout->setSpacing(6);
+    brandLayout->setContentsMargins(0, 0, 0, 40);
+
+    // "Inventra" title in primary color
     auto* wordmark = new QLabel(QStringLiteral("Inventra"));
+    wordmark->setAlignment(Qt::AlignCenter);
     wordmark->setStyleSheet(QStringLiteral(
-        "font-size:20px; font-weight:600; color:#e6edf3; background:transparent;"));
-    logoRow->addWidget(logoIcon);
-    logoRow->addSpacing(6);
-    logoRow->addWidget(wordmark);
-    cardLayout->addLayout(logoRow);
+        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
+        "font-size:36px;font-weight:700;"
+        "color:#afc6ff;"
+        "background:transparent;border:none;"));
 
-    // Shop greeting
     m_shopGreeting = new QLabel(QStringLiteral("Welcome back"));
     m_shopGreeting->setAlignment(Qt::AlignCenter);
     m_shopGreeting->setStyleSheet(QStringLiteral(
-        "color:#8b949e; font-size:13px; background:transparent;"));
-    cardLayout->addWidget(m_shopGreeting);
+        "font-family:'Hanken Grotesk',sans-serif;"
+        "font-size:15px;color:#8c90a0;"
+        "background:transparent;border:none;"));
 
-    // PIN dot indicators
+    brandLayout->addWidget(wordmark);
+    brandLayout->addWidget(m_shopGreeting);
+    cardLayout->addWidget(brandWidget);
+
+    // ── PIN dot indicators ──────────────────
     m_pinDots = new PinDotIndicator;
+    m_pinDots->setFixedSize(160, 32);
     cardLayout->addWidget(m_pinDots, 0, Qt::AlignCenter);
+    cardLayout->addSpacing(32);
 
     // Error label (hidden)
     m_errorLabel = new QLabel(QStringLiteral("Incorrect PIN. Please try again."));
     m_errorLabel->setAlignment(Qt::AlignCenter);
     m_errorLabel->setStyleSheet(QStringLiteral(
-        "color:#f85149; font-size:11px; background:transparent;"));
+        "color:#ffb4ab;font-size:13px;font-family:'Hanken Grotesk',sans-serif;"
+        "background:transparent;border:none;"));
     m_errorLabel->setVisible(false);
     cardLayout->addWidget(m_errorLabel);
+    cardLayout->addSpacing(8);
 
-    // ── PIN grid ──
+    // ── PIN Keypad grid (3x4) ────────────────
     auto* pinGrid = new QGridLayout;
-    pinGrid->setSpacing(10);
+    pinGrid->setSpacing(20);  // gap-6 = 24px
+    pinGrid->setAlignment(Qt::AlignCenter);
 
     auto makeDigitBtn = [this](const QString& label, int digit) {
         auto* btn = new QPushButton(label);
         btn->setObjectName(QStringLiteral("PinBtn"));
-        btn->setFixedSize(72, 72);
+        btn->setFixedSize(76, 76);
+        btn->setCursor(Qt::PointingHandCursor);
+        btn->setStyleSheet(
+            "QPushButton#PinBtn {"
+            "  background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #262a30,stop:1 #1c2025);"
+            "  border: 1px solid #424754;"
+            "  color: #e0e2ea;"
+            "  font-family:'JetBrains Mono',monospace;"
+            "  font-size:20px;font-weight:500;"
+            "  border-radius:38px;"
+            "}"
+            "QPushButton#PinBtn:hover {"
+            "  background:#31353b;"
+            "  border-color:#afc6ff;"
+            "}"
+            "QPushButton#PinBtn:pressed {"
+            "  background:rgba(31,111,235,0.3);"
+            "  border-color:#afc6ff;"
+            "  color:#ffffff;"
+            "}");
         connect(btn, &QPushButton::clicked, this, [this, digit]() {
             onPinDigitPressed(digit);
         });
         return btn;
     };
 
-    // Rows: 1-3, 4-6, 7-9, 0+backspace
     for (int d = 1; d <= 9; ++d) {
         int row = (d - 1) / 3;
         int col = (d - 1) % 3;
         pinGrid->addWidget(makeDigitBtn(QString::number(d), d), row, col);
     }
-    // Row 3: empty, 0, backspace
+    // Row 3: [empty] [0] [backspace]
+    pinGrid->addItem(new QSpacerItem(76, 76), 3, 0);
     pinGrid->addWidget(makeDigitBtn(QStringLiteral("0"), 0), 3, 1);
+
     auto* bsBtn = new QPushButton(QStringLiteral("⌫"));
     bsBtn->setObjectName(QStringLiteral("PinBackspaceBtn"));
-    bsBtn->setFixedSize(72, 72);
+    bsBtn->setFixedSize(76, 76);
+    bsBtn->setCursor(Qt::PointingHandCursor);
+    bsBtn->setStyleSheet(
+        "QPushButton#PinBackspaceBtn {"
+        "  background:transparent;border:none;"
+        "  color:#8c90a0;font-size:22px;"
+        "  border-radius:38px;"
+        "}"
+        "QPushButton#PinBackspaceBtn:hover {"
+        "  background:rgba(255,180,171,0.08);"
+        "  color:#ffb4ab;"
+        "}");
     connect(bsBtn, &QPushButton::clicked, this, &AuthWidget::onPinBackspace);
     pinGrid->addWidget(bsBtn, 3, 2);
 
     cardLayout->addLayout(pinGrid);
+    cardLayout->addSpacing(32);
 
-    // Forgot PIN
-    auto* forgotBtn = new QPushButton(QStringLiteral("Forgot PIN?"));
+    // "Register your shop" link
+    auto* forgotBtn = new QPushButton(QStringLiteral("Register your shop"));
     forgotBtn->setStyleSheet(QStringLiteral(
-        "QPushButton { background:transparent; border:none; color:#6e7681;"
-        "  font-size:11px; text-decoration:underline; }"
-        "QPushButton:hover { color:#8b949e; }"));
+        "QPushButton {"
+        "  background:transparent;border:none;"
+        "  color:#afc6ff;"
+        "  font-family:'Hanken Grotesk',sans-serif;"
+        "  font-size:13px;font-weight:600;"
+        "}"
+        "QPushButton:hover { color:#d9e2ff; }"));
     forgotBtn->setCursor(Qt::PointingHandCursor);
     connect(forgotBtn, &QPushButton::clicked, this, &AuthWidget::onForgotPin);
     cardLayout->addWidget(forgotBtn, 0, Qt::AlignCenter);
 
     outer->addWidget(m_pinCard, 0, Qt::AlignCenter);
 
-    // Setup shake animation on the card
+    // Shake animation
     m_shakeAnim = new QPropertyAnimation(m_pinCard, "pos", this);
     m_shakeAnim->setDuration(400);
 }
