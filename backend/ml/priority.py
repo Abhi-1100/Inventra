@@ -70,7 +70,9 @@ def calculate_priority_score(
         status_map = {
             "Critical": 1.0,
             "Low": 0.7,
+            "Reorder": 0.7,
             "Healthy": 0.2,
+            "No Action": 0.2,
             "Overstock": 0.0
         }
         status_factor = status_map.get(stock_status, 0.2)

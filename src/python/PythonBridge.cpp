@@ -119,9 +119,9 @@ PipelineRunResult PythonBridge::runPipeline(
                 r.eoqQty         = item.attr("eoq").cast<int>();
 
                 const std::string dl = item.attr("demand_label").cast<std::string>();
-                if      (dl == "High")   r.demandLabel = DemandLabel::High;
-                else if (dl == "Medium") r.demandLabel = DemandLabel::Medium;
-                else                     r.demandLabel = DemandLabel::Low;
+                if      (dl == "High" || dl == "High Demand")   r.demandLabel = DemandLabel::High;
+                else if (dl == "Medium" || dl == "Medium Demand") r.demandLabel = DemandLabel::Medium;
+                else                                              r.demandLabel = DemandLabel::Low;
 
                 const std::string ss = item.attr("stock_status").cast<std::string>();
                 if      (ss == "Reorder")   r.stockStatus = StockStatus::Reorder;
@@ -130,7 +130,7 @@ PipelineRunResult PythonBridge::runPipeline(
 
                 const std::string pr = item.attr("priority").cast<std::string>();
                 if      (pr == "Critical")    r.priority = Priority::Critical;
-                else if (pr == "ReorderSoon") r.priority = Priority::ReorderSoon;
+                else if (pr == "ReorderSoon" || pr == "Reorder Soon") r.priority = Priority::ReorderSoon;
                 else                          r.priority = Priority::Safe;
 
                 if (py::hasattr(item, "forecast_points")) {
@@ -179,9 +179,9 @@ PipelineRunResult PythonBridge::runPipeline(
                 r.eoqQty         = item["eoq"].cast<int>();
 
                 const std::string dl = item["demand_label"].cast<std::string>();
-                if      (dl == "High")   r.demandLabel = DemandLabel::High;
-                else if (dl == "Medium") r.demandLabel = DemandLabel::Medium;
-                else                     r.demandLabel = DemandLabel::Low;
+                if      (dl == "High" || dl == "High Demand")   r.demandLabel = DemandLabel::High;
+                else if (dl == "Medium" || dl == "Medium Demand") r.demandLabel = DemandLabel::Medium;
+                else                                              r.demandLabel = DemandLabel::Low;
 
                 const std::string ss = item["stock_status"].cast<std::string>();
                 if      (ss == "Reorder")   r.stockStatus = StockStatus::Reorder;
@@ -190,7 +190,7 @@ PipelineRunResult PythonBridge::runPipeline(
 
                 const std::string pr = item["priority"].cast<std::string>();
                 if      (pr == "Critical")    r.priority = Priority::Critical;
-                else if (pr == "ReorderSoon") r.priority = Priority::ReorderSoon;
+                else if (pr == "ReorderSoon" || pr == "Reorder Soon") r.priority = Priority::ReorderSoon;
                 else                          r.priority = Priority::Safe;
 
                 if (item.contains("forecast_points")) {

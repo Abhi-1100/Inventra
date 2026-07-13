@@ -40,7 +40,8 @@ def save_model(
             "version": settings.VERSION,
             "training_timestamp": datetime.now().isoformat(),
             "feature_list": feature_cols,
-            "data_hash": data_hash
+            "data_hash": data_hash,
+            "model_type": type(clf).__name__
         }
         
         with open(METADATA_FILE, "w", encoding="utf-8") as f:
@@ -93,6 +94,12 @@ def should_retrain(new_data_hash: str) -> bool:
     clf, scaler, metadata = load_model()
     if not clf or not scaler or not metadata:
         logger.info("Retraining required: No existing models found.")
+        return True
+        
+    # Check if model class type is SVC
+    saved_type = metadata.get("model_type")
+    if saved_type != "SVC":
+        logger.info(f"Retraining required: Model type changed or older model type detected (saved={saved_type}).")
         return True
         
     saved_hash = metadata.get("data_hash")

@@ -2002,3 +2002,53 @@ backend.utils.validators.DuplicateProductError: Row 1: Product name 'Real Produc
 2026-07-11 15:57:05,952 - inventory_backend.classifier - INFO - Classifier trained successfully. Train Accuracy: 98.32%
 2026-07-11 15:57:05,962 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
 2026-07-11 15:57:14,292 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:02:18,689 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:02:18,690 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:02:18,705 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:02:20,137 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:02:20,137 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:02:20,143 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:02:38,856 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:07:08,172 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:07:08,172 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:07:08,184 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:07:09,622 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:07:09,627 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:07:09,633 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:07:18,131 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:14:44,628 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:14:44,629 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:14:44,644 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:14:46,225 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:14:46,225 - inventory_backend.model_manager - INFO - Retraining required: Model type changed or older model type detected (saved=None).
+2026-07-13 20:14:48,086 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 70.92%
+2026-07-13 20:14:48,089 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
+2026-07-13 20:14:56,372 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:15:14,660 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:15:14,660 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:15:14,671 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:15:16,149 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:15:16,150 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:15:16,150 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:15:24,258 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:15:52,970 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:15:52,970 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:15:52,982 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:15:54,469 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:15:54,469 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:15:54,470 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:16:02,415 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:16:28,339 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:16:28,339 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:16:28,350 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:16:29,859 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:16:29,859 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:16:29,860 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:16:37,794 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-13 20:17:36,532 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 20:17:36,533 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 20:17:36,544 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-13 20:17:38,027 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:17:38,027 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-13 20:17:38,028 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-13 20:17:46,042 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.

@@ -63,7 +63,7 @@ def generate_explanation(
             explanations.append("Forecast demand for next week is close to zero, with a stable trend.")
             
         # 3. Action recommendations based on Lead time and priority
-        if stock_status in ("Critical", "Low") or priority in ("Critical", "ReorderSoon"):
+        if stock_status in ("Critical", "Low") or priority in ("Critical", "ReorderSoon", "Reorder Soon"):
             risk = "immediate stockout" if stock_status == "Critical" else "potential stockout"
             explanations.append(
                 f"Given the {lead_time}-day lead time, ordering the Economic Order Quantity (EOQ) of {eoq} units now "
