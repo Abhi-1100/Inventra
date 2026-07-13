@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDateTime>
 #include "core/ProductData.h"
+#include "python/PipelineResult.h"
 
 namespace Kirana {
 
@@ -53,6 +54,7 @@ public:
     void loadDummyData();
     bool loadFromDatabase();
     void applyPipelineResults(QVector<Product> updated);
+    void applyPipelineRun(const PipelineRunResult& result);
     void updateSettings(const AppSettings& s);
 
 signals:

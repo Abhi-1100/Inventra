@@ -3,6 +3,7 @@
 #include "core/AuthController.h"
 #include "core/Database.h"
 #include "core/ProductData.h"
+#include <QCompleter>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>

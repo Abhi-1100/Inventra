@@ -183,7 +183,7 @@ void StockWidget::buildLayout() {
     m_filterTypeCombo->addItem(QStringLiteral("All Movements"), QStringLiteral(""));
     m_filterTypeCombo->addItem(QStringLiteral("Stock In (Restocks)"), QStringLiteral("IN"));
     m_filterTypeCombo->addItem(QStringLiteral("Stock Out (Removals)"), QStringLiteral("OUT"));
-    connect(m_filterTypeCombo, &QComboBox::currentIndexChanged, this, &StockWidget::onFilterChanged);
+    connect(m_filterTypeCombo, qOverload<int>(&QComboBox::currentIndexChanged), this, &StockWidget::onFilterChanged);
     filterRow->addWidget(m_filterTypeCombo);
 
     filterRow->addStretch();

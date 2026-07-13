@@ -111,7 +111,11 @@ void SidebarButton::mousePressEvent(QMouseEvent* ev) {
     QWidget::mousePressEvent(ev);
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 void SidebarButton::enterEvent(QEnterEvent* ev) {
+#else
+void SidebarButton::enterEvent(QEvent* ev) {
+#endif
     m_hovered = true; update(); QWidget::enterEvent(ev);
 }
 

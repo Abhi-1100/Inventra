@@ -1,0 +1,11 @@
+sku,name,current_stock,unit_cost,sales_volume,date
+SKU-101,Fresh Milk 1L,25,65.0,15,2026-07-01
+SKU-101,Fresh Milk 1L,18,65.0,22,2026-07-08
+SKU-102,Basmati Rice 5kg,40,450.0,8,2026-07-01
+SKU-102,Basmati Rice 5kg,32,450.0,12,2026-07-08
+SKU-103,Tata Salt 1kg,100,25.0,30,2026-07-01
+SKU-103,Tata Salt 1kg,70,25.0,35,2026-07-08
+SKU-104,Britannia Biscuits,50,40.0,20,2026-07-01
+SKU-104,Britannia Biscuits,30,40.0,25,2026-07-08
+SKU-105,Aashirvaad Atta 10kg,15,350.0,5,2026-07-01
+SKU-105,Aashirvaad Atta 10kg,10,350.0,7,2026-07-08

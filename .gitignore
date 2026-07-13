@@ -27,3 +27,19 @@ Thumbs.db
 # Stitch MCP Screens
 stitch_screens/
 download_screens.ps1
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Executables
+*.exe
+
+# Archives
+*.zip
+
+# Qt Install
+qt/

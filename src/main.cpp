@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 
     // Setup core controllers & Auth
     Kirana::AppController controller(&db);
+    controller.settings().dbPath = dbPath;
     Kirana::AuthController auth(&db);
 
     // Load actual product database list (seeds defaults if first run)

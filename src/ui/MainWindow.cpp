@@ -207,7 +207,16 @@ void MainWindow::onLoginSucceeded(const StaffUser& user) {
     // Apply role gating
     m_sidebar->setRole(user.role);
     m_rootStack->setCurrentIndex(1);
-    showPage(static_cast<int>(Sidebar::Page::Dashboard));
+    
+    if (m_controller->products().isEmpty()) {
+        QMessageBox::information(this, "Welcome to Inventra", 
+                                 "It looks like this is your first time using Inventra.\n\n"
+                                 "Please provide a CSV file of your historical inventory data so our Machine Learning model can train and provide predictions.");
+        showPage(static_cast<int>(Sidebar::Page::Import));
+    } else {
+        showPage(static_cast<int>(Sidebar::Page::Dashboard));
+    }
+    
     resetIdleTimer();
 }
 
@@ -242,9 +251,12 @@ void MainWindow::onPipelineProgress(int /*pct*/, const QString& /*stage*/) {}
 
 void MainWindow::onPipelineFinished(const PipelineRunResult& result) {
     if (result.success && !result.results.isEmpty()) {
-        // Phase 2: applyPipelineResults
+        // Reload from database to pick up any new products ingested via CSV import
+        m_controller->loadFromDatabase();
+        m_controller->applyPipelineRun(result);
+    } else {
+        m_controller->loadDummyData();
     }
-    m_controller->loadDummyData();
     m_statusBar->setPipelineState(false, m_controller->lastRunTime());
 }
 
