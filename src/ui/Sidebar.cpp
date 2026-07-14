@@ -1,6 +1,8 @@
 #include "core/ThemeManager.h"
 #include "ui/Sidebar.h"
 #include "core/ProductData.h"
+#include "widgets/QtAwesome.h"
+#include <QPropertyAnimation>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -18,89 +20,107 @@ namespace Kirana {
 // SidebarButton
 // ══════════════════════════════════════════════
 
-SidebarButton::SidebarButton(const QString& iconPath,
+static QColor interpolateColor(const QColor& c1, const QColor& c2, qreal progress) {
+    int r = c1.red()   + progress * (c2.red()   - c1.red());
+    int g = c1.green() + progress * (c2.green() - c1.green());
+    int b = c1.blue()  + progress * (c2.blue()  - c1.blue());
+    int a = c1.alpha() + progress * (c2.alpha() - c1.alpha());
+    return QColor(r, g, b, a);
+}
+
+SidebarButton::SidebarButton(char32_t iconChar,
                                const QString& label,
                                const QString& tooltip,
                                QWidget* parent)
     : QWidget(parent)
-    , m_iconPath(iconPath)
+    , m_iconChar(iconChar)
     , m_label(label)
 {
     setFixedSize(260, 44);
     setToolTip(tooltip);
     setCursor(Qt::PointingHandCursor);
     setAttribute(Qt::WA_Hover);
+}
 
-    m_icon = QPixmap(iconPath);
+void SidebarButton::setActive(bool v) {
+    if (m_active != v) {
+        m_active = v;
+        animateActive(v);
+    }
+}
+
+void SidebarButton::animateHover(bool hover) {
+    auto* anim = new QPropertyAnimation(this, "hoverProgress", this);
+    anim->setDuration(150);
+    anim->setStartValue(m_hoverProgress);
+    anim->setEndValue(hover ? 1.0 : 0.0);
+    anim->setEasingCurve(QEasingCurve::OutCubic);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void SidebarButton::animateActive(bool active) {
+    auto* anim = new QPropertyAnimation(this, "activeProgress", this);
+    anim->setDuration(180);
+    anim->setStartValue(m_activeProgress);
+    anim->setEndValue(active ? 1.0 : 0.0);
+    anim->setEasingCurve(QEasingCurve::OutCubic);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 void SidebarButton::paintEvent(QPaintEvent*) {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
-    p.setRenderHint(QPainter::SmoothPixmapTransform);
 
     const QRect r = rect();
 
-    // ── Background ─────────────────────────────
-    if (m_active) {
-        // Active: primary tint background
-        QColor bg(0xaf, 0xc6, 0xff, 26); // rgba(175,198,255, 0.10)
+    // ── Backgrounds ─────────────────────────────
+    if (m_hoverProgress > 0.01) {
+        QColor bg = QColor("#161616"); // Obsidian bg_hover
+        bg.setAlpha(static_cast<int>(255 * m_hoverProgress));
         p.setPen(Qt::NoPen);
         p.setBrush(bg);
-        p.drawRoundedRect(r.adjusted(6, 2, -6, -2), 6, 6);
+        p.drawRoundedRect(r.adjusted(6, 2, -6, -2), 4, 4);
+    }
 
-        // Left accent bar — 4px, full height of row, primary color
-        p.setBrush(QColor("#afc6ff"));
+    if (m_activeProgress > 0.01) {
+        const auto& tokens = ThemeManager::instance().tokens();
+        QColor bg = tokens.Accent;
+        bg.setAlpha(static_cast<int>(26 * m_activeProgress));
+        p.setPen(Qt::NoPen);
+        p.setBrush(bg);
+        p.drawRoundedRect(r.adjusted(6, 2, -6, -2), 4, 4);
+
+        // Left accent bar
+        QColor accent = tokens.Accent;
+        accent.setAlphaF(m_activeProgress);
+        p.setBrush(accent);
         p.setPen(Qt::NoPen);
         p.drawRect(0, 0, 4, r.height());
-
-    } else if (m_hovered) {
-        // Hover: subtle surface-container-high tint
-        QColor bg(0x26, 0x2a, 0x30, 180);
-        p.setPen(Qt::NoPen);
-        p.setBrush(bg);
-        p.drawRoundedRect(r.adjusted(6, 2, -6, -2), 6, 6);
     }
+
+    // ── Icon & Text colors ──────────────────────
+    const auto& tokens = ThemeManager::instance().tokens();
+    QColor baseColor = interpolateColor(tokens.TextSecondary, tokens.TextPrimary, m_hoverProgress);
+    QColor iconColor = interpolateColor(baseColor, tokens.Accent, m_activeProgress);
+    QColor textColor = interpolateColor(baseColor, tokens.Accent, m_activeProgress);
 
     // ── Icon ───────────────────────────────────
     const int iconSz = 20;
     const int iconX  = 20;
     const int iconY  = (r.height() - iconSz) / 2;
 
-    QColor iconColor = m_active  ? QColor("#afc6ff")
-                     : m_hovered ? QColor("#e0e2ea")
-                                 : QColor("#8c90a0");
-
-    if (!m_icon.isNull()) {
-        QPixmap scaled = m_icon.scaled(iconSz, iconSz,
-                                       Qt::KeepAspectRatio,
-                                       Qt::SmoothTransformation);
-        p.setOpacity(1.0);
-        p.drawPixmap(iconX, iconY, scaled);
-
-        // Tint overlay
-        p.save();
-        p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-        p.fillRect(QRect(iconX, iconY, iconSz, iconSz), iconColor);
-        p.restore();
-    } else {
-        // Fallback: draw a small colored dot as placeholder
-        p.setPen(Qt::NoPen);
-        p.setBrush(iconColor);
-        p.drawEllipse(iconX + 4, iconY + 4, iconSz - 8, iconSz - 8);
+    QPixmap pix = QtAwesome::instance().pixmap(m_iconChar, iconSz, iconColor);
+    if (!pix.isNull()) {
+        p.drawPixmap(iconX, iconY, pix);
     }
 
     // ── Label ──────────────────────────────────
     const int textX = iconX + iconSz + 12;
-    QColor textColor = m_active  ? QColor("#afc6ff")
-                      : m_hovered ? QColor("#e0e2ea")
-                                  : QColor("#c2c6d6");
-
     p.setPen(textColor);
     QFont f;
-    f.setFamily(QStringLiteral("Hanken Grotesk"));
+    f.setFamily(QStringLiteral("SF Mono"));
     f.setPixelSize(13);
-    f.setWeight(m_active ? QFont::DemiBold : QFont::Normal);
+    f.setWeight(m_active ? QFont::Bold : QFont::Normal);
     p.setFont(f);
     p.drawText(QRect(textX, 0, r.width() - textX - 8, r.height()),
                Qt::AlignVCenter | Qt::AlignLeft, m_label);
@@ -116,11 +136,15 @@ void SidebarButton::enterEvent(QEnterEvent* ev) {
 #else
 void SidebarButton::enterEvent(QEvent* ev) {
 #endif
-    m_hovered = true; update(); QWidget::enterEvent(ev);
+    m_hovered = true;
+    animateHover(true);
+    QWidget::enterEvent(ev);
 }
 
 void SidebarButton::leaveEvent(QEvent* ev) {
-    m_hovered = false; update(); QWidget::leaveEvent(ev);
+    m_hovered = false;
+    animateHover(false);
+    QWidget::leaveEvent(ev);
 }
 
 // ══════════════════════════════════════════════
@@ -160,22 +184,22 @@ void Sidebar::buildLayout() {
     logoRow->setContentsMargins(24, 14, 16, 14);
     logoRow->setSpacing(2);
 
-    // "Inventra" wordmark — gradient text effect using HTML
+    // "Inventra" wordmark
     auto* wordmark = new QLabel(logoArea);
     wordmark->setText(QStringLiteral("Inventra"));
     wordmark->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:20px; font-weight:700;"
-        "color:#afc6ff;"             // primary accent as approximation
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:18px; font-weight:bold;"
+        "color:#d97706;"             // Obsidian Accent
         "background:transparent;"
         "border:none;"));
 
     auto* subtitle = new QLabel(QStringLiteral("Inventory Management"), logoArea);
     subtitle->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:11px; font-weight:600;"
-        "color:#8c90a0;"
-        "letter-spacing:0.05em;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:10px; font-weight:bold;"
+        "color:#808080;"             // Obsidian TextSecondary
+        "letter-spacing:0.02em;"
         "background:transparent;"
         "border:none;"));
 
@@ -185,22 +209,22 @@ void Sidebar::buildLayout() {
     vlay->addWidget(logoArea);
     vlay->addSpacing(8);
 
-    // ── Nav items (all except Settings) ────────
+    // ── Nav items ────────
     struct NavItem {
-        const char* icon;
+        char32_t icon;
         const char* label;
         const char* tip;
         Page page;
-        bool bottom; // true = pinned at bottom
+        bool bottom;
     };
 
     static const NavItem items[] = {
-        { ":/icons/dashboard.svg",   "Dashboard",    "Dashboard",       Page::Dashboard,  false },
-        { ":/icons/daily_entry.svg", "Daily Entry",  "Daily Entry",     Page::DailyEntry, false },
-        { ":/icons/stock.svg",       "Stock In/Out", "Stock In / Out",  Page::Stock,      false },
-        { ":/icons/products.svg",    "Products",     "Products",        Page::Products,   false },
-        { ":/icons/analytics.svg",   "Analytics",    "Analytics",       Page::Analytics,  false },
-        { ":/icons/import.svg",      "Import",       "Import CSV",      Page::Import,     false },
+        { QtAwesome::Dashboard,   "Dashboard",    "Dashboard",       Page::Dashboard,  false },
+        { QtAwesome::DailyEntry,  "Daily Entry",  "Daily Entry",     Page::DailyEntry, false },
+        { QtAwesome::Stock,       "Stock In/Out", "Stock In / Out",  Page::Stock,      false },
+        { QtAwesome::Products,    "Products",     "Products",        Page::Products,   false },
+        { QtAwesome::Analytics,   "Analytics",    "Analytics",       Page::Analytics,  false },
+        { QtAwesome::Import,      "Import",       "Import CSV",      Page::Import,     false },
     };
 
     auto* navArea = new QWidget(this);
@@ -211,7 +235,7 @@ void Sidebar::buildLayout() {
 
     for (const auto& item : items) {
         auto* btn = new SidebarButton(
-            QString::fromLatin1(item.icon),
+            item.icon,
             QString::fromLatin1(item.label),
             QString::fromLatin1(item.tip),
             this);
@@ -231,7 +255,7 @@ void Sidebar::buildLayout() {
     vlay->addWidget(separator);
 
     auto* settingsBtn = new SidebarButton(
-        QStringLiteral(":/icons/settings.svg"),
+        QtAwesome::Settings,
         QStringLiteral("Settings"),
         QStringLiteral("Settings"),
         this);

@@ -39,17 +39,19 @@ void AnalyticsWidget::buildLayout() {
     mainLayout->setSpacing(20);
 
     // Title Section
+    const auto& tokens = ThemeManager::instance().tokens();
     auto* titleLabel = new QLabel(QStringLiteral("Analytics"), this);
     titleLabel->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:24px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;"));
     mainLayout->addWidget(titleLabel);
 
     // Subtitle
     auto* subtitleLabel = new QLabel(QStringLiteral("Operational Intelligence"), this);
     subtitleLabel->setStyleSheet(QStringLiteral(
-        "font-size:14px;color:#8c90a0;font-family:'Hanken Grotesk',sans-serif;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:13px;color:#808080;"
         "background:transparent;border:none;margin-top:-8px;"));
     mainLayout->addWidget(subtitleLabel);
 
@@ -83,11 +85,11 @@ void AnalyticsWidget::refreshCharts() {
 void AnalyticsWidget::renderDemandBarChart() {
     auto* chart = new QChart();
     chart->setTitle(QStringLiteral("Most Demanded Products — 7-Day Forecast"));
-    chart->setTitleBrush(QBrush(QColor("#e0e2ea")));
+    chart->setTitleBrush(QBrush(ThemeManager::instance().tokens().TextPrimary));
     chart->setBackgroundVisible(false);
 
-    QColor textCol("#8c90a0");
-    QColor gridCol("#232a33");
+    QColor textCol = ThemeManager::instance().tokens().TextSecondary;
+    QColor gridCol = ThemeManager::instance().tokens().Border;
 
     // Fetch and sort top products
     QVector<Product> sortedList = m_controller->products();
@@ -144,10 +146,10 @@ void AnalyticsWidget::renderDemandBarChart() {
 void AnalyticsWidget::renderStatusPieChart() {
     auto* chart = new QChart();
     chart->setTitle("STOCK STATUS DISTRIBUTION");
-    chart->setTitleBrush(QBrush(QColor("#e6edf3")));
+    chart->setTitleBrush(QBrush(ThemeManager::instance().tokens().TextPrimary));
     chart->setBackgroundVisible(false);
 
-    QColor textCol("#8b949e");
+    QColor textCol = ThemeManager::instance().tokens().TextSecondary;
 
     int reorderCount = 0;
     int safeCount = 0;

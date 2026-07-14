@@ -188,8 +188,8 @@ void ProductDetailPanel::updateCharts() {
     chart->layout()->setContentsMargins(0, 0, 0, 0);
 
     // Dark theme text styling for chart
-    QColor textCol("#8b949e");
-    QColor gridCol("#21262d");
+    QColor textCol = ThemeManager::instance().tokens().TextSecondary;
+    QColor gridCol = ThemeManager::instance().tokens().Border;
 
     // ── Prophet Forecast Line ───────────────────
     auto* forecastSeries = new QLineSeries();

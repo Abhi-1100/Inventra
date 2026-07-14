@@ -44,12 +44,14 @@ void PinDotIndicator::paintEvent(QPaintEvent*) {
 
     for (int i = 0; i < 4; ++i) {
         bool filled = (i < m_filled);
-        QColor fill   = filled ? QColor("#afc6ff") : QColor("#262a30");
-        QColor border = filled ? QColor("#afc6ff") : QColor("#424754");
+        const auto& tokens = ThemeManager::instance().tokens();
+        QColor fill   = filled ? tokens.Accent : QColor("#111111");
+        QColor border = filled ? tokens.Accent : QColor("#222222");
 
         // Glow effect for filled dots
         if (filled) {
-            QColor glow(0xaf, 0xc6, 0xff, 60);
+            QColor glow = tokens.Accent;
+            glow.setAlpha(60);
             p.setPen(Qt::NoPen);
             p.setBrush(glow);
             p.drawEllipse(startX + i * spacing - 3, y - 3, (dotR + 3) * 2, (dotR + 3) * 2);
@@ -96,10 +98,10 @@ void AuthWidget::buildRegistrationPage() {
     outer->setAlignment(Qt::AlignCenter);
     outer->setContentsMargins(40, 40, 40, 40);
 
-    // Card
     auto* card = new QFrame;
     card->setObjectName(QStringLiteral("AuthCard"));
     card->setFixedWidth(480);
+    ThemeManager::applyDropShadow(card, 20, QColor(31, 111, 235, 30));
 
     auto* cardLayout = new QVBoxLayout(card);
     cardLayout->setContentsMargins(40, 40, 40, 40);
@@ -113,12 +115,14 @@ void AuthWidget::buildRegistrationPage() {
     logoIcon->setPixmap(
         QPixmap(QStringLiteral(":/icons/inventra_logo.svg")).scaled(32, 32,
             Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    const auto& tokens = ThemeManager::instance().tokens();
+    ThemeManager::applyDropShadow(logoIcon, 15, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 60));
 
     auto* wordmark = new QLabel(QStringLiteral("Inventra"));
     wordmark->setStyleSheet(
-        QStringLiteral("font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;"
-                       "font-size: 24px; font-weight: 700;"
-                       "color: #afc6ff; background: transparent; border: none;"));
+        QStringLiteral("font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
+                       "font-size: 24px; font-weight: bold;"
+                       "color: #d97706; background: transparent; border: none;"));
 
     logoRow->addWidget(logoIcon);
     logoRow->addSpacing(8);
@@ -128,7 +132,7 @@ void AuthWidget::buildRegistrationPage() {
     auto* subtitle = new QLabel(QStringLiteral("Set up your shop to get started"));
     subtitle->setAlignment(Qt::AlignCenter);
     subtitle->setStyleSheet(QStringLiteral(
-        "color: #8c90a0; font-size: 13px; font-family:'Hanken Grotesk',sans-serif;"
+        "color: #808080; font-size: 13px; font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
         "background: transparent; border: none;"));
     cardLayout->addWidget(subtitle);
 
@@ -224,13 +228,7 @@ void AuthWidget::buildRegistrationPage() {
     auto* createBtn = new QPushButton(QStringLiteral("Create Shop →"));
     createBtn->setObjectName(QStringLiteral("PrimaryBtn"));
     createBtn->setMinimumHeight(44);
-    createBtn->setStyleSheet(QStringLiteral(
-        "QPushButton#PrimaryBtn {"
-        "  background:#1f6feb; border:none; color:#fff;"
-        "  font-size:14px; font-weight:600; border-radius:7px;"
-        "}"
-        "QPushButton#PrimaryBtn:hover { background:#388bfd; }"
-        "QPushButton#PrimaryBtn:pressed { background:#1158c7; }"));
+    createBtn->setStyleSheet(QString());
     cardLayout->addSpacing(8);
     cardLayout->addWidget(createBtn);
 
@@ -277,16 +275,16 @@ void AuthWidget::buildLoginPage() {
     auto* wordmark = new QLabel(QStringLiteral("Inventra"));
     wordmark->setAlignment(Qt::AlignCenter);
     wordmark->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:36px;font-weight:700;"
-        "color:#afc6ff;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:32px;font-weight:bold;"
+        "color:#d97706;"
         "background:transparent;border:none;"));
 
     m_shopGreeting = new QLabel(QStringLiteral("Welcome back"));
     m_shopGreeting->setAlignment(Qt::AlignCenter);
     m_shopGreeting->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-size:15px;color:#8c90a0;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:14px;color:#808080;"
         "background:transparent;border:none;"));
 
     brandLayout->addWidget(wordmark);
@@ -303,7 +301,7 @@ void AuthWidget::buildLoginPage() {
     m_errorLabel = new QLabel(QStringLiteral("Incorrect PIN. Please try again."));
     m_errorLabel->setAlignment(Qt::AlignCenter);
     m_errorLabel->setStyleSheet(QStringLiteral(
-        "color:#ffb4ab;font-size:13px;font-family:'Hanken Grotesk',sans-serif;"
+        "color:#dc2626;font-size:13px;font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
         "background:transparent;border:none;"));
     m_errorLabel->setVisible(false);
     cardLayout->addWidget(m_errorLabel);
@@ -319,24 +317,7 @@ void AuthWidget::buildLoginPage() {
         btn->setObjectName(QStringLiteral("PinBtn"));
         btn->setFixedSize(76, 76);
         btn->setCursor(Qt::PointingHandCursor);
-        btn->setStyleSheet(
-            "QPushButton#PinBtn {"
-            "  background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #262a30,stop:1 #1c2025);"
-            "  border: 1px solid #424754;"
-            "  color: #e0e2ea;"
-            "  font-family:'JetBrains Mono',monospace;"
-            "  font-size:20px;font-weight:500;"
-            "  border-radius:38px;"
-            "}"
-            "QPushButton#PinBtn:hover {"
-            "  background:#31353b;"
-            "  border-color:#afc6ff;"
-            "}"
-            "QPushButton#PinBtn:pressed {"
-            "  background:rgba(31,111,235,0.3);"
-            "  border-color:#afc6ff;"
-            "  color:#ffffff;"
-            "}");
+        btn->setStyleSheet(QString());
         connect(btn, &QPushButton::clicked, this, [this, digit]() {
             onPinDigitPressed(digit);
         });
@@ -356,16 +337,7 @@ void AuthWidget::buildLoginPage() {
     bsBtn->setObjectName(QStringLiteral("PinBackspaceBtn"));
     bsBtn->setFixedSize(76, 76);
     bsBtn->setCursor(Qt::PointingHandCursor);
-    bsBtn->setStyleSheet(
-        "QPushButton#PinBackspaceBtn {"
-        "  background:transparent;border:none;"
-        "  color:#8c90a0;font-size:22px;"
-        "  border-radius:38px;"
-        "}"
-        "QPushButton#PinBackspaceBtn:hover {"
-        "  background:rgba(255,180,171,0.08);"
-        "  color:#ffb4ab;"
-        "}");
+    bsBtn->setStyleSheet(QString());
     connect(bsBtn, &QPushButton::clicked, this, &AuthWidget::onPinBackspace);
     pinGrid->addWidget(bsBtn, 3, 2);
 
@@ -377,11 +349,11 @@ void AuthWidget::buildLoginPage() {
     forgotBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
         "  background:transparent;border:none;"
-        "  color:#afc6ff;"
-        "  font-family:'Hanken Grotesk',sans-serif;"
-        "  font-size:13px;font-weight:600;"
+        "  color:#d97706;"
+        "  font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "  font-size:13px;font-weight:bold;"
         "}"
-        "QPushButton:hover { color:#d9e2ff; }"));
+        "QPushButton:hover { color:#f59e0b; }"));
     forgotBtn->setCursor(Qt::PointingHandCursor);
     connect(forgotBtn, &QPushButton::clicked, this, &AuthWidget::onForgotPin);
     cardLayout->addWidget(forgotBtn, 0, Qt::AlignCenter);

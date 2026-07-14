@@ -2,6 +2,7 @@
 #include "core/AppController.h"
 #include "core/AuthController.h"
 #include "core/Database.h"
+#include "core/ThemeManager.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -40,10 +41,11 @@ void SettingsWidget::buildLayout() {
     mainLayout->setSpacing(20);
 
     // Title
+    const auto& tokens = ThemeManager::instance().tokens();
     auto* titleLabel = new QLabel(QStringLiteral("Settings"), this);
     titleLabel->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:24px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;"));
     mainLayout->addWidget(titleLabel);
 
@@ -54,7 +56,8 @@ void SettingsWidget::buildLayout() {
     auto makeFieldLabel = [](const QString& text) -> QLabel* {
         auto* l = new QLabel(text);
         l->setStyleSheet(QStringLiteral(
-            "color:#8c90a0;font-size:11px;font-weight:600;"
+            "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+            "color:#808080;font-size:11px;font-weight:bold;"
             "letter-spacing:0.05em;background:transparent;border:none;"));
         return l;
     };
@@ -76,13 +79,14 @@ void SettingsWidget::buildLayout() {
 
     auto* formFrame = new QFrame(pipelineTab);
     formFrame->setObjectName(QStringLiteral("FormFrame"));
+    ThemeManager::applyDropShadow(formFrame, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     auto* grid = new QGridLayout(formFrame);
     grid->setSpacing(16);
 
     auto* eoqHeader = new QLabel(QStringLiteral("ECONOMIC ORDER QUANTITY (EOQ) VARIABLES"), formFrame);
     eoqHeader->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-weight:700;color:#afc6ff;font-size:11px;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-weight:bold;color:#d97706;font-size:11px;"
         "letter-spacing:0.06em;background:transparent;border:none;"));
     grid->addWidget(eoqHeader, 0, 0, 1, 2);
 
@@ -112,8 +116,8 @@ void SettingsWidget::buildLayout() {
 
     auto* mlHeader = new QLabel(QStringLiteral("CLASSIFICATION DECISION THRESHOLDS"), formFrame);
     mlHeader->setStyleSheet(QStringLiteral(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-weight:700;color:#afc6ff;font-size:11px;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-weight:bold;color:#d97706;font-size:11px;"
         "letter-spacing:0.06em;background:transparent;border:none;"));
     grid->addWidget(mlHeader, 5, 0, 1, 2);
 
@@ -162,6 +166,7 @@ void SettingsWidget::buildLayout() {
 
     auto* shopFrame = new QFrame(shopTab);
     shopFrame->setObjectName(QStringLiteral("FormFrame"));
+    ThemeManager::applyDropShadow(shopFrame, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     auto* sGrid = new QGridLayout(shopFrame);
     sGrid->setSpacing(16);
 
@@ -244,6 +249,7 @@ void SettingsWidget::buildLayout() {
 
     auto* secFormFrame = new QFrame(sessionTab);
     secFormFrame->setObjectName(QStringLiteral("FormFrame"));
+    ThemeManager::applyDropShadow(secFormFrame, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     auto* secGrid = new QGridLayout(secFormFrame);
     secGrid->setSpacing(16);
 
@@ -259,7 +265,9 @@ void SettingsWidget::buildLayout() {
     sessLayout->addWidget(secFormFrame);
 
     m_sessionTimeLabel = new QLabel(QStringLiteral("Session Active: 00:00:00"), sessionTab);
-    m_sessionTimeLabel->setStyleSheet(QStringLiteral("font-size: 14px; font-weight: bold; color: #1f6feb;"));
+    m_sessionTimeLabel->setStyleSheet(QStringLiteral(
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size: 13px; font-weight: bold; color: #d97706; background:transparent; border:none;"));
     sessLayout->addWidget(m_sessionTimeLabel);
 
     m_logoutBtn = new QPushButton(QStringLiteral("Logout"), sessionTab);
@@ -284,6 +292,7 @@ void SettingsWidget::buildLayout() {
 
     auto* appFormFrame = new QFrame(appTab);
     appFormFrame->setObjectName(QStringLiteral("FormFrame"));
+    ThemeManager::applyDropShadow(appFormFrame, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     auto* appGrid = new QGridLayout(appFormFrame);
     appGrid->setSpacing(16);
 

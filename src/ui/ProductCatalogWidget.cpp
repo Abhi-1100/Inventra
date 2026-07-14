@@ -4,6 +4,7 @@
 #include "core/ProductData.h"
 #include "ui/ProductDetailPanel.h"
 #include "widgets/BadgeDelegate.h"
+#include "core/ThemeManager.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -92,17 +93,17 @@ void ProductCatalogWidget::buildLayout() {
 
     auto* pageTitle = new QLabel(QStringLiteral("Product Catalog"), this);
     pageTitle->setStyleSheet(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:24px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;");
     headerRow->addWidget(pageTitle);
 
     m_countLabel = new QLabel(QStringLiteral("0 products"), this);
     m_countLabel->setStyleSheet(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-size:14px;color:#8c90a0;"
-        "background:rgba(175,198,255,0.08);"
-        "border:1px solid rgba(175,198,255,0.2);"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:12px;color:#808080;"
+        "background:rgba(217,119,6,0.08);"
+        "border:1px solid #222222;"
         "border-radius:12px;padding:4px 12px;");
     m_countLabel->setAlignment(Qt::AlignCenter);
     headerRow->addWidget(m_countLabel);
@@ -112,29 +113,17 @@ void ProductCatalogWidget::buildLayout() {
     addBtn->setObjectName("PrimaryBtn");
     addBtn->setFixedHeight(36);
     addBtn->setCursor(Qt::PointingHandCursor);
-    addBtn->setStyleSheet(
-        "QPushButton {"
-        "  background:qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #1f6feb,stop:1 #0050a7);"
-        "  border:none;border-top:1px solid rgba(175,198,255,0.3);"
-        "  color:#fffcff;font-family:'Hanken Grotesk',sans-serif;"
-        "  font-size:14px;font-weight:600;border-radius:6px;padding:0 20px;"
-        "}"
-        "QPushButton:hover {"
-        "  background:qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #388bfd,stop:1 #1f6feb);"
-        "}"
-        "QPushButton:pressed { background:#0050a7; }");
+    addBtn->setStyleSheet(QString());
     headerRow->addWidget(addBtn);
     mainLayout->addLayout(headerRow);
 
     // ── Filter bar ──────────────────────────────
+    const auto& tokens = ThemeManager::instance().tokens();
     auto* filterCard = new QFrame(this);
     filterCard->setObjectName("GlassCard");
+    ThemeManager::applyDropShadow(filterCard, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     filterCard->setFixedHeight(64);
-    filterCard->setStyleSheet(
-        "QFrame#GlassCard {"
-        "  background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #161b22,stop:1 #12161c);"
-        "  border:1px solid #232a33;border-radius:8px;"
-        "}");
+    filterCard->setStyleSheet(QString());
 
     auto* filterRow = new QHBoxLayout(filterCard);
     filterRow->setContentsMargins(16, 0, 16, 0);
@@ -143,19 +132,19 @@ void ProductCatalogWidget::buildLayout() {
     // Search input
     auto* searchWrap = new QWidget(filterCard);
     searchWrap->setStyleSheet(
-        "background:#0a0e13;border:1px solid #232a33;border-radius:6px;");
+        "background:#050505;border:1px solid #222222;border-radius:3px;");
     searchWrap->setFixedWidth(260);
     auto* searchRow = new QHBoxLayout(searchWrap);
     searchRow->setContentsMargins(10, 0, 10, 0);
     searchRow->setSpacing(6);
     auto* searchIcon = new QLabel(QStringLiteral("⌕"), searchWrap);
-    searchIcon->setStyleSheet("color:#8c90a0;font-size:16px;background:transparent;border:none;");
+    searchIcon->setStyleSheet("color:#808080;font-size:16px;background:transparent;border:none;");
     m_searchEdit = new QLineEdit(searchWrap);
     m_searchEdit->setPlaceholderText(QStringLiteral("Search products or SKU..."));
     m_searchEdit->setStyleSheet(
         "QLineEdit{background:transparent;border:none;"
-        "color:#e0e2ea;font-family:'JetBrains Mono',monospace;font-size:14px;padding:0;}"
-        "QLineEdit::placeholder{color:rgba(140,144,160,0.6);}");
+        "color:#e5e5e5;font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;font-size:13px;padding:0;}"
+        "QLineEdit::placeholder{color:rgba(128,128,128,0.6);}");
     m_searchEdit->setFixedHeight(40);
     searchRow->addWidget(searchIcon);
     searchRow->addWidget(m_searchEdit);
@@ -173,14 +162,7 @@ void ProductCatalogWidget::buildLayout() {
         cb->setCursor(Qt::PointingHandCursor);
         cb->addItem(placeholder);
         for (const auto& item : items) cb->addItem(item);
-        cb->setStyleSheet(
-            "QComboBox{background:#1c2025;border:1px solid #232a33;border-radius:6px;"
-            "color:#c2c6d6;padding:0 12px;font-family:'Hanken Grotesk',sans-serif;font-size:13px;}"
-            "QComboBox:focus{border-color:#afc6ff;}"
-            "QComboBox::drop-down{border:none;width:20px;}"
-            "QComboBox QAbstractItemView{background:#1c2025;border:1px solid #232a33;"
-            "border-radius:6px;color:#e0e2ea;selection-background-color:#262a30;}"
-            "QComboBox QAbstractItemView::item{padding:6px 12px;border-radius:4px;}");
+        cb->setStyleSheet(QString());
         return cb;
     };
 
@@ -204,11 +186,8 @@ void ProductCatalogWidget::buildLayout() {
     // ── Product table ────────────────────────────
     auto* tableCard = new QFrame(this);
     tableCard->setObjectName("GlassCard");
-    tableCard->setStyleSheet(
-        "QFrame#GlassCard {"
-        "  background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #161b22,stop:1 #12161c);"
-        "  border:1px solid #232a33;border-radius:8px;"
-        "}");
+    ThemeManager::applyDropShadow(tableCard, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
+    tableCard->setStyleSheet(QString());
 
     auto* tableLayout = new QVBoxLayout(tableCard);
     tableLayout->setContentsMargins(0, 0, 0, 0);
@@ -223,30 +202,7 @@ void ProductCatalogWidget::buildLayout() {
     m_tableView->verticalHeader()->setVisible(false);
     m_tableView->verticalHeader()->setDefaultSectionSize(52);
     m_tableView->setFrameShape(QFrame::NoFrame);
-    m_tableView->setStyleSheet(
-        "QTableView {"
-        "  background: transparent;"
-        "  border: none;"
-        "  gridline-color: transparent;"
-        "  selection-background-color: #1c2025;"
-        "}"
-        "QTableView::item {"
-        "  border-bottom: 1px solid rgba(35,42,51,0.5);"
-        "  padding: 0 16px;"
-        "  color: #e0e2ea;"
-        "  background: transparent;"
-        "}"
-        "QTableView::item:hover { background: #1c2025; }"
-        "QTableView::item:selected { background: #1c2025; }"
-        "QHeaderView::section {"
-        "  background: #0a0e13;"
-        "  color: #8c90a0;"
-        "  font-family:'Hanken Grotesk',sans-serif;"
-        "  font-size:13px;font-weight:600;letter-spacing:0.04em;"
-        "  padding: 12px 16px;"
-        "  border: none;"
-        "  border-bottom: 1px solid #232a33;"
-        "}");
+    m_tableView->setStyleSheet("QTableView { border: none; background: transparent; }");
 
     tableLayout->addWidget(m_tableView);
     mainLayout->addWidget(tableCard, 1);

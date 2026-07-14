@@ -7,6 +7,8 @@
 #include <QPaintEvent>
 #include <QEnterEvent>
 #include <QLinearGradient>
+#include <QGraphicsDropShadowEffect>
+#include "core/ThemeManager.h"
 
 namespace Kirana {
 
@@ -25,6 +27,13 @@ MetricCard::MetricCard(const QString& title,
     buildLayout();
     setValue(QStringLiteral("—"));
     setSubtitle(QString());
+
+    auto* shadow = new QGraphicsDropShadowEffect(this);
+    shadow->setBlurRadius(20);
+    shadow->setXOffset(0);
+    shadow->setYOffset(4);
+    shadow->setColor(QColor(31, 111, 235, 30)); // Subtle blue-tinted shadow
+    setGraphicsEffect(shadow);
 }
 
 void MetricCard::setIconText(const QString& text) {
@@ -48,11 +57,11 @@ void MetricCard::buildLayout() {
 
     m_titleLabel = new QLabel(this);
     m_titleLabel->setStyleSheet(
-        "font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;"
-        "font-size: 13px;"
-        "font-weight: 600;"
-        "letter-spacing: 0.02em;"
-        "color: #8c90a0;"
+        "font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
+        "font-size: 11px;"
+        "font-weight: bold;"
+        "letter-spacing: 0.05em;"
+        "color: #808080;"
         "background: transparent;"
         "border: none;");
     m_titleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -73,17 +82,17 @@ void MetricCard::buildLayout() {
 
     m_valueLabel = new QLabel(this);
     m_valueLabel->setStyleSheet(
-        "font-family: 'JetBrains Mono', 'Consolas', monospace;"
+        "font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
         "font-size: 26px;"
-        "font-weight: 500;"
-        "color: #e0e2ea;"
+        "font-weight: bold;"
+        "color: #e5e5e5;"
         "background: transparent;"
         "border: none;");
     m_valueLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     m_deltaLabel = new QLabel(this);
     m_deltaLabel->setStyleSheet(
-        "font-family: 'JetBrains Mono', monospace;"
+        "font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
         "font-size: 12px;"
         "font-weight: 400;"
         "background: transparent;"
@@ -98,9 +107,9 @@ void MetricCard::buildLayout() {
     // ── Row 3: Subtitle ───────────────────────
     m_subtitleLabel = new QLabel(this);
     m_subtitleLabel->setStyleSheet(
-        "font-family: 'Hanken Grotesk', sans-serif;"
+        "font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
         "font-size: 12px;"
-        "color: #8c90a0;"
+        "color: #808080;"
         "background: transparent;"
         "border: none;");
     m_subtitleLabel->setAlignment(Qt::AlignLeft);
@@ -127,9 +136,9 @@ void MetricCard::setSubtitle(const QString& text) {
 
 void MetricCard::setDelta(const QString& delta, bool positive) {
     m_deltaLabel->setText(delta);
-    QString color = positive ? "#afc6ff" : "#ffb4ab";
+    QString color = positive ? ThemeManager::instance().tokens().Success.name() : ThemeManager::instance().tokens().Critical.name();
     m_deltaLabel->setStyleSheet(
-        QString("font-family:'JetBrains Mono',monospace;"
+        QString("font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
                 "font-size:12px;font-weight:400;"
                 "color:%1;background:transparent;border:none;").arg(color));
     m_deltaLabel->setVisible(!delta.isEmpty());
@@ -149,33 +158,34 @@ void MetricCard::paintEvent(QPaintEvent*) {
     p.setRenderHint(QPainter::Antialiasing);
 
     const QRect r = rect();
+    const auto& tokens = ThemeManager::instance().tokens();
 
-    // Card gradient background: #161b22 -> #12161c
+    // Card gradient background
     QLinearGradient bg(0, 0, 0, r.height());
-    bg.setColorAt(0.0, QColor("#161b22"));
-    bg.setColorAt(1.0, QColor("#12161c"));
+    bg.setColorAt(0.0, tokens.BgSurface);
+    bg.setColorAt(1.0, tokens.BgPrimary);
 
     // Border
-    p.setPen(QPen(QColor("#232a33"), 1));
+    p.setPen(QPen(tokens.Border, 1));
     p.setBrush(bg);
-    p.drawRoundedRect(r.adjusted(0, 0, -1, -1), 8, 8);
+    p.drawRoundedRect(r.adjusted(0, 0, -1, -1), 4, 4);
 
-    // Hover top-border glow (1px colored top line)
+    // Hover top-border glow
     if (m_hovered) {
         QColor glow = m_accentColor;
         glow.setAlphaF(0.5f);
         p.setPen(QPen(glow, 1));
-        p.drawLine(r.left() + 8, r.top(), r.right() - 8, r.top());
+        p.drawLine(r.left() + 4, r.top(), r.right() - 4, r.top());
     }
 
-    // Icon chip (colored rounded square behind m_iconLabel)
+    // Icon chip
     if (m_iconLabel) {
         QRect iconBg = m_iconLabel->geometry().adjusted(-2, -2, 2, 2);
         QColor chipBg = m_accentColor;
         chipBg.setAlphaF(0.12f);
         p.setPen(Qt::NoPen);
         p.setBrush(chipBg);
-        p.drawRoundedRect(iconBg, 6, 6);
+        p.drawRoundedRect(iconBg, 3, 3);
     }
 
     // Update title label text
@@ -186,15 +196,16 @@ void MetricCard::paintEvent(QPaintEvent*) {
     // Colored value
     if (m_valueLabel) {
         m_valueLabel->setStyleSheet(
-            QString("font-family:'JetBrains Mono','Consolas',monospace;"
-                    "font-size:26px;font-weight:500;"
-                    "color:#e0e2ea;"
-                    "background:transparent;border:none;"));
+            QString("font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+                    "font-size:26px;font-weight:bold;"
+                    "color:%1;"
+                    "background:transparent;border:none;").arg(tokens.TextPrimary.name()));
     }
     // Accent icon text
     if (m_iconLabel) {
         m_iconLabel->setStyleSheet(
-            QString("font-size:14px;color:%1;background:transparent;border:none;")
+            QString("font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+                    "font-size:14px;color:%1;background:transparent;border:none;")
             .arg(m_accentColor.name()));
     }
 }

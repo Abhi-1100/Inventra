@@ -1,4 +1,5 @@
 #include "ui/StatusBar.h"
+#include "core/ThemeManager.h"
 
 #include <QHBoxLayout>
 #include <QLabel>
@@ -35,12 +36,12 @@ void StatusBar::buildLayout() {
     searchWrap->setFixedWidth(300);
     searchWrap->setStyleSheet(
         "QWidget {"
-        "  background-color: #0a0e13;"
-        "  border: 1px solid #232a33;"
-        "  border-radius: 6px;"
+        "  background-color: #050505;"
+        "  border: 1px solid #222222;"
+        "  border-radius: 3px;"
         "}"
         "QWidget:focus-within {"
-        "  border-color: #afc6ff;"
+        "  border-color: #d97706;"
         "}");
 
     auto* searchRow = new QHBoxLayout(searchWrap);
@@ -58,12 +59,12 @@ void StatusBar::buildLayout() {
         "QLineEdit {"
         "  background: transparent;"
         "  border: none;"
-        "  color: #e0e2ea;"
-        "  font-family: 'Hanken Grotesk', sans-serif;"
-        "  font-size: 14px;"
+        "  color: #e5e5e5;"
+        "  font-family: 'SF Mono', 'Menlo', 'Cascadia Mono', 'Consolas', monospace;"
+        "  font-size: 13px;"
         "  padding: 0;"
         "}"
-        "QLineEdit::placeholder { color: rgba(140,144,160,0.6); }");
+        "QLineEdit::placeholder { color: rgba(128,128,128,0.6); }");
     m_searchEdit->setFixedHeight(36);
 
     searchRow->addWidget(searchIcon);
@@ -99,22 +100,6 @@ void StatusBar::buildLayout() {
     m_runBtn->setFixedHeight(32);
     m_runBtn->setCursor(Qt::PointingHandCursor);
     m_runBtn->setObjectName("PrimaryBtn");
-    m_runBtn->setStyleSheet(
-        "QPushButton {"
-        "  background: qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #1f6feb,stop:1 #0050a7);"
-        "  border: none;"
-        "  border-top: 1px solid rgba(175,198,255,0.3);"
-        "  color: #fffcff;"
-        "  font-family: 'Hanken Grotesk', sans-serif;"
-        "  font-size: 13px;"
-        "  font-weight: 600;"
-        "  border-radius: 6px;"
-        "  padding: 0 16px;"
-        "}"
-        "QPushButton:hover {"
-        "  background: qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #388bfd,stop:1 #1f6feb);"
-        "}"
-        "QPushButton:pressed { background: #0050a7; }");
     connect(m_runBtn, &QPushButton::clicked, this, &StatusBar::runNowRequested);
     lay->addWidget(m_runBtn);
     lay->addSpacing(16);
@@ -122,7 +107,7 @@ void StatusBar::buildLayout() {
     // ── Separator ─────────────────────────────
     auto* sep = new QWidget(this);
     sep->setFixedSize(1, 20);
-    sep->setStyleSheet("background: #424754; border: none;");
+    sep->setStyleSheet("background: #222222; border: none;");
     lay->addWidget(sep);
     lay->addSpacing(16);
 
@@ -134,9 +119,9 @@ void StatusBar::buildLayout() {
     notifBtn->setStyleSheet(
         "QPushButton {"
         "  background: transparent; border: none;"
-        "  font-size: 16px; color: #8c90a0; border-radius: 16px;"
+        "  font-size: 16px; color: #808080; border-radius: 16px;"
         "}"
-        "QPushButton:hover { background: #262a30; color: #afc6ff; }");
+        "QPushButton:hover { background: #161616; color: #d97706; }");
     lay->addWidget(notifBtn);
     lay->addSpacing(8);
 
@@ -148,9 +133,9 @@ void StatusBar::buildLayout() {
     accountBtn->setStyleSheet(
         "QPushButton {"
         "  background: transparent; border: none;"
-        "  font-size: 16px; color: #8c90a0; border-radius: 16px;"
+        "  font-size: 16px; color: #808080; border-radius: 16px;"
         "}"
-        "QPushButton:hover { background: #262a30; color: #afc6ff; }");
+        "QPushButton:hover { background: #161616; color: #d97706; }");
     lay->addWidget(accountBtn);
 }
 
@@ -159,18 +144,19 @@ void StatusBar::buildLayout() {
 // ─────────────────────────────────────────────
 
 void StatusBar::setPipelineState(bool live, const QDateTime& lastRun) {
+    const auto& tokens = ThemeManager::instance().tokens();
     if (live) {
         m_pipelineLabel->setText(QStringLiteral("● LIVE"));
         m_pipelineLabel->setStyleSheet(
-            "font-family:'JetBrains Mono',monospace;"
-            "font-size:11px;font-weight:700;"
-            "color:#afc6ff;background:transparent;border:none;");
+            QString("font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+                    "font-size:11px;font-weight:bold;"
+                    "color:%1;background:transparent;border:none;").arg(tokens.Success.name()));
     } else {
         m_pipelineLabel->setText(QStringLiteral("○ IDLE"));
         m_pipelineLabel->setStyleSheet(
-            "font-family:'JetBrains Mono',monospace;"
-            "font-size:11px;font-weight:600;"
-            "color:#8c90a0;background:transparent;border:none;");
+            QString("font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+                    "font-size:11px;font-weight:bold;"
+                    "color:%1;background:transparent;border:none;").arg(tokens.TextSecondary.name()));
     }
 
     if (lastRun.isValid()) {
@@ -187,10 +173,11 @@ void StatusBar::setPipelineState(bool live, const QDateTime& lastRun) {
 
 void StatusBar::paintEvent(QPaintEvent* event) {
     QPainter p(this);
-    p.fillRect(rect(), QColor("#101419"));
+    const auto& tokens = ThemeManager::instance().tokens();
+    p.fillRect(rect(), tokens.BgPrimary);
 
-    // Bottom separator line matching outline-variant
-    p.setPen(QPen(QColor("#424754"), 1));
+    // Bottom separator line
+    p.setPen(QPen(tokens.Border, 1));
     p.drawLine(0, height() - 1, width(), height() - 1);
 
     QWidget::paintEvent(event);

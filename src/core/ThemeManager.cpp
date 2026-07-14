@@ -1,8 +1,63 @@
 #include "core/ThemeManager.h"
 #include <QApplication>
 #include <QFile>
+#include <QDialog>
+#include <QPropertyAnimation>
+#include <QEvent>
+#include <QEasingCurve>
+#include <QGraphicsDropShadowEffect>
 
 namespace Kirana {
+
+class DialogAnimationFilter : public QObject {
+protected:
+    bool eventFilter(QObject* obj, QEvent* event) override {
+        if (event->type() == QEvent::Show) {
+            if (auto* dialog = qobject_cast<QDialog*>(obj)) {
+                if (!dialog->property("animating").toBool()) {
+                    dialog->setProperty("animating", true);
+
+                    // 1. Fade-in
+                    dialog->setWindowOpacity(0.0);
+                    auto* fade = new QPropertyAnimation(dialog, "windowOpacity", dialog);
+                    fade->setDuration(200);
+                    fade->setStartValue(0.0);
+                    fade->setEndValue(1.0);
+                    fade->setEasingCurve(QEasingCurve::OutCubic);
+                    fade->start(QAbstractAnimation::DeleteWhenStopped);
+
+                    // 2. Scale-in
+                    QRect target = dialog->geometry();
+                    int cx = target.center().x();
+                    int cy = target.center().y();
+                    int w = target.width();
+                    int h = target.height();
+
+                    QRect start(cx - (w * 0.95) / 2, cy - (h * 0.95) / 2, w * 0.95, h * 0.95);
+                    dialog->setGeometry(start);
+
+                    auto* scale = new QPropertyAnimation(dialog, "geometry", dialog);
+                    scale->setDuration(200);
+                    scale->setStartValue(start);
+                    scale->setEndValue(target);
+                    scale->setEasingCurve(QEasingCurve::OutCubic);
+                    scale->start(QAbstractAnimation::DeleteWhenStopped);
+                }
+            }
+        }
+        return QObject::eventFilter(obj, event);
+    }
+};
+
+void ThemeManager::applyDropShadow(QWidget* widget, qreal blurRadius, const QColor& color) {
+    if (!widget) return;
+    auto* shadow = new QGraphicsDropShadowEffect(widget);
+    shadow->setBlurRadius(blurRadius);
+    shadow->setXOffset(0);
+    shadow->setYOffset(4);
+    shadow->setColor(color);
+    widget->setGraphicsEffect(shadow);
+}
 
 ThemeManager& ThemeManager::instance() {
     static ThemeManager instance;
@@ -11,26 +66,29 @@ ThemeManager& ThemeManager::instance() {
 
 ThemeManager::ThemeManager() : m_theme(Dark) {
     setTheme(Dark);
+    if (qApp) {
+        qApp->installEventFilter(new DialogAnimationFilter());
+    }
 }
 
 void ThemeManager::setTheme(Theme t) {
     m_theme = t;
 
     if (t == Dark) {
-        // Material Design 3 dark palette — matching stitch_screens design tokens
-        m_tokens.BgPrimary    = QColor("#101419");   // background
-        m_tokens.BgSurface    = QColor("#161b22");   // card surface-low
-        m_tokens.BgOverlay    = QColor("#1c2025");   // surface-container
-        m_tokens.Border       = QColor("#232a33");   // card border
-        m_tokens.TextPrimary  = QColor("#e0e2ea");   // on-surface
-        m_tokens.TextSecondary= QColor("#c2c6d6");   // on-surface-variant
-        m_tokens.TextMuted    = QColor("#8c90a0");   // outline
-        m_tokens.Critical     = QColor("#ffb4ab");   // error
-        m_tokens.Warning      = QColor("#c0c7d3");   // tertiary (overstock)
-        m_tokens.Success      = QColor("#afc6ff");   // primary (safe stock)
-        m_tokens.Accent       = QColor("#afc6ff");   // primary
-        m_tokens.Info         = QColor("#acc7ff");   // secondary
-        m_tokens.Gradient     = "qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161b22, stop:1 #12161c)";
+        // Obsidian Dark Theme
+        m_tokens.BgPrimary    = QColor("#080808");   // Obsidian base BG
+        m_tokens.BgSurface    = QColor("#0a0a0a");   // Obsidian surface
+        m_tokens.BgOverlay    = QColor("#111111");   // Obsidian raised
+        m_tokens.Border       = QColor("#222222");   // Obsidian border
+        m_tokens.TextPrimary  = QColor("#e5e5e5");   // primary text
+        m_tokens.TextSecondary= QColor("#808080");   // secondary text
+        m_tokens.TextMuted    = QColor("#525252");   // muted/tertiary text
+        m_tokens.Critical     = QColor("#dc2626");   // negative/reorder red
+        m_tokens.Warning      = QColor("#d97706");   // warning/overstock amber
+        m_tokens.Success      = QColor("#16a34a");   // positive/safe stock green
+        m_tokens.Accent       = QColor("#d97706");   // amber accent
+        m_tokens.Info         = QColor("#808080");   // info secondary
+        m_tokens.Gradient     = "qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0a0a0a, stop:1 #080808)";
 
         QFile styleFile(QStringLiteral(":/styles/terminal.qss"));
         if (styleFile.open(QFile::ReadOnly | QFile::Text)) {

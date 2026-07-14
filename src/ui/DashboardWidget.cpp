@@ -88,11 +88,12 @@ protected:
         const int thick = sz / 5;
 
         // Segments: safe=primary, overstock=tertiary, reorder=error
+        const auto& tokens = ThemeManager::instance().tokens();
         struct Seg { double pct; QColor col; };
         Seg segs[] = {
-            { m_safe,      QColor("#afc6ff") },
-            { m_overstock, QColor("#c0c7d3") },
-            { m_reorder,   QColor("#ffb4ab") },
+            { m_safe,      tokens.Success },
+            { m_overstock, tokens.Warning },
+            { m_reorder,   tokens.Critical },
         };
 
         int startAngle = 90 * 16; // 12 o'clock
@@ -145,6 +146,7 @@ DashboardWidget::DashboardWidget(AppController* controller, QWidget* parent)
 }
 
 void DashboardWidget::buildLayout() {
+    const auto& tokens = ThemeManager::instance().tokens();
     auto* mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(24, 20, 24, 20);
     mainLayout->setSpacing(16);
@@ -154,8 +156,8 @@ void DashboardWidget::buildLayout() {
     auto* pageTitle = new QLabel(QStringLiteral("Dashboard"), this);
     pageTitle->setObjectName("HeadlineLg");
     pageTitle->setStyleSheet(
-        "font-family:'Hanken Grotesk','Segoe UI',sans-serif;"
-        "font-size:28px;font-weight:700;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:24px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;");
     headerRow->addWidget(pageTitle);
     headerRow->addStretch();
@@ -172,10 +174,10 @@ void DashboardWidget::buildLayout() {
     auto* cardsLayout = new QHBoxLayout;
     cardsLayout->setSpacing(16);
 
-    m_cardSKUs     = new MetricCard(QStringLiteral("Total SKUs"),      QColor("#afc6ff"), this);
-    m_cardCritical = new MetricCard(QStringLiteral("Critical Reorder"), QColor("#ffb4ab"), this);
-    m_cardOverstock= new MetricCard(QStringLiteral("Overstock"),        QColor("#c0c7d3"), this);
-    m_cardStockout = new MetricCard(QStringLiteral("Stockout Risk"),     QColor("#acc7ff"), this);
+    m_cardSKUs     = new MetricCard(QStringLiteral("Total SKUs"),      tokens.Success, this);
+    m_cardCritical = new MetricCard(QStringLiteral("Critical Reorder"), tokens.Critical, this);
+    m_cardOverstock= new MetricCard(QStringLiteral("Overstock"),        tokens.Warning, this);
+    m_cardStockout = new MetricCard(QStringLiteral("Stockout Risk"),     tokens.Accent, this);
 
     // Set icon characters for each card
     m_cardSKUs->setIconText     (QStringLiteral("📦"));
@@ -196,6 +198,7 @@ void DashboardWidget::buildLayout() {
     // ── Priority Queue (2/3) ─────────────────────
     auto* queueCard = new QFrame(this);
     queueCard->setObjectName("GlassCard");
+    ThemeManager::applyDropShadow(queueCard, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     queueCard->setMinimumHeight(480);
     auto* queueLayout = new QVBoxLayout(queueCard);
     queueLayout->setContentsMargins(0, 0, 0, 0);
@@ -204,16 +207,16 @@ void DashboardWidget::buildLayout() {
     // Queue header
     auto* queueHeader = new QWidget(queueCard);
     queueHeader->setStyleSheet(
-        "background: rgba(11,15,20,0.5);"
-        "border-bottom: 1px solid #232a33;");
+        "background: rgba(10,10,10,0.5);"
+        "border-bottom: 1px solid #222222;");
     queueHeader->setFixedHeight(52);
     auto* queueHRow = new QHBoxLayout(queueHeader);
     queueHRow->setContentsMargins(20, 0, 16, 0);
 
     auto* queueTitle = new QLabel(QStringLiteral("Priority Queue"), queueHeader);
     queueTitle->setStyleSheet(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-size:16px;font-weight:600;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:14px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;");
 
     auto* viewAllQ = new QPushButton(QStringLiteral("View All"), queueHeader);
@@ -222,9 +225,9 @@ void DashboardWidget::buildLayout() {
     viewAllQ->setCursor(Qt::PointingHandCursor);
     viewAllQ->setStyleSheet(
         "QPushButton{background:transparent;border:none;"
-        "color:#afc6ff;font-family:'Hanken Grotesk',sans-serif;"
-        "font-size:13px;font-weight:600;padding:0;}"
-        "QPushButton:hover{color:#d9e2ff;}");
+        "color:#d97706;font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:13px;font-weight:bold;padding:0;}"
+        "QPushButton:hover{color:#f59e0b;}");
 
     queueHRow->addWidget(queueTitle);
     queueHRow->addStretch();
@@ -241,34 +244,11 @@ void DashboardWidget::buildLayout() {
     m_tableView->verticalHeader()->setVisible(false);
     m_tableView->verticalHeader()->setDefaultSectionSize(48);
     m_tableView->setFrameShape(QFrame::NoFrame);
-    m_tableView->setStyleSheet(
-        "QTableView {"
-        "  background: transparent;"
-        "  border: none;"
-        "  border-radius: 0;"
-        "  gridline-color: transparent;"
-        "  selection-background-color: #1c2025;"
-        "}"
-        "QTableView::item {"
-        "  border-bottom: 1px solid rgba(35,42,51,0.5);"
-        "  padding: 0 16px;"
-        "  background: transparent;"
-        "}"
-        "QTableView::item:hover { background: #1c2025; }"
-        "QTableView::item:selected { background: #1c2025; color: #e0e2ea; }"
-        "QHeaderView::section {"
-        "  background: #0a0e13;"
-        "  color: #8c90a0;"
-        "  font-family:'Hanken Grotesk',sans-serif;"
-        "  font-size:13px;font-weight:600;letter-spacing:0.04em;"
-        "  padding: 10px 16px;"
-        "  border: none;"
-        "  border-bottom: 1px solid #232a33;"
-        "}");
+    m_tableView->setStyleSheet("QTableView { border: none; background: transparent; }");
 
     // Filter chips row
     auto* chipsRow = new QWidget(queueCard);
-    chipsRow->setStyleSheet("background: transparent; border-bottom: 1px solid #232a33;");
+    chipsRow->setStyleSheet("background: transparent; border-bottom: 1px solid #222222;");
     chipsRow->setFixedHeight(48);
     auto* chipsLayout = new QHBoxLayout(chipsRow);
     chipsLayout->setContentsMargins(16, 8, 16, 8);
@@ -283,6 +263,7 @@ void DashboardWidget::buildLayout() {
     // ── Stock Distribution (1/3) ──────────────────
     auto* donutCard = new QFrame(this);
     donutCard->setObjectName("GlassCard");
+    ThemeManager::applyDropShadow(donutCard, 20, QColor(tokens.Accent.red(), tokens.Accent.green(), tokens.Accent.blue(), 30));
     donutCard->setMinimumHeight(480);
     auto* donutLayout = new QVBoxLayout(donutCard);
     donutLayout->setContentsMargins(20, 20, 20, 20);
@@ -290,8 +271,8 @@ void DashboardWidget::buildLayout() {
 
     auto* donutTitle = new QLabel(QStringLiteral("Stock Distribution"), donutCard);
     donutTitle->setStyleSheet(
-        "font-family:'Hanken Grotesk',sans-serif;"
-        "font-size:16px;font-weight:600;color:#e0e2ea;"
+        "font-family:'SF Mono','Menlo','Cascadia Mono','Consolas',monospace;"
+        "font-size:14px;font-weight:bold;color:#e5e5e5;"
         "background:transparent;border:none;");
     donutLayout->addWidget(donutTitle);
 
@@ -320,9 +301,9 @@ void DashboardWidget::buildLayout() {
         return val;
     };
 
-    m_legendSafe      = makeLegendRow(QStringLiteral("Safe Stock"), QColor("#afc6ff"));
-    m_legendOverstock = makeLegendRow(QStringLiteral("Overstock"),  QColor("#c0c7d3"));
-    m_legendReorder   = makeLegendRow(QStringLiteral("Reorder"),    QColor("#ffb4ab"));
+    m_legendSafe      = makeLegendRow(QStringLiteral("Safe Stock"), tokens.Success);
+    m_legendOverstock = makeLegendRow(QStringLiteral("Overstock"),  tokens.Warning);
+    m_legendReorder   = makeLegendRow(QStringLiteral("Reorder"),    tokens.Critical);
 
     lowerRow->addWidget(queueCard, 2);
     lowerRow->addWidget(donutCard, 1);

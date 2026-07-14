@@ -14,16 +14,24 @@ namespace Kirana {
 class SidebarButton : public QWidget {
     Q_OBJECT
     Q_PROPERTY(bool active READ isActive WRITE setActive)
+    Q_PROPERTY(qreal hoverProgress READ hoverProgress WRITE setHoverProgress)
+    Q_PROPERTY(qreal activeProgress READ activeProgress WRITE setActiveProgress)
 
 public:
-    explicit SidebarButton(const QString& iconPath,
+    explicit SidebarButton(char32_t iconChar,
                             const QString& label,
                             const QString& tooltip,
                             QWidget* parent = nullptr);
 
     bool isActive() const   { return m_active; }
-    void setActive(bool v)  { m_active = v; update(); }
+    void setActive(bool v);
     void setVisible(bool v) { QWidget::setVisible(v); }
+
+    qreal hoverProgress() const { return m_hoverProgress; }
+    void setHoverProgress(qreal p) { m_hoverProgress = p; update(); }
+
+    qreal activeProgress() const { return m_activeProgress; }
+    void setActiveProgress(qreal p) { m_activeProgress = p; update(); }
 
 signals:
     void clicked();
@@ -39,11 +47,16 @@ protected:
     void leaveEvent(QEvent* event) override;
 
 private:
-    QString m_iconPath;
+    char32_t m_iconChar;
     QString m_label;
     bool    m_active  = false;
     bool    m_hovered = false;
-    QPixmap m_icon;
+
+    qreal   m_hoverProgress = 0.0;
+    qreal   m_activeProgress = 0.0;
+
+    void animateHover(bool hover);
+    void animateActive(bool active);
 };
 
 // ─────────────────────────────────────────────

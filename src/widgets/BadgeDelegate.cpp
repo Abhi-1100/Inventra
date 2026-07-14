@@ -1,5 +1,6 @@
 #include "widgets/BadgeDelegate.h"
 #include "core/ProductModel.h"
+#include "core/ThemeManager.h"
 
 #include <QPainter>
 #include <QPainterPath>
@@ -7,17 +8,6 @@
 #include <QStyleOption>
 
 namespace Kirana {
-
-// Design system colors — matching stitch_screens Material Design 3 palette
-static const QColor kPrimary        ("#afc6ff");  // safe/optimal
-static const QColor kPrimaryContainer("#1f6feb"); // CTA / low stock indicator
-static const QColor kError          ("#ffb4ab");  // critical low
-static const QColor kTertiary       ("#c0c7d3");  // overstock / medium
-static const QColor kSecondary      ("#acc7ff");  // secondary overstock
-static const QColor kOutline        ("#8c90a0");  // muted / low demand
-static const QColor kRowHover       ("#1c2025");
-static const QColor kRowSelected    ("#1c2025");
-static const QColor kRowBase        ("#101419");
 
 BadgeDelegate::BadgeDelegate(Mode mode, QObject* parent)
     : QStyledItemDelegate(parent)
@@ -50,18 +40,19 @@ void BadgeDelegate::paint(QPainter* painter,
 void BadgeDelegate::fillBackground(QPainter* p,
                                    const QStyleOptionViewItem& opt) const
 {
-    QColor bg = kRowBase;
+    const auto& tokens = ThemeManager::instance().tokens();
+    QColor bg = tokens.BgPrimary;
 
     if (opt.state & QStyle::State_Selected) {
-        bg = kRowSelected;
+        bg = tokens.BgOverlay;
     } else if (opt.state & QStyle::State_MouseOver) {
-        bg = kRowHover;
+        bg = QColor("#161616"); // Obsidian bg_hover
     }
 
     p->fillRect(opt.rect, bg);
 
     // Bottom border 0.5px
-    QColor border("#232a33");
+    QColor border = tokens.Border;
     border.setAlphaF(0.5f);
     p->fillRect(opt.rect.left(), opt.rect.bottom(), opt.rect.width(), 1, border);
 }
@@ -74,39 +65,39 @@ void BadgeDelegate::paintBadge(QPainter* painter,
                                 const QStyleOptionViewItem& option,
                                 const QModelIndex& index) const
 {
+    const auto& tokens = ThemeManager::instance().tokens();
     const QString text  = index.data(Qt::DisplayRole).toString();
     const QVariant cvar = index.data(ProductRole::BadgeColor);
 
     // ── Status dot + label variant ──────────────
-    // Check if this is a status column (dot + text pattern)
     if (text == QLatin1String("Optimal") ||
         text == QLatin1String("Safe"))
     {
-        paintStatusDot(painter, option, kPrimary, text, true);
+        paintStatusDot(painter, option, tokens.Success, text, true);
         return;
     }
     if (text == QLatin1String("Critical") ||
         text == QLatin1String("Critical Low"))
     {
-        paintStatusDot(painter, option, kError, text, false);
+        paintStatusDot(painter, option, tokens.Critical, text, false);
         return;
     }
     if (text == QLatin1String("Reorder") ||
         text == QLatin1String("Reorder Soon"))
     {
-        paintStatusDot(painter, option, kTertiary, text, false);
+        paintStatusDot(painter, option, tokens.Warning, text, false);
         return;
     }
     if (text == QLatin1String("Overstock"))
     {
-        paintStatusDot(painter, option, kSecondary, text, false);
+        paintStatusDot(painter, option, tokens.Warning, text, false);
         return;
     }
 
     // ── Standard pill badge ──────────────────────
     if (text.isEmpty() || text == QLatin1String("—")) return;
 
-    QColor statusColor = kOutline;
+    QColor statusColor = tokens.TextMuted;
     if (cvar.isValid()) {
         QColor c = cvar.value<QColor>();
         if (c.isValid()) statusColor = c;
@@ -119,20 +110,19 @@ void BadgeDelegate::paintBadge(QPainter* painter,
 
     QString upperText = text.toUpper();
     if (text == QLatin1String("High") || upperText == QLatin1String("HIGH")) {
-        bgColor    = QColor(kPrimary); bgColor.setAlphaF(0.18f);
-        borderColor= QColor(kPrimary); borderColor.setAlphaF(0.4f);
-        textColor  = kPrimary;
+        bgColor    = QColor(tokens.Success); bgColor.setAlphaF(0.18f);
+        borderColor= QColor(tokens.Success); borderColor.setAlphaF(0.4f);
+        textColor  = tokens.Success;
     } else if (text == QLatin1String("Med") || text == QLatin1String("Medium") ||
                upperText == QLatin1String("MED")) {
-        bgColor    = QColor(kTertiary); bgColor.setAlphaF(0.12f);
-        borderColor= QColor(kOutline);  borderColor.setAlphaF(0.5f);
-        textColor  = QColor("#e0e2ea");
+        bgColor    = QColor(tokens.Warning); bgColor.setAlphaF(0.12f);
+        borderColor= QColor(tokens.Warning);  borderColor.setAlphaF(0.5f);
+        textColor  = tokens.TextPrimary;
     } else if (text == QLatin1String("Low") || upperText == QLatin1String("LOW")) {
-        bgColor    = QColor(0,0,0,0); // transparent
-        borderColor= QColor(kOutline); borderColor.setAlphaF(0.5f);
-        textColor  = kOutline;
+        bgColor    = QColor(0,0,0,0);
+        borderColor= QColor(tokens.TextMuted); borderColor.setAlphaF(0.5f);
+        textColor  = tokens.TextMuted;
     } else {
-        // generic: use the accent color
         bgColor    = statusColor; bgColor.setAlphaF(0.18f);
         borderColor= statusColor; borderColor.setAlphaF(0.35f);
         textColor  = statusColor;
@@ -140,9 +130,9 @@ void BadgeDelegate::paintBadge(QPainter* painter,
 
     // Badge font
     QFont badgeFont;
-    badgeFont.setFamily(QStringLiteral("Hanken Grotesk"));
+    badgeFont.setFamily(QStringLiteral("SF Mono"));
     badgeFont.setPixelSize(11);
-    badgeFont.setWeight(QFont::DemiBold);
+    badgeFont.setWeight(QFont::Bold);
     badgeFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.8);
 
     const QFontMetrics fm(badgeFont);
@@ -203,7 +193,7 @@ void BadgeDelegate::painter_helper(QPainter* p,
 
     // Label
     QFont labelFont;
-    labelFont.setFamily(QStringLiteral("Hanken Grotesk"));
+    labelFont.setFamily(QStringLiteral("SF Mono"));
     labelFont.setPixelSize(13);
     labelFont.setWeight(QFont::Normal);
 
@@ -221,17 +211,18 @@ void BadgeDelegate::paintForecast(QPainter* painter,
                                    const QStyleOptionViewItem& option,
                                    const QModelIndex& index) const
 {
+    const auto& tokens = ThemeManager::instance().tokens();
     const double trend   = index.data(ProductRole::TrendValue).toDouble();
     const QString numText= index.data(Qt::DisplayRole).toString() + QStringLiteral(" u");
 
     QString arrow;
     QColor  arrowColor;
-    if      (trend >  0.25) { arrow = QStringLiteral("▲"); arrowColor = kPrimary; }
-    else if (trend < -0.25) { arrow = QStringLiteral("▼"); arrowColor = kError; }
-    else                     { arrow = QStringLiteral("→"); arrowColor = kOutline; }
+    if      (trend >  0.25) { arrow = QStringLiteral("▲"); arrowColor = tokens.Success; }
+    else if (trend < -0.25) { arrow = QStringLiteral("▼"); arrowColor = tokens.Critical; }
+    else                     { arrow = QStringLiteral("→"); arrowColor = tokens.TextMuted; }
 
     QFont monoFont;
-    monoFont.setFamily(QStringLiteral("JetBrains Mono"));
+    monoFont.setFamily(QStringLiteral("SF Mono"));
     monoFont.setPixelSize(13);
     const QFontMetrics fm(monoFont);
 
@@ -254,7 +245,7 @@ void BadgeDelegate::paintForecast(QPainter* painter,
 
     QRect numRect(arrowRect.right(), cy - fm.height() / 2,
                   fm.horizontalAdvance(numText) + 4, fm.height());
-    painter->setPen(QColor("#c2c6d6")); // on-surface-variant
+    painter->setPen(tokens.TextSecondary);
     painter->drawText(numRect, Qt::AlignLeft | Qt::AlignVCenter, numText);
 }
 

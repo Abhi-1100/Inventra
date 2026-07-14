@@ -2258,3 +2258,41 @@ sqlite3.OperationalError: no such table: products
 2026-07-12 23:04:52,763 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-104 is in Cold Start (history=2 points, span=7 days).
 2026-07-12 23:04:52,764 - inventory_backend.prediction_engine - INFO - Product SKU=SKU-105 is in Cold Start (history=2 points, span=7 days).
 2026-07-12 23:04:52,768 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 5 predictions.
+2026-07-13 22:07:35,273 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-07-13 22:07:35,280 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-07-13 22:07:35,292 - inventory_backend.db_manager - INFO - Added product SKU=TST-001 with ID=1
+2026-07-13 22:07:35,326 - inventory_backend.db_manager - INFO - Added daily entry ID=1 for product ID=1
+2026-07-13 22:07:35,347 - inventory_backend.db_manager - INFO - Added daily entry ID=2 for product ID=1
+2026-07-13 22:07:35,370 - inventory_backend.db_manager - INFO - Added daily entry ID=3 for product ID=1
+2026-07-13 22:07:35,390 - inventory_backend.db_manager - INFO - Added daily entry ID=4 for product ID=1
+2026-07-13 22:07:35,412 - inventory_backend.db_manager - INFO - Added daily entry ID=5 for product ID=1
+2026-07-13 22:07:35,430 - inventory_backend.db_manager - INFO - Added daily entry ID=6 for product ID=1
+2026-07-13 22:07:35,450 - inventory_backend.db_manager - INFO - Added daily entry ID=7 for product ID=1
+2026-07-13 22:07:35,471 - inventory_backend.db_manager - INFO - Added daily entry ID=8 for product ID=1
+2026-07-13 22:07:35,491 - inventory_backend.db_manager - INFO - Added daily entry ID=9 for product ID=1
+2026-07-13 22:07:35,512 - inventory_backend.db_manager - INFO - Added daily entry ID=10 for product ID=1
+2026-07-13 22:07:35,531 - inventory_backend.db_manager - INFO - Added daily entry ID=11 for product ID=1
+2026-07-13 22:07:35,545 - inventory_backend.db_manager - INFO - Added daily entry ID=12 for product ID=1
+2026-07-13 22:07:35,559 - inventory_backend.db_manager - INFO - Added daily entry ID=13 for product ID=1
+2026-07-13 22:07:35,575 - inventory_backend.db_manager - INFO - Added daily entry ID=14 for product ID=1
+2026-07-13 22:07:35,589 - inventory_backend.db_manager - INFO - Added daily entry ID=15 for product ID=1
+2026-07-13 22:07:35,601 - inventory_backend.db_manager - INFO - Added daily entry ID=16 for product ID=1
+2026-07-13 22:07:35,617 - inventory_backend.db_manager - INFO - Added daily entry ID=17 for product ID=1
+2026-07-13 22:07:35,631 - inventory_backend.db_manager - INFO - Added daily entry ID=18 for product ID=1
+2026-07-13 22:07:35,645 - inventory_backend.db_manager - INFO - Added daily entry ID=19 for product ID=1
+2026-07-13 22:07:35,659 - inventory_backend.db_manager - INFO - Added daily entry ID=20 for product ID=1
+2026-07-13 22:07:35,673 - inventory_backend.db_manager - INFO - Added daily entry ID=21 for product ID=1
+2026-07-13 22:07:35,685 - inventory_backend.db_manager - INFO - Added daily entry ID=22 for product ID=1
+2026-07-13 22:07:35,698 - inventory_backend.db_manager - INFO - Added daily entry ID=23 for product ID=1
+2026-07-13 22:07:35,714 - inventory_backend.db_manager - INFO - Added daily entry ID=24 for product ID=1
+2026-07-13 22:07:35,727 - inventory_backend.db_manager - INFO - Added daily entry ID=25 for product ID=1
+2026-07-13 22:07:35,749 - inventory_backend.db_manager - INFO - Added daily entry ID=26 for product ID=1
+2026-07-13 22:07:35,765 - inventory_backend.db_manager - INFO - Added daily entry ID=27 for product ID=1
+2026-07-13 22:07:35,790 - inventory_backend.db_manager - INFO - Added daily entry ID=28 for product ID=1
+2026-07-13 22:07:35,825 - inventory_backend.db_manager - INFO - Added daily entry ID=29 for product ID=1
+2026-07-13 22:07:35,849 - inventory_backend.db_manager - INFO - Added daily entry ID=30 for product ID=1
+2026-07-13 22:07:35,876 - inventory_backend.db_manager - INFO - Added daily entry ID=31 for product ID=1
+2026-07-13 22:07:35,900 - inventory_backend.db_manager - INFO - Added daily entry ID=32 for product ID=1
+2026-07-13 22:07:35,915 - inventory_backend.db_manager - INFO - Added daily entry ID=33 for product ID=1
+2026-07-13 22:07:35,932 - inventory_backend.db_manager - INFO - Added daily entry ID=34 for product ID=1
+2026-07-13 22:07:35,947 - inventory_backend.db_manager - INFO - Added daily entry ID=35 for product ID=1

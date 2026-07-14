@@ -10,5 +10,6 @@
         <file>icons/analytics.svg</file>
         <file>icons/import.svg</file>
         <file>icons/settings.svg</file>
+        <file>fonts/tabler-icons.ttf</file>
     </qresource>
 </RCC>

@@ -75,6 +75,7 @@ set(INVENTRA_SOURCES
     src/ui/ProductCatalogWidget.cpp
     src/widgets/MetricCard.cpp
     src/widgets/BadgeDelegate.cpp
+    src/widgets/QtAwesome.cpp
 )
 
 set(INVENTRA_HEADERS
@@ -102,6 +103,7 @@ set(INVENTRA_HEADERS
     src/ui/ProductCatalogWidget.h
     src/widgets/MetricCard.h
     src/widgets/BadgeDelegate.h
+    src/widgets/QtAwesome.h
 )
 
 # ─────────────────────────────────────────────

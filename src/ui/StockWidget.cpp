@@ -159,6 +159,7 @@ void StockWidget::buildLayout() {
     // ── Bottom section: Ledger Table & Filters ──
     auto* ledgerFrame = new QFrame(this);
     ledgerFrame->setObjectName(QStringLiteral("PanelFrame"));
+    ThemeManager::applyDropShadow(ledgerFrame, 20, QColor(31, 111, 235, 30));
     auto* ledgerLayout = new QVBoxLayout(ledgerFrame);
     ledgerLayout->setContentsMargins(16, 16, 16, 16);
     ledgerLayout->setSpacing(12);

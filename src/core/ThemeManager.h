@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QColor>
+#include <QWidget>
 
 namespace Kirana {
 
@@ -30,6 +31,8 @@ public:
     void setTheme(Theme t);
     Theme theme() const { return m_theme; }
     const ThemeTokens& tokens() const { return m_tokens; }
+
+    static void applyDropShadow(QWidget* widget, qreal blurRadius = 20.0, const QColor& color = QColor(31, 111, 235, 30));
 
 signals:
     void themeChanged();
