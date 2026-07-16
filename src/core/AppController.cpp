@@ -59,6 +59,32 @@ static const RawSeed kSeedData[] = {
     {"SKU-015","Surf Excel Easy Wash 1kg",       "Detergent",    92,  175.0, DemandLabel::Low,    StockStatus::Overstock, Priority::Safe,        77.8,  14.0,  -1.2,  48},
     {"SKU-019","Britannia 50-50 Biscuits 400g",  "Snacks",       72,   55.0, DemandLabel::Medium, StockStatus::Overstock, Priority::Safe,        78.2,  22.0,  -0.8,  60},
     {"SKU-023","Vim Dishwash Liquid 750ml",      "Cleaning",    145,   98.0, DemandLabel::Low,    StockStatus::Overstock, Priority::Safe,        73.4,  11.5,  -1.5,  72},
+    // 25 new items to reach exactly 50
+    {"SKU-026","MDH Kitchen King Masala 100g",   "Spices",        40,   78.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        85.0,  15.0,   0.2,  48},
+    {"SKU-027","Catch Turmeric Powder 200g",     "Spices",        50,   54.0, DemandLabel::Low,    StockStatus::NoAction,  Priority::Safe,        80.0,  10.0,   0.1,  48},
+    {"SKU-028","Everest Garam Masala 100g",      "Spices",        35,   82.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        84.0,  18.0,   0.3,  48},
+    {"SKU-029","Tata Sampann Toor Dal 1kg",       "Pulses",        60,  175.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        90.0,  45.0,   0.8,  48},
+    {"SKU-030","Fortune Chana Besan 1kg",        "Staples",       45,   90.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        88.0,  30.0,   0.5,  48},
+    {"SKU-031","Britannia Marie Gold 250g",      "Snacks",        80,   35.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        92.0,  60.0,   1.2,  96},
+    {"SKU-032","Oreo Biscuit Vanilla 120g",      "Snacks",        55,   30.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        87.0,  35.0,   0.4,  72},
+    {"SKU-033","Good Day Cashew 200g",           "Snacks",        70,   45.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        91.0,  50.0,   0.9,  96},
+    {"SKU-034","Hide & Seek Biscuits 120g",      "Snacks",        40,   40.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        85.0,  25.0,   0.3,  72},
+    {"SKU-035","Cadbury Dairy Milk 50g",         "Snacks",       120,   45.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        94.0,  95.0,   2.1, 120},
+    {"SKU-036","Coca-Cola 1.25L",                "Beverages",     15,   65.0, DemandLabel::High,   StockStatus::Reorder,   Priority::Critical,    95.0,  80.0,   3.5,  96},
+    {"SKU-037","Pepsi 1.25L",                    "Beverages",     18,   65.0, DemandLabel::Medium, StockStatus::Reorder,   Priority::ReorderSoon, 88.0,  65.0,   2.0,  96},
+    {"SKU-038","Sprite 1.25L",                   "Beverages",     20,   65.0, DemandLabel::High,   StockStatus::Reorder,   Priority::ReorderSoon, 91.0,  75.0,   2.5,  96},
+    {"SKU-039","Red Bull 250ml",                 "Beverages",     30,  125.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        86.0,  20.0,   0.5,  48},
+    {"SKU-040","Nescafe Sunrise 100g",           "Beverages",     25,  195.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        83.0,  15.0,   0.2,  36},
+    {"SKU-041","Brooke Bond Red Label 500g",     "Beverages",     40,  220.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        89.0,  48.0,   0.9,  60},
+    {"SKU-042","Lizol Floor Cleaner 1L",         "Cleaning",      25,  185.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        84.0,  14.0,   0.3,  36},
+    {"SKU-043","Harpic Toilet Cleaner 1L",       "Cleaning",      30,  165.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        91.0,  22.0,   0.5,  48},
+    {"SKU-044","Vim Dishwash Bar 155g",          "Cleaning",     150,   15.0, DemandLabel::High,   StockStatus::NoAction,  Priority::Safe,        93.0, 110.0,   1.5, 144},
+    {"SKU-045","Rin Detergent Bar 250g",         "Cleaning",      90,   20.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        87.0,  45.0,   0.6,  96},
+    {"SKU-046","Head & Shoulders Shampoo 180ml", "Personal Care", 24,  145.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        85.0,  12.0,   0.2,  36},
+    {"SKU-047","Clinic Plus Shampoo 175ml",      "Personal Care", 35,   90.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        86.0,  18.0,   0.3,  48},
+    {"SKU-048","Lux Soap Beauty 100g×3",         "Personal Care", 45,  110.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        84.0,  20.0,   0.4,  48},
+    {"SKU-049","Pears Pure & Gentle 125g",       "Personal Care", 28,   85.0, DemandLabel::Medium, StockStatus::NoAction,  Priority::Safe,        82.0,  15.0,   0.3,  36},
+    {"SKU-050","Sensodyne Fresh Mint 100g",      "Personal Care", 10,  150.0, DemandLabel::High,   StockStatus::Reorder,   Priority::Critical,    93.0,  28.0,   1.2,  48}
 };
 
 // ─────────────────────────────────────────────
@@ -95,8 +121,18 @@ bool AppController::loadFromDatabase() {
     QVector<Product> dbProds = m_db->getProducts();
 
     if (dbProds.isEmpty()) {
-        // No longer seeding dummy data automatically.
-        // We will prompt the user to upload a CSV instead.
+        qInfo() << "[AppController] Product database is empty. Auto-seeding 50 products...";
+        for (const auto& s : kSeedData) {
+            Product p;
+            p.sku = QString::fromLatin1(s.sku);
+            p.name = QString::fromLatin1(s.name);
+            p.category = QString::fromLatin1(s.category);
+            p.currentStock = s.stock;
+            p.unitCost = s.unitCost;
+            int newId = m_db->saveProduct(p);
+            p.id = newId;
+            dbProds.append(p);
+        }
     }
 
     // Try loading actual ML pipeline results from Database

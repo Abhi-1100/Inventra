@@ -430,6 +430,8 @@ QVector<DailyEntry> Database::getDailyEntriesRange(const QDate& from, const QDat
 
 int Database::saveDailyEntry(const DailyEntry& e) {
     auto db = QSqlDatabase::database(m_connectionName);
+    db.transaction();
+
     QSqlQuery q(db);
     q.prepare(QStringLiteral(R"(
         INSERT INTO daily_entries(product_id,entry_date,units_sold,units_wasted,entered_by)
@@ -439,28 +441,125 @@ int Database::saveDailyEntry(const DailyEntry& e) {
     q.bindValue(QStringLiteral(":sold"),   e.unitsSold);
     q.bindValue(QStringLiteral(":wasted"), e.unitsWasted);
     q.bindValue(QStringLiteral(":by"),     e.enteredBy > 0 ? QVariant(e.enteredBy) : QVariant());
-    if (!q.exec()) { m_lastError = q.lastError().text(); return -1; }
-    return q.lastInsertId().toInt();
+    if (!q.exec()) {
+        m_lastError = q.lastError().text();
+        db.rollback();
+        return -1;
+    }
+    int newId = q.lastInsertId().toInt();
+
+    // Deduct stock (unitsSold + unitsWasted) from product inventory
+    QSqlQuery sq(db);
+    sq.prepare(QStringLiteral(
+        "UPDATE products SET current_stock=MAX(0, current_stock - :qty), updated_at=datetime('now') WHERE id=:pid;"));
+    sq.bindValue(QStringLiteral(":qty"), e.unitsSold + e.unitsWasted);
+    sq.bindValue(QStringLiteral(":pid"), e.productId);
+    if (!sq.exec()) {
+        m_lastError = sq.lastError().text();
+        db.rollback();
+        return -1;
+    }
+
+    db.commit();
+    return newId;
 }
 
 bool Database::updateDailyEntry(const DailyEntry& e) {
     auto db = QSqlDatabase::database(m_connectionName);
+    db.transaction();
+
+    // 1. Get old daily entry quantities to calculate stock difference
+    QSqlQuery oq(db);
+    oq.prepare(QStringLiteral("SELECT units_sold, units_wasted, product_id FROM daily_entries WHERE id=:id;"));
+    oq.bindValue(QStringLiteral(":id"), e.id);
+    if (!oq.exec() || !oq.next()) {
+        m_lastError = oq.lastError().text().isEmpty() ? QStringLiteral("Entry not found") : oq.lastError().text();
+        db.rollback();
+        return false;
+    }
+    int oldSold = oq.value(0).toInt();
+    int oldWasted = oq.value(1).toInt();
+    int oldProductId = oq.value(2).toInt();
+
+    // 2. Update daily entry
     QSqlQuery q(db);
     q.prepare(QStringLiteral(R"(
-        UPDATE daily_entries SET units_sold=:sold,units_wasted=:wasted WHERE id=:id;)"));
+        UPDATE daily_entries SET product_id=:pid, units_sold=:sold, units_wasted=:wasted WHERE id=:id;)"));
+    q.bindValue(QStringLiteral(":pid"),    e.productId);
     q.bindValue(QStringLiteral(":sold"),   e.unitsSold);
     q.bindValue(QStringLiteral(":wasted"), e.unitsWasted);
     q.bindValue(QStringLiteral(":id"),     e.id);
-    if (!q.exec()) { m_lastError = q.lastError().text(); return false; }
+    if (!q.exec()) {
+        m_lastError = q.lastError().text();
+        db.rollback();
+        return false;
+    }
+
+    // 3. Revert stock for old product
+    QSqlQuery sqOld(db);
+    sqOld.prepare(QStringLiteral("UPDATE products SET current_stock=current_stock + :qty, updated_at=datetime('now') WHERE id=:pid;"));
+    sqOld.bindValue(QStringLiteral(":qty"), oldSold + oldWasted);
+    sqOld.bindValue(QStringLiteral(":pid"), oldProductId);
+    if (!sqOld.exec()) {
+        m_lastError = sqOld.lastError().text();
+        db.rollback();
+        return false;
+    }
+
+    // 4. Deduct stock for new product/updated quantities
+    QSqlQuery sqNew(db);
+    sqNew.prepare(QStringLiteral("UPDATE products SET current_stock=MAX(0, current_stock - :qty), updated_at=datetime('now') WHERE id=:pid;"));
+    sqNew.bindValue(QStringLiteral(":qty"), e.unitsSold + e.unitsWasted);
+    sqNew.bindValue(QStringLiteral(":pid"), e.productId);
+    if (!sqNew.exec()) {
+        m_lastError = sqNew.lastError().text();
+        db.rollback();
+        return false;
+    }
+
+    db.commit();
     return true;
 }
 
 bool Database::deleteDailyEntry(int id) {
     auto db = QSqlDatabase::database(m_connectionName);
+    db.transaction();
+
+    // 1. Get old entry details
+    QSqlQuery oq(db);
+    oq.prepare(QStringLiteral("SELECT units_sold, units_wasted, product_id FROM daily_entries WHERE id=:id;"));
+    oq.bindValue(QStringLiteral(":id"), id);
+    if (!oq.exec() || !oq.next()) {
+        m_lastError = oq.lastError().text().isEmpty() ? QStringLiteral("Entry not found") : oq.lastError().text();
+        db.rollback();
+        return false;
+    }
+    int oldSold = oq.value(0).toInt();
+    int oldWasted = oq.value(1).toInt();
+    int oldProductId = oq.value(2).toInt();
+
+    // 2. Delete entry
     QSqlQuery q(db);
     q.prepare(QStringLiteral("DELETE FROM daily_entries WHERE id=:id;"));
     q.bindValue(QStringLiteral(":id"), id);
-    if (!q.exec()) { m_lastError = q.lastError().text(); return false; }
+    if (!q.exec()) {
+        m_lastError = q.lastError().text();
+        db.rollback();
+        return false;
+    }
+
+    // 3. Restore product stock
+    QSqlQuery sq(db);
+    sq.prepare(QStringLiteral("UPDATE products SET current_stock=current_stock + :qty, updated_at=datetime('now') WHERE id=:pid;"));
+    sq.bindValue(QStringLiteral(":qty"), oldSold + oldWasted);
+    sq.bindValue(QStringLiteral(":pid"), oldProductId);
+    if (!sq.exec()) {
+        m_lastError = sq.lastError().text();
+        db.rollback();
+        return false;
+    }
+
+    db.commit();
     return true;
 }
 

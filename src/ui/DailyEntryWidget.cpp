@@ -66,19 +66,18 @@ void DailyEntryWidget::buildLayout() {
     header->addWidget(m_dateLabel);
     mainLayout->addLayout(header);
 
-    // ── Top section: tabs (form + bulk) + list side by side ──
-    auto* contentRow = new QHBoxLayout;
-    contentRow->setSpacing(16);
+    // ── Content Layout (Top-Bottom) ───────────
+    auto* contentCol = new QVBoxLayout;
+    contentCol->setSpacing(16);
 
-    // ── Left: Entry form tabs ──────────────────
-    auto* leftPanel = new QFrame;
-    leftPanel->setObjectName(QStringLiteral("PanelFrame"));
-    leftPanel->setFixedWidth(420);
-    auto* leftLayout = new QVBoxLayout(leftPanel);
-    leftLayout->setContentsMargins(20, 20, 20, 20);
-    leftLayout->setSpacing(12);
+    // ── Top: Entry form tabs ──────────────────
+    auto* topPanel = new QFrame;
+    topPanel->setObjectName(QStringLiteral("PanelFrame"));
+    auto* topLayout = new QVBoxLayout(topPanel);
+    topLayout->setContentsMargins(20, 20, 20, 20);
+    topLayout->setSpacing(12);
 
-    m_tabs = new QTabWidget(leftPanel);
+    m_tabs = new QTabWidget(topPanel);
     m_tabs->setDocumentMode(true);
 
     // Tab 1: Single entry
@@ -100,7 +99,14 @@ void DailyEntryWidget::buildLayout() {
     m_productCombo->setEditable(true);
     m_productCombo->setInsertPolicy(QComboBox::NoInsert);
     m_productCombo->setMinimumHeight(38);
-    m_productCombo->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+    m_productCombo->setPlaceholderText(QStringLiteral("Search and select product..."));
+    auto* comp = m_productCombo->completer();
+    if (comp) {
+        comp->setCaseSensitivity(Qt::CaseInsensitive);
+        comp->setFilterMode(Qt::MatchContains);
+        comp->setCompletionMode(QCompleter::PopupCompletion);
+    }
+    m_productCombo->setCurrentIndex(-1);
     singleLayout->addWidget(m_productCombo);
 
     auto* qtyRow = new QHBoxLayout;
@@ -172,15 +178,15 @@ void DailyEntryWidget::buildLayout() {
     connect(m_bulkImport, &QPushButton::clicked, this, &DailyEntryWidget::onBulkImportClicked);
 
     m_tabs->addTab(bulkTab, QStringLiteral("Bulk Paste"));
-    leftLayout->addWidget(m_tabs);
-    contentRow->addWidget(leftPanel);
+    topLayout->addWidget(m_tabs);
+    contentCol->addWidget(topPanel, 0);
 
-    // ── Right: Today's entries list ────────────
-    auto* rightPanel = new QFrame;
-    rightPanel->setObjectName(QStringLiteral("PanelFrame"));
-    auto* rightLayout = new QVBoxLayout(rightPanel);
-    rightLayout->setContentsMargins(16, 16, 16, 16);
-    rightLayout->setSpacing(10);
+    // ── Bottom: Today's entries list ───────────
+    auto* bottomPanel = new QFrame;
+    bottomPanel->setObjectName(QStringLiteral("PanelFrame"));
+    auto* bottomLayout = new QVBoxLayout(bottomPanel);
+    bottomLayout->setContentsMargins(16, 16, 16, 16);
+    bottomLayout->setSpacing(10);
 
     auto* listHeader = new QHBoxLayout;
     auto* listTitle = new QLabel(QStringLiteral("TODAY'S ENTRIES"));
@@ -195,13 +201,13 @@ void DailyEntryWidget::buildLayout() {
     listHeader->addWidget(listTitle);
     listHeader->addStretch();
     listHeader->addWidget(m_summaryLabel);
-    rightLayout->addLayout(listHeader);
+    bottomLayout->addLayout(listHeader);
 
-    m_entryList = new QListWidget(rightPanel);
+    m_entryList = new QListWidget(bottomPanel);
     m_entryList->setAlternatingRowColors(true);
     m_entryList->setStyleSheet(QStringLiteral(
         "QListWidget::item { padding:10px 12px; }"));
-    rightLayout->addWidget(m_entryList, 1);
+    bottomLayout->addWidget(m_entryList, 1);
 
     auto* listActions = new QHBoxLayout;
     m_editBtn = new QPushButton(QStringLiteral("Edit"));
@@ -213,7 +219,7 @@ void DailyEntryWidget::buildLayout() {
     listActions->addStretch();
     listActions->addWidget(m_editBtn);
     listActions->addWidget(m_deleteBtn);
-    rightLayout->addLayout(listActions);
+    bottomLayout->addLayout(listActions);
 
     connect(m_entryList, &QListWidget::currentRowChanged, this, [this](int row) {
         m_editBtn->setEnabled(row >= 0);
@@ -222,8 +228,8 @@ void DailyEntryWidget::buildLayout() {
     connect(m_deleteBtn, &QPushButton::clicked, this, &DailyEntryWidget::onDeleteEntryClicked);
     connect(m_editBtn,   &QPushButton::clicked, this, &DailyEntryWidget::onEditEntryClicked);
 
-    contentRow->addWidget(rightPanel, 1);
-    mainLayout->addLayout(contentRow, 1);
+    contentCol->addWidget(bottomPanel, 1);
+    mainLayout->addLayout(contentCol, 1);
 }
 
 // ─────────────────────────────────────────────
@@ -268,9 +274,15 @@ void DailyEntryWidget::onAddEntryClicked() {
         return;
     }
 
-    saveEntry(productId, name, sold, wasted);
+    // Reset UI fields before saving to prevent index restoration during reload
+    m_productCombo->setCurrentIndex(-1);
+    if (m_productCombo->lineEdit()) {
+        m_productCombo->lineEdit()->clear();
+    }
     m_soldSpin->setValue(0);
     m_wastedSpin->setValue(0);
+
+    saveEntry(productId, name, sold, wasted);
 }
 
 void DailyEntryWidget::saveEntry(int productId, const QString& productName,
@@ -294,6 +306,7 @@ void DailyEntryWidget::saveEntry(int productId, const QString& productName,
         return;
     }
 
+    m_controller->loadFromDatabase();
     refreshList();
 }
 
@@ -313,6 +326,9 @@ void DailyEntryWidget::onBulkImportClicked() {
     for (const auto& p : m_controller->products())
         nameToId.insert(p.name.toLower(), p.id);
 
+    auto* db = m_controller->database();
+    if (!db) return;
+
     for (const QString& line : lines) {
         const QStringList parts = line.split(QLatin1Char(','));
         if (parts.size() < 2) { ++fail; continue; }
@@ -328,8 +344,26 @@ void DailyEntryWidget::onBulkImportClicked() {
         int pid = nameToId.value(pName.toLower(), -1);
         if (pid < 0) { ++fail; continue; }
 
-        saveEntry(pid, pName, sold, wasted);
-        ++ok;
+        DailyEntry e;
+        e.productId   = pid;
+        e.productName = pName;
+        e.entryDate   = m_entryDate;
+        e.unitsSold   = sold;
+        e.unitsWasted = wasted;
+        e.enteredBy   = m_auth->currentUser().id;
+
+        int id = db->saveDailyEntry(e);
+        if (id < 0) {
+            ++fail;
+        } else {
+            ++ok;
+        }
+    }
+
+    if (ok > 0) {
+        m_controller->loadFromDatabase();
+        refreshList();
+        m_bulkEdit->clear();
     }
 
     m_bulkStatus->setText(QStringLiteral("Imported %1 rows · %2 failed").arg(ok).arg(fail));
@@ -337,8 +371,6 @@ void DailyEntryWidget::onBulkImportClicked() {
         ? QStringLiteral("color:#d29922; font-size:10px; background:transparent;")
         : QStringLiteral("color:#3fb950; font-size:10px; background:transparent;"));
     m_bulkStatus->setVisible(true);
-
-    if (ok > 0) m_bulkEdit->clear();
 }
 
 // ─────────────────────────────────────────────
@@ -356,7 +388,10 @@ void DailyEntryWidget::onDeleteEntryClicked() {
     if (btn != QMessageBox::Yes) return;
 
     auto* db = m_controller->database();
-    if (db) db->deleteDailyEntry(e.id);
+    if (db) {
+        db->deleteDailyEntry(e.id);
+        m_controller->loadFromDatabase();
+    }
     refreshList();
 }
 
@@ -381,7 +416,10 @@ void DailyEntryWidget::onEditEntryClicked() {
     e.unitsWasted = newWasted;
 
     auto* db = m_controller->database();
-    if (db) db->updateDailyEntry(e);
+    if (db) {
+        db->updateDailyEntry(e);
+        m_controller->loadFromDatabase();
+    }
     refreshList();
 }
 
