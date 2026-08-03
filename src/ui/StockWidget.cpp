@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QCompleter>
 
 namespace Kirana {
 
@@ -74,6 +75,14 @@ void StockWidget::buildLayout() {
     m_inProductCombo->setInsertPolicy(QComboBox::NoInsert);
     m_inProductCombo->setMinimumHeight(38);
     m_inProductCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_inProductCombo->setPlaceholderText(QStringLiteral("Search and select product..."));
+    auto* inComp = m_inProductCombo->completer();
+    if (inComp) {
+        inComp->setCaseSensitivity(Qt::CaseInsensitive);
+        inComp->setFilterMode(Qt::MatchContains);
+        inComp->setCompletionMode(QCompleter::PopupCompletion);
+    }
+    m_inProductCombo->setCurrentIndex(-1);
     inGrid->addWidget(m_inProductCombo, 1, 0);
 
     inGrid->addWidget(makeFieldLabel(QStringLiteral("QUANTITY")), 0, 1);
@@ -122,6 +131,14 @@ void StockWidget::buildLayout() {
     m_outProductCombo->setInsertPolicy(QComboBox::NoInsert);
     m_outProductCombo->setMinimumHeight(38);
     m_outProductCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_outProductCombo->setPlaceholderText(QStringLiteral("Search and select product..."));
+    auto* outComp = m_outProductCombo->completer();
+    if (outComp) {
+        outComp->setCaseSensitivity(Qt::CaseInsensitive);
+        outComp->setFilterMode(Qt::MatchContains);
+        outComp->setCompletionMode(QCompleter::PopupCompletion);
+    }
+    m_outProductCombo->setCurrentIndex(-1);
     outGrid->addWidget(m_outProductCombo, 1, 0);
 
     outGrid->addWidget(makeFieldLabel(QStringLiteral("QUANTITY")), 0, 1);
@@ -218,20 +235,22 @@ void StockWidget::buildLayout() {
 void StockWidget::populateProductCombos() {
     QString currentIn = m_inProductCombo->currentText();
     QString currentOut = m_outProductCombo->currentText();
-
+ 
     m_inProductCombo->clear();
     m_outProductCombo->clear();
-
+ 
     for (const auto& p : m_controller->products()) {
         m_inProductCombo->addItem(p.name, p.id);
         m_outProductCombo->addItem(p.name, p.id);
     }
-
+ 
     int idxIn = m_inProductCombo->findText(currentIn);
     if (idxIn >= 0) m_inProductCombo->setCurrentIndex(idxIn);
-
+    else m_inProductCombo->setCurrentIndex(-1);
+ 
     int idxOut = m_outProductCombo->findText(currentOut);
     if (idxOut >= 0) m_outProductCombo->setCurrentIndex(idxOut);
+    else m_outProductCombo->setCurrentIndex(-1);
 }
 
 void StockWidget::onProductsChanged() {
@@ -243,10 +262,10 @@ void StockWidget::onStockInSaved() {
         QMessageBox::warning(this, QStringLiteral("Restock"), QStringLiteral("Select a product to restock."));
         return;
     }
-
+ 
     auto* db = m_controller->database();
     if (!db) return;
-
+ 
     StockMovement mv;
     mv.productId = m_inProductCombo->currentData().toInt();
     mv.movementType = QStringLiteral("IN");
@@ -255,9 +274,13 @@ void StockWidget::onStockInSaved() {
     mv.costPerUnit = m_inCostSpin->value();
     mv.movementDate = m_inDateEdit->date();
     mv.enteredBy = m_auth->currentUser().id;
-
+ 
     if (db->saveStockMovement(mv) > 0) {
         // Reset Form
+        m_inProductCombo->setCurrentIndex(-1);
+        if (m_inProductCombo->lineEdit()) {
+            m_inProductCombo->lineEdit()->clear();
+        }
         m_inQtySpin->setValue(1);
         m_inSupplierEdit->clear();
         m_inCostSpin->setValue(0.0);
@@ -274,10 +297,10 @@ void StockWidget::onStockOutSaved() {
         QMessageBox::warning(this, QStringLiteral("Stock Out"), QStringLiteral("Select a product to adjust/remove."));
         return;
     }
-
+ 
     auto* db = m_controller->database();
     if (!db) return;
-
+ 
     StockMovement mv;
     mv.productId = m_outProductCombo->currentData().toInt();
     mv.movementType = QStringLiteral("OUT");
@@ -285,9 +308,13 @@ void StockWidget::onStockOutSaved() {
     mv.reason = m_outReasonCombo->currentText();
     mv.movementDate = m_outDateEdit->date();
     mv.enteredBy = m_auth->currentUser().id;
-
+ 
     if (db->saveStockMovement(mv) > 0) {
         // Reset Form
+        m_outProductCombo->setCurrentIndex(-1);
+        if (m_outProductCombo->lineEdit()) {
+            m_outProductCombo->lineEdit()->clear();
+        }
         m_outQtySpin->setValue(1);
         // Refresh
         loadLedger();
