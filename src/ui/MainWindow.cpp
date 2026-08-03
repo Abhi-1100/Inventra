@@ -66,10 +66,6 @@ MainWindow::MainWindow(AppController* controller,
 }
 
 MainWindow::~MainWindow() {
-    if (m_worker && m_worker->isRunning()) {
-        m_worker->requestStop();
-        m_worker->wait(3000);
-    }
 }
 
 // ─────────────────────────────────────────────
@@ -132,40 +128,17 @@ void MainWindow::buildAppShell() {
     bodyLayout->addWidget(m_stack, 1);
     rootLayout->addWidget(body, 1);
 
-    m_worker = new PipelineWorker(m_appShell);
-
     m_rootStack->addWidget(m_appShell);   // index 1
 
     // Connect shell signals
     connect(m_sidebar, &Sidebar::pageSelected,
             this, &MainWindow::onPageSelected);
 
-    connect(m_statusBar, &StatusBar::runNowRequested,
-            this, &MainWindow::onRunNowClicked);
-
-    connect(m_importPage, &ImportWidget::pipelineRunRequested,
-            this, [this](const QString& csvPath) {
-                m_worker->setCsvPath(csvPath);
-                m_worker->setSettings(m_controller->settings());
-                if (!m_worker->isRunning()) m_worker->start();
-            });
-
     connect(m_settingsPage, &SettingsWidget::settingsChanged,
             [this](const AppSettings& s) {
                 m_controller->updateSettings(s);
                 resetIdleTimer();
             });
-    connect(m_settingsPage, &SettingsWidget::reRunRequested,
-            this, &MainWindow::onRunNowClicked);
-
-    connect(m_worker, &PipelineWorker::pipelineStarted,
-            this, &MainWindow::onPipelineStarted, Qt::QueuedConnection);
-    connect(m_worker, &PipelineWorker::progressUpdate,
-            this, &MainWindow::onPipelineProgress, Qt::QueuedConnection);
-    connect(m_worker, &PipelineWorker::pipelineFinished,
-            this, &MainWindow::onPipelineFinished, Qt::QueuedConnection);
-    connect(m_worker, &PipelineWorker::pipelineError,
-            this, &MainWindow::onPipelineError, Qt::QueuedConnection);
 
     connect(m_controller, &AppController::pipelineStateChanged,
             m_statusBar, &StatusBar::setPipelineState);
@@ -227,43 +200,11 @@ void MainWindow::showPage(int index) {
     m_sidebar->setActivePage(static_cast<Sidebar::Page>(index));
 }
 
-void MainWindow::onRunNowClicked() {
-    if (!m_worker || m_worker->isRunning()) return;
-    m_worker->setCsvPath(QString());
-    m_worker->setSettings(m_controller->settings());
-    m_worker->start();
-}
-
-void MainWindow::onPipelineStarted() {
-    m_statusBar->setPipelineState(true, m_controller->lastRunTime());
-}
-
-void MainWindow::onPipelineProgress(int /*pct*/, const QString& /*stage*/) {}
-
-void MainWindow::onPipelineFinished(const PipelineRunResult& result) {
-    if (result.success && !result.results.isEmpty()) {
-        m_controller->applyPipelineRun(result);
-    } else {
-        m_controller->loadDummyData();
-    }
-    m_statusBar->setPipelineState(false, m_controller->lastRunTime());
-}
-
-void MainWindow::onPipelineError(const QString& msg) {
-    m_statusBar->setPipelineState(false, m_controller->lastRunTime());
-    QMessageBox::warning(this, QStringLiteral("Pipeline Error"),
-        QStringLiteral("The ML pipeline encountered an error:\n\n") + msg);
-}
-
-// ─────────────────────────────────────────────
+// PipelineWorker legacy methods removed// ─────────────────────────────────────────────
 // Events
 // ─────────────────────────────────────────────
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-    if (m_worker && m_worker->isRunning()) {
-        m_worker->requestStop();
-        m_worker->wait(3000);
-    }
     event->accept();
 }
 

@@ -271,33 +271,17 @@ bool AppController::loadFromDatabase() {
 
 
     if (!loadedMLResults) {
-        // Populate ML simulation values on top of DB loaded structures
+        // Assign safe, neutral default ML values for products if no pipeline results exist
         for (int i = 0; i < dbProds.size(); ++i) {
             Product& p = dbProds[i];
-            bool foundSeed = false;
-            for (const auto& s : kSeedData) {
-                if (p.sku == QString::fromLatin1(s.sku)) {
-                    p.demandLabel = s.demand;
-                    p.stockStatus = s.status;
-                    p.priority = s.priority;
-                    p.confidence = s.confidence;
-                    p.forecastNext7 = s.forecast7;
-                    p.forecastTrend = s.trend;
-                    p.eoqQty = s.eoq;
-                    foundSeed = true;
-                    break;
-                }
-            }
-            if (!foundSeed) {
-                // Default generated ML/forecasting values
-                p.demandLabel = DemandLabel::Medium;
-                p.stockStatus = StockStatus::NoAction;
-                p.priority = Priority::Safe;
-                p.confidence = 85.0;
-                p.forecastNext7 = p.currentStock * 0.5;
-                p.forecastTrend = 0.5;
-                p.eoqQty = 50;
-            }
+            // Default generated ML/forecasting values
+            p.demandLabel = DemandLabel::Medium;
+            p.stockStatus = StockStatus::NoAction;
+            p.priority = Priority::Safe;
+            p.confidence = 85.0;
+            p.forecastNext7 = p.currentStock * 0.5;
+            p.forecastTrend = 0.5;
+            p.eoqQty = 50;
 
             const double dailyBase = p.forecastNext7 / 7.0;
             p.forecast = makeForecast(dailyBase, p.forecastTrend / 7.0, m_settings.forecastHorizonDays);

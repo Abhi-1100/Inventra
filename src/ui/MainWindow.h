@@ -23,8 +23,7 @@ class AnalyticsWidget;
 class ImportWidget;
 class SettingsWidget;
 class ProductCatalogWidget;
-class PipelineWorker;
-struct PipelineRunResult;
+// No longer using PipelineWorker
 
 // ─────────────────────────────────────────────
 // MainWindow — application shell
@@ -66,11 +65,7 @@ private slots:
     void onPageSelected(Sidebar::Page page);
     void onLoginSucceeded(const Kirana::StaffUser& user);
     void onLoggedOut();
-    void onRunNowClicked();
-    void onPipelineStarted();
-    void onPipelineProgress(int pct, const QString& stage);
-    void onPipelineFinished(const PipelineRunResult& result);
-    void onPipelineError(const QString& msg);
+    // PipelineWorker methods removed
     void onSessionLocked();
     void onSessionUnlocked();
     void onIdleTimeout();
@@ -110,9 +105,6 @@ private:
     AnalyticsWidget*       m_analyticsPage   = nullptr;
     ImportWidget*          m_importPage      = nullptr;
     SettingsWidget*        m_settingsPage    = nullptr;
-
-    // Background pipeline worker
-    PipelineWorker* m_worker = nullptr;
 
     // ---- ADDED: API Integration ----
     QLabel* m_apiBadge      = nullptr;

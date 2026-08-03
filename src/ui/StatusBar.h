@@ -25,7 +25,6 @@ public:
     void setPipelineState(bool live, const QDateTime& lastRun);
 
 signals:
-    void runNowRequested();
     void searchRequested(const QString& query);
 
 protected:
@@ -35,7 +34,6 @@ private:
     QLineEdit*   m_searchEdit     = nullptr;
     QLabel*      m_pipelineLabel  = nullptr;
     QLabel*      m_lastRunLabel   = nullptr;
-    QPushButton* m_runBtn         = nullptr;
 
     void buildLayout();
 };

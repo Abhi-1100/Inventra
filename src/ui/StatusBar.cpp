@@ -95,30 +95,7 @@ void StatusBar::buildLayout() {
     lay->addWidget(m_pipelineLabel);
     lay->addSpacing(16);
 
-    // ── Run Now button ────────────────────────
-    m_runBtn = new QPushButton(QStringLiteral("Run Pipeline"), this);
-    m_runBtn->setFixedHeight(32);
-    m_runBtn->setCursor(Qt::PointingHandCursor);
-    m_runBtn->setObjectName("PrimaryBtn");
-    m_runBtn->setStyleSheet(
-        "QPushButton {"
-        "  background: qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #1f6feb,stop:1 #0050a7);"
-        "  border: none;"
-        "  border-top: 1px solid rgba(175,198,255,0.3);"
-        "  color: #fffcff;"
-        "  font-family: 'Hanken Grotesk', sans-serif;"
-        "  font-size: 13px;"
-        "  font-weight: 600;"
-        "  border-radius: 6px;"
-        "  padding: 0 16px;"
-        "}"
-        "QPushButton:hover {"
-        "  background: qlineargradient(x1:0,y1:0,x2:1,y2:0,stop:0 #388bfd,stop:1 #1f6feb);"
-        "}"
-        "QPushButton:pressed { background: #0050a7; }");
-    connect(m_runBtn, &QPushButton::clicked, this, &StatusBar::runNowRequested);
-    lay->addWidget(m_runBtn);
-    lay->addSpacing(16);
+    // Removed Run Now button
 
     // ── Separator ─────────────────────────────
     auto* sep = new QWidget(this);
