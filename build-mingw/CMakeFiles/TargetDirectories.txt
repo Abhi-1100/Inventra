@@ -1,8 +1,0 @@
-D:/confres/build-mingw/CMakeFiles/Inventra.dir
-D:/confres/build-mingw/CMakeFiles/edit_cache.dir
-D:/confres/build-mingw/CMakeFiles/rebuild_cache.dir
-D:/confres/build-mingw/CMakeFiles/list_install_components.dir
-D:/confres/build-mingw/CMakeFiles/install.dir
-D:/confres/build-mingw/CMakeFiles/install/local.dir
-D:/confres/build-mingw/CMakeFiles/install/strip.dir
-D:/confres/build-mingw/CMakeFiles/Inventra_autogen.dir

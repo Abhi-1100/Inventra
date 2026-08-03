@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Inventra.dir/objects.a
-C:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\Inventra.dir/objects.a @CMakeFiles\Inventra.dir\objects1.rsp
-C:\Qt\Tools\mingw1310_64\bin\c++.exe -g -mwindows -Wl,--whole-archive CMakeFiles\Inventra.dir/objects.a -Wl,--no-whole-archive -o Inventra.exe -Wl,--out-implib,libInventra.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Inventra.dir\linkLibs.rsp
