@@ -41,6 +41,8 @@ public:
     AppSettings&        settings()     { return m_settings; }
     const AppSettings&  settings() const { return m_settings; }
     Database*           database()     { return m_db; }
+    QString             searchQuery() const { return m_searchQuery; }
+    bool                matchesSearch(const Product& p, const QString& query) const;
 
     QDateTime lastRunTime() const { return m_lastRunTime; }
     bool      pipelineLive() const { return m_pipelineLive; }
@@ -57,10 +59,15 @@ public:
     void applyPipelineRun(const PipelineRunResult& result);
     void updateSettings(const AppSettings& s);
 
+public slots:
+    void onApiResultsReady(const QJsonArray& results);
+    void setSearchQuery(const QString& query);
+
 signals:
     void productsChanged(const QVector<Product>& products);
     void pipelineStateChanged(bool live, QDateTime lastRun);
     void settingsChanged(const AppSettings& s);
+    void searchQueryChanged(const QString& query);
 
 private:
     static QVector<Product> buildDummyProducts(const AppSettings& cfg);
@@ -72,6 +79,7 @@ private:
     AppSettings      m_settings;
     QDateTime        m_lastRunTime;
     bool             m_pipelineLive = false;
+    QString          m_searchQuery;
 };
 
 } // namespace Kirana

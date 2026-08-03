@@ -65,6 +65,7 @@ void StatusBar::buildLayout() {
         "}"
         "QLineEdit::placeholder { color: rgba(140,144,160,0.6); }");
     m_searchEdit->setFixedHeight(36);
+    connect(m_searchEdit, &QLineEdit::textChanged, this, [this](const QString& text){ qDebug() << "\n[TRACE] Search QLineEdit changed:" << text; emit searchRequested(text); });
 
     searchRow->addWidget(searchIcon);
     searchRow->addWidget(m_searchEdit);

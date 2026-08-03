@@ -41,6 +41,7 @@ private slots:
     void onAddEntryClicked();
     void onDeleteEntryClicked();
     void onEditEntryClicked();
+    void applySearchFilter();
     void onBulkImportClicked();
     void onProductsChanged();
     void refreshList();

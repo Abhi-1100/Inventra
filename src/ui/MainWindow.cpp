@@ -315,3 +315,6 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
 }
 
 } // namespace Kirana
+
+void Kirana::MainWindow::onApiHealthChecked(bool) {}
+

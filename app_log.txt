@@ -1,0 +1,4 @@
+[main] Database path: "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/build/Inventra.app/Contents/MacOS/inventra.db"
+[PythonBridge] Initialized successfully. Python path: "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/build/Inventra.app/Contents/MacOS/python"
+qt.qpa.fonts: Populating font family aliases took 36 ms. Replace uses of missing font family "JetBrains Mono" with one that exists to avoid this cost. 
+QThread: Destroyed while thread '' is still running

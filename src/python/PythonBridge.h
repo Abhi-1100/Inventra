@@ -4,9 +4,6 @@
 #include "core/ProductData.h"
 #include "python/PipelineResult.h"
 
-// PythonBridge is only compiled when KIRANA_PYTHON_ENABLED is defined.
-// In Phase 1, this file still exists but all methods are no-ops.
-
 namespace Kirana {
 
 struct AppSettings;
@@ -16,7 +13,7 @@ struct AppSettings;
 //
 // Manages the embedded Python interpreter lifetime
 // (must outlive all pybind11 calls) and provides
-// a clean C++ API over the three Python modules.
+// a clean C++ API over the ML pipeline modules.
 // ─────────────────────────────────────────────
 
 class PythonBridge {
@@ -31,7 +28,12 @@ public:
     bool isInitialized() const { return m_initialized; }
 
     // ── API called from PipelineWorker (background thread) ──
+
+    // Run full pipeline against SQLite DB (csvPath empty) or CSV file.
     PipelineRunResult runPipeline(const QString& csvPath, const AppSettings& settings);
+
+    // Run pipeline for a single product by ID (for detail panel "Run Prediction" button).
+    MLResult runSingleProduct(int productId, const AppSettings& settings);
 
 private:
     PythonBridge()  = default;

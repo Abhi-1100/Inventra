@@ -22,8 +22,46 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QSortFilterProxyModel>
 
 namespace Kirana {
+
+// ══════════════════════════════════════════════
+// LedgerFilterProxyModel
+// ══════════════════════════════════════════════
+
+class LedgerFilterProxyModel : public QSortFilterProxyModel {
+public:
+    explicit LedgerFilterProxyModel(AppController* ctrl, QObject* parent = nullptr)
+        : QSortFilterProxyModel(parent), controller(ctrl)
+    {}
+
+    AppController* controller;
+
+    void refreshFilter() {
+        beginResetModel();
+        invalidateFilter();
+        endResetModel();
+    }
+
+protected:
+    bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override {
+        if (!controller) return true;
+        QString q = controller->searchQuery();
+        if (q.isEmpty()) return true;
+
+        QModelIndex idxProduct = sourceModel()->index(sourceRow, 1, sourceParent);
+        QModelIndex idxSupplier = sourceModel()->index(sourceRow, 5, sourceParent);
+
+        QString pName = sourceModel()->data(idxProduct).toString();
+        QString supName = sourceModel()->data(idxSupplier).toString();
+
+        if (pName.contains(q, Qt::CaseInsensitive)) return true;
+        if (supName.contains(q, Qt::CaseInsensitive)) return true;
+
+        return false;
+    }
+};
 
 StockWidget::StockWidget(AppController* controller,
                          AuthController* auth,
@@ -37,6 +75,11 @@ StockWidget::StockWidget(AppController* controller,
     loadLedger();
 
     connect(m_controller, &AppController::productsChanged, this, &StockWidget::onProductsChanged);
+    connect(m_controller, &AppController::searchQueryChanged, this, [this]() {
+        if (auto* p = static_cast<LedgerFilterProxyModel*>(m_proxyModel)) {
+            p->refreshFilter();
+        }
+    });
 }
 
 void StockWidget::buildLayout() {
@@ -208,7 +251,10 @@ void StockWidget::buildLayout() {
         QStringLiteral("QTY"), QStringLiteral("COST/UNIT"), QStringLiteral("SUPPLIER / REASON"),
         QStringLiteral("RECORDED BY")
     });
-    m_ledgerTable->setModel(m_ledgerModel);
+
+    m_proxyModel = new LedgerFilterProxyModel(m_controller, this);
+    m_proxyModel->setSourceModel(m_ledgerModel);
+    m_ledgerTable->setModel(m_proxyModel);
 
     ledgerLayout->addWidget(m_ledgerTable, 1);
     mainLayout->addWidget(ledgerFrame, 1);

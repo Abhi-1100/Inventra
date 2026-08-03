@@ -11,6 +11,7 @@ class QLineEdit;
 class QDateEdit;
 class QTableView;
 class QStandardItemModel;
+class QSortFilterProxyModel;
 class QPushButton;
 
 namespace Kirana {
@@ -66,8 +67,9 @@ private:
     QComboBox*      m_filterTypeCombo = nullptr;
 
     // Ledger View
-    QTableView*         m_ledgerTable = nullptr;
-    QStandardItemModel* m_ledgerModel = nullptr;
+    QTableView*            m_ledgerTable = nullptr;
+    QStandardItemModel*    m_ledgerModel = nullptr;
+    QSortFilterProxyModel* m_proxyModel  = nullptr;
 };
 
 } // namespace Kirana

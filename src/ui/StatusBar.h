@@ -26,6 +26,7 @@ public:
 
 signals:
     void runNowRequested();
+    void searchRequested(const QString& query);
 
 protected:
     void paintEvent(QPaintEvent* event) override;

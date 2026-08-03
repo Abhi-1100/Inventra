@@ -2052,3 +2052,1574 @@ backend.utils.validators.DuplicateProductError: Row 1: Product name 'Real Produc
 2026-07-13 20:17:38,027 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
 2026-07-13 20:17:38,028 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
 2026-07-13 20:17:46,042 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-14 21:45:37,752 - inventory_backend.inventra_bridge - INFO - predict_all_products: db=/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/build/inventra.db
+2026-07-14 21:45:37,761 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-14 21:45:38,798 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-14 21:45:38,798 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=676e059d046875377b3d1f325deba7924abf78fe2b10abcd85b9bd8d48e7b768, new=42b1d7dcb16bd58030c9bc581d6e17b194941ae7a956ca23c29fac548e8676b1).
+2026-07-14 21:45:38,970 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-14 21:45:38,971 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
+2026-07-14 21:45:46,806 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 13:38:02,108 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 13:38:34,976 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 3 products...
+2026-07-17 13:38:35,057 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 13:38:35,057 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=42b1d7dcb16bd58030c9bc581d6e17b194941ae7a956ca23c29fac548e8676b1, new=e48bcd437d9d8c683cf1f3edcb8873808827cde7903b73d2873a1cca5cb2e652).
+2026-07-17 13:38:35,069 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-17 13:38:35,070 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
+2026-07-17 13:38:38,252 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 3 predictions.
+2026-07-17 13:41:51,319 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 13:41:51,320 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:38:35.070294)
+2026-07-17 13:44:58,023 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 13:44:58,023 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:38:35.070294)
+2026-07-17 13:47:31,577 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=cc146e83)
+2026-07-17 13:47:32,001 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 13:47:32,987 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 13:47:32,987 - inventory_backend.model_manager - INFO - Retraining required: Data hash changed (saved=e48bcd437d9d8c683cf1f3edcb8873808827cde7903b73d2873a1cca5cb2e652, new=4c1c96c52cef07e38dce7844d0227eb9e86ebb05733c47fb219d29c9fa6f280f).
+2026-07-17 13:47:33,158 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 100.00%
+2026-07-17 13:47:33,159 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
+2026-07-17 13:47:40,848 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:44:26,144 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:44:26,145 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:44:43,844 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=2dffd186)
+2026-07-17 21:44:44,270 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:44:45,268 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:44:45,268 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:44:45,269 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:44:53,322 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:51:06,435 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:51:06,435 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:51:10,397 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=70395f5d)
+2026-07-17 21:51:10,815 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:51:11,854 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:51:11,854 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:51:11,855 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:51:11,871 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,874 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,876 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,879 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,881 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,883 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,886 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,889 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,891 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,894 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,897 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,899 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,902 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,904 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,907 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,909 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,911 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,914 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,916 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,918 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,921 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,923 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,925 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,927 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,930 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,932 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,934 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,937 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,939 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,941 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,944 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,946 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,948 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,951 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,953 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,955 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,958 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,961 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,964 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,966 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,969 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,971 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,973 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,976 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,978 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,980 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,983 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,985 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,988 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,991 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,994 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:11,996 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,000 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,004 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,006 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,009 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,012 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,015 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,018 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,021 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,024 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,026 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,029 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,032 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,035 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,038 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,041 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,043 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,046 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,049 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,052 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,055 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,057 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,060 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,063 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,066 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,069 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,072 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,074 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,077 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,080 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,083 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,085 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,089 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,091 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,094 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,096 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,101 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,105 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,108 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,111 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,114 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,118 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,121 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,124 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,127 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,129 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,133 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,136 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,139 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:51:12,140 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:51:30,260 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:51:30,260 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:52:16,206 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=e10df1b3)
+2026-07-17 21:52:16,621 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:52:17,591 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:52:17,592 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:52:17,592 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:52:17,599 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,602 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,604 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,607 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,610 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,612 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,614 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,617 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,619 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,621 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,624 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,627 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,630 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,632 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,635 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,637 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,640 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,642 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,645 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,648 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,650 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,653 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,655 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,657 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,660 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,662 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,665 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,667 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,669 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,672 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,674 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,676 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,679 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,681 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,684 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,687 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,689 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,692 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,694 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,697 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,699 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,702 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,705 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,707 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,710 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,712 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,715 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,717 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,720 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,722 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,724 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,727 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,729 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,732 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,735 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,738 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,740 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,743 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,746 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,748 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,751 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,753 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,756 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,758 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,760 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,763 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,765 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,767 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,770 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,772 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,775 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,778 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,780 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,786 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,791 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,798 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,806 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,811 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,815 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,818 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,820 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,823 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,825 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,828 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,830 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,833 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,835 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,837 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,840 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,843 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,845 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,848 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,850 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,853 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,855 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,857 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,860 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,862 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,865 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,867 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:52:17,868 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:53:09,343 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:53:09,343 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:53:35,411 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:53:35,411 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:54:19,484 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:54:19,484 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:55:05,197 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=a67a4e89)
+2026-07-17 21:55:05,616 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:55:06,585 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:55:06,586 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:55:06,586 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:55:06,597 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,600 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,602 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,605 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,607 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,610 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,612 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,614 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,616 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,619 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,621 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,624 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,626 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,629 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,631 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,633 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,636 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,638 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,640 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,642 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,644 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,647 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,649 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,651 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,653 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,656 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,658 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,660 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,662 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,664 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,666 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,669 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,671 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,673 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,675 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,677 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,680 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,682 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,684 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,686 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,688 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,691 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,693 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,695 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,697 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,699 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,701 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,704 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,707 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,711 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,713 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,715 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,718 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,720 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,722 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,724 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,726 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,729 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,731 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,733 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,735 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,738 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,740 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,742 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,744 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,747 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,749 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,751 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,753 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,756 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,758 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,760 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,762 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,765 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,767 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,770 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,772 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,774 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,777 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,779 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,781 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,783 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,786 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,788 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,790 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,793 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,795 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,797 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,799 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,802 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,804 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,806 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,808 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,811 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,813 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,815 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,818 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,820 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,822 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,824 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:55:06,825 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:55:49,596 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:55:49,596 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:56:20,766 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=6de94318)
+2026-07-17 21:56:21,190 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:56:22,169 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:56:22,169 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:56:22,169 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:56:22,180 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,183 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,186 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,188 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,190 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,192 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,195 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,197 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,200 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,202 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,204 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,207 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,209 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,212 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,214 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,216 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,218 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,221 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,223 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,225 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,227 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,229 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,232 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,234 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,236 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,238 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,241 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,243 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,245 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,247 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,250 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,252 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,254 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,257 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,260 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,262 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,265 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,267 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,269 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,272 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,274 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,276 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,278 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,281 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,283 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,285 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,287 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,290 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,292 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,294 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,296 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,299 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,301 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,303 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,305 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,307 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,310 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,312 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,314 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,316 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,318 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,321 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,323 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,325 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,327 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,330 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,332 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,334 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,336 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,339 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,341 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,343 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,345 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,348 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,350 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,352 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,355 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,357 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,359 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,361 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,364 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,366 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,368 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,371 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,373 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,375 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,377 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,380 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,382 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,384 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,386 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,389 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,391 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,393 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,395 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,398 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,400 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,402 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,404 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,407 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:56:22,407 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:58:10,750 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=902f7486)
+2026-07-17 21:58:11,226 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:58:12,210 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:58:12,210 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:58:12,211 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:58:12,213 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,217 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,220 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,222 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,225 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,227 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,230 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,232 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,235 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,237 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,240 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,242 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,244 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,247 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,249 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,252 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,255 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,257 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,260 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,262 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,266 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,268 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,270 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,273 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,275 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,277 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,279 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,282 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,285 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,287 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,290 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,292 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,294 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,297 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,299 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,301 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,303 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,306 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,308 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,310 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,313 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,315 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,317 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,319 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,322 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,324 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,326 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,328 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,331 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,333 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,335 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,337 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,339 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,342 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,344 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,346 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,348 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,350 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,353 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,355 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,357 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,359 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,361 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,364 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,366 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,368 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,370 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,372 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,375 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,377 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,379 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,381 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,383 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,386 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,388 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,391 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,393 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,396 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,398 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,401 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,403 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,405 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,407 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,410 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,412 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,415 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,417 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,419 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,421 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,424 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,426 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,428 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,431 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,433 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,436 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,438 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,441 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,443 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,445 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,449 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:58:12,449 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:58:52,621 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:58:52,621 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:59:24,717 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:24,717 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 21:59:28,839 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=3a3ad21c)
+2026-07-17 21:59:29,259 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:59:30,233 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:30,233 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:59:30,234 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:30,244 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,247 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,250 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,253 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,255 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,257 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,260 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,262 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,265 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,267 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,270 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,272 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,274 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,277 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,279 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,282 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,284 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,286 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,289 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,291 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,293 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,295 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,298 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,300 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,302 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,304 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,307 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,309 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,311 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,314 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,316 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,318 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,321 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,323 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,325 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,328 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,330 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,332 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,334 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,337 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,339 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,341 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,344 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,346 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,348 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,350 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,353 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,355 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,357 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,360 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,362 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,364 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,367 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,369 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,371 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,373 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,376 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,378 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,380 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,382 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,385 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,387 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,389 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,391 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,394 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,396 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,398 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,400 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,402 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,405 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,407 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,409 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,411 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,414 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,416 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,418 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,421 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,423 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,425 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,427 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,430 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,432 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,434 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,437 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,439 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,441 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,443 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,446 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,448 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,450 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,452 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,454 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,457 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,459 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,461 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,464 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,466 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,468 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,471 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,473 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:30,474 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:59:30,514 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=d7fb5ad0)
+2026-07-17 21:59:30,942 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 21:59:31,905 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:31,905 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 21:59:31,906 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:31,908 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,911 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,913 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,915 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,918 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,920 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,922 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,924 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,927 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,929 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,932 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,934 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,937 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,939 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,941 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,944 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,946 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,948 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,950 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,953 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,955 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,957 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,960 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,962 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,964 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,966 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,969 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,971 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,973 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,976 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,978 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,980 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,982 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,985 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,987 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,989 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,992 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,994 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,996 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:31,998 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,001 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,003 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,005 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,007 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,010 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,012 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,014 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,016 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,019 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,021 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,023 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,026 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,028 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,030 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,032 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,035 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,037 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,039 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,041 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,044 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,046 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,048 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,050 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,053 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,055 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,057 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,060 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,062 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,064 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,066 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,069 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,071 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,073 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,076 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,078 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,080 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,083 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,085 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,087 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,089 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,091 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,094 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,096 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,098 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,100 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,103 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,105 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,107 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,109 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,112 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,114 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,116 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,118 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,121 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,123 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,126 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,128 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,131 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,133 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,136 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 21:59:32,136 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-07-17 21:59:56,408 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:56,408 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-07-17 22:00:34,060 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=e6ad2ea1)
+2026-07-17 22:00:34,485 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 22:00:35,453 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 22:00:35,453 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 22:00:35,454 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 22:00:35,461 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,464 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,466 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,469 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,471 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,473 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,476 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,478 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,480 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,484 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,486 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,488 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,491 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,493 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,496 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,498 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,500 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,503 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,505 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,507 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,510 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,512 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,514 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,517 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,519 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,521 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,523 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,526 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,528 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,530 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,533 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,535 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,537 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,539 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,542 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,544 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,546 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,548 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,551 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,553 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,555 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,557 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,560 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,562 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,564 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,566 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,569 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,571 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,573 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,576 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,578 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,580 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,582 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,585 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,587 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,589 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,591 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,594 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,596 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,598 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,601 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,603 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,605 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,607 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,610 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,612 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,614 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,616 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,619 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,621 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,623 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,625 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,628 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,630 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,632 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,635 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,637 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,639 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,641 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,643 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,646 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,648 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,650 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,653 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,655 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,657 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,659 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,662 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,664 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,666 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,668 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,671 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,673 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,675 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,677 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,680 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,682 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,684 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,687 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,689 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,690 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-08-02 10:43:17,234 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 10:43:17,234 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-08-02 10:44:14,872 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=6ce031ce)
+2026-08-02 10:44:15,308 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-08-02 10:44:16,292 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 10:44:16,292 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-08-02 10:44:16,293 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 10:44:16,308 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,311 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,314 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,316 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,319 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,322 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,324 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,327 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,329 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,332 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,334 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,337 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,339 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,341 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,344 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,346 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,349 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,351 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,353 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,356 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,358 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,360 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,363 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,365 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,368 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,370 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,372 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,375 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,377 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,379 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,382 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,385 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,387 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,390 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,392 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,395 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,397 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,400 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,402 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,404 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,407 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,409 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,412 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,415 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,417 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,420 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,423 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,426 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,428 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,431 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,433 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,436 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,438 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,440 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,443 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,445 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,448 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,450 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,452 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,455 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,457 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,459 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,462 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,464 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,467 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,470 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,472 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,475 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,477 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,480 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,482 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,485 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,488 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,490 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,492 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,495 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,497 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,500 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,506 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,514 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,525 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,530 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,533 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,536 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,538 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,541 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,545 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,547 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,550 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,552 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,555 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,557 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,560 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,563 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,565 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,568 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,570 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,572 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,575 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,578 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 10:44:16,579 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-08-02 11:20:43,001 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:20:43,003 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-08-02 11:26:54,691 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:26:54,693 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+2026-08-02 11:32:44,258 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,259 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,261 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,262 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,263 - inventory_backend.db_manager - INFO - Added product SKU=TEST-01 with ID=1
+2026-08-02 11:32:44,264 - inventory_backend.db_manager - ERROR - Transaction failed and was rolled back: FOREIGN KEY constraint failed
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 80, in transaction
+    yield cursor
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/tests/test_database.py", line 55, in test_transaction_rollback
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        INSERT INTO stock_movements (product_id, movement_type, quantity, supplier_name, cost_per_unit, reason, movement_date, entered_by, created_at)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (999, 'IN', 5, 'Supplier', 5.0, 'Reason', '2026-07-11', NULL, datetime('now'));
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+2026-08-02 11:32:44,265 - inventory_backend.db_manager - ERROR - Database connection error: Database transaction failure: FOREIGN KEY constraint failed
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 80, in transaction
+    yield cursor
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/tests/test_database.py", line 55, in test_transaction_rollback
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        INSERT INTO stock_movements (product_id, movement_type, quantity, supplier_name, cost_per_unit, reason, movement_date, entered_by, created_at)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (999, 'IN', 5, 'Supplier', 5.0, 'Reason', '2026-07-11', NULL, datetime('now'));
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 54, in connection
+    yield conn
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 88, in transaction
+    raise DatabaseError(f"Database transaction failure: {e}") from e
+backend.utils.validators.DatabaseError: Database transaction failure: FOREIGN KEY constraint failed
+2026-08-02 11:32:44,267 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,267 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,268 - inventory_backend.db_manager - INFO - Added product SKU=SKU-1 with ID=1
+2026-08-02 11:32:44,270 - inventory_backend.db_manager - INFO - Updated product ID=1, status=True
+2026-08-02 11:32:44,272 - inventory_backend.db_manager - INFO - Deleted product ID=1, status=True
+2026-08-02 11:32:44,274 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,275 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,276 - inventory_backend.db_manager - INFO - Added product SKU=P1 with ID=1
+2026-08-02 11:32:44,276 - inventory_backend.db_manager - INFO - Added daily entry ID=1 for product ID=1
+2026-08-02 11:32:44,278 - inventory_backend.db_manager - INFO - Updated daily entry ID=1, status=True
+2026-08-02 11:32:44,279 - inventory_backend.db_manager - INFO - Deleted daily entry ID=1, status=True
+2026-08-02 11:32:44,282 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,282 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,283 - inventory_backend.db_manager - INFO - Added product SKU=P1 with ID=1
+2026-08-02 11:32:44,284 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (OUT), delta=-5 for product ID=1
+2026-08-02 11:32:44,289 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,290 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,306 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,307 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,308 - inventory_backend.db_manager - ERROR - Database connection error: no such table: nonexistent_table
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 54, in connection
+    yield conn
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/tests/test_database.py", line 204, in test_db_execute_error
+    cursor.execute("SELECT * FROM nonexistent_table;")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: nonexistent_table
+2026-08-02 11:32:44,312 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:44,313 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:44,315 - inventory_backend.db_manager - ERROR - Database connection error: unable to open database file
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 45, in connection
+    conn = sqlite3.connect(self.db_path)
+sqlite3.OperationalError: unable to open database file
+2026-08-02 11:32:44,315 - inventory_backend.db_manager - CRITICAL - Database initialization failed: Database error: unable to open database file
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 45, in connection
+    conn = sqlite3.connect(self.db_path)
+sqlite3.OperationalError: unable to open database file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 31, in _initialize_db
+    with self.connection() as conn:
+         ~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 66, in connection
+    raise DatabaseError(f"Database error: {e}") from e
+backend.utils.validators.DatabaseError: Database error: unable to open database file
+2026-08-02 11:32:44,668 - inventory_backend.forecasting - INFO - Moving Average fallback completed successfully
+2026-08-02 11:32:44,680 - inventory_backend.forecasting - INFO - Linear Regression forecast completed successfully
+2026-08-02 11:32:45,157 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 100.00%
+2026-08-02 11:32:45,161 - inventory_backend.evaluation - INFO - Forecast evaluation: MAPE=0.0500, RMSE=0.8165, R2=0.9600
+2026-08-02 11:32:45,163 - inventory_backend.evaluation - INFO - Classification evaluation: Accuracy=0.6667, F1=0.5556
+2026-08-02 11:32:45,254 - inventory_backend.model_manager - INFO - Retraining required: No existing models found.
+2026-08-02 11:32:45,256 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /private/var/folders/9t/_d31_z194q5g1mykg6m706hh0000gn/T/pytest-of-ghoriommukeshbai/pytest-0/test_model_manager0/models
+2026-08-02 11:32:45,257 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:32:45,257 - inventory_backend.model_manager - INFO - Retraining required: Model type changed or older model type detected (saved=RandomForestClassifier).
+2026-08-02 11:32:45,299 - inventory_backend.prediction_engine - WARNING - Sales history or product list is empty. Returning empty predictions.
+2026-08-02 11:32:45,300 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-08-02 11:32:45,320 - inventory_backend.prediction_engine - INFO - Product SKU=COLD is in Cold Start (history=2 points, span=7 days).
+2026-08-02 11:32:45,320 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-08-02 11:32:45,322 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,324 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,327 - inventory_backend.db_manager - INFO - Added product SKU=SKU-T1 with ID=1
+2026-08-02 11:32:45,328 - inventory_backend.inventory_service - WARNING - Failed to add product: SKU 'SKU-T1' already exists.
+2026-08-02 11:32:45,329 - inventory_backend.inventory_service - WARNING - Failed to add product: Name 'Bread' already exists.
+2026-08-02 11:32:45,331 - inventory_backend.db_manager - INFO - Updated product ID=1, status=True
+2026-08-02 11:32:45,333 - inventory_backend.inventory_service - INFO - Logically deactivated product SKU=SKU-T1
+2026-08-02 11:32:45,336 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,337 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,339 - inventory_backend.db_manager - INFO - Added product SKU=MILK-01 with ID=1
+2026-08-02 11:32:45,340 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (IN), delta=15 for product ID=1
+2026-08-02 11:32:45,342 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=MILK-01: Sales=17, PrevStock=10, Deliveries=15, NewStock=8
+2026-08-02 11:32:45,345 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,346 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,348 - inventory_backend.db_manager - INFO - Added product SKU=A-1 with ID=1
+2026-08-02 11:32:45,350 - inventory_backend.db_manager - INFO - Added product SKU=B-2 with ID=2
+2026-08-02 11:32:45,351 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A-1: Sales=10, PrevStock=20, Deliveries=0, NewStock=10
+2026-08-02 11:32:45,352 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=B-2: Sales=3, PrevStock=5, Deliveries=0, NewStock=2
+2026-08-02 11:32:45,357 - inventory_backend.db_manager - INFO - Recorded movement ID=1 (IN), delta=10 for product ID=1
+2026-08-02 11:32:45,361 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,362 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,363 - inventory_backend.prediction_service - WARNING - No active products to run predictions for.
+2026-08-02 11:32:45,365 - inventory_backend.db_manager - INFO - Added product SKU=A with ID=1
+2026-08-02 11:32:45,366 - inventory_backend.prediction_service - WARNING - No sales history records in daily_entries. Pipeline cannot run.
+2026-08-02 11:32:45,367 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=5, PrevStock=20, Deliveries=0, NewStock=15
+2026-08-02 11:32:45,368 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-08-02 11:32:45,370 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-08-02 11:32:45,371 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-08-02 11:32:45,372 - inventory_backend.inventory_service - INFO - Weekly submission for SKU=A: Sales=0, PrevStock=15, Deliveries=0, NewStock=15
+2026-08-02 11:32:45,374 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-08-02 11:32:45,385 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:32:45,385 - inventory_backend.model_manager - INFO - Retraining required: Model type changed or older model type detected (saved=RandomForestClassifier).
+2026-08-02 11:32:45,387 - inventory_backend.prediction_engine - ERROR - Error training/loading classifier model: The number of classes has to be greater than one; got 1 class
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/ml/prediction_engine.py", line 158, in run_ml_pipeline
+    clf, scaler, acc = train_classifier(combined_features, CLASSIFIER_FEATURES)
+                       ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/ml/classifier.py", line 85, in train_classifier
+    clf.fit(X_scaled, y)
+    ~~~~~~~^^^^^^^^^^^^^
+  File "/Users/ghoriommukeshbai/Library/Python/3.13/lib/python/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/ghoriommukeshbai/Library/Python/3.13/lib/python/site-packages/sklearn/svm/_base.py", line 224, in fit
+    y = self._validate_targets(y)
+  File "/Users/ghoriommukeshbai/Library/Python/3.13/lib/python/site-packages/sklearn/svm/_base.py", line 789, in _validate_targets
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The number of classes has to be greater than one; got 1 class
+2026-08-02 11:32:45,391 - inventory_backend.forecasting - INFO - Linear Regression forecast completed successfully
+2026-08-02 11:32:45,391 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-08-02 11:32:45,392 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 1 products...
+2026-08-02 11:32:45,395 - inventory_backend.prediction_engine - INFO - Product SKU=A is in Cold Start (history=2 points, span=1 days).
+2026-08-02 11:32:45,395 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 1 predictions.
+2026-08-02 11:32:45,397 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,398 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,401 - inventory_backend.inventory_service - INFO - Bulk CSV import complete: 2 inserted, 0 updated.
+2026-08-02 11:32:45,402 - inventory_backend.inventory_service - INFO - Bulk CSV import complete: 0 inserted, 2 updated.
+2026-08-02 11:32:45,404 - inventory_backend.migrations - INFO - Running database migrations (current=0, target=1)...
+2026-08-02 11:32:45,405 - inventory_backend.migrations - INFO - Database migrations completed successfully.
+2026-08-02 11:32:45,406 - inventory_backend.inventory_service - WARNING - Attempted deactivation of non-existent product ID=999
+2026-08-02 11:32:45,409 - inventory_backend.db_manager - INFO - Added product SKU=SKU-REAL with ID=1
+2026-08-02 11:32:45,412 - inventory_backend.db_manager - ERROR - Transaction failed and was rolled back: Row 1: Product name 'Real Product' already exists in database with a different SKU.
+Traceback (most recent call last):
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/database/db_manager.py", line 80, in transaction
+    yield cursor
+  File "/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/services/inventory_service.py", line 189, in bulk_csv_import
+    raise DuplicateProductError(f"Row {idx+1}: Product name '{name}' already exists in database with a different SKU.")
+backend.utils.validators.DuplicateProductError: Row 1: Product name 'Real Product' already exists in database with a different SKU.
+2026-08-02 11:42:42,842 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:42:42,843 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=RandomForestClassifier, trained=2026-08-02T11:32:45.256062)
+2026-08-02 11:45:04,296 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=64a153e4)
+2026-08-02 11:45:04,736 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-08-02 11:45:05,734 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 11:45:05,734 - inventory_backend.model_manager - INFO - Retraining required: Model type changed or older model type detected (saved=RandomForestClassifier).
+2026-08-02 11:45:05,907 - inventory_backend.classifier - INFO - LSVM Classifier trained successfully. Train Accuracy: 100.00%
+2026-08-02 11:45:05,909 - inventory_backend.model_manager - INFO - Classifier and Scaler successfully saved to /Users/ghoriommukeshbai/Desktop/research paper/model/Inventra/backend/saved_models
+2026-08-02 11:45:05,913 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,916 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,919 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,922 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,925 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,927 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,930 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,932 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,935 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,937 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,940 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,942 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,945 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,947 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,950 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,952 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,955 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,957 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,960 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,963 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,965 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,968 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,970 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,973 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,975 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,978 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,980 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,983 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,985 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,988 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,990 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,993 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,995 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:05,998 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,000 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,003 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,005 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,007 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,010 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,012 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,015 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,017 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,020 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,022 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,025 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,027 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,029 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,032 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,035 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,038 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,040 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,043 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,045 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,048 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,051 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,054 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,056 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,059 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,061 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,064 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,066 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,069 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,071 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,073 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,076 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,078 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,081 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,083 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,086 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,088 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,091 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,093 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,096 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,099 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,101 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,104 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,107 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,109 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,112 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,114 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,117 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,119 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,121 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,124 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,127 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,134 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,142 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,148 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,164 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,167 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,170 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,173 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,176 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,178 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,181 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,183 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,185 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,188 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,190 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,193 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 11:45:06,194 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-08-02 13:14:53,365 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:14:53,365 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:18:51,199 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:18:51,200 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:19:14,688 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=936beb12)
+2026-08-02 13:19:15,115 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-08-02 13:19:16,109 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:19:16,109 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-08-02 13:19:16,110 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:19:16,120 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,124 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,127 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,129 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,132 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,134 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,137 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,139 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,142 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,145 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,148 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,151 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,154 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,157 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,160 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,162 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,165 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,168 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,170 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,173 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,175 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,178 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,180 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,183 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,186 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,188 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,191 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,193 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,196 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,198 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,201 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,204 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,206 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,209 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,211 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,214 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,216 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,219 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,221 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,223 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,226 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,228 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,231 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,233 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,235 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,238 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,240 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,242 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,245 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,247 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,250 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,252 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,255 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,258 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,260 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,262 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,265 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,267 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,269 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,272 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,274 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,276 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,279 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,282 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,284 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,287 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,289 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,292 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,294 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,297 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,299 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,302 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,304 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,307 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,310 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,312 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,315 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,317 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,320 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,322 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,324 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,331 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,339 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,347 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,353 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,356 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,359 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,362 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,364 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,367 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,372 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,381 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,384 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,386 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,389 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,392 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,394 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,397 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,399 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,402 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:19:16,403 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-08-02 13:31:13,490 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:31:13,491 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:31:41,608 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:31:41,608 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:34:26,446 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:34:26,448 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:48:47,045 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:48:47,046 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-02 13:50:04,113 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=89699e16)
+2026-08-02 13:50:04,545 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-08-02 13:50:05,538 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:50:05,538 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-08-02 13:50:05,538 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 13:50:05,548 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,552 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,554 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,557 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,559 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,562 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,565 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,567 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,570 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,572 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,574 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,577 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,580 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,583 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,585 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,588 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,591 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,594 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,598 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,601 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,604 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,606 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,609 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,612 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,614 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,617 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,619 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,622 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,624 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,627 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,630 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,632 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,635 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,637 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,640 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,643 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,645 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,648 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,650 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,653 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,656 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,658 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,661 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,663 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,666 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,668 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,671 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,674 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,676 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,679 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,681 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,684 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,686 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,689 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,691 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,693 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,696 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,698 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,701 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,703 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,706 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,709 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,711 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,714 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,716 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,719 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,722 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,724 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,727 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,729 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,731 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,734 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,736 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,739 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,741 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,744 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,746 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,748 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,751 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,753 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,756 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,758 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,760 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,763 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,765 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,767 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,770 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,772 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,774 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,777 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,779 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,782 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,785 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,788 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,790 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,793 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,795 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,798 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,801 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,803 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-08-02 13:50:05,804 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+2026-08-02 14:00:45,368 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-02 14:00:45,368 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:02:15,747 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:02:15,747 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:06:24,978 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:06:24,978 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:08:39,418 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:08:39,419 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:09:48,893 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:09:48,893 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:10:07,151 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:10:07,151 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:10:27,216 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:10:27,216 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:14:26,706 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:14:26,706 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:19:34,872 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:19:34,872 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 19:19:34,874 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 19:19:34,874 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:01:36,706 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:01:36,706 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:01:36,706 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:01:36,706 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:08:13,712 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:08:13,712 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:08:13,713 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:08:13,713 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:13:04,228 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:13:04,228 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:13:04,229 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:13:04,229 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:17:10,575 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:17:10,575 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:17:10,575 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:17:10,575 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:18:08,669 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:18:08,669 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:18:08,670 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:18:08,670 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:18:55,117 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:18:55,117 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:18:55,117 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:18:55,117 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:23:13,757 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:23:13,757 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:23:13,757 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:23:13,757 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:25:48,754 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:25:48,754 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-08-03 20:25:48,754 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)
+2026-08-03 20:25:48,754 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-08-02T11:45:05.909048)

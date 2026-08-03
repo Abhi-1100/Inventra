@@ -1,6 +1,7 @@
 #include "core/ThemeManager.h"
 #include "ui/AnalyticsWidget.h"
 #include "core/AppController.h"
+#include "core/ApiClient.h"          // ---- ADDED: API Integration ----
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -15,6 +16,8 @@
 #include <QValueAxis>
 #include <QPieSeries>
 #include <QPieSlice>
+#include <QJsonObject>               // ---- ADDED: API Integration ----
+#include <QJsonArray>                // ---- ADDED: API Integration ----
 
 namespace Kirana {
 

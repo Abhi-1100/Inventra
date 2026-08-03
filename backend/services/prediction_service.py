@@ -17,6 +17,41 @@ from backend.utils.logger import get_logger
 
 logger = get_logger("prediction_service")
 
+
+def _build_recommendation_text(r) -> str:
+    """
+    Build a short, actionable recommendation sentence from an MLResult.
+    Displayed in the Product Detail Panel as a 1-2 sentence summary.
+    """
+    status   = getattr(r, "stock_status", "Healthy")
+    priority = getattr(r, "priority", "Safe")
+    eoq      = int(getattr(r, "eoq", 0))
+    forecast = float(getattr(r, "forecast_7d", 0.0))
+
+    if priority == "Critical" or status in ("Critical", "Low"):
+        return (
+            f"\u26a0\ufe0f Immediate reorder required. Place an order of approximately "
+            f"{eoq} units to meet the forecasted demand of {forecast:.0f} units "
+            f"over the next 7 days."
+        )
+    elif priority == "Reorder Soon" or status == "Reorder":
+        return (
+            f"Stock is approaching the reorder point. Consider ordering {eoq} units soon. "
+            f"Forecasted demand for the next 7 days: {forecast:.0f} units."
+        )
+    elif status == "Overstock":
+        return (
+            f"Stock is above optimal levels. Hold off on new orders. "
+            f"Expected consumption over the next 7 days: {forecast:.0f} units."
+        )
+    else:
+        return (
+            f"Inventory is at a healthy level. "
+            f"Next reorder of {eoq} units recommended when stock nears the reorder point. "
+            f"7-day forecast: {forecast:.0f} units."
+        )
+
+
 class PredictionService:
     """
     Executes and evaluates ML predictions by loading history from DB.
@@ -98,6 +133,8 @@ class PredictionService:
             if results:
                 serializable_results = []
                 for r in results:
+                    # Build recommendation from priority + status + EOQ
+                    rec = _build_recommendation_text(r)
                     serializable_results.append({
                         "product_id": r.product_id,
                         "sku": r.sku,
@@ -108,6 +145,7 @@ class PredictionService:
                         "trend": r.trend,
                         "eoq": r.eoq,
                         "priority": r.priority,
+                        "recommendation": rec,
                         "explanations": r.explanations,
                         "forecast_points": r.forecast_points
                     })

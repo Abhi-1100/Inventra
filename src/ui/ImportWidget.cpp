@@ -11,6 +11,11 @@
 #include <QTableWidget>
 #include <QFileDialog>
 #include <QHeaderView>
+#include <QProgressBar>              // ---- ADDED: API Integration ----
+#include <QMessageBox>               // ---- ADDED: API Integration ----
+#include <QJsonArray>                // ---- ADDED: API Integration ----
+#include <QJsonObject>               // ---- ADDED: API Integration ----
+#include "core/ApiClient.h"          // ---- ADDED: API Integration ----
 
 namespace Kirana {
 
@@ -131,6 +136,30 @@ void ImportWidget::buildLayout() {
     processLayout->addWidget(m_statusLabel, 1);
     processLayout->addWidget(m_runBtn);
     mainLayout->addLayout(processLayout);
+
+    // ---- ADDED: API Integration ---- progress bar + result label
+    m_progressBar = new QProgressBar(this);
+    m_progressBar->setRange(0, 0);  // indeterminate
+    m_progressBar->setVisible(false);
+    m_progressBar->setFixedHeight(6);
+    m_progressBar->setStyleSheet(
+        "QProgressBar { background: #21262d; border: none; border-radius: 3px; }"
+        "QProgressBar::chunk { background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1f6feb, stop:1 #58a6ff); border-radius: 3px; }"
+    );
+    mainLayout->addWidget(m_progressBar);
+
+    m_resultLabel = new QLabel(this);
+    m_resultLabel->setVisible(false);
+    m_resultLabel->setWordWrap(true);
+    m_resultLabel->setStyleSheet("font-family: 'Consolas', monospace; font-size: 11px; color: #3fb950; padding: 8px;");
+    mainLayout->addWidget(m_resultLabel);
+
+    // Connect ApiClient signals
+    connect(&ApiClient::instance(), &ApiClient::pipelineComplete,
+            this, &ImportWidget::onApiPipelineComplete);
+    connect(&ApiClient::instance(), &ApiClient::apiError,
+            this, &ImportWidget::onApiError);
+    // ---- END ADDED ----
 }
 
 void ImportWidget::onBrowseClicked() {
@@ -155,7 +184,59 @@ void ImportWidget::validateFile() {
 
 void ImportWidget::onRunClicked() {
     if (m_selectedPath.isEmpty()) return;
-    emit pipelineRunRequested(m_selectedPath);
+    
+    // Provide immediate visual feedback that the heavy ML process has started
+    m_runBtn->setEnabled(false);
+    m_runBtn->setText("⏳ PROCESSING...");
+    m_resultLabel->setVisible(false);
+
+    // ---- ADDED: API Integration ---- upload via HTTP instead of pybind11
+    m_progressBar->setVisible(true);
+    m_statusLabel->setText("Uploading dataset to FastAPI server...");
+    m_statusLabel->setStyleSheet("font-family: 'Consolas', monospace; font-size: 11px; color: #f0b37e;");
+
+    ApiClient::instance().uploadCsv(m_selectedPath);
+    // ---- END ADDED ----
 }
+
+// ---- ADDED: API Integration ----
+void ImportWidget::onApiPipelineComplete(const QJsonArray& results) {
+    m_progressBar->setVisible(false);
+    m_runBtn->setEnabled(true);
+    m_runBtn->setText("▶ RUN ML PIPELINE");
+
+    int total = results.size();
+    int critical = 0, reorderSoon = 0, safe = 0;
+    for (const auto& val : results) {
+        QJsonObject obj = val.toObject();
+        QString priority = obj.value("priority").toString();
+        if (priority == "Critical") critical++;
+        else if (priority == "ReorderSoon") reorderSoon++;
+        else safe++;
+    }
+
+    m_statusLabel->setText("✅ Pipeline complete!");
+    m_statusLabel->setStyleSheet("font-family: 'Consolas', monospace; font-size: 11px; color: #3fb950;");
+
+    m_resultLabel->setVisible(true);
+    m_resultLabel->setText(
+        QString("Successfully processed %1 products.\n"
+                "%2 Critical  |  %3 Reorder Soon  |  %4 Safe")
+            .arg(total).arg(critical).arg(reorderSoon).arg(safe));
+}
+
+void ImportWidget::onApiError(const QString& msg) {
+    m_progressBar->setVisible(false);
+    m_runBtn->setEnabled(true);
+    m_runBtn->setText("▶ RUN ML PIPELINE");
+    m_statusLabel->setText("❌ Pipeline failed.");
+    m_statusLabel->setStyleSheet("font-family: 'Consolas', monospace; font-size: 11px; color: #f85149;");
+
+    QMessageBox::warning(this, "Pipeline Error",
+        QString("The ML pipeline encountered an error:\n\n%1\n\n"
+                "Hint: Is the FastAPI server running?\n"
+                "Start it with: uvicorn main:app --port 8000").arg(msg));
+}
+// ---- END ADDED ----
 
 } // namespace Kirana

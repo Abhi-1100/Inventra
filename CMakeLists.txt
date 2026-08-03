@@ -20,7 +20,7 @@ option(INVENTRA_ENABLE_PYTHON
 # ─────────────────────────────────────────────
 # Qt6
 # ─────────────────────────────────────────────
-find_package(Qt6 6.4 REQUIRED COMPONENTS Core Widgets Sql Charts)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core Widgets Sql Charts Concurrent Network)
 qt_standard_project_setup()
 
 # ─────────────────────────────────────────────
@@ -53,6 +53,7 @@ set(INVENTRA_SOURCES
     src/core/Database.cpp
     src/core/AuthController.cpp
     src/core/ThemeManager.cpp
+    src/core/ApiClient.cpp
     src/python/PythonBridge.cpp
     src/ui/MainWindow.cpp
     src/ui/Sidebar.cpp
@@ -79,6 +80,7 @@ set(INVENTRA_HEADERS
     src/core/AuthData.h
     src/core/AuthController.h
     src/core/ThemeManager.h
+    src/core/ApiClient.h
     src/python/PythonBridge.h
     src/python/PipelineResult.h
     src/ui/MainWindow.h
@@ -100,10 +102,18 @@ set(INVENTRA_HEADERS
 # ─────────────────────────────────────────────
 # Executable
 # ─────────────────────────────────────────────
-qt_add_executable(Inventra WIN32
+qt_add_executable(Inventra WIN32 MACOSX_BUNDLE
     ${INVENTRA_SOURCES}
     ${INVENTRA_HEADERS}
     resources/inventra.qrc
+)
+
+set_target_properties(Inventra PROPERTIES
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_BUNDLE_NAME "Inventra"
+    MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
+    MACOSX_BUNDLE_IDENTIFIER "com.inventra.app"
 )
 
 target_include_directories(Inventra PRIVATE
@@ -115,6 +125,8 @@ target_link_libraries(Inventra PRIVATE
     Qt6::Widgets
     Qt6::Sql
     Qt6::Charts
+    Qt6::Concurrent
+    Qt6::Network
 )
 
 # Phase 2: link Python
@@ -133,12 +145,20 @@ endif()
 # Post-build: copy Python scripts to output dir
 # ─────────────────────────────────────────────
 add_custom_command(TARGET Inventra POST_BUILD
+    # Copy to standard output dir (for non-bundle mode)
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/python"
         "$<TARGET_FILE_DIR:Inventra>/python"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/backend"
         "$<TARGET_FILE_DIR:Inventra>/backend"
+    # Also copy into macOS .app bundle if it exists
+    COMMAND ${CMAKE_COMMAND} -E $<IF:$<BOOL:$<TARGET_PROPERTY:Inventra,MACOSX_BUNDLE>>,copy_directory,true>
+        "${CMAKE_SOURCE_DIR}/python"
+        "$<TARGET_BUNDLE_CONTENT_DIR:Inventra>/MacOS/python"
+    COMMAND ${CMAKE_COMMAND} -E $<IF:$<BOOL:$<TARGET_PROPERTY:Inventra,MACOSX_BUNDLE>>,copy_directory,true>
+        "${CMAKE_SOURCE_DIR}/backend"
+        "$<TARGET_BUNDLE_CONTENT_DIR:Inventra>/MacOS/backend"
     COMMENT "Copying Python ML modules and backend to output directory..."
 )
 
@@ -171,6 +191,7 @@ endif()
 # ─────────────────────────────────────────────
 install(TARGETS Inventra
     RUNTIME DESTINATION bin
+    BUNDLE DESTINATION .
 )
 install(DIRECTORY python/
     DESTINATION bin/python
@@ -178,3 +199,16 @@ install(DIRECTORY python/
 install(DIRECTORY backend/
     DESTINATION bin/backend
 )
+qt_add_executable(test_pipeline test_pipeline.cpp)
+target_link_libraries(test_pipeline PRIVATE Qt6::Core Qt6::Sql Qt6::Network sqlite3)
+# Just a dirty hack for testing, we'll link against the same sources
+target_sources(test_pipeline PRIVATE 
+    src/python/PythonBridge.cpp 
+    src/core/AppController.cpp 
+    src/core/Database.cpp
+    src/core/ApiClient.cpp
+)
+target_compile_definitions(test_pipeline PRIVATE KIRANA_PYTHON_ENABLED)
+target_include_directories(test_pipeline PRIVATE src build/_deps/pybind11-src/include)
+find_package(Python3 COMPONENTS Development REQUIRED)
+target_link_libraries(test_pipeline PRIVATE Python3::Python)

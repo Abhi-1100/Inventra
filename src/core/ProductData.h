@@ -52,8 +52,10 @@ struct Product {
     QString sku;
     QString name;
     QString category;
+    QString supplier;       // primary supplier / vendor name
     int     currentStock = 0;
     double  unitCost     = 0.0;
+    int     reorderPoint = 10;    // minimum stock level before replenishment
 
     // ML pipeline results
     DemandLabel demandLabel  = DemandLabel::Unknown;
@@ -74,6 +76,10 @@ struct Product {
     double orderingCost    = 20.0;   // ₹ per order (or $ depending on locale)
     double holdingCostRate = 0.25;   // % of unit cost per year
     bool   usingDefaultEOQ = true;   // flag: user hasn't customised costs yet
+
+    // ML textual outputs
+    QString recommendation;   // short action text
+    QString explanation;      // detailed narrative explanation
 };
 
 // ─────────────────────────────────────────────

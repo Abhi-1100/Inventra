@@ -2,6 +2,8 @@
 #include <QFile>
 #include <QDir>
 #include <QStyleFactory>
+#include <QStandardPaths>
+#include <QFileInfo>
 #include "core/Database.h"
 #include "core/AppController.h"
 #include "core/AuthController.h"
@@ -11,6 +13,8 @@
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
+    app.setApplicationName(QStringLiteral("Inventra"));
+    app.setOrganizationName(QStringLiteral("Inventra"));
 
     // Set styling hints
     app.setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
@@ -18,11 +22,28 @@ int main(int argc, char *argv[]) {
     // Initialize ThemeManager to apply the default theme
     Kirana::ThemeManager::instance();
 
-    // Initialize Database
-    QString dbPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("inventra.db"));
+    // ── Database path resolution ──────────────────────────────────────────
+    // 1. Check applicationDirPath (works inside .app/Contents/MacOS and plain binary)
+    // 2. Fallback: check parent of applicationDirPath (build root when running plain binary during development)
+    // 3. Fallback: use app writable data location
+    auto tryDbPath = [](const QString& dir) -> QString {
+        QString p = QDir(dir).filePath(QStringLiteral("inventra.db"));
+        if (QFileInfo::exists(p)) return p;
+        return QString();
+    };
+
+    QString dbPath = tryDbPath(QCoreApplication::applicationDirPath());
+    if (dbPath.isEmpty()) {
+        dbPath = tryDbPath(QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("..")));
+    }
+    if (dbPath.isEmpty()) {
+        // Not found anywhere — use applicationDirPath so db gets created there
+        dbPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("inventra.db"));
+    }
+    qInfo() << "[main] Database path:" << dbPath;
+
     Kirana::Database db;
     if (!db.initialize(dbPath)) {
-        // Fallback to in-memory db if write fails
         db.initialize(QStringLiteral(":memory:"));
     }
 
@@ -34,9 +55,12 @@ int main(int argc, char *argv[]) {
     // Load actual product database list (seeds defaults if first run)
     controller.loadFromDatabase();
 
-    // Initialize Python bridge if embedded pipeline mode is compiled/enabled
-    QString pythonPath = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("python"));
-    Kirana::PythonBridge::instance().initialize(pythonPath);
+    // Initialize Python bridge — look in applicationDirPath first, then parent
+    QString pythonDir = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("python"));
+    if (!QDir(pythonDir).exists()) {
+        pythonDir = QDir(QCoreApplication::applicationDirPath()).filePath(QStringLiteral("../python"));
+    }
+    Kirana::PythonBridge::instance().initialize(pythonDir);
 
     // Setup main GUI
     Kirana::MainWindow w(&controller, &auth);
@@ -49,3 +73,4 @@ int main(int argc, char *argv[]) {
 
     return result;
 }
+

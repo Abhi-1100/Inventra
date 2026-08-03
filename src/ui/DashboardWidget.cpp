@@ -3,6 +3,7 @@
 #include "core/AppController.h"
 #include "core/Database.h"
 #include "core/ProductModel.h"
+#include "core/ApiClient.h"          // ---- ADDED: API Integration ----
 #include "widgets/MetricCard.h"
 #include "widgets/BadgeDelegate.h"
 #include "ui/ProductDetailPanel.h"
@@ -22,6 +23,7 @@
 #include <QPainterPath>
 #include <QScrollArea>
 #include <QLinearGradient>
+#include <QTimer>                    // ---- ADDED: API Integration ----
 #include <cmath>
 
 namespace Kirana {
@@ -32,21 +34,32 @@ namespace Kirana {
 
 class ProductFilterProxyModel : public QSortFilterProxyModel {
 public:
-    explicit ProductFilterProxyModel(QObject* parent = nullptr)
-        : QSortFilterProxyModel(parent)
+    explicit ProductFilterProxyModel(AppController* ctrl, QObject* parent = nullptr)
+        : QSortFilterProxyModel(parent), controller(ctrl)
     {}
 
+    AppController* controller;
     QString filterState = QStringLiteral("All");
+
+    void refreshFilter() {
+        beginResetModel();
+        invalidateFilter();
+        endResetModel();
+    }
 
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override {
-        if (filterState.isEmpty() || filterState == QLatin1String("All"))
-            return true;
-
         auto* model = qobject_cast<ProductModel*>(sourceModel());
         if (!model) return true;
 
         const Product& p = model->productAt(sourceRow);
+
+        if (controller && !controller->matchesSearch(p, controller->searchQuery())) {
+            return false;
+        }
+
+        if (filterState.isEmpty() || filterState == QLatin1String("All"))
+            return true;
 
         if (filterState == QLatin1String("Critical"))
             return p.priority == Priority::Critical;
@@ -141,6 +154,16 @@ DashboardWidget::DashboardWidget(AppController* controller, QWidget* parent)
     buildLayout();
     configureTable();
     connect(m_controller, &AppController::productsChanged, this, &DashboardWidget::onProductsChanged);
+    connect(m_controller, &AppController::searchQueryChanged, this, [this](const QString& q) {
+        qDebug() << "[TRACE] DashboardWidget received searchQueryChanged:" << q;
+        if (auto* p = static_cast<ProductFilterProxyModel*>(m_proxyModel)) {
+            if (m_model) {
+                qDebug() << "[TRACE] Products inside ProductModel:" << m_model->rowCount();
+                p->refreshFilter();
+                qDebug() << "[TRACE] Products inside ProxyModel after refresh:" << p->rowCount();
+            }
+        }
+    });
     onProductsChanged();
 }
 
@@ -331,6 +354,10 @@ void DashboardWidget::buildLayout() {
     // Detail panel (hidden overlay)
     m_detailPanel = new ProductDetailPanel(this);
     m_detailPanel->setVisible(false);
+
+    // Forward single-product prediction request up to MainWindow
+    connect(m_detailPanel, &ProductDetailPanel::runPredictionRequested,
+            this, &DashboardWidget::singleProductPredictionRequested);
 }
 
 void DashboardWidget::setupFilterChips(QHBoxLayout* rowLayout) {
@@ -358,7 +385,7 @@ void DashboardWidget::setupFilterChips(QHBoxLayout* rowLayout) {
 void DashboardWidget::configureTable() {
     m_model = new ProductModel(this);
 
-    auto* filterProxy = new ProductFilterProxyModel(this);
+    auto* filterProxy = new ProductFilterProxyModel(m_controller, this);
     filterProxy->setSourceModel(m_model);
     filterProxy->setSortRole(Qt::DisplayRole);
     m_proxyModel = filterProxy;
@@ -444,7 +471,7 @@ void DashboardWidget::onFilterChipClicked() {
     auto* proxy = static_cast<ProductFilterProxyModel*>(m_proxyModel);
     if (proxy) {
         proxy->filterState = val;
-        proxy->invalidate();
+        proxy->refreshFilter();
     }
 }
 
@@ -456,10 +483,27 @@ void DashboardWidget::onRowDoubleClicked(const QModelIndex& index) {
     m_detailPanel->slideIn();
 }
 
+void DashboardWidget::onSingleProductPredictionFinished(int productId) {
+    // Find the updated product in the controller and refresh the panel
+    const auto& products = m_controller->products();
+    for (const auto& p : products) {
+        if (p.id == productId) {
+            m_detailPanel->setProduct(p);
+            break;
+        }
+    }
+    // Make sure the panel is visible with updated data
+    if (!m_detailPanel->isVisible()) {
+        m_detailPanel->slideIn();
+    }
+}
+
 void DashboardWidget::resizeEvent(QResizeEvent* event) {
     QWidget::resizeEvent(event);
     if (m_detailPanel && m_detailPanel->isVisible())
         m_detailPanel->adjustPanelPosition();
 }
+
+// API methods removed, now relying on AppController single source of truth
 
 } // namespace Kirana

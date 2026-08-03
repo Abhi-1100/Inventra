@@ -37,6 +37,8 @@ DailyEntryWidget::DailyEntryWidget(AppController* controller,
 
     connect(m_controller, &AppController::productsChanged,
             this, &DailyEntryWidget::onProductsChanged);
+    connect(m_controller, &AppController::searchQueryChanged,
+            this, &DailyEntryWidget::applySearchFilter);
     onProductsChanged();
     refreshList();
 }
@@ -414,6 +416,20 @@ void DailyEntryWidget::refreshList() {
         .arg(m_entries.size()).arg(totalSold).arg(totalWasted));
     m_deleteBtn->setEnabled(false);
     m_editBtn->setEnabled(false);
+
+    applySearchFilter();
+}
+
+void DailyEntryWidget::applySearchFilter() {
+    QString query = m_controller->searchQuery();
+    for (int i = 0; i < m_entryList->count(); ++i) {
+        QListWidgetItem* item = m_entryList->item(i);
+        if (query.isEmpty() || item->text().contains(query, Qt::CaseInsensitive)) {
+            item->setHidden(false);
+        } else {
+            item->setHidden(true);
+        }
+    }
 }
 
 } // namespace Kirana

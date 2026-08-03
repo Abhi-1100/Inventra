@@ -40,7 +40,8 @@ def run_ml_pipeline(
     lead_time_days: int = 7,
     ordering_cost: float = 20.0,
     holding_cost_rate: float = 0.25,
-    forecast_horizon: int = 7
+    forecast_horizon: int = 7,
+    use_prophet: bool = True
 ) -> List[MLResult]:
     """
     Executes the entire AI inventory prediction, forecasting, classification,
@@ -243,7 +244,9 @@ def run_ml_pipeline(
             # ── ML TRAINING & PREDICTION PATH ──
             try:
                 # 1. Forecasting
-                forecast_7d, trend, fcst_pts, model_used = forecast_demand(sku_df, forecast_horizon)
+                forecast_7d, trend, fcst_pts, model_used = forecast_demand(
+                    sku_df, forecast_horizon, use_prophet=use_prophet
+                )
                 
                 # 2. Classification Feature Setup (use the last row representing the current state)
                 feat_df = features_by_sku[sku]

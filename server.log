@@ -1,0 +1,319 @@
+INFO:     Will watch for changes in these directories: ['/Users/ghoriommukeshbai/Desktop/research paper/model/Inventra']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [5752] using StatReload
+INFO:     Started server process [5755]
+INFO:     Waiting for application startup.
+2026-07-17 21:59:56,408 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 21:59:56,408 - inventory_backend.fastapi_server - INFO - ✅ Pre-trained model loaded successfully (type=SVC, trained=2026-07-17T13:47:33.159203)
+INFO:     Application startup complete.
+INFO:     127.0.0.1:50623 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50628 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50628 - "GET /openapi.json HTTP/1.1" 200 OK
+2026-07-17 22:00:34,060 - inventory_backend.fastapi_server - INFO - Saved 5000 rows to SQLite table 'dataset' (batch=e6ad2ea1)
+2026-07-17 22:00:34,485 - inventory_backend.prediction_engine - INFO - Starting ML pipeline for 100 products...
+2026-07-17 22:00:35,453 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+2026-07-17 22:00:35,453 - inventory_backend.model_manager - INFO - Skipping retraining: Data hash is unchanged, loaded cached model.
+2026-07-17 22:00:35,454 - inventory_backend.model_manager - INFO - Loaded pre-trained model and metadata from disk.
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,461 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,464 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,466 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,469 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,471 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,473 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,476 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,478 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,480 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,484 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,486 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,488 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,491 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,493 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,496 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,498 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,500 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,503 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,505 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,507 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,510 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,512 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,514 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,517 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,519 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,521 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,523 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,526 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,528 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,530 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,533 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,535 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,537 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,539 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,542 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,544 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,546 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,548 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,551 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,553 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,555 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,557 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,560 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,562 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,564 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,566 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,569 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,571 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,573 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,576 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,578 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,580 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,582 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,585 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,587 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,589 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,591 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,594 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,596 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,598 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,601 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,603 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,605 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,607 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,610 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,612 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,614 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,616 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,619 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,621 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,623 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,625 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,628 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,630 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,632 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,635 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,637 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,639 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,641 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,643 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,646 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,648 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,650 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,653 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,655 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,657 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,659 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,662 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,664 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,666 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,668 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,671 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,673 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,675 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,677 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,680 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,682 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,684 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,687 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+/opt/homebrew/lib/python3.14/site-packages/sklearn/utils/validation.py:2827: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
+2026-07-17 22:00:35,689 - inventory_backend.forecasting - INFO - Linear Regression (fast) forecast completed successfully
+2026-07-17 22:00:35,690 - inventory_backend.prediction_engine - INFO - ML Pipeline execution finished. Generated 100 predictions.
+INFO:     127.0.0.1:50630 - "POST /upload_csv HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50704 - "GET /favicon.ico HTTP/1.1" 404 Not Found

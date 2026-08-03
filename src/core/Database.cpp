@@ -11,7 +11,7 @@
 
 namespace Kirana {
 
-static constexpr int kSchemaVersion = 1;
+static constexpr int kSchemaVersion = 2;
 
 Database::Database(QObject* parent)
     : QObject(parent)
@@ -118,6 +118,7 @@ bool Database::runMigrations() {
             sku           TEXT    UNIQUE NOT NULL,
             name          TEXT    NOT NULL,
             category      TEXT    DEFAULT '',
+            supplier_name TEXT    DEFAULT '',
             current_stock INTEGER DEFAULT 0,
             unit_cost     REAL    DEFAULT 0,
             reorder_point INTEGER DEFAULT 10,
@@ -184,6 +185,19 @@ bool Database::runMigrations() {
     }
 
     qInfo() << "[Database] Schema migrated to version" << kSchemaVersion;
+
+    // ── Additive migrations: run regardless of version ────────────────
+    // Safe to run on existing databases: ALTER TABLE IF NOT EXISTS-style.
+    // SQLite does not support ADD COLUMN IF NOT EXISTS, so we use a try/ignore.
+    {
+        auto db2 = QSqlDatabase::database(m_connectionName);
+        QSqlQuery aq(db2);
+        // Add supplier_name to products if it doesn't exist yet (v1 → v2 upgrade)
+        aq.exec(QStringLiteral(
+            "ALTER TABLE products ADD COLUMN supplier_name TEXT DEFAULT '';"));
+        // Ignore the error — it fires if the column already exists, which is fine.
+    }
+
     return true;
 }
 
@@ -328,7 +342,7 @@ StaffUser Database::findUserByPinHash(const QString& pinHash) const {
 QVector<Product> Database::getProducts() const {
     auto db = QSqlDatabase::database(m_connectionName);
     QSqlQuery q(QStringLiteral(R"(
-        SELECT id,sku,name,category,current_stock,unit_cost,reorder_point
+        SELECT id,sku,name,category,supplier_name,current_stock,unit_cost,reorder_point
         FROM products ORDER BY name ASC;)"), db);
     QVector<Product> list;
     while (q.next()) {
@@ -337,8 +351,10 @@ QVector<Product> Database::getProducts() const {
         p.sku          = q.value(1).toString();
         p.name         = q.value(2).toString();
         p.category     = q.value(3).toString();
-        p.currentStock = q.value(4).toInt();
-        p.unitCost     = q.value(5).toDouble();
+        p.supplier     = q.value(4).toString();   // supplier_name column
+        p.currentStock = q.value(5).toInt();
+        p.unitCost     = q.value(6).toDouble();
+        p.reorderPoint = q.value(7).toInt();
         list.append(p);
     }
     return list;
@@ -349,12 +365,12 @@ int Database::saveProduct(const Product& p) {
     QSqlQuery q(db);
     if (p.id == 0) {
         q.prepare(QStringLiteral(R"(
-            INSERT INTO products(sku,name,category,current_stock,unit_cost)
-            VALUES(:sku,:name,:cat,:stock,:cost);)"));
+            INSERT INTO products(sku,name,category,supplier_name,current_stock,unit_cost)
+            VALUES(:sku,:name,:cat,:sup,:stock,:cost);)"));
     } else {
         q.prepare(QStringLiteral(R"(
             UPDATE products
-            SET sku=:sku,name=:name,category=:cat,
+            SET sku=:sku,name=:name,category=:cat,supplier_name=:sup,
                 current_stock=:stock,unit_cost=:cost,
                 updated_at=datetime('now')
             WHERE id=:id;)"));
@@ -363,6 +379,7 @@ int Database::saveProduct(const Product& p) {
     q.bindValue(QStringLiteral(":sku"),   p.sku);
     q.bindValue(QStringLiteral(":name"),  p.name);
     q.bindValue(QStringLiteral(":cat"),   p.category);
+    q.bindValue(QStringLiteral(":sup"),   p.supplier);
     q.bindValue(QStringLiteral(":stock"), p.currentStock);
     q.bindValue(QStringLiteral(":cost"),  p.unitCost);
     if (!q.exec()) { m_lastError = q.lastError().text(); return -1; }
@@ -619,6 +636,18 @@ QString Database::getLatestPipelineResults() const {
         return q.value(0).toString();
     }
     return QString();
+}
+
+bool Database::savePipelineResults(const QString& json) {
+    auto db = QSqlDatabase::database(m_connectionName);
+    QSqlQuery q(db);
+    q.prepare(QStringLiteral("INSERT INTO pipeline_results(run_at, success, results_json) VALUES(datetime('now'), 1, :json);"));
+    q.bindValue(QStringLiteral(":json"), json);
+    if (!q.exec()) {
+        m_lastError = q.lastError().text();
+        return false;
+    }
+    return true;
 }
 
 } // namespace Kirana

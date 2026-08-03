@@ -6,6 +6,7 @@ class QLineEdit;
 class QPushButton;
 class QTableWidget;
 class QLabel;
+class QProgressBar;  // ---- ADDED: API Integration ----
 
 namespace Kirana {
 
@@ -47,6 +48,13 @@ private:
     QLabel*       m_statusLabel  = nullptr;
 
     QString m_selectedPath;
+
+    // ---- ADDED: API Integration ----
+    QProgressBar* m_progressBar  = nullptr;
+    QLabel*       m_resultLabel  = nullptr;
+    void onApiPipelineComplete(const QJsonArray& results);
+    void onApiError(const QString& msg);
+    // ---- END ADDED ----
 };
 
 } // namespace Kirana

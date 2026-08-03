@@ -1,5 +1,6 @@
 #include "core/AppController.h"
 #include "core/Database.h"
+#include "core/ApiClient.h"
 #include <QRandomGenerator>
 #include <QtMath>
 #include <algorithm>
@@ -71,6 +72,9 @@ AppController::AppController(Database* db, QObject* parent)
 {
     qRegisterMetaType<Kirana::Product>();
     qRegisterMetaType<QVector<Kirana::Product>>();
+    
+    // Connect to ApiClient to act as single source of truth
+    connect(&ApiClient::instance(), &ApiClient::resultsReady, this, &AppController::onApiResultsReady);
 }
 
 // ─────────────────────────────────────────────
@@ -87,6 +91,55 @@ void AppController::loadDummyData() {
 }
 
 // ─────────────────────────────────────────────
+// onApiResultsReady
+// ─────────────────────────────────────────────
+
+void AppController::onApiResultsReady(const QJsonArray& results) {
+    if (!m_db) return;
+
+    // 1. Iterate over JSON and ensure products exist in our local SQLite
+    //    so foreign keys (like daily_entries) still work.
+    QVector<Product> existingProducts = m_db->getProducts();
+    for (const QJsonValue& val : results) {
+        QJsonObject obj = val.toObject();
+        // Try "sku" (preferred, new format) then fall back to "product_id" (legacy)
+        QString sku = obj.value(QStringLiteral("sku")).toString().trimmed();
+        if (sku.isEmpty())
+            sku = obj.value(QStringLiteral("product_id")).toString().trimmed();
+        if (sku.isEmpty()) continue;
+        
+        // Find existing product id if any
+        int existingId = 0;
+        for (const auto& ep : existingProducts) {
+            if (ep.sku == sku) {
+                existingId = ep.id;
+                break;
+            }
+        }
+        
+        Product p;
+        p.id           = existingId;
+        p.sku          = sku;
+        p.name         = obj.value(QStringLiteral("product_name")).toString();
+        if (p.name.isEmpty()) p.name = obj.value(QStringLiteral("name")).toString();
+        p.category     = obj.value(QStringLiteral("category")).toString();
+        p.supplier     = obj.value(QStringLiteral("supplier_name")).toString();
+        p.currentStock = static_cast<int>(obj.value(QStringLiteral("current_stock")).toDouble());
+        p.reorderPoint = static_cast<int>(obj.value(QStringLiteral("reorder_point")).toDouble());
+        p.unitCost     = obj.value(QStringLiteral("unit_cost")).toDouble();
+        
+        m_db->saveProduct(p);
+    }
+    
+    // 2. Save the full JSON prediction blob to local SQLite pipeline_results
+    QJsonDocument doc(results);
+    m_db->savePipelineResults(QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+    
+    // 3. Reload everything from local SQLite to ensure the entire app stays in sync
+    loadFromDatabase();
+}
+
+// ─────────────────────────────────────────────
 // loadFromDatabase
 // ─────────────────────────────────────────────
 
@@ -94,24 +147,8 @@ bool AppController::loadFromDatabase() {
     if (!m_db) return false;
     QVector<Product> dbProds = m_db->getProducts();
     if (dbProds.isEmpty()) {
-        // Seed database with dummy seed data
-        QVector<Product> dummyList = buildDummyProducts(m_settings);
-        for (const auto& p : dummyList) {
-            int newId = m_db->saveProduct(p);
-            if (newId > 0) {
-                // Seed 30 days of sales history daily entries
-                QDate today = QDate::currentDate();
-                for (int d = 30; d >= 1; --d) {
-                    DailyEntry entry;
-                    entry.productId = newId;
-                    entry.entryDate = today.addDays(-d);
-                    entry.unitsSold = p.historicalSales[30 - d];
-                    entry.unitsWasted = QRandomGenerator::global()->bounded(2);
-                    m_db->saveDailyEntry(entry);
-                }
-            }
-        }
-        dbProds = m_db->getProducts();
+        // Database is empty. We will not seed dummy data,
+        // so the app remains clean until the user imports a CSV.
     }
 
     // Try loading actual ML pipeline results from Database
@@ -119,56 +156,119 @@ bool AppController::loadFromDatabase() {
     bool loadedMLResults = false;
     if (!jsonStr.isEmpty()) {
         QJsonParseError err;
-        QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8(), &err);
-        if (err.error == QJsonParseError::NoError && doc.isArray()) {
-            QJsonArray arr = doc.array();
+        QJsonDocument jdoc = QJsonDocument::fromJson(jsonStr.toUtf8(), &err);
+        if (err.error == QJsonParseError::NoError && jdoc.isArray()) {
+            QJsonArray arr = jdoc.array();
             for (const QJsonValue& val : arr) {
                 QJsonObject obj = val.toObject();
-                QString sku = obj.value(QStringLiteral("sku")).toString();
+
+                // ── SKU matching ─────────────────────────────────────────────
+                // Stored JSON may use either "sku" (preferred, from fixed main.py)
+                // or the old "product_id" key (legacy format). Try both.
+                QString sku = obj.value(QStringLiteral("sku")).toString().trimmed();
+                if (sku.isEmpty())
+                    sku = obj.value(QStringLiteral("product_id")).toString().trimmed();
+
                 for (auto& p : dbProds) {
-                    if (p.sku == sku) {
-                        QString dl = obj.value(QStringLiteral("demand_label")).toString();
-                        if (dl == QStringLiteral("High") || dl == QStringLiteral("High Demand")) p.demandLabel = DemandLabel::High;
-                        else if (dl == QStringLiteral("Medium") || dl == QStringLiteral("Medium Demand")) p.demandLabel = DemandLabel::Medium;
-                        else p.demandLabel = DemandLabel::Low;
+                    if (p.sku.trimmed() != sku) continue;
 
-                        QString ss = obj.value(QStringLiteral("stock_status")).toString();
-                        if (ss == QStringLiteral("Reorder")) p.stockStatus = StockStatus::Reorder;
-                        else if (ss == QStringLiteral("Overstock")) p.stockStatus = StockStatus::Overstock;
-                        else p.stockStatus = StockStatus::NoAction;
+                    // ── Demand Label ────────────────────────────────────────
+                    QString dl = obj.value(QStringLiteral("demand_label")).toString().trimmed();
+                    if      (dl.contains(QStringLiteral("High"),   Qt::CaseInsensitive)) p.demandLabel = DemandLabel::High;
+                    else if (dl.contains(QStringLiteral("Low"),    Qt::CaseInsensitive)) p.demandLabel = DemandLabel::Low;
+                    else if (dl.contains(QStringLiteral("Medium"), Qt::CaseInsensitive)) p.demandLabel = DemandLabel::Medium;
+                    else                                                                   p.demandLabel = DemandLabel::Medium;
 
-                        QString pr = obj.value(QStringLiteral("priority")).toString();
-                        if (pr == QStringLiteral("Critical")) p.priority = Priority::Critical;
-                        else if (pr == QStringLiteral("ReorderSoon") || pr == QStringLiteral("Reorder Soon")) p.priority = Priority::ReorderSoon;
-                        else p.priority = Priority::Safe;
+                    // ── Stock Status ─────────────────────────────────────────
+                    // Python outputs: Critical / Low / Healthy / Overstock
+                    // C++ enums:      Reorder / NoAction / Overstock
+                    QString ss = obj.value(QStringLiteral("stock_status")).toString().trimmed();
+                    if      (ss.contains(QStringLiteral("Critical"),  Qt::CaseInsensitive) ||
+                             ss.contains(QStringLiteral("Reorder"),   Qt::CaseInsensitive) ||
+                             ss.contains(QStringLiteral("Low"),       Qt::CaseInsensitive))
+                        p.stockStatus = StockStatus::Reorder;
+                    else if (ss.contains(QStringLiteral("Overstock"), Qt::CaseInsensitive))
+                        p.stockStatus = StockStatus::Overstock;
+                    else    // "Healthy", "No Action", "NoAction", unknown
+                        p.stockStatus = StockStatus::NoAction;
 
-                        p.confidence = obj.value(QStringLiteral("confidence")).toDouble();
-                        p.forecastNext7 = obj.value(QStringLiteral("forecast_7d")).toDouble();
-                        p.forecastTrend = obj.value(QStringLiteral("trend")).toDouble();
-                        p.eoqQty = obj.value(QStringLiteral("eoq")).toInt();
+                    // ── Priority ─────────────────────────────────────────────
+                    // Stored key is now "priority" (fixed), legacy was "urgency"
+                    QString pr = obj.value(QStringLiteral("priority")).toString().trimmed();
+                    if (pr.isEmpty())
+                        pr = obj.value(QStringLiteral("urgency")).toString().trimmed();
+                    if      (pr.contains(QStringLiteral("Critical"),    Qt::CaseInsensitive))
+                        p.priority = Priority::Critical;
+                    else if (pr.contains(QStringLiteral("Reorder"),     Qt::CaseInsensitive) ||
+                             pr.contains(QStringLiteral("Low"),         Qt::CaseInsensitive))
+                        p.priority = Priority::ReorderSoon;
+                    else    // "Safe", unknown
+                        p.priority = Priority::Safe;
 
-                        p.forecast.clear();
-                        QJsonArray pts = obj.value(QStringLiteral("forecast_points")).toArray();
-                        for (const QJsonValue& ptVal : pts) {
-                            QJsonObject ptObj = ptVal.toObject();
-                            ForecastPoint fp;
-                            fp.date = QDate::fromString(ptObj.value(QStringLiteral("ds")).toString(), QStringLiteral("yyyy-MM-dd"));
-                            fp.value = ptObj.value(QStringLiteral("yhat")).toDouble();
-                            fp.lower = ptObj.value(QStringLiteral("yhat_lower")).toDouble();
-                            fp.upper = ptObj.value(QStringLiteral("yhat_upper")).toDouble();
-                            p.forecast.append(fp);
-                        }
+                    // ── Confidence ───────────────────────────────────────────
+                    // Value stored as fraction (0.0–1.0); display needs 0–100.
+                    double confRaw = obj.value(QStringLiteral("confidence")).toDouble();
+                    p.confidence = (confRaw <= 1.0 && confRaw > 0.0) ? confRaw * 100.0 : confRaw;
 
-                        const double dailyBase = p.forecastNext7 / 7.0;
-                        p.historicalSales = makeHistory(dailyBase, 30);
-                        break;
+                    // ── Forecast 7-day total ──────────────────────────────────
+                    // New format: "forecast_7d", legacy: "weekly_forecast"
+                    double fc = obj.value(QStringLiteral("forecast_7d")).toDouble();
+                    if (fc == 0.0) fc = obj.value(QStringLiteral("weekly_forecast")).toDouble();
+                    p.forecastNext7 = fc;
+
+                    // ── Trend slope ───────────────────────────────────────────
+                    // New format: "trend" (numeric), legacy: "trend_direction" (string)
+                    QJsonValue trendVal = obj.value(QStringLiteral("trend"));
+                    if (trendVal.isDouble()) {
+                        p.forecastTrend = trendVal.toDouble();
+                    } else {
+                        // Map legacy string → ±0.5 as a neutral placeholder
+                        QString td = obj.value(QStringLiteral("trend_direction")).toString();
+                        p.forecastTrend = td.contains(QStringLiteral("Rising"), Qt::CaseInsensitive) ? 0.5 : -0.5;
                     }
+
+                    // ── EOQ ───────────────────────────────────────────────────
+                    // New format: "eoq" (int), legacy: "eoq_quantity" (float)
+                    int eoqVal = obj.value(QStringLiteral("eoq")).toInt();
+                    if (eoqVal == 0)
+                        eoqVal = static_cast<int>(obj.value(QStringLiteral("eoq_quantity")).toDouble());
+                    p.eoqQty = eoqVal;
+
+                    // ── Text outputs ──────────────────────────────────────────
+                    p.recommendation = obj.value(QStringLiteral("recommendation")).toString();
+
+                    p.explanation = obj.value(QStringLiteral("explanation")).toString();
+                    if (p.explanation.isEmpty())
+                        p.explanation = obj.value(QStringLiteral("explanations")).toString();
+
+                    // ── Forecast Points ───────────────────────────────────────
+                    p.forecast.clear();
+                    QJsonArray pts = obj.value(QStringLiteral("forecast_points")).toArray();
+                    for (const QJsonValue& ptVal : pts) {
+                        QJsonObject ptObj = ptVal.toObject();
+                        ForecastPoint fp;
+                        fp.date  = QDate::fromString(
+                            ptObj.value(QStringLiteral("ds")).toString(),
+                            QStringLiteral("yyyy-MM-dd"));
+                        fp.value = ptObj.value(QStringLiteral("yhat")).toDouble();
+                        fp.lower = ptObj.value(QStringLiteral("yhat_lower")).toDouble();
+                        fp.upper = ptObj.value(QStringLiteral("yhat_upper")).toDouble();
+                        // Clamp lower to 0 (Prophet can predict negative lower bound)
+                        if (fp.lower < 0.0) fp.lower = 0.0;
+                        if (fp.upper < fp.value) fp.upper = fp.value;
+                        p.forecast.append(fp);
+                    }
+
+                    const double dailyBase = p.forecastNext7 / 7.0;
+                    p.historicalSales = makeHistory(dailyBase, 30);
+                    break;
                 }
             }
             m_pipelineLive = true;
             loadedMLResults = true;
         }
     }
+
 
     if (!loadedMLResults) {
         // Populate ML simulation values on top of DB loaded structures
@@ -208,6 +308,7 @@ bool AppController::loadFromDatabase() {
     m_products = dbProds;
     m_lastRunTime  = QDateTime::currentDateTime();
     emit productsChanged(m_products);
+
     return true;
 }
 
@@ -229,14 +330,16 @@ void AppController::applyPipelineRun(const PipelineRunResult& result) {
     for (const auto& r : result.results) {
         for (auto& p : updatedList) {
             if ((r.productId > 0 && p.id == r.productId) || (p.sku == r.sku)) {
-                p.demandLabel   = r.demandLabel;
-                p.stockStatus   = r.stockStatus;
-                p.confidence    = r.confidence;
-                p.priority      = r.priority;
-                p.forecastNext7 = r.forecastNext7;
-                p.forecastTrend = r.forecastTrend;
-                p.forecast      = r.forecast;
-                p.eoqQty        = r.eoqQty;
+                p.demandLabel    = r.demandLabel;
+                p.stockStatus    = r.stockStatus;
+                p.confidence     = r.confidence;
+                p.priority       = r.priority;
+                p.forecastNext7  = r.forecastNext7;
+                p.forecastTrend  = r.forecastTrend;
+                p.forecast       = r.forecast;
+                p.eoqQty         = r.eoqQty;
+                p.recommendation = r.recommendation;
+                p.explanation    = r.explanation;
 
                 const double dailyBase = p.forecastNext7 / 7.0;
                 p.historicalSales = makeHistory(dailyBase, 30);
@@ -325,6 +428,7 @@ QVector<Product> AppController::buildDummyProducts(const AppSettings& cfg) {
         p.category       = QString::fromLatin1(s.category);
         p.currentStock   = s.stock;
         p.unitCost       = s.unitCost;
+        p.reorderPoint   = 10;       // default reorder point for seed data
         p.demandLabel    = s.demand;
         p.stockStatus    = s.status;
         p.priority       = s.priority;
@@ -344,6 +448,37 @@ QVector<Product> AppController::buildDummyProducts(const AppSettings& cfg) {
     }
 
     return result;
+}
+
+// ─────────────────────────────────────────────
+// Search
+// ─────────────────────────────────────────────
+
+void AppController::setSearchQuery(const QString& query) {
+    qDebug() << "[TRACE] AppController received search query:" << query;
+    if (m_searchQuery != query) {
+        m_searchQuery = query;
+        emit searchQueryChanged(m_searchQuery);
+        qDebug() << "[TRACE] AppController emitted searchQueryChanged:" << m_searchQuery;
+    } else {
+        qDebug() << "[TRACE] AppController query unchanged, not emitting.";
+    }
+}
+
+bool AppController::matchesSearch(const Product& p, const QString& query) const {
+    if (query.isEmpty()) return true;
+    if (p.name.contains(query, Qt::CaseInsensitive))     return true;
+    if (p.sku.contains(query, Qt::CaseInsensitive))      return true;
+    if (p.category.contains(query, Qt::CaseInsensitive)) return true;
+    if (p.supplier.contains(query, Qt::CaseInsensitive)) return true;
+    if (QString::number(p.id).contains(query))           return true;
+
+    // Also match stringified enumerations (e.g. "Safe", "Critical", "Overstock")
+    if (toString(p.demandLabel).contains(query, Qt::CaseInsensitive)) return true;
+    if (toString(p.stockStatus).contains(query, Qt::CaseInsensitive)) return true;
+    if (toString(p.priority).contains(query, Qt::CaseInsensitive))    return true;
+
+    return false;
 }
 
 } // namespace Kirana

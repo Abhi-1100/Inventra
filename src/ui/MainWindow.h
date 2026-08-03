@@ -7,6 +7,8 @@
 #include "ui/Sidebar.h"
 #include "core/AuthData.h"
 
+class QLabel;  // ---- ADDED: API Integration ----
+
 namespace Kirana {
 
 class AppController;
@@ -72,6 +74,7 @@ private slots:
     void onSessionLocked();
     void onSessionUnlocked();
     void onIdleTimeout();
+    void onApiHealthChecked(bool isOnline);  // ---- ADDED: API Integration ----
 
 private:
     void buildAuthLayer();
@@ -110,6 +113,11 @@ private:
 
     // Background pipeline worker
     PipelineWorker* m_worker = nullptr;
+
+    // ---- ADDED: API Integration ----
+    QLabel* m_apiBadge      = nullptr;
+    QTimer* m_healthTimer   = nullptr;
+    // ---- END ADDED ----
 };
 
 } // namespace Kirana

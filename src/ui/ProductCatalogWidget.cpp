@@ -25,13 +25,19 @@ namespace Kirana {
 
 class CatalogFilterProxy : public QSortFilterProxyModel {
 public:
-    explicit CatalogFilterProxy(QObject* parent = nullptr)
-        : QSortFilterProxyModel(parent)
+    explicit CatalogFilterProxy(AppController* ctrl, QObject* parent = nullptr)
+        : QSortFilterProxyModel(parent), controller(ctrl)
     {}
 
-    QString searchText;
+    AppController* controller;
     QString statusFilter;   // "" = all
     QString demandFilter;   // "" = all
+
+    void refreshFilter() {
+        beginResetModel();
+        invalidateFilter();
+        endResetModel();
+    }
 
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex&) const override {
@@ -41,10 +47,8 @@ protected:
         const Product& p = m->productAt(sourceRow);
 
         // Search text
-        if (!searchText.isEmpty()) {
-            if (!p.name.contains(searchText, Qt::CaseInsensitive) &&
-                !p.sku.contains(searchText, Qt::CaseInsensitive))
-                return false;
+        if (controller && !controller->matchesSearch(p, controller->searchQuery())) {
+            return false;
         }
 
         // Status filter
@@ -78,6 +82,12 @@ ProductCatalogWidget::ProductCatalogWidget(AppController* controller, QWidget* p
     configureTable();
     connect(m_controller, &AppController::productsChanged,
             this, &ProductCatalogWidget::onProductsChanged);
+    connect(m_controller, &AppController::searchQueryChanged,
+            this, [this]() {
+        if (auto* p = static_cast<CatalogFilterProxy*>(m_proxyModel)) {
+            p->refreshFilter();
+        }
+    });
     onProductsChanged();
 }
 
@@ -140,29 +150,7 @@ void ProductCatalogWidget::buildLayout() {
     filterRow->setContentsMargins(16, 0, 16, 0);
     filterRow->setSpacing(12);
 
-    // Search input
-    auto* searchWrap = new QWidget(filterCard);
-    searchWrap->setStyleSheet(
-        "background:#0a0e13;border:1px solid #232a33;border-radius:6px;");
-    searchWrap->setFixedWidth(260);
-    auto* searchRow = new QHBoxLayout(searchWrap);
-    searchRow->setContentsMargins(10, 0, 10, 0);
-    searchRow->setSpacing(6);
-    auto* searchIcon = new QLabel(QStringLiteral("⌕"), searchWrap);
-    searchIcon->setStyleSheet("color:#8c90a0;font-size:16px;background:transparent;border:none;");
-    m_searchEdit = new QLineEdit(searchWrap);
-    m_searchEdit->setPlaceholderText(QStringLiteral("Search products or SKU..."));
-    m_searchEdit->setStyleSheet(
-        "QLineEdit{background:transparent;border:none;"
-        "color:#e0e2ea;font-family:'JetBrains Mono',monospace;font-size:14px;padding:0;}"
-        "QLineEdit::placeholder{color:rgba(140,144,160,0.6);}");
-    m_searchEdit->setFixedHeight(40);
-    searchRow->addWidget(searchIcon);
-    searchRow->addWidget(m_searchEdit);
-    connect(m_searchEdit, &QLineEdit::textChanged,
-            this, &ProductCatalogWidget::onSearchTextChanged);
-
-    filterRow->addWidget(searchWrap);
+    // Local search wrap removed to avoid double-search inputs.
 
     // Status filter
     auto makeFilter = [&](const QString& placeholder,
@@ -259,7 +247,7 @@ void ProductCatalogWidget::buildLayout() {
 void ProductCatalogWidget::configureTable() {
     m_model = new ProductModel(this);
 
-    auto* proxy = new CatalogFilterProxy(this);
+    auto* proxy = new CatalogFilterProxy(m_controller, this);
     proxy->setSourceModel(m_model);
     proxy->setSortRole(Qt::DisplayRole);
     m_proxyModel = proxy;
@@ -306,20 +294,30 @@ void ProductCatalogWidget::onRowDoubleClicked(const QModelIndex& index) {
     m_detailPanel->slideIn();
 }
 
-void ProductCatalogWidget::onSearchTextChanged(const QString& text) {
-    auto* proxy = static_cast<CatalogFilterProxy*>(m_proxyModel);
-    if (proxy) { proxy->searchText = text; proxy->invalidate(); }
+void ProductCatalogWidget::onSearchTextChanged(const QString& /*text*/) {
+    // Left for backwards compatibility, handled globally now
 }
 
 void ProductCatalogWidget::onFilterChanged() {
     auto* proxy = static_cast<CatalogFilterProxy*>(m_proxyModel);
     if (!proxy) return;
 
-    proxy->statusFilter = (m_statusFilter->currentIndex() > 0)
-                          ? m_statusFilter->currentText() : QString();
-    proxy->demandFilter = (m_demandFilter->currentIndex() > 0)
-                          ? m_demandFilter->currentText() : QString();
-    proxy->invalidate();
+    QObject* senderObj = sender();
+    QComboBox* combo = qobject_cast<QComboBox*>(senderObj);
+    if (!combo) return;
+
+    QString val = combo->currentText();
+
+    if (combo == m_statusFilter) {
+        if (val == QLatin1String("Reorder Soon")) proxy->statusFilter = QStringLiteral("Reorder");
+        else if (val == QLatin1String("All Status")) proxy->statusFilter.clear();
+        else proxy->statusFilter = val;
+    } else if (combo == m_demandFilter) {
+        if (val == QLatin1String("All Demand")) proxy->demandFilter.clear();
+        else proxy->demandFilter = val;
+    }
+
+    proxy->refreshFilter();
 }
 
 void ProductCatalogWidget::refresh() {

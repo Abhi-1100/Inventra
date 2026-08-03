@@ -24,6 +24,10 @@ struct MLResult {
     QVector<ForecastPoint> forecast;
     double forecastNext7;
     double forecastTrend;
+
+    // ML textual outputs from Python
+    QString recommendation;   // short action summary
+    QString explanation;      // detailed narrative from generate_explanation()
 };
 
 // ─────────────────────────────────────────────
@@ -34,6 +38,7 @@ struct PipelineRunResult {
     bool             success    = false;
     QString          errorMsg;
     int              totalRows  = 0;
+    bool             isImport   = false; // True if this run also imported a dataset
     QVector<MLResult> results;
     qint64           durationMs = 0;   // wall-clock time of the run
 };

@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include <QModelIndex>
+#include <QJsonArray>
+#include <QJsonObject>
 #include "core/ProductData.h"
 
 class QTableView;
@@ -38,6 +40,10 @@ public:
 
     void updateMetrics();
     void updateActivityFeed();
+    void onSingleProductPredictionFinished(int productId); // called by MainWindow after prediction
+
+signals:
+    void singleProductPredictionRequested(int productId);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -76,6 +82,7 @@ private:
 
     // Product detail side panel
     ProductDetailPanel* m_detailPanel = nullptr;
+
 };
 
 } // namespace Kirana
