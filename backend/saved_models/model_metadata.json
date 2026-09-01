@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "training_timestamp": "2026-08-02T11:45:05.909048",
+    "training_timestamp": "2026-09-01T18:22:32.241420",
     "feature_list": [
         "sales_volume",
         "lag_1",
@@ -25,6 +25,6 @@
         "average_usage",
         "demand_trend"
     ],
-    "data_hash": "4c1c96c52cef07e38dce7844d0227eb9e86ebb05733c47fb219d29c9fa6f280f",
+    "data_hash": "c1e3271e1a37b2dab82628ad78ddd4deb7f9dd78085adf2f355509ed949046f4",
     "model_type": "SVC"
 }

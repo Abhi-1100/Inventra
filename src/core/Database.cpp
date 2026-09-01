@@ -365,13 +365,13 @@ int Database::saveProduct(const Product& p) {
     QSqlQuery q(db);
     if (p.id == 0) {
         q.prepare(QStringLiteral(R"(
-            INSERT INTO products(sku,name,category,supplier_name,current_stock,unit_cost)
-            VALUES(:sku,:name,:cat,:sup,:stock,:cost);)"));
+            INSERT INTO products(sku,name,category,supplier_name,current_stock,unit_cost,reorder_point)
+            VALUES(:sku,:name,:cat,:sup,:stock,:cost,:reorder);)"));
     } else {
         q.prepare(QStringLiteral(R"(
             UPDATE products
             SET sku=:sku,name=:name,category=:cat,supplier_name=:sup,
-                current_stock=:stock,unit_cost=:cost,
+                current_stock=:stock,unit_cost=:cost,reorder_point=:reorder,
                 updated_at=datetime('now')
             WHERE id=:id;)"));
         q.bindValue(QStringLiteral(":id"), p.id);
@@ -382,6 +382,7 @@ int Database::saveProduct(const Product& p) {
     q.bindValue(QStringLiteral(":sup"),   p.supplier);
     q.bindValue(QStringLiteral(":stock"), p.currentStock);
     q.bindValue(QStringLiteral(":cost"),  p.unitCost);
+    q.bindValue(QStringLiteral(":reorder"), p.reorderPoint);
     if (!q.exec()) { m_lastError = q.lastError().text(); return -1; }
     return p.id == 0 ? q.lastInsertId().toInt() : p.id;
 }
@@ -631,7 +632,7 @@ QString Database::getLatestPipelineResults() const {
     auto db = QSqlDatabase::database(m_connectionName);
     QSqlQuery q(db);
     q.prepare(QStringLiteral(
-        "SELECT results_json FROM pipeline_results WHERE success=1 ORDER BY run_at DESC LIMIT 1;"));
+        "SELECT results_json FROM pipeline_results WHERE success=1 ORDER BY id DESC LIMIT 1;"));
     if (q.exec() && q.next()) {
         return q.value(0).toString();
     }
@@ -651,4 +652,3 @@ bool Database::savePipelineResults(const QString& json) {
 }
 
 } // namespace Kirana
-

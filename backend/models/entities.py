@@ -15,6 +15,7 @@ class Product:
     sku: str = ""
     name: str = ""
     category: str = ""
+    supplier_name: str = ""
     current_stock: int = 0
     unit_cost: float = 0.0
     reorder_point: int = 10

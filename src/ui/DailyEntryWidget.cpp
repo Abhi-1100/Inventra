@@ -102,7 +102,15 @@ void DailyEntryWidget::buildLayout() {
     m_productCombo->setEditable(true);
     m_productCombo->setInsertPolicy(QComboBox::NoInsert);
     m_productCombo->setMinimumHeight(38);
-    m_productCombo->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+    auto* productCompleter = m_productCombo->completer();
+    productCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    productCompleter->setFilterMode(Qt::MatchContains);
+    productCompleter->setCompletionMode(QCompleter::PopupCompletion);
+    connect(productCompleter, QOverload<const QString&>::of(&QCompleter::activated),
+            this, [this](const QString& productName) {
+                const int index = m_productCombo->findText(productName, Qt::MatchFixedString);
+                if (index >= 0) m_productCombo->setCurrentIndex(index);
+            });
     singleLayout->addWidget(m_productCombo);
 
     auto* qtyRow = new QHBoxLayout;
@@ -252,12 +260,16 @@ void DailyEntryWidget::onProductsChanged() {
 // ─────────────────────────────────────────────
 
 void DailyEntryWidget::onAddEntryClicked() {
-    if (m_productCombo->currentIndex() < 0 ||
-        m_productCombo->currentText().trimmed().isEmpty()) {
+    const QString selectedName = m_productCombo->currentText().trimmed();
+    int selectedIndex = m_productCombo->findText(selectedName, Qt::MatchFixedString);
+
+    if (selectedIndex < 0) {
         QMessageBox::warning(this, QStringLiteral("Daily Entry"),
-            QStringLiteral("Please select a product."));
+            QStringLiteral("Choose a product from the matching results."));
         return;
     }
+
+    m_productCombo->setCurrentIndex(selectedIndex);
 
     const int productId   = m_productCombo->currentData().toInt();
     const QString name    = m_productCombo->currentText();

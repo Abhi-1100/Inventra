@@ -3,7 +3,6 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QLineEdit>
 #include <QPainter>
 #include <QPaintEvent>
 #include <QDateTime>
@@ -12,7 +11,7 @@ namespace Kirana {
 
 // ─────────────────────────────────────────────
 // StatusBar — Top App Bar
-// Layout: [Search]  stretch  [Sync status]  [● pipe]  [Run Now]  [🔔]  [👤]
+// Layout: stretch  [Sync status]  [● pipe]  [Run Now]  [🔔]  [👤]
 // Height: 56px, background: surface (#101419), border-bottom: #424754
 // ─────────────────────────────────────────────
 
@@ -30,47 +29,6 @@ void StatusBar::buildLayout() {
     lay->setContentsMargins(20, 0, 20, 0);
     lay->setSpacing(0);
 
-    // ── Search bar ────────────────────────────
-    auto* searchWrap = new QWidget(this);
-    searchWrap->setFixedWidth(300);
-    searchWrap->setStyleSheet(
-        "QWidget {"
-        "  background-color: #0a0e13;"
-        "  border: 1px solid #232a33;"
-        "  border-radius: 6px;"
-        "}"
-        "QWidget:focus-within {"
-        "  border-color: #afc6ff;"
-        "}");
-
-    auto* searchRow = new QHBoxLayout(searchWrap);
-    searchRow->setContentsMargins(10, 0, 10, 0);
-    searchRow->setSpacing(8);
-
-    auto* searchIcon = new QLabel(QStringLiteral("⌕"), searchWrap);
-    searchIcon->setStyleSheet(
-        "font-size: 16px; color: #8c90a0; background: transparent; border: none;");
-    searchIcon->setFixedWidth(18);
-
-    m_searchEdit = new QLineEdit(searchWrap);
-    m_searchEdit->setPlaceholderText(QStringLiteral("Search SKU, Product..."));
-    m_searchEdit->setStyleSheet(
-        "QLineEdit {"
-        "  background: transparent;"
-        "  border: none;"
-        "  color: #e0e2ea;"
-        "  font-family: 'Hanken Grotesk', sans-serif;"
-        "  font-size: 14px;"
-        "  padding: 0;"
-        "}"
-        "QLineEdit::placeholder { color: rgba(140,144,160,0.6); }");
-    m_searchEdit->setFixedHeight(36);
-    connect(m_searchEdit, &QLineEdit::textChanged, this, [this](const QString& text){ qDebug() << "\n[TRACE] Search QLineEdit changed:" << text; emit searchRequested(text); });
-
-    searchRow->addWidget(searchIcon);
-    searchRow->addWidget(m_searchEdit);
-
-    lay->addWidget(searchWrap);
     lay->addStretch();
 
     // ── Last sync label ──────────────────────

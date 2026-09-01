@@ -1,0 +1,33 @@
+INVENTRA PRODUCT NAME EDIT REPORT
+=================================
+Total rows: 26836
+Total unique products: 512
+Total categories: 8
+Number of names changed: 512 (across all rows)
+Number of generic names remaining: 0
+Missing product names: 0
+
+VALIDATION RESULTS
+------------------
+Row count unchanged: YES
+Column count unchanged: YES
+Product IDs unchanged: YES
+Categories unchanged: YES
+Dates unchanged: YES
+Weekly sales unchanged: YES
+Closing stock unchanged: YES
+Unit prices unchanged: YES
+Reorder points unchanged: YES
+Lead times unchanged: YES
+Order costs unchanged: YES
+Holding costs unchanged: YES
+
+Only product_name changed: YES
+
+Unique product IDs:
+Original = Final: YES
+
+Every product_id has exactly one product_name: YES
+
+Generic category-only product names remaining: 0
+Missing product names: 0

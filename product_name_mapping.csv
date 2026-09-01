@@ -1,0 +1,513 @@
+product_id,old_product_name,new_product_name
+AHMEDABAD_AMUL_BEVERAGES,Amul Beverages (Ahmedabad),Amul Tru Mango 200ml
+AHMEDABAD_AMUL_DAIRY,Amul Dairy (Ahmedabad),Amul Ghee 1L
+AHMEDABAD_AMUL_FRUITS,Amul Fruits (Ahmedabad),Real Orange Juice 1L
+AHMEDABAD_AMUL_GROCERY,Amul Grocery (Ahmedabad),Tata Sampann Besan 500g
+AHMEDABAD_AMUL_HOME_CARE,Amul Home Care (Ahmedabad),Rin Detergent Powder 1kg
+AHMEDABAD_AMUL_PERSONAL_CARE,Amul Personal Care (Ahmedabad),Pond's White Beauty Face Wash 100g
+AHMEDABAD_AMUL_SNACKS,Amul Snacks (Ahmedabad),Kurkure Puffcorn Yummy Cheese 55g
+AHMEDABAD_AMUL_VEGETABLES,Amul Vegetables (Ahmedabad),Fresho Tomato 1kg
+AHMEDABAD_BRITANNIA_BEVERAGES,Britannia Beverages (Ahmedabad),Pepsi Cola Soft Drink 750ml
+AHMEDABAD_BRITANNIA_DAIRY,Britannia Dairy (Ahmedabad),Britannia Roasted Makhana 50g
+AHMEDABAD_BRITANNIA_FRUITS,Britannia Fruits (Ahmedabad),Real Litchi Juice 1L
+AHMEDABAD_BRITANNIA_GROCERY,Britannia Grocery (Ahmedabad),Tata Salt Iodised Salt 1kg
+AHMEDABAD_BRITANNIA_HOME_CARE,Britannia Home Care (Ahmedabad),Surf Excel Matic Front Load 1kg
+AHMEDABAD_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Ahmedabad),Lifebuoy Total 10 Soap 100g
+AHMEDABAD_BRITANNIA_SNACKS,Britannia Snacks (Ahmedabad),Britannia 50-50 Maska Chaska 120g
+AHMEDABAD_BRITANNIA_VEGETABLES,Britannia Vegetables (Ahmedabad),Fresho Cauliflower 1pc
+AHMEDABAD_HUL_BEVERAGES,HUL Beverages (Ahmedabad),Slice Mango Drink 600ml
+AHMEDABAD_HUL_DAIRY,HUL Dairy (Ahmedabad),Amul Masti Dahi 400g
+AHMEDABAD_HUL_FRUITS,HUL Fruits (Ahmedabad),Real Apple Juice 1L
+AHMEDABAD_HUL_GROCERY,HUL Grocery (Ahmedabad),Tata Sampann Moong Dal 1kg
+AHMEDABAD_HUL_HOME_CARE,HUL Home Care (Ahmedabad),Vim Dishwash Liquid 500ml
+AHMEDABAD_HUL_PERSONAL_CARE,HUL Personal Care (Ahmedabad),Dove Cream Beauty Bathing Bar 100g
+AHMEDABAD_HUL_SNACKS,HUL Snacks (Ahmedabad),Lay's American Style Cream & Onion 50g
+AHMEDABAD_HUL_VEGETABLES,HUL Vegetables (Ahmedabad),Fresho Lady Finger 500g
+AHMEDABAD_ITC_BEVERAGES,ITC Beverages (Ahmedabad),B Natural Mango 1L
+AHMEDABAD_ITC_DAIRY,ITC Dairy (Ahmedabad),Amul Taaza Toned Milk 1L
+AHMEDABAD_ITC_FRUITS,ITC Fruits (Ahmedabad),Real Pomegranate Juice 1L
+AHMEDABAD_ITC_GROCERY,ITC Grocery (Ahmedabad),Sunfeast Yippee Noodles 280g
+AHMEDABAD_ITC_HOME_CARE,ITC Home Care (Ahmedabad),Vim Dishwash Bar 200g
+AHMEDABAD_ITC_PERSONAL_CARE,ITC Personal Care (Ahmedabad),Fiama Di Wills Shower Gel 250ml
+AHMEDABAD_ITC_SNACKS,ITC Snacks (Ahmedabad),Sunfeast Mom's Magic Cashew & Almond 200g
+AHMEDABAD_ITC_VEGETABLES,ITC Vegetables (Ahmedabad),Fresho Capsicum 500g
+AHMEDABAD_NESTLE_BEVERAGES,Nestle Beverages (Ahmedabad),Nescafé Classic 100g
+AHMEDABAD_NESTLE_DAIRY,Nestle Dairy (Ahmedabad),Nestle a+ Nourish Milk 1L
+AHMEDABAD_NESTLE_FRUITS,Nestle Fruits (Ahmedabad),Real Mango Juice 1L
+AHMEDABAD_NESTLE_GROCERY,Nestle Grocery (Ahmedabad),Maggi Masala-ae-Magic 60g
+AHMEDABAD_NESTLE_HOME_CARE,Nestle Home Care (Ahmedabad),Domex Toilet Cleaner 500ml
+AHMEDABAD_NESTLE_PERSONAL_CARE,Nestle Personal Care (Ahmedabad),Sunsilk Stunning Black Shine Shampoo 340ml
+AHMEDABAD_NESTLE_SNACKS,Nestle Snacks (Ahmedabad),Maggi 2-Minute Masala Noodles 420g
+AHMEDABAD_NESTLE_VEGETABLES,Nestle Vegetables (Ahmedabad),Fresho Cabbage 1pc
+AHMEDABAD_PARLE_BEVERAGES,Parle Beverages (Ahmedabad),Appy Fizz 250ml
+AHMEDABAD_PARLE_DAIRY,Parle Dairy (Ahmedabad),Amul Fresh Cream 250ml
+AHMEDABAD_PARLE_FRUITS,Parle Fruits (Ahmedabad),Real Mixed Fruit Juice 1L
+AHMEDABAD_PARLE_GROCERY,Parle Grocery (Ahmedabad),Tata Sampann Turmeric 200g
+AHMEDABAD_PARLE_HOME_CARE,Parle Home Care (Ahmedabad),Surf Excel Matic Top Load 1kg
+AHMEDABAD_PARLE_PERSONAL_CARE,Parle Personal Care (Ahmedabad),Clinic Plus Strong & Long Shampoo 340ml
+AHMEDABAD_PARLE_SNACKS,Parle Snacks (Ahmedabad),Parle 20-20 Cookies 150g
+AHMEDABAD_PARLE_VEGETABLES,Parle Vegetables (Ahmedabad),Fresho Carrot 500g
+AHMEDABAD_PEPSICO_BEVERAGES,PepsiCo Beverages (Ahmedabad),Mirinda Orange 750ml
+AHMEDABAD_PEPSICO_DAIRY,PepsiCo Dairy (Ahmedabad),Amul Cheese Slices 200g
+AHMEDABAD_PEPSICO_FRUITS,PepsiCo Fruits (Ahmedabad),Real Pineapple Juice 1L
+AHMEDABAD_PEPSICO_GROCERY,PepsiCo Grocery (Ahmedabad),Tata Sampann Urad Dal 1kg
+AHMEDABAD_PEPSICO_HOME_CARE,PepsiCo Home Care (Ahmedabad),Comfort Fabric Conditioner 860ml
+AHMEDABAD_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Ahmedabad),Lux Soft Touch Soap 100g
+AHMEDABAD_PEPSICO_SNACKS,PepsiCo Snacks (Ahmedabad),Lay's Spanish Tomato Tango 50g
+AHMEDABAD_PEPSICO_VEGETABLES,PepsiCo Vegetables (Ahmedabad),Fresho Potato 1kg
+AHMEDABAD_TATA_BEVERAGES,Tata Beverages (Ahmedabad),Tata Gluco Plus 200ml
+AHMEDABAD_TATA_DAIRY,Tata Dairy (Ahmedabad),Amul Butter Pasteurised 500g
+AHMEDABAD_TATA_FRUITS,Tata Fruits (Ahmedabad),Real Guava Juice 1L
+AHMEDABAD_TATA_GROCERY,Tata Grocery (Ahmedabad),Tata Sampann Toor Dal 1kg
+AHMEDABAD_TATA_HOME_CARE,Tata Home Care (Ahmedabad),Surf Excel Easy Wash Detergent 1kg
+AHMEDABAD_TATA_PERSONAL_CARE,Tata Personal Care (Ahmedabad),Fair & Lovely Advanced Multi Vitamin 50g
+AHMEDABAD_TATA_SNACKS,Tata Snacks (Ahmedabad),Lay's India's Magic Masala 50g
+AHMEDABAD_TATA_VEGETABLES,Tata Vegetables (Ahmedabad),Tata Sampann High Protein Toor Dal 1kg
+BENGALURU_AMUL_BEVERAGES,Amul Beverages (Bengaluru),Amul Kool Rose 200ml
+BENGALURU_AMUL_DAIRY,Amul Dairy (Bengaluru),Amul Paneer 200g
+BENGALURU_AMUL_FRUITS,Amul Fruits (Bengaluru),Real Apple Juice 1L
+BENGALURU_AMUL_GROCERY,Amul Grocery (Bengaluru),Tata Salt Lite 1kg
+BENGALURU_AMUL_HOME_CARE,Amul Home Care (Bengaluru),Vim Dishwash Bar 200g
+BENGALURU_AMUL_PERSONAL_CARE,Amul Personal Care (Bengaluru),Pepsodent Germi Check Toothpaste 150g
+BENGALURU_AMUL_SNACKS,Amul Snacks (Bengaluru),Kurkure Masala Munch 90g
+BENGALURU_AMUL_VEGETABLES,Amul Vegetables (Bengaluru),Fresho Onion 1kg
+BENGALURU_BRITANNIA_BEVERAGES,Britannia Beverages (Bengaluru),7UP Soft Drink 750ml
+BENGALURU_BRITANNIA_DAIRY,Britannia Dairy (Bengaluru),Britannia Cream Cheese 200g
+BENGALURU_BRITANNIA_FRUITS,Britannia Fruits (Bengaluru),Real Guava Juice 1L
+BENGALURU_BRITANNIA_GROCERY,Britannia Grocery (Bengaluru),Tata Sampann Chana Dal 1kg
+BENGALURU_BRITANNIA_HOME_CARE,Britannia Home Care (Bengaluru),Comfort Fabric Conditioner 860ml
+BENGALURU_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Bengaluru),Lifebuoy Total 10 Soap 100g
+BENGALURU_BRITANNIA_SNACKS,Britannia Snacks (Bengaluru),Britannia Marie Gold Biscuits 250g
+BENGALURU_BRITANNIA_VEGETABLES,Britannia Vegetables (Bengaluru),Fresho Carrot 500g
+BENGALURU_HUL_BEVERAGES,HUL Beverages (Bengaluru),Pepsi Cola Soft Drink 2.25L
+BENGALURU_HUL_DAIRY,HUL Dairy (Bengaluru),Amul Gold Full Cream Milk 1L
+BENGALURU_HUL_FRUITS,HUL Fruits (Bengaluru),Real Pomegranate Juice 1L
+BENGALURU_HUL_GROCERY,HUL Grocery (Bengaluru),Tata Sampann Turmeric 200g
+BENGALURU_HUL_HOME_CARE,HUL Home Care (Bengaluru),Surf Excel Matic Top Load 1kg
+BENGALURU_HUL_PERSONAL_CARE,HUL Personal Care (Bengaluru),Clinic Plus Strong & Long Shampoo 340ml
+BENGALURU_HUL_SNACKS,HUL Snacks (Bengaluru),Kurkure Chilli Chatka 90g
+BENGALURU_HUL_VEGETABLES,HUL Vegetables (Bengaluru),Fresho Tomato 1kg
+BENGALURU_ITC_BEVERAGES,ITC Beverages (Bengaluru),B Natural Guava 1L
+BENGALURU_ITC_DAIRY,ITC Dairy (Bengaluru),Amul Ghee 1L
+BENGALURU_ITC_FRUITS,ITC Fruits (Bengaluru),Real Orange Juice 1L
+BENGALURU_ITC_GROCERY,ITC Grocery (Bengaluru),Aashirvaad Shudh Chakki Atta 5kg
+BENGALURU_ITC_HOME_CARE,ITC Home Care (Bengaluru),Surf Excel Matic Front Load 1kg
+BENGALURU_ITC_PERSONAL_CARE,ITC Personal Care (Bengaluru),Vivel Aloe Vera Soap 100g
+BENGALURU_ITC_SNACKS,ITC Snacks (Bengaluru),Bingo Potato Chips Masala 50g
+BENGALURU_ITC_VEGETABLES,ITC Vegetables (Bengaluru),Fresho Cauliflower 1pc
+BENGALURU_NESTLE_BEVERAGES,Nestle Beverages (Bengaluru),Nescafé Classic 200g
+BENGALURU_NESTLE_DAIRY,Nestle Dairy (Bengaluru),Nestle a+ Slim Milk 1L
+BENGALURU_NESTLE_FRUITS,Nestle Fruits (Bengaluru),Real Pomegranate Juice 1L
+BENGALURU_NESTLE_GROCERY,Nestle Grocery (Bengaluru),Maggi Hot & Sweet Tomato Chilli Sauce 500g
+BENGALURU_NESTLE_HOME_CARE,Nestle Home Care (Bengaluru),Vim Dishwash Liquid 500ml
+BENGALURU_NESTLE_PERSONAL_CARE,Nestle Personal Care (Bengaluru),Dove Cream Beauty Bathing Bar 100g
+BENGALURU_NESTLE_SNACKS,Nestle Snacks (Bengaluru),Maggi Fusian Singapore Tangy Pepper 73g
+BENGALURU_NESTLE_VEGETABLES,Nestle Vegetables (Bengaluru),Fresho Lady Finger 500g
+BENGALURU_PARLE_BEVERAGES,Parle Beverages (Bengaluru),Frooti Mango Drink 1L
+BENGALURU_PARLE_DAIRY,Parle Dairy (Bengaluru),Amul Taaza Toned Milk 1L
+BENGALURU_PARLE_FRUITS,Parle Fruits (Bengaluru),Real Mixed Fruit Juice 1L
+BENGALURU_PARLE_GROCERY,Parle Grocery (Bengaluru),Tata Sampann Besan 500g
+BENGALURU_PARLE_HOME_CARE,Parle Home Care (Bengaluru),Rin Detergent Powder 1kg
+BENGALURU_PARLE_PERSONAL_CARE,Parle Personal Care (Bengaluru),Dove Cream Beauty Bathing Bar 100g
+BENGALURU_PARLE_SNACKS,Parle Snacks (Bengaluru),Parle Happy Happy 100g
+BENGALURU_PARLE_VEGETABLES,Parle Vegetables (Bengaluru),Fresho Cauliflower 1pc
+BENGALURU_PEPSICO_BEVERAGES,PepsiCo Beverages (Bengaluru),Pepsi Cola Soft Drink 1.25L
+BENGALURU_PEPSICO_DAIRY,PepsiCo Dairy (Bengaluru),Amul Ghee 1L
+BENGALURU_PEPSICO_FRUITS,PepsiCo Fruits (Bengaluru),Real Mango Juice 1L
+BENGALURU_PEPSICO_GROCERY,PepsiCo Grocery (Bengaluru),Tata Salt Iodised Salt 1kg
+BENGALURU_PEPSICO_HOME_CARE,PepsiCo Home Care (Bengaluru),Vim Dishwash Bar 200g
+BENGALURU_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Bengaluru),Dove Cream Beauty Bathing Bar 100g
+BENGALURU_PEPSICO_SNACKS,PepsiCo Snacks (Bengaluru),Lay's Classic Salted 50g
+BENGALURU_PEPSICO_VEGETABLES,PepsiCo Vegetables (Bengaluru),Fresho Cabbage 1pc
+BENGALURU_TATA_BEVERAGES,Tata Beverages (Bengaluru),Tata Tea Agni 500g
+BENGALURU_TATA_DAIRY,Tata Dairy (Bengaluru),Amul Masti Dahi 400g
+BENGALURU_TATA_FRUITS,Tata Fruits (Bengaluru),Real Mixed Fruit Juice 1L
+BENGALURU_TATA_GROCERY,Tata Grocery (Bengaluru),Tata Salt Iodised Salt 1kg
+BENGALURU_TATA_HOME_CARE,Tata Home Care (Bengaluru),Surf Excel Easy Wash Detergent 1kg
+BENGALURU_TATA_PERSONAL_CARE,Tata Personal Care (Bengaluru),Clinic Plus Strong & Long Shampoo 340ml
+BENGALURU_TATA_SNACKS,Tata Snacks (Bengaluru),Kurkure Solid Masti 90g
+BENGALURU_TATA_VEGETABLES,Tata Vegetables (Bengaluru),Tata Sampann High Protein Masoor Dal 1kg
+CHENNAI_AMUL_BEVERAGES,Amul Beverages (Chennai),Amul Kool Cafe 200ml
+CHENNAI_AMUL_DAIRY,Amul Dairy (Chennai),Amul Butter Pasteurised 500g
+CHENNAI_AMUL_FRUITS,Amul Fruits (Chennai),Real Apple Juice 1L
+CHENNAI_AMUL_GROCERY,Amul Grocery (Chennai),Tata Salt Lite 1kg
+CHENNAI_AMUL_HOME_CARE,Amul Home Care (Chennai),Surf Excel Matic Front Load 1kg
+CHENNAI_AMUL_PERSONAL_CARE,Amul Personal Care (Chennai),Sunsilk Stunning Black Shine Shampoo 340ml
+CHENNAI_AMUL_SNACKS,Amul Snacks (Chennai),Kurkure Solid Masti 90g
+CHENNAI_AMUL_VEGETABLES,Amul Vegetables (Chennai),Fresho Potato 1kg
+CHENNAI_BRITANNIA_BEVERAGES,Britannia Beverages (Chennai),Mountain Dew Soft Drink 750ml
+CHENNAI_BRITANNIA_DAIRY,Britannia Dairy (Chennai),Britannia Cheese Block 200g
+CHENNAI_BRITANNIA_FRUITS,Britannia Fruits (Chennai),Real Orange Juice 1L
+CHENNAI_BRITANNIA_GROCERY,Britannia Grocery (Chennai),Tata Sampann Moong Dal 1kg
+CHENNAI_BRITANNIA_HOME_CARE,Britannia Home Care (Chennai),Surf Excel Matic Top Load 1kg
+CHENNAI_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Chennai),Sunsilk Stunning Black Shine Shampoo 340ml
+CHENNAI_BRITANNIA_SNACKS,Britannia Snacks (Chennai),Britannia Good Day Cashew Cookies 200g
+CHENNAI_BRITANNIA_VEGETABLES,Britannia Vegetables (Chennai),Fresho Cauliflower 1pc
+CHENNAI_HUL_BEVERAGES,HUL Beverages (Chennai),Aquafina Water 1L
+CHENNAI_HUL_DAIRY,HUL Dairy (Chennai),Amul Cheese Slices 200g
+CHENNAI_HUL_FRUITS,HUL Fruits (Chennai),Real Mixed Fruit Juice 1L
+CHENNAI_HUL_GROCERY,HUL Grocery (Chennai),Tata Sampann Toor Dal 1kg
+CHENNAI_HUL_HOME_CARE,HUL Home Care (Chennai),Vim Dishwash Liquid 500ml
+CHENNAI_HUL_PERSONAL_CARE,HUL Personal Care (Chennai),Clinic Plus Strong & Long Shampoo 340ml
+CHENNAI_HUL_SNACKS,HUL Snacks (Chennai),Lay's Classic Salted 50g
+CHENNAI_HUL_VEGETABLES,HUL Vegetables (Chennai),Fresho Carrot 500g
+CHENNAI_ITC_BEVERAGES,ITC Beverages (Chennai),B Natural Pineapple 1L
+CHENNAI_ITC_DAIRY,ITC Dairy (Chennai),Amul Gold Full Cream Milk 1L
+CHENNAI_ITC_FRUITS,ITC Fruits (Chennai),Real Apple Juice 1L
+CHENNAI_ITC_GROCERY,ITC Grocery (Chennai),Aashirvaad Select Premium Atta 5kg
+CHENNAI_ITC_HOME_CARE,ITC Home Care (Chennai),Vim Dishwash Bar 200g
+CHENNAI_ITC_PERSONAL_CARE,ITC Personal Care (Chennai),Vivel Lotus Oil Soap 100g
+CHENNAI_ITC_SNACKS,ITC Snacks (Chennai),Bingo Mad Angles Tomato Mischief 80g
+CHENNAI_ITC_VEGETABLES,ITC Vegetables (Chennai),Fresho Lady Finger 500g
+CHENNAI_NESTLE_BEVERAGES,Nestle Beverages (Chennai),Nestea Iced Tea 400g
+CHENNAI_NESTLE_DAIRY,Nestle Dairy (Chennai),Nestle Everyday Dairy Whitener 200g
+CHENNAI_NESTLE_FRUITS,Nestle Fruits (Chennai),Real Apple Juice 1L
+CHENNAI_NESTLE_GROCERY,Nestle Grocery (Chennai),Maggi Rich Tomato Ketchup 500g
+CHENNAI_NESTLE_HOME_CARE,Nestle Home Care (Chennai),Rin Detergent Powder 1kg
+CHENNAI_NESTLE_PERSONAL_CARE,Nestle Personal Care (Chennai),Lux Soft Touch Soap 100g
+CHENNAI_NESTLE_SNACKS,Nestle Snacks (Chennai),Maggi 2-Minute Masala Noodles 280g
+CHENNAI_NESTLE_VEGETABLES,Nestle Vegetables (Chennai),Fresho Capsicum 500g
+CHENNAI_PARLE_BEVERAGES,Parle Beverages (Chennai),Smoodh Chocolate Milk 85ml
+CHENNAI_PARLE_DAIRY,Parle Dairy (Chennai),Amul Paneer 200g
+CHENNAI_PARLE_FRUITS,Parle Fruits (Chennai),Real Mixed Fruit Juice 1L
+CHENNAI_PARLE_GROCERY,Parle Grocery (Chennai),Tata Sampann Urad Dal 1kg
+CHENNAI_PARLE_HOME_CARE,Parle Home Care (Chennai),Rin Detergent Powder 1kg
+CHENNAI_PARLE_PERSONAL_CARE,Parle Personal Care (Chennai),Lifebuoy Total 10 Soap 100g
+CHENNAI_PARLE_SNACKS,Parle Snacks (Chennai),Parle Krack Jack 75g
+CHENNAI_PARLE_VEGETABLES,Parle Vegetables (Chennai),Fresho Tomato 1kg
+CHENNAI_PEPSICO_BEVERAGES,PepsiCo Beverages (Chennai),Aquafina Water 1L
+CHENNAI_PEPSICO_DAIRY,PepsiCo Dairy (Chennai),Amul Taaza Toned Milk 1L
+CHENNAI_PEPSICO_FRUITS,PepsiCo Fruits (Chennai),Real Mango Juice 1L
+CHENNAI_PEPSICO_GROCERY,PepsiCo Grocery (Chennai),Tata Sampann Besan 500g
+CHENNAI_PEPSICO_HOME_CARE,PepsiCo Home Care (Chennai),Domex Toilet Cleaner 500ml
+CHENNAI_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Chennai),Pond's White Beauty Face Wash 100g
+CHENNAI_PEPSICO_SNACKS,PepsiCo Snacks (Chennai),Lay's American Style Cream & Onion 50g
+CHENNAI_PEPSICO_VEGETABLES,PepsiCo Vegetables (Chennai),Fresho Onion 1kg
+CHENNAI_TATA_BEVERAGES,Tata Beverages (Chennai),Tetley Green Tea 25 Bags
+CHENNAI_TATA_DAIRY,Tata Dairy (Chennai),Amul Paneer 200g
+CHENNAI_TATA_FRUITS,Tata Fruits (Chennai),Real Guava Juice 1L
+CHENNAI_TATA_GROCERY,Tata Grocery (Chennai),Tata Sampann Turmeric 200g
+CHENNAI_TATA_HOME_CARE,Tata Home Care (Chennai),Surf Excel Matic Top Load 1kg
+CHENNAI_TATA_PERSONAL_CARE,Tata Personal Care (Chennai),Dove Cream Beauty Bathing Bar 100g
+CHENNAI_TATA_SNACKS,Tata Snacks (Chennai),Kurkure Puffcorn Yummy Cheese 55g
+CHENNAI_TATA_VEGETABLES,Tata Vegetables (Chennai),Tata Sampann High Protein Kabuli Chana 1kg
+DELHI_AMUL_BEVERAGES,Amul Beverages (Delhi),Amul Lassi 200ml
+DELHI_AMUL_DAIRY,Amul Dairy (Delhi),Amul Masti Dahi 400g
+DELHI_AMUL_FRUITS,Amul Fruits (Delhi),Real Pineapple Juice 1L
+DELHI_AMUL_GROCERY,Amul Grocery (Delhi),Tata Sampann Moong Dal 1kg
+DELHI_AMUL_HOME_CARE,Amul Home Care (Delhi),Rin Detergent Powder 1kg
+DELHI_AMUL_PERSONAL_CARE,Amul Personal Care (Delhi),Pond's White Beauty Face Wash 100g
+DELHI_AMUL_SNACKS,Amul Snacks (Delhi),Lay's Classic Salted 50g
+DELHI_AMUL_VEGETABLES,Amul Vegetables (Delhi),Fresho Tomato 1kg
+DELHI_BRITANNIA_BEVERAGES,Britannia Beverages (Delhi),Pepsi Cola Soft Drink 2.25L
+DELHI_BRITANNIA_DAIRY,Britannia Dairy (Delhi),Britannia Daily Fresh Dahi 400g
+DELHI_BRITANNIA_FRUITS,Britannia Fruits (Delhi),Real Pineapple Juice 1L
+DELHI_BRITANNIA_GROCERY,Britannia Grocery (Delhi),Tata Sampann Moong Dal 1kg
+DELHI_BRITANNIA_HOME_CARE,Britannia Home Care (Delhi),Rin Detergent Powder 1kg
+DELHI_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Delhi),Lux Soft Touch Soap 100g
+DELHI_BRITANNIA_SNACKS,Britannia Snacks (Delhi),Britannia Little Hearts 75g
+DELHI_BRITANNIA_VEGETABLES,Britannia Vegetables (Delhi),Fresho Onion 1kg
+DELHI_HUL_BEVERAGES,HUL Beverages (Delhi),Mountain Dew Soft Drink 750ml
+DELHI_HUL_DAIRY,HUL Dairy (Delhi),Amul Taaza Toned Milk 1L
+DELHI_HUL_FRUITS,HUL Fruits (Delhi),Real Orange Juice 1L
+DELHI_HUL_GROCERY,HUL Grocery (Delhi),Tata Salt Lite 1kg
+DELHI_HUL_HOME_CARE,HUL Home Care (Delhi),Surf Excel Matic Top Load 1kg
+DELHI_HUL_PERSONAL_CARE,HUL Personal Care (Delhi),Sunsilk Stunning Black Shine Shampoo 340ml
+DELHI_HUL_SNACKS,HUL Snacks (Delhi),Kurkure Solid Masti 90g
+DELHI_HUL_VEGETABLES,HUL Vegetables (Delhi),Fresho Cabbage 1pc
+DELHI_ITC_BEVERAGES,ITC Beverages (Delhi),Sunfeast Yippee Magic 120g
+DELHI_ITC_DAIRY,ITC Dairy (Delhi),Amul Paneer 200g
+DELHI_ITC_FRUITS,ITC Fruits (Delhi),Real Pomegranate Juice 1L
+DELHI_ITC_GROCERY,ITC Grocery (Delhi),Aashirvaad Coriander Powder 200g
+DELHI_ITC_HOME_CARE,ITC Home Care (Delhi),Rin Detergent Powder 1kg
+DELHI_ITC_PERSONAL_CARE,ITC Personal Care (Delhi),Engage Cologne Spray 135ml
+DELHI_ITC_SNACKS,ITC Snacks (Delhi),Sunfeast Marie Light 250g
+DELHI_ITC_VEGETABLES,ITC Vegetables (Delhi),Fresho Carrot 500g
+DELHI_NESTLE_BEVERAGES,Nestle Beverages (Delhi),Milo Energy Drink 200ml
+DELHI_NESTLE_DAIRY,Nestle Dairy (Delhi),Nestle Milkmaid 400g
+DELHI_NESTLE_FRUITS,Nestle Fruits (Delhi),Real Pineapple Juice 1L
+DELHI_NESTLE_GROCERY,Nestle Grocery (Delhi),Maggi Pazzta Cheese Macaroni 70g
+DELHI_NESTLE_HOME_CARE,Nestle Home Care (Delhi),Surf Excel Easy Wash Detergent 1kg
+DELHI_NESTLE_PERSONAL_CARE,Nestle Personal Care (Delhi),Pepsodent Germi Check Toothpaste 150g
+DELHI_NESTLE_SNACKS,Nestle Snacks (Delhi),Maggi Nutri-licious Atta Noodles 300g
+DELHI_NESTLE_VEGETABLES,Nestle Vegetables (Delhi),Fresho Cauliflower 1pc
+DELHI_PARLE_BEVERAGES,Parle Beverages (Delhi),Frooti Mango Drink 200ml
+DELHI_PARLE_DAIRY,Parle Dairy (Delhi),Amul Masti Dahi 400g
+DELHI_PARLE_FRUITS,Parle Fruits (Delhi),Real Mixed Fruit Juice 1L
+DELHI_PARLE_GROCERY,Parle Grocery (Delhi),Tata Sampann Moong Dal 1kg
+DELHI_PARLE_HOME_CARE,Parle Home Care (Delhi),Comfort Fabric Conditioner 860ml
+DELHI_PARLE_PERSONAL_CARE,Parle Personal Care (Delhi),Dove Cream Beauty Bathing Bar 100g
+DELHI_PARLE_SNACKS,Parle Snacks (Delhi),Parle-G Original Glucose Biscuits 800g
+DELHI_PARLE_VEGETABLES,Parle Vegetables (Delhi),Fresho Capsicum 500g
+DELHI_PEPSICO_BEVERAGES,PepsiCo Beverages (Delhi),Slice Mango Drink 600ml
+DELHI_PEPSICO_DAIRY,PepsiCo Dairy (Delhi),Amul Fresh Cream 250ml
+DELHI_PEPSICO_FRUITS,PepsiCo Fruits (Delhi),Real Mixed Fruit Juice 1L
+DELHI_PEPSICO_GROCERY,PepsiCo Grocery (Delhi),Tata Salt Iodised Salt 1kg
+DELHI_PEPSICO_HOME_CARE,PepsiCo Home Care (Delhi),Rin Detergent Powder 1kg
+DELHI_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Delhi),Fair & Lovely Advanced Multi Vitamin 50g
+DELHI_PEPSICO_SNACKS,PepsiCo Snacks (Delhi),Kurkure Chilli Chatka 90g
+DELHI_PEPSICO_VEGETABLES,PepsiCo Vegetables (Delhi),Fresho Potato 1kg
+DELHI_TATA_BEVERAGES,Tata Beverages (Delhi),Tata Tea Premium 500g
+DELHI_TATA_DAIRY,Tata Dairy (Delhi),Amul Paneer 200g
+DELHI_TATA_FRUITS,Tata Fruits (Delhi),Real Pineapple Juice 1L
+DELHI_TATA_GROCERY,Tata Grocery (Delhi),Tata Sampann Chana Dal 1kg
+DELHI_TATA_HOME_CARE,Tata Home Care (Delhi),Rin Detergent Powder 1kg
+DELHI_TATA_PERSONAL_CARE,Tata Personal Care (Delhi),Clinic Plus Strong & Long Shampoo 340ml
+DELHI_TATA_SNACKS,Tata Snacks (Delhi),Lay's India's Magic Masala 50g
+DELHI_TATA_VEGETABLES,Tata Vegetables (Delhi),Tata Sampann High Protein Chana Dal 1kg
+HYDERABAD_AMUL_BEVERAGES,Amul Beverages (Hyderabad),Amul Masti Buttermilk 500ml
+HYDERABAD_AMUL_DAIRY,Amul Dairy (Hyderabad),Amul Cheese Slices 200g
+HYDERABAD_AMUL_FRUITS,Amul Fruits (Hyderabad),Real Mixed Fruit Juice 1L
+HYDERABAD_AMUL_GROCERY,Amul Grocery (Hyderabad),Tata Sampann Turmeric 200g
+HYDERABAD_AMUL_HOME_CARE,Amul Home Care (Hyderabad),Surf Excel Matic Top Load 1kg
+HYDERABAD_AMUL_PERSONAL_CARE,Amul Personal Care (Hyderabad),Lifebuoy Total 10 Soap 100g
+HYDERABAD_AMUL_SNACKS,Amul Snacks (Hyderabad),Kurkure Chilli Chatka 90g
+HYDERABAD_AMUL_VEGETABLES,Amul Vegetables (Hyderabad),Fresho Onion 1kg
+HYDERABAD_BRITANNIA_BEVERAGES,Britannia Beverages (Hyderabad),Mirinda Orange 750ml
+HYDERABAD_BRITANNIA_DAIRY,Britannia Dairy (Hyderabad),Britannia Cheese Cubes 200g
+HYDERABAD_BRITANNIA_FRUITS,Britannia Fruits (Hyderabad),Real Guava Juice 1L
+HYDERABAD_BRITANNIA_GROCERY,Britannia Grocery (Hyderabad),Tata Sampann Toor Dal 1kg
+HYDERABAD_BRITANNIA_HOME_CARE,Britannia Home Care (Hyderabad),Surf Excel Matic Top Load 1kg
+HYDERABAD_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Hyderabad),Pond's White Beauty Face Wash 100g
+HYDERABAD_BRITANNIA_SNACKS,Britannia Snacks (Hyderabad),Britannia Milk Bikis 120g
+HYDERABAD_BRITANNIA_VEGETABLES,Britannia Vegetables (Hyderabad),Fresho Tomato 1kg
+HYDERABAD_HUL_BEVERAGES,HUL Beverages (Hyderabad),Pepsi Cola Soft Drink 2.25L
+HYDERABAD_HUL_DAIRY,HUL Dairy (Hyderabad),Amul Gold Full Cream Milk 1L
+HYDERABAD_HUL_FRUITS,HUL Fruits (Hyderabad),Real Litchi Juice 1L
+HYDERABAD_HUL_GROCERY,HUL Grocery (Hyderabad),Tata Sampann Turmeric 200g
+HYDERABAD_HUL_HOME_CARE,HUL Home Care (Hyderabad),Surf Excel Easy Wash Detergent 1kg
+HYDERABAD_HUL_PERSONAL_CARE,HUL Personal Care (Hyderabad),Fair & Lovely Advanced Multi Vitamin 50g
+HYDERABAD_HUL_SNACKS,HUL Snacks (Hyderabad),Lay's American Style Cream & Onion 50g
+HYDERABAD_HUL_VEGETABLES,HUL Vegetables (Hyderabad),Fresho Lady Finger 500g
+HYDERABAD_ITC_BEVERAGES,ITC Beverages (Hyderabad),B Natural Litchi 1L
+HYDERABAD_ITC_DAIRY,ITC Dairy (Hyderabad),Amul Masti Dahi 400g
+HYDERABAD_ITC_FRUITS,ITC Fruits (Hyderabad),Real Mixed Fruit Juice 1L
+HYDERABAD_ITC_GROCERY,ITC Grocery (Hyderabad),Aashirvaad Salt 1kg
+HYDERABAD_ITC_HOME_CARE,ITC Home Care (Hyderabad),Domex Toilet Cleaner 500ml
+HYDERABAD_ITC_PERSONAL_CARE,ITC Personal Care (Hyderabad),Fiama Di Wills Gel Bar 115g
+HYDERABAD_ITC_SNACKS,ITC Snacks (Hyderabad),Sunfeast Bounce Chocolate 100g
+HYDERABAD_ITC_VEGETABLES,ITC Vegetables (Hyderabad),Fresho Capsicum 500g
+HYDERABAD_NESTLE_BEVERAGES,Nestle Beverages (Hyderabad),Nescafé Sunrise 50g
+HYDERABAD_NESTLE_DAIRY,Nestle Dairy (Hyderabad),Nestle Everyday Ghee 1L
+HYDERABAD_NESTLE_FRUITS,Nestle Fruits (Hyderabad),Real Orange Juice 1L
+HYDERABAD_NESTLE_GROCERY,Nestle Grocery (Hyderabad),Maggi Pazzta Masala Penne 65g
+HYDERABAD_NESTLE_HOME_CARE,Nestle Home Care (Hyderabad),Domex Toilet Cleaner 500ml
+HYDERABAD_NESTLE_PERSONAL_CARE,Nestle Personal Care (Hyderabad),Lifebuoy Total 10 Soap 100g
+HYDERABAD_NESTLE_SNACKS,Nestle Snacks (Hyderabad),Maggi Fusian Bangkok Sweet Chilli 73g
+HYDERABAD_NESTLE_VEGETABLES,Nestle Vegetables (Hyderabad),Fresho Cauliflower 1pc
+HYDERABAD_PARLE_BEVERAGES,Parle Beverages (Hyderabad),Frooti Mango Drink 2L
+HYDERABAD_PARLE_DAIRY,Parle Dairy (Hyderabad),Amul Cheese Slices 200g
+HYDERABAD_PARLE_FRUITS,Parle Fruits (Hyderabad),Real Mango Juice 1L
+HYDERABAD_PARLE_GROCERY,Parle Grocery (Hyderabad),Tata Sampann Urad Dal 1kg
+HYDERABAD_PARLE_HOME_CARE,Parle Home Care (Hyderabad),Surf Excel Easy Wash Detergent 1kg
+HYDERABAD_PARLE_PERSONAL_CARE,Parle Personal Care (Hyderabad),Dove Cream Beauty Bathing Bar 100g
+HYDERABAD_PARLE_SNACKS,Parle Snacks (Hyderabad),Parle Hide & Seek Chocolate Chip Cookies 120g
+HYDERABAD_PARLE_VEGETABLES,Parle Vegetables (Hyderabad),Fresho Capsicum 500g
+HYDERABAD_PEPSICO_BEVERAGES,PepsiCo Beverages (Hyderabad),Mountain Dew Soft Drink 750ml
+HYDERABAD_PEPSICO_DAIRY,PepsiCo Dairy (Hyderabad),Amul Cheese Slices 200g
+HYDERABAD_PEPSICO_FRUITS,PepsiCo Fruits (Hyderabad),Real Orange Juice 1L
+HYDERABAD_PEPSICO_GROCERY,PepsiCo Grocery (Hyderabad),Tata Salt Lite 1kg
+HYDERABAD_PEPSICO_HOME_CARE,PepsiCo Home Care (Hyderabad),Vim Dishwash Liquid 500ml
+HYDERABAD_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Hyderabad),Pepsodent Germi Check Toothpaste 150g
+HYDERABAD_PEPSICO_SNACKS,PepsiCo Snacks (Hyderabad),Lay's Spanish Tomato Tango 50g
+HYDERABAD_PEPSICO_VEGETABLES,PepsiCo Vegetables (Hyderabad),Fresho Cabbage 1pc
+HYDERABAD_TATA_BEVERAGES,Tata Beverages (Hyderabad),Tata Coffee Grand 50g
+HYDERABAD_TATA_DAIRY,Tata Dairy (Hyderabad),Amul Gold Full Cream Milk 1L
+HYDERABAD_TATA_FRUITS,Tata Fruits (Hyderabad),Real Mixed Fruit Juice 1L
+HYDERABAD_TATA_GROCERY,Tata Grocery (Hyderabad),Tata Sampann Turmeric 200g
+HYDERABAD_TATA_HOME_CARE,Tata Home Care (Hyderabad),Surf Excel Easy Wash Detergent 1kg
+HYDERABAD_TATA_PERSONAL_CARE,Tata Personal Care (Hyderabad),Fair & Lovely Advanced Multi Vitamin 50g
+HYDERABAD_TATA_SNACKS,Tata Snacks (Hyderabad),Kurkure Chilli Chatka 90g
+HYDERABAD_TATA_VEGETABLES,Tata Vegetables (Hyderabad),Tata Sampann High Protein Kala Chana 1kg
+KOLKATA_AMUL_BEVERAGES,Amul Beverages (Kolkata),Amul Lassi 250ml
+KOLKATA_AMUL_DAIRY,Amul Dairy (Kolkata),Amul Taaza Toned Milk 1L
+KOLKATA_AMUL_FRUITS,Amul Fruits (Kolkata),Real Pomegranate Juice 1L
+KOLKATA_AMUL_GROCERY,Amul Grocery (Kolkata),Tata Sampann Turmeric 200g
+KOLKATA_AMUL_HOME_CARE,Amul Home Care (Kolkata),Surf Excel Easy Wash Detergent 1kg
+KOLKATA_AMUL_PERSONAL_CARE,Amul Personal Care (Kolkata),Lifebuoy Total 10 Soap 100g
+KOLKATA_AMUL_SNACKS,Amul Snacks (Kolkata),Lay's American Style Cream & Onion 50g
+KOLKATA_AMUL_VEGETABLES,Amul Vegetables (Kolkata),Fresho Cauliflower 1pc
+KOLKATA_BRITANNIA_BEVERAGES,Britannia Beverages (Kolkata),Slice Mango Drink 600ml
+KOLKATA_BRITANNIA_DAIRY,Britannia Dairy (Kolkata),Britannia Winkin Cow Shake 200ml
+KOLKATA_BRITANNIA_FRUITS,Britannia Fruits (Kolkata),Real Mango Juice 1L
+KOLKATA_BRITANNIA_GROCERY,Britannia Grocery (Kolkata),Tata Sampann Besan 500g
+KOLKATA_BRITANNIA_HOME_CARE,Britannia Home Care (Kolkata),Domex Toilet Cleaner 500ml
+KOLKATA_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Kolkata),Fair & Lovely Advanced Multi Vitamin 50g
+KOLKATA_BRITANNIA_SNACKS,Britannia Snacks (Kolkata),Britannia NutriChoice Digestive Biscuits 250g
+KOLKATA_BRITANNIA_VEGETABLES,Britannia Vegetables (Kolkata),Fresho Tomato 1kg
+KOLKATA_HUL_BEVERAGES,HUL Beverages (Kolkata),Slice Mango Drink 600ml
+KOLKATA_HUL_DAIRY,HUL Dairy (Kolkata),Amul Butter Pasteurised 500g
+KOLKATA_HUL_FRUITS,HUL Fruits (Kolkata),Real Pineapple Juice 1L
+KOLKATA_HUL_GROCERY,HUL Grocery (Kolkata),Tata Sampann Toor Dal 1kg
+KOLKATA_HUL_HOME_CARE,HUL Home Care (Kolkata),Surf Excel Matic Front Load 1kg
+KOLKATA_HUL_PERSONAL_CARE,HUL Personal Care (Kolkata),Sunsilk Stunning Black Shine Shampoo 340ml
+KOLKATA_HUL_SNACKS,HUL Snacks (Kolkata),Lay's Classic Salted 50g
+KOLKATA_HUL_VEGETABLES,HUL Vegetables (Kolkata),Fresho Tomato 1kg
+KOLKATA_ITC_BEVERAGES,ITC Beverages (Kolkata),B Natural Mixed Fruit 1L
+KOLKATA_ITC_DAIRY,ITC Dairy (Kolkata),Amul Ghee 1L
+KOLKATA_ITC_FRUITS,ITC Fruits (Kolkata),Real Mixed Fruit Juice 1L
+KOLKATA_ITC_GROCERY,ITC Grocery (Kolkata),Aashirvaad Multigrain Atta 5kg
+KOLKATA_ITC_HOME_CARE,ITC Home Care (Kolkata),Rin Detergent Powder 1kg
+KOLKATA_ITC_PERSONAL_CARE,ITC Personal Care (Kolkata),Savlon Handwash 200ml
+KOLKATA_ITC_SNACKS,ITC Snacks (Kolkata),Bingo Tedhe Medhe 90g
+KOLKATA_ITC_VEGETABLES,ITC Vegetables (Kolkata),Fresho Onion 1kg
+KOLKATA_NESTLE_BEVERAGES,Nestle Beverages (Kolkata),Nescafé Gold 50g
+KOLKATA_NESTLE_DAIRY,Nestle Dairy (Kolkata),Nestle a+ Curd 400g
+KOLKATA_NESTLE_FRUITS,Nestle Fruits (Kolkata),Real Litchi Juice 1L
+KOLKATA_NESTLE_GROCERY,Nestle Grocery (Kolkata),Maggi 2-Minute Masala Noodles 70g
+KOLKATA_NESTLE_HOME_CARE,Nestle Home Care (Kolkata),Comfort Fabric Conditioner 860ml
+KOLKATA_NESTLE_PERSONAL_CARE,Nestle Personal Care (Kolkata),Pepsodent Germi Check Toothpaste 150g
+KOLKATA_NESTLE_SNACKS,Nestle Snacks (Kolkata),Maggi Fusian Hong Kong Spicy Garlic 73g
+KOLKATA_NESTLE_VEGETABLES,Nestle Vegetables (Kolkata),Fresho Carrot 500g
+KOLKATA_PARLE_BEVERAGES,Parle Beverages (Kolkata),B-Fizz 250ml
+KOLKATA_PARLE_DAIRY,Parle Dairy (Kolkata),Amul Masti Dahi 400g
+KOLKATA_PARLE_FRUITS,Parle Fruits (Kolkata),Real Guava Juice 1L
+KOLKATA_PARLE_GROCERY,Parle Grocery (Kolkata),Tata Salt Iodised Salt 1kg
+KOLKATA_PARLE_HOME_CARE,Parle Home Care (Kolkata),Domex Toilet Cleaner 500ml
+KOLKATA_PARLE_PERSONAL_CARE,Parle Personal Care (Kolkata),Pond's White Beauty Face Wash 100g
+KOLKATA_PARLE_SNACKS,Parle Snacks (Kolkata),Parle Milano Chocolate Chip Cookies 75g
+KOLKATA_PARLE_VEGETABLES,Parle Vegetables (Kolkata),Fresho Lady Finger 500g
+KOLKATA_PEPSICO_BEVERAGES,PepsiCo Beverages (Kolkata),Mirinda Orange 750ml
+KOLKATA_PEPSICO_DAIRY,PepsiCo Dairy (Kolkata),Amul Masti Dahi 400g
+KOLKATA_PEPSICO_FRUITS,PepsiCo Fruits (Kolkata),Real Orange Juice 1L
+KOLKATA_PEPSICO_GROCERY,PepsiCo Grocery (Kolkata),Tata Salt Lite 1kg
+KOLKATA_PEPSICO_HOME_CARE,PepsiCo Home Care (Kolkata),Vim Dishwash Liquid 500ml
+KOLKATA_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Kolkata),Dove Cream Beauty Bathing Bar 100g
+KOLKATA_PEPSICO_SNACKS,PepsiCo Snacks (Kolkata),Kurkure Chilli Chatka 90g
+KOLKATA_PEPSICO_VEGETABLES,PepsiCo Vegetables (Kolkata),Fresho Tomato 1kg
+KOLKATA_TATA_BEVERAGES,Tata Beverages (Kolkata),Tata Copper Water 1L
+KOLKATA_TATA_DAIRY,Tata Dairy (Kolkata),Amul Gold Full Cream Milk 1L
+KOLKATA_TATA_FRUITS,Tata Fruits (Kolkata),Real Pomegranate Juice 1L
+KOLKATA_TATA_GROCERY,Tata Grocery (Kolkata),Tata Salt Lite 1kg
+KOLKATA_TATA_HOME_CARE,Tata Home Care (Kolkata),Comfort Fabric Conditioner 860ml
+KOLKATA_TATA_PERSONAL_CARE,Tata Personal Care (Kolkata),Sunsilk Stunning Black Shine Shampoo 340ml
+KOLKATA_TATA_SNACKS,Tata Snacks (Kolkata),Kurkure Puffcorn Yummy Cheese 55g
+KOLKATA_TATA_VEGETABLES,Tata Vegetables (Kolkata),Tata Sampann High Protein Urad Dal 1kg
+MUMBAI_AMUL_BEVERAGES,Amul Beverages (Mumbai),Amul Kool Kesar 200ml
+MUMBAI_AMUL_DAIRY,Amul Dairy (Mumbai),Amul Paneer 200g
+MUMBAI_AMUL_FRUITS,Amul Fruits (Mumbai),Real Orange Juice 1L
+MUMBAI_AMUL_GROCERY,Amul Grocery (Mumbai),Tata Sampann Chana Dal 1kg
+MUMBAI_AMUL_HOME_CARE,Amul Home Care (Mumbai),Surf Excel Matic Top Load 1kg
+MUMBAI_AMUL_PERSONAL_CARE,Amul Personal Care (Mumbai),Pepsodent Germi Check Toothpaste 150g
+MUMBAI_AMUL_SNACKS,Amul Snacks (Mumbai),Kurkure Chilli Chatka 90g
+MUMBAI_AMUL_VEGETABLES,Amul Vegetables (Mumbai),Fresho Cabbage 1pc
+MUMBAI_BRITANNIA_BEVERAGES,Britannia Beverages (Mumbai),7UP Soft Drink 750ml
+MUMBAI_BRITANNIA_DAIRY,Britannia Dairy (Mumbai),Britannia Cheese Slices 200g
+MUMBAI_BRITANNIA_FRUITS,Britannia Fruits (Mumbai),Real Orange Juice 1L
+MUMBAI_BRITANNIA_GROCERY,Britannia Grocery (Mumbai),Tata Sampann Toor Dal 1kg
+MUMBAI_BRITANNIA_HOME_CARE,Britannia Home Care (Mumbai),Surf Excel Easy Wash Detergent 1kg
+MUMBAI_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Mumbai),Clinic Plus Strong & Long Shampoo 340ml
+MUMBAI_BRITANNIA_SNACKS,Britannia Snacks (Mumbai),Britannia Treat Jim Jam 100g
+MUMBAI_BRITANNIA_VEGETABLES,Britannia Vegetables (Mumbai),Fresho Onion 1kg
+MUMBAI_HUL_BEVERAGES,HUL Beverages (Mumbai),Slice Mango Drink 600ml
+MUMBAI_HUL_DAIRY,HUL Dairy (Mumbai),Amul Ghee 1L
+MUMBAI_HUL_FRUITS,HUL Fruits (Mumbai),Real Litchi Juice 1L
+MUMBAI_HUL_GROCERY,HUL Grocery (Mumbai),Tata Sampann Toor Dal 1kg
+MUMBAI_HUL_HOME_CARE,HUL Home Care (Mumbai),Domex Toilet Cleaner 500ml
+MUMBAI_HUL_PERSONAL_CARE,HUL Personal Care (Mumbai),Fair & Lovely Advanced Multi Vitamin 50g
+MUMBAI_HUL_SNACKS,HUL Snacks (Mumbai),Lay's Spanish Tomato Tango 50g
+MUMBAI_HUL_VEGETABLES,HUL Vegetables (Mumbai),Fresho Onion 1kg
+MUMBAI_ITC_BEVERAGES,ITC Beverages (Mumbai),B Natural Orange 1L
+MUMBAI_ITC_DAIRY,ITC Dairy (Mumbai),Amul Gold Full Cream Milk 1L
+MUMBAI_ITC_FRUITS,ITC Fruits (Mumbai),Real Pineapple Juice 1L
+MUMBAI_ITC_GROCERY,ITC Grocery (Mumbai),Aashirvaad Svasti Ghee 1L
+MUMBAI_ITC_HOME_CARE,ITC Home Care (Mumbai),Surf Excel Matic Top Load 1kg
+MUMBAI_ITC_PERSONAL_CARE,ITC Personal Care (Mumbai),Engage Pocket Perfume 18ml
+MUMBAI_ITC_SNACKS,ITC Snacks (Mumbai),Sunfeast Dark Fantasy Choco Fills 300g
+MUMBAI_ITC_VEGETABLES,ITC Vegetables (Mumbai),Fresho Potato 1kg
+MUMBAI_NESTLE_BEVERAGES,Nestle Beverages (Mumbai),Nescafé Cold Coffee 180ml
+MUMBAI_NESTLE_DAIRY,Nestle Dairy (Mumbai),Nestle a+ Mishti Doi 400g
+MUMBAI_NESTLE_FRUITS,Nestle Fruits (Mumbai),Real Mixed Fruit Juice 1L
+MUMBAI_NESTLE_GROCERY,Nestle Grocery (Mumbai),Maggi 2-Minute Masala Noodles 280g
+MUMBAI_NESTLE_HOME_CARE,Nestle Home Care (Mumbai),Domex Toilet Cleaner 500ml
+MUMBAI_NESTLE_PERSONAL_CARE,Nestle Personal Care (Mumbai),Lux Soft Touch Soap 100g
+MUMBAI_NESTLE_SNACKS,Nestle Snacks (Mumbai),Maggi Nutri-licious Oats Noodles 300g
+MUMBAI_NESTLE_VEGETABLES,Nestle Vegetables (Mumbai),Fresho Potato 1kg
+MUMBAI_PARLE_BEVERAGES,Parle Beverages (Mumbai),Appy Fizz 600ml
+MUMBAI_PARLE_DAIRY,Parle Dairy (Mumbai),Amul Paneer 200g
+MUMBAI_PARLE_FRUITS,Parle Fruits (Mumbai),Real Litchi Juice 1L
+MUMBAI_PARLE_GROCERY,Parle Grocery (Mumbai),Tata Sampann Toor Dal 1kg
+MUMBAI_PARLE_HOME_CARE,Parle Home Care (Mumbai),Vim Dishwash Bar 200g
+MUMBAI_PARLE_PERSONAL_CARE,Parle Personal Care (Mumbai),Clinic Plus Strong & Long Shampoo 340ml
+MUMBAI_PARLE_SNACKS,Parle Snacks (Mumbai),Parle Magix Chocolate Creams 100g
+MUMBAI_PARLE_VEGETABLES,Parle Vegetables (Mumbai),Fresho Cabbage 1pc
+MUMBAI_PEPSICO_BEVERAGES,PepsiCo Beverages (Mumbai),7UP Soft Drink 750ml
+MUMBAI_PEPSICO_DAIRY,PepsiCo Dairy (Mumbai),Amul Taaza Toned Milk 1L
+MUMBAI_PEPSICO_FRUITS,PepsiCo Fruits (Mumbai),Real Mixed Fruit Juice 1L
+MUMBAI_PEPSICO_GROCERY,PepsiCo Grocery (Mumbai),Tata Salt Iodised Salt 1kg
+MUMBAI_PEPSICO_HOME_CARE,PepsiCo Home Care (Mumbai),Vim Dishwash Bar 200g
+MUMBAI_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Mumbai),Pepsodent Germi Check Toothpaste 150g
+MUMBAI_PEPSICO_SNACKS,PepsiCo Snacks (Mumbai),Lay's Classic Salted 50g
+MUMBAI_PEPSICO_VEGETABLES,PepsiCo Vegetables (Mumbai),Fresho Cabbage 1pc
+MUMBAI_TATA_BEVERAGES,Tata Beverages (Mumbai),Tata Tea Gold 250g
+MUMBAI_TATA_DAIRY,Tata Dairy (Mumbai),Amul Fresh Cream 250ml
+MUMBAI_TATA_FRUITS,Tata Fruits (Mumbai),Real Pomegranate Juice 1L
+MUMBAI_TATA_GROCERY,Tata Grocery (Mumbai),Tata Salt Iodised Salt 1kg
+MUMBAI_TATA_HOME_CARE,Tata Home Care (Mumbai),Surf Excel Matic Front Load 1kg
+MUMBAI_TATA_PERSONAL_CARE,Tata Personal Care (Mumbai),Sunsilk Stunning Black Shine Shampoo 340ml
+MUMBAI_TATA_SNACKS,Tata Snacks (Mumbai),Kurkure Solid Masti 90g
+MUMBAI_TATA_VEGETABLES,Tata Vegetables (Mumbai),Tata Sampann High Protein Moong Dal 1kg
+PUNE_AMUL_BEVERAGES,Amul Beverages (Pune),Amul Masti Buttermilk 200ml
+PUNE_AMUL_DAIRY,Amul Dairy (Pune),Amul Cheese Slices 200g
+PUNE_AMUL_FRUITS,Amul Fruits (Pune),Real Guava Juice 1L
+PUNE_AMUL_GROCERY,Amul Grocery (Pune),Tata Salt Lite 1kg
+PUNE_AMUL_HOME_CARE,Amul Home Care (Pune),Comfort Fabric Conditioner 860ml
+PUNE_AMUL_PERSONAL_CARE,Amul Personal Care (Pune),Lifebuoy Total 10 Soap 100g
+PUNE_AMUL_SNACKS,Amul Snacks (Pune),Kurkure Solid Masti 90g
+PUNE_AMUL_VEGETABLES,Amul Vegetables (Pune),Fresho Cauliflower 1pc
+PUNE_BRITANNIA_BEVERAGES,Britannia Beverages (Pune),Pepsi Cola Soft Drink 1.25L
+PUNE_BRITANNIA_DAIRY,Britannia Dairy (Pune),Britannia Cow Ghee 1L
+PUNE_BRITANNIA_FRUITS,Britannia Fruits (Pune),Real Pomegranate Juice 1L
+PUNE_BRITANNIA_GROCERY,Britannia Grocery (Pune),Tata Sampann Moong Dal 1kg
+PUNE_BRITANNIA_HOME_CARE,Britannia Home Care (Pune),Comfort Fabric Conditioner 860ml
+PUNE_BRITANNIA_PERSONAL_CARE,Britannia Personal Care (Pune),Fair & Lovely Advanced Multi Vitamin 50g
+PUNE_BRITANNIA_SNACKS,Britannia Snacks (Pune),Britannia Bourbon Chocolate Creams 150g
+PUNE_BRITANNIA_VEGETABLES,Britannia Vegetables (Pune),Fresho Onion 1kg
+PUNE_HUL_BEVERAGES,HUL Beverages (Pune),7UP Soft Drink 750ml
+PUNE_HUL_DAIRY,HUL Dairy (Pune),Amul Masti Dahi 400g
+PUNE_HUL_FRUITS,HUL Fruits (Pune),Real Apple Juice 1L
+PUNE_HUL_GROCERY,HUL Grocery (Pune),Tata Sampann Turmeric 200g
+PUNE_HUL_HOME_CARE,HUL Home Care (Pune),Surf Excel Matic Top Load 1kg
+PUNE_HUL_PERSONAL_CARE,HUL Personal Care (Pune),Pond's White Beauty Face Wash 100g
+PUNE_HUL_SNACKS,HUL Snacks (Pune),Kurkure Puffcorn Yummy Cheese 55g
+PUNE_HUL_VEGETABLES,HUL Vegetables (Pune),Fresho Capsicum 500g
+PUNE_ITC_BEVERAGES,ITC Beverages (Pune),B Natural Apple 1L
+PUNE_ITC_DAIRY,ITC Dairy (Pune),Amul Butter Pasteurised 500g
+PUNE_ITC_FRUITS,ITC Fruits (Pune),Real Mango Juice 1L
+PUNE_ITC_GROCERY,ITC Grocery (Pune),Aashirvaad Chilli Powder 200g
+PUNE_ITC_HOME_CARE,ITC Home Care (Pune),Comfort Fabric Conditioner 860ml
+PUNE_ITC_PERSONAL_CARE,ITC Personal Care (Pune),Savlon Antiseptic Liquid 500ml
+PUNE_ITC_SNACKS,ITC Snacks (Pune),Bingo Potato Chips Salted 50g
+PUNE_ITC_VEGETABLES,ITC Vegetables (Pune),Fresho Potato 1kg
+PUNE_NESTLE_BEVERAGES,Nestle Beverages (Pune),Nescafé Classic Coffee 50g
+PUNE_NESTLE_DAIRY,Nestle Dairy (Pune),Nestle Milkmaid 200g
+PUNE_NESTLE_FRUITS,Nestle Fruits (Pune),Real Pomegranate Juice 1L
+PUNE_NESTLE_GROCERY,Nestle Grocery (Pune),Maggi Pazzta Cheese Macaroni 70g
+PUNE_NESTLE_HOME_CARE,Nestle Home Care (Pune),Comfort Fabric Conditioner 860ml
+PUNE_NESTLE_PERSONAL_CARE,Nestle Personal Care (Pune),Pepsodent Germi Check Toothpaste 150g
+PUNE_NESTLE_SNACKS,Nestle Snacks (Pune),Maggi 2-Minute Masala Noodles 280g
+PUNE_NESTLE_VEGETABLES,Nestle Vegetables (Pune),Fresho Carrot 500g
+PUNE_PARLE_BEVERAGES,Parle Beverages (Pune),Appy Fizz 1L
+PUNE_PARLE_DAIRY,Parle Dairy (Pune),Amul Taaza Toned Milk 1L
+PUNE_PARLE_FRUITS,Parle Fruits (Pune),Real Guava Juice 1L
+PUNE_PARLE_GROCERY,Parle Grocery (Pune),Tata Sampann Chana Dal 1kg
+PUNE_PARLE_HOME_CARE,Parle Home Care (Pune),Rin Detergent Powder 1kg
+PUNE_PARLE_PERSONAL_CARE,Parle Personal Care (Pune),Pepsodent Germi Check Toothpaste 150g
+PUNE_PARLE_SNACKS,Parle Snacks (Pune),Parle Monaco Classic Regular 75g
+PUNE_PARLE_VEGETABLES,Parle Vegetables (Pune),Fresho Tomato 1kg
+PUNE_PEPSICO_BEVERAGES,PepsiCo Beverages (Pune),Pepsi Cola Soft Drink 750ml
+PUNE_PEPSICO_DAIRY,PepsiCo Dairy (Pune),Amul Ghee 1L
+PUNE_PEPSICO_FRUITS,PepsiCo Fruits (Pune),Real Litchi Juice 1L
+PUNE_PEPSICO_GROCERY,PepsiCo Grocery (Pune),Tata Sampann Besan 500g
+PUNE_PEPSICO_HOME_CARE,PepsiCo Home Care (Pune),Vim Dishwash Bar 200g
+PUNE_PEPSICO_PERSONAL_CARE,PepsiCo Personal Care (Pune),Fair & Lovely Advanced Multi Vitamin 50g
+PUNE_PEPSICO_SNACKS,PepsiCo Snacks (Pune),Kurkure Masala Munch 90g
+PUNE_PEPSICO_VEGETABLES,PepsiCo Vegetables (Pune),Fresho Potato 1kg
+PUNE_TATA_BEVERAGES,Tata Beverages (Pune),Tata Tea Premium 250g
+PUNE_TATA_DAIRY,Tata Dairy (Pune),Amul Masti Dahi 400g
+PUNE_TATA_FRUITS,Tata Fruits (Pune),Real Pomegranate Juice 1L
+PUNE_TATA_GROCERY,Tata Grocery (Pune),Tata Sampann Moong Dal 1kg
+PUNE_TATA_HOME_CARE,Tata Home Care (Pune),Surf Excel Matic Front Load 1kg
+PUNE_TATA_PERSONAL_CARE,Tata Personal Care (Pune),Dove Cream Beauty Bathing Bar 100g
+PUNE_TATA_SNACKS,Tata Snacks (Pune),Kurkure Solid Masti 90g
+PUNE_TATA_VEGETABLES,Tata Vegetables (Pune),Tata Sampann High Protein Rajma 1kg

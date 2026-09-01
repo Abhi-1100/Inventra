@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QFontMetrics>
 #include <QLinearGradient>
+#include <QBitmap>
+#include <QRegion>
 
 namespace Kirana {
 
@@ -71,24 +73,59 @@ void SidebarButton::paintEvent(QPaintEvent*) {
                      : m_hovered ? QColor("#e0e2ea")
                                  : QColor("#8c90a0");
 
-    if (!m_icon.isNull()) {
-        QPixmap scaled = m_icon.scaled(iconSz, iconSz,
-                                       Qt::KeepAspectRatio,
-                                       Qt::SmoothTransformation);
-        p.setOpacity(1.0);
-        p.drawPixmap(iconX, iconY, scaled);
+    // Draw the section symbols directly. This avoids platform-specific SVG
+    // rasterization that was showing the icon canvases as solid squares.
+    p.save();
+    p.setPen(QPen(iconColor, 1.8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setBrush(Qt::NoBrush);
+    const int x = iconX;
+    const int y = iconY;
 
-        // Tint overlay
-        p.save();
-        p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-        p.fillRect(QRect(iconX, iconY, iconSz, iconSz), iconColor);
-        p.restore();
-    } else {
-        // Fallback: draw a small colored dot as placeholder
-        p.setPen(Qt::NoPen);
-        p.setBrush(iconColor);
-        p.drawEllipse(iconX + 4, iconY + 4, iconSz - 8, iconSz - 8);
+    if (m_label == QLatin1String("Dashboard")) {
+        p.drawRoundedRect(x, y, 8, 8, 1, 1);
+        p.drawRoundedRect(x + 12, y, 8, 8, 1, 1);
+        p.drawRoundedRect(x, y + 12, 8, 8, 1, 1);
+        p.drawRoundedRect(x + 12, y + 12, 8, 8, 1, 1);
+    } else if (m_label == QLatin1String("Daily Entry")) {
+        p.drawRoundedRect(x + 2, y + 3, 16, 15, 2, 2);
+        p.drawLine(x + 2, y + 8, x + 18, y + 8);
+        p.drawLine(x + 6, y + 1, x + 6, y + 5);
+        p.drawLine(x + 14, y + 1, x + 14, y + 5);
+        p.drawLine(x + 6, y + 12, x + 10, y + 12);
+        p.drawLine(x + 6, y + 15, x + 14, y + 15);
+    } else if (m_label == QLatin1String("Stock In/Out")) {
+        p.drawLine(x + 6, y + 18, x + 6, y + 3);
+        p.drawLine(x + 6, y + 3, x + 2, y + 7);
+        p.drawLine(x + 6, y + 3, x + 10, y + 7);
+        p.drawLine(x + 14, y + 2, x + 14, y + 17);
+        p.drawLine(x + 14, y + 17, x + 10, y + 13);
+        p.drawLine(x + 14, y + 17, x + 18, y + 13);
+    } else if (m_label == QLatin1String("Products")) {
+        p.drawPolyline(QPolygon({QPoint(x + 2, y + 6), QPoint(x + 10, y + 2), QPoint(x + 18, y + 6), QPoint(x + 10, y + 10), QPoint(x + 2, y + 6)}));
+        p.drawLine(x + 2, y + 11, x + 10, y + 15);
+        p.drawLine(x + 10, y + 15, x + 18, y + 11);
+        p.drawLine(x + 10, y + 15, x + 10, y + 20);
+    } else if (m_label == QLatin1String("Analytics")) {
+        p.drawLine(x + 3, y + 19, x + 3, y + 12);
+        p.drawLine(x + 10, y + 19, x + 10, y + 5);
+        p.drawLine(x + 17, y + 19, x + 17, y + 9);
+        p.drawLine(x + 1, y + 19, x + 19, y + 19);
+    } else if (m_label == QLatin1String("Import")) {
+        p.drawLine(x + 2, y + 14, x + 2, y + 18);
+        p.drawLine(x + 2, y + 18, x + 18, y + 18);
+        p.drawLine(x + 18, y + 18, x + 18, y + 14);
+        p.drawLine(x + 10, y + 14, x + 10, y + 2);
+        p.drawLine(x + 10, y + 2, x + 6, y + 6);
+        p.drawLine(x + 10, y + 2, x + 14, y + 6);
+    } else { // Settings
+        p.drawEllipse(x + 6, y + 6, 8, 8);
+        p.drawEllipse(x + 9, y + 9, 2, 2);
+        p.drawLine(x + 10, y + 1, x + 10, y + 4);
+        p.drawLine(x + 10, y + 16, x + 10, y + 19);
+        p.drawLine(x + 1, y + 10, x + 4, y + 10);
+        p.drawLine(x + 16, y + 10, x + 19, y + 10);
     }
+    p.restore();
 
     // ── Label ──────────────────────────────────
     const int textX = iconX + iconSz + 12;

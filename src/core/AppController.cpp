@@ -172,6 +172,14 @@ bool AppController::loadFromDatabase() {
                 for (auto& p : dbProds) {
                     if (p.sku.trimmed() != sku) continue;
 
+                    // Keep the panel's inventory inputs aligned with the exact
+                    // snapshot used to generate this model result.
+                    if (obj.contains(QStringLiteral("current_stock")))
+                        p.currentStock = static_cast<int>(obj.value(QStringLiteral("current_stock")).toDouble());
+                    const int modelReorderPoint = static_cast<int>(obj.value(QStringLiteral("reorder_point")).toDouble());
+                    if (modelReorderPoint > 0)
+                        p.reorderPoint = modelReorderPoint;
+
                     // ── Demand Label ────────────────────────────────────────
                     QString dl = obj.value(QStringLiteral("demand_label")).toString().trimmed();
                     if      (dl.contains(QStringLiteral("High"),   Qt::CaseInsensitive)) p.demandLabel = DemandLabel::High;
@@ -233,6 +241,7 @@ bool AppController::loadFromDatabase() {
                     if (eoqVal == 0)
                         eoqVal = static_cast<int>(obj.value(QStringLiteral("eoq_quantity")).toDouble());
                     p.eoqQty = eoqVal;
+                    p.usingDefaultEOQ = false;
 
                     // ── Text outputs ──────────────────────────────────────────
                     p.recommendation = obj.value(QStringLiteral("recommendation")).toString();
@@ -322,6 +331,7 @@ void AppController::applyPipelineRun(const PipelineRunResult& result) {
                 p.forecastTrend  = r.forecastTrend;
                 p.forecast       = r.forecast;
                 p.eoqQty         = r.eoqQty;
+                p.usingDefaultEOQ= false;
                 p.recommendation = r.recommendation;
                 p.explanation    = r.explanation;
 

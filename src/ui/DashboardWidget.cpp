@@ -18,6 +18,7 @@
 #include <QListWidget>
 #include <QFrame>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPainter>
 #include <QPaintEvent>
 #include <QPainterPath>
@@ -40,6 +41,7 @@ public:
 
     AppController* controller;
     QString filterState = QStringLiteral("All");
+    QString searchQuery;
 
     void refreshFilter() {
         beginResetModel();
@@ -54,7 +56,7 @@ protected:
 
         const Product& p = model->productAt(sourceRow);
 
-        if (controller && !controller->matchesSearch(p, controller->searchQuery())) {
+        if (controller && !controller->matchesSearch(p, searchQuery)) {
             return false;
         }
 
@@ -154,16 +156,6 @@ DashboardWidget::DashboardWidget(AppController* controller, QWidget* parent)
     buildLayout();
     configureTable();
     connect(m_controller, &AppController::productsChanged, this, &DashboardWidget::onProductsChanged);
-    connect(m_controller, &AppController::searchQueryChanged, this, [this](const QString& q) {
-        qDebug() << "[TRACE] DashboardWidget received searchQueryChanged:" << q;
-        if (auto* p = static_cast<ProductFilterProxyModel*>(m_proxyModel)) {
-            if (m_model) {
-                qDebug() << "[TRACE] Products inside ProductModel:" << m_model->rowCount();
-                p->refreshFilter();
-                qDebug() << "[TRACE] Products inside ProxyModel after refresh:" << p->rowCount();
-            }
-        }
-    });
     onProductsChanged();
 }
 
@@ -239,6 +231,16 @@ void DashboardWidget::buildLayout() {
         "font-size:16px;font-weight:600;color:#e0e2ea;"
         "background:transparent;border:none;");
 
+    m_searchEdit = new QLineEdit(queueHeader);
+    m_searchEdit->setPlaceholderText(QStringLiteral("Search products..."));
+    m_searchEdit->setClearButtonEnabled(true);
+    m_searchEdit->setFixedSize(210, 30);
+    m_searchEdit->setStyleSheet(
+        "QLineEdit { background:#0a0e13; border:1px solid #232a33; border-radius:5px;"
+        "color:#e0e2ea; font-size:12px; padding:0 10px; }"
+        "QLineEdit:focus { border-color:#afc6ff; }"
+        "QLineEdit::placeholder { color:rgba(140,144,160,0.65); }");
+
     auto* viewAllQ = new QPushButton(QStringLiteral("View All"), queueHeader);
     viewAllQ->setObjectName("SecondaryBtn");
     viewAllQ->setFixedHeight(28);
@@ -251,7 +253,16 @@ void DashboardWidget::buildLayout() {
 
     queueHRow->addWidget(queueTitle);
     queueHRow->addStretch();
+    queueHRow->addWidget(m_searchEdit);
+    queueHRow->addSpacing(12);
     queueHRow->addWidget(viewAllQ);
+
+    connect(m_searchEdit, &QLineEdit::textChanged, this, [this](const QString& query) {
+        if (auto* proxy = static_cast<ProductFilterProxyModel*>(m_proxyModel)) {
+            proxy->searchQuery = query.trimmed();
+            proxy->refreshFilter();
+        }
+    });
 
     // Table view
     m_tableView = new QTableView(queueCard);

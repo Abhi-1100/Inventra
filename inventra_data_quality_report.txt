@@ -1,0 +1,150 @@
+======================================================================
+INVENTRA DATA QUALITY REPORT
+======================================================================
+Generated: 2026-09-01 18:10:22
+Source:     Indian FMCG Retail Sales  Customer  Inventory (2024).csv
+Output:     inventra_training_data.csv
+
+────────────────────────────────────────
+SOURCE DATASET
+────────────────────────────────────────
+Original row count:      100,000
+Original column count:   21
+Date range:              2024-01-01 00:00:00 to 2024-12-30 23:57:00
+Unique cities:           8
+Unique brands:           8
+Unique categories:       8
+Unique store formats:    3
+Brand×Category combos:   64
+City×Brand×Cat entities: 512
+
+Source Missing Values:
+  Customer_Age        : 40,081 (40.1%)
+  Customer_Gender     : 5,048 (5.0%)
+  Duplicate rows:        0
+  Duplicate Invoice_IDs: 62
+
+────────────────────────────────────────
+OUTPUT DATASET
+────────────────────────────────────────
+Final row count:         26,836
+Unique products:         512
+Categories:              8
+Date range:              2024-01-01 to 2024-12-30
+Total weeks:             53
+
+Product History Distribution:
+  Products total:        512
+  Products < 7 weeks:    0
+  Products >= 7 weeks:   512
+  Products >= 26 weeks:  512
+  Products >= 50 weeks:  512
+  Min weeks/product:     50
+  Max weeks/product:     53
+  Mean weeks/product:    52.4
+
+Output Missing Values:
+  None
+  Duplicate product-week rows: 0
+
+────────────────────────────────────────
+FIELD STATISTICS
+────────────────────────────────────────
+
+Weekly Sales:
+  min:           0.00
+  max:          41.00
+  mean:         11.17
+  std:           6.40
+  median:       10.00
+
+Closing Stock:
+  min:          50.00
+  max:         499.00
+  mean:        274.45
+  std:         129.97
+  median:      274.00
+
+Unit Price (INR):
+  min:          12.13
+  max:         282.74
+  mean:        131.17
+  std:          44.38
+  median:      130.59
+
+Reorder Point:
+  min:          20.00
+  max:          79.00
+  mean:         49.47
+  std:          12.25
+  median:       50.00
+
+Lead Time (days):
+  min:           3.00
+  max:          14.00
+  mean:          8.52
+  std:           2.48
+  median:        8.00
+
+Order Cost (INR):
+  min:          20.00
+  max:          20.00
+  mean:         20.00
+  std:           0.00
+  median:       20.00
+
+Holding Cost (INR):
+  min:           3.03
+  max:          70.69
+  mean:         32.79
+  std:          11.10
+  median:       32.65
+
+────────────────────────────────────────
+ASSUMPTIONS AND DECISIONS
+────────────────────────────────────────
+1. PRODUCT IDENTITY: City + Brand + Category treated as separate
+   inventory entities because Stock_On_Hand varies independently
+   across cities for the same Brand+Category combination.
+
+2. CLOSING STOCK: Taken from the LAST transaction (by timestamp)
+   within each product-week. Stock_On_Hand varies across
+   transactions even on the same day.
+
+3. UNIT PRICE: Revenue-weighted average per product-week:
+   SUM(Revenue) / SUM(Units). Preserves true average revenue.
+
+4. REORDER POINT: Weekly MEDIAN of Reorder_Level observations.
+   The source value varies per transaction (~60 unique values
+   per entity), so median provides a robust central estimate.
+
+5. LEAD TIME: Weekly MEDIAN of Lead_Time_Days observations.
+   Same rationale as reorder point.
+
+6. ORDER COST: NOT AVAILABLE IN SOURCE.
+   Fixed at 20.0 INR per Inventra pipeline default.
+
+7. HOLDING COST: NOT AVAILABLE IN SOURCE.
+   Derived as unit_price_inr × 0.25 per Inventra convention.
+
+8. MISSING WEEKS: For weeks with no transactions, weekly_sales = 0
+   and closing_stock is forward-filled from last known observation.
+   This is justified because inventory persists between sales events.
+
+9. WEEK START: Monday-based (ISO standard). All week_start_date values
+   are the Monday of the corresponding week.
+
+────────────────────────────────────────
+VALIDATION SUMMARY
+────────────────────────────────────────
+Schema valid:              YES
+Temporal integrity valid:  YES
+Data quality valid:        YES
+
+────────────────────────────────────────
+FIELDS NOT AVAILABLE IN SOURCE DATASET
+────────────────────────────────────────
+order_cost:   No ordering/procurement cost column exists in source.
+              Used Inventra default: 20.0 INR
+holding_cost: No annual holding cost column exists in source.
+              Derived as unit_price_inr × 0.25

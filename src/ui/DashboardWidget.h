@@ -12,6 +12,7 @@ class QPushButton;
 class QListWidget;
 class QHBoxLayout;
 class QLabel;
+class QLineEdit;
 
 namespace Kirana {
 
@@ -73,6 +74,7 @@ private:
 
     // Priority Queue table
     QTableView* m_tableView = nullptr;
+    QLineEdit*  m_searchEdit = nullptr;
 
     // Stock Distribution donut
     StockDonutWidget* m_donutWidget      = nullptr;

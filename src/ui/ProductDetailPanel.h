@@ -62,13 +62,16 @@ private:
     QLabel* m_skuLabel       = nullptr;
     QLabel* m_nameLabel      = nullptr;
     QLabel* m_categoryLabel  = nullptr;
-    QLabel* m_stockLabel     = nullptr;
+    QLabel* m_stockValue     = nullptr;
+    QLabel* m_reorderValue   = nullptr;
+    QLabel* m_unitCostValue  = nullptr;
 
     // ── ML Prediction badges ──
     QLabel* m_demandBadge    = nullptr;
     QLabel* m_statusBadge    = nullptr;
     QLabel* m_confidenceVal  = nullptr;
     QLabel* m_forecastVal    = nullptr;
+    QLabel* m_chartSummary   = nullptr;
     QLabel* m_priorityBadge  = nullptr;
 
     // ── EOQ Card labels ──
